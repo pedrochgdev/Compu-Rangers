@@ -1,3 +1,4 @@
+CREATE database april_boutique_db;
 USE april_boutique_db;
 CREATE TABLE products (
     id INT AUTO_INCREMENT PRIMARY KEY,
