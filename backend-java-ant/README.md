@@ -1,16 +1,16 @@
 # 🛠️ April Boutique - Backend
 
-**April Boutique Backend** es el componente del servidor de la tienda virtual, desarrollado en **Java 11** con **Apache Ant** y utilizando **servicios web SOAP** para la comunicación con el frontend. Gestiona la lógica de negocio, el acceso a datos y la seguridad del sistema.
+**April Boutique Backend** es el componente del servidor de la tienda virtual, desarrollado en **Java 21** con **Apache Ant** y utilizando **servicios web SOAP** para la comunicación con el frontend. Gestiona la lógica de negocio, el acceso a datos y la seguridad del sistema.
 
 ---
 
 ## 🚀 Tecnologías Utilizadas
 
-- **Lenguaje:** Java 11
-- **Build Tool:** Apache Ant 1.10.12
-- **Servicios Web:** SOAP (JAX-WS)
-- **Base de Datos:** Oracle 19c
-- **Configuración:** Archivos `.properties`
+- **Lenguaje:** Java 21
+- **Build Tool:** Apache Ant
+- **Servicios Web:** SOAP
+- **Base de Datos:** MySQL Server
+- **Configuración:** Archivos `.env`
 
 ---
 
@@ -18,9 +18,9 @@
 
 Antes de empezar, asegúrate de tener instalados:
 
-- **Java Development Kit (JDK) 11**
-- **Apache Ant 1.10.12**
-- **Oracle Database 19c**
+- **Java Development Kit (JDK) 21**
+- **Apache Ant**
+- **MySQL Server**
 - **Git**
 
 ---
@@ -29,19 +29,19 @@ Antes de empezar, asegúrate de tener instalados:
 
 ### **1️⃣ Clonar el Repositorio**
 ```sh
-git clone https://github.com/tu-usuario/april-boutique.git
+git clone https://github.com/pedrochgdev/april-boutique.git
 cd april-boutique/backend-java-ant
 ```
 
 ### **2️⃣ Configurar la Base de Datos**
 
-1. Crea una base de datos en Oracle.
-2. Ejecuta el script `database/schema.sql` para crear las tablas.
+1. Crea una base de datos en MySQL.
+2. Ejecuta el script `database/example.sql` para crear las tablas.
 3. (Opcional) Ejecuta `database/seed.sql` para agregar datos de prueba.
 
 ### **3️⃣ Configurar el Backend**
 ```sh
-# Edita config/database.properties con las credenciales de tu base de datos
+# Crea y edita .env con las credenciales de tu base de datos
 # Edita config/application.properties según el entorno (desarrollo, producción, etc.)
 
 # Compila el backend

@@ -8,22 +8,22 @@
 
 ### **Backend**
 
-- **Lenguaje:** Java 11
-- **Build Tool:** Apache Ant 1.10.12
-- **Servicios Web:** SOAP (JAX-WS)
-- **Base de Datos:** Oracle 19c
+- **Lenguaje:** Java 21
+- **Build Tool:** Apache Ant
+- **Servicios Web:** SOAP
+- **Base de Datos:** MySQL Server
 
 ### **Frontend**
 
 - **Lenguaje:** C# 9.0
-- **Framework:** .NET 5.0
-- **Arquitectura:** MVVM
+- **Framework:** .NET Framework
+- **Arquitectura:** -
 
 ### **Otros**
 
 - **Control de versiones:** Git
 - **Gestión de dependencias:** Librerías locales
-- **Configuración:** Archivos `.properties`
+- **Configuración:** Archivos `.env`
 
 ---
 
@@ -31,10 +31,10 @@
 
 Antes de empezar, asegúrate de tener instalados:
 
-- **Java Development Kit (JDK) 11**
-- **Apache Ant 1.10.12**
-- **Oracle Database 19c**
-- **.NET 5.0 SDK**
+- **Java Development Kit (JDK) 21**
+- **Apache Ant**
+- **MySQL Server**
+- **.NET Framework SDK**
 - **Git**
 
 ---
@@ -49,14 +49,14 @@ cd april-boutique
 
 ### **2️⃣ Configurar la Base de Datos**
 
-1. Crea una base de datos en Oracle.
-2. Ejecuta el script `database/schema.sql` para crear las tablas.
+1. Crea una base de datos en MySQL.
+2. Ejecuta el script `database/example.sql` para crear las tablas.
 3. (Opcional) Ejecuta `database/seed.sql` para agregar datos de prueba.
 
 ### **3️⃣ Configurar el Backend**
 ```sh
 cd backend-java-ant
-# Edita config/database.properties con las credenciales de tu base de datos
+# Crea y edita .env con las credenciales de tu base de datos
 # Edita config/application.properties según el entorno (desarrollo, producción, etc.)
 # Compila el backend
 ant compile
