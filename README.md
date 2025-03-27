@@ -43,7 +43,7 @@ Antes de empezar, asegúrate de tener instalados:
 
 ### **1️⃣ Clonar el Repositorio**
 ```sh
-git clone https://github.com/tu-usuario/april-boutique.git
+git clone https://github.com/pedrochgdev/april-boutique.git
 cd april-boutique
 ```
 
