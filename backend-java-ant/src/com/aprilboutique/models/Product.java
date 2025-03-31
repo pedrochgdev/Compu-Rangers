@@ -1,4 +1,6 @@
 
+//Este es el modelo Ejemplo para los siguiente archivos xD
+
 package com.aprilboutique.models;
 
 public class Product {
