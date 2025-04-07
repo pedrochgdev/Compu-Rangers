@@ -1,15 +1,19 @@
-# 🛍️ April Boutique - Tienda Virtual
-
-**April Boutique** es un sistema de comercio electrónico diseñado para ofrecer una experiencia de compra en línea fluida y eficiente. Permite a los usuarios navegar por un catálogo de productos, agregar artículos al carrito, realizar pagos seguros y gestionar sus pedidos. La aplicación consta de un **backend** en **Java con Apache Ant** y un **frontend** en **C# con .NET**, conectados mediante **servicios web SOAP**.
+Aquí tienes el README actualizado, tomando en cuenta que ahora trabajas con Maven:
 
 ---
 
-## 🚀 Tecnologías Utilizadas
+# 🖥️ **Compu Rangers - Tienda Virtual**
+
+**Compu Rangers** es un sistema de comercio electrónico diseñado para ofrecer una experiencia de compra en línea fluida y eficiente. Este proyecto se centra en la venta de productos tecnológicos y componentes. Los usuarios pueden navegar por un catálogo de productos, agregar artículos al carrito, realizar pagos seguros y gestionar sus pedidos. La aplicación consta de un **backend** en **Java con Maven** y un **frontend** en **C# con .NET**, conectados mediante **servicios web SOAP**.
+
+---
+
+## 🚀 **Tecnologías Utilizadas**
 
 ### **Backend**
 
 - **Lenguaje:** Java 21
-- **Build Tool:** Apache Ant
+- **Gestor de dependencias:** Maven
 - **Servicios Web:** SOAP
 - **Base de Datos:** MySQL Server
 
@@ -27,24 +31,24 @@
 
 ---
 
-## 📌 Requisitos Previos
+## 📌 **Requisitos Previos**
 
 Antes de empezar, asegúrate de tener instalados:
 
 - **Java Development Kit (JDK) 21**
-- **Apache Ant**
+- **Maven**
 - **MySQL Server**
 - **.NET Framework SDK**
 - **Git**
 
 ---
 
-## 📌 Instalación y Configuración
+## 📌 **Instalación y Configuración**
 
 ### **1️⃣ Clonar el Repositorio**
 ```sh
 git clone https://github.com/pedrochgdev/Compu-Rangers.git
-cd april-boutique
+cd compu-rangers
 ```
 
 ### **2️⃣ Configurar la Base de Datos**
@@ -55,13 +59,13 @@ cd april-boutique
 
 ### **3️⃣ Configurar el Backend**
 ```sh
-cd backend-java-ant
+cd backend-java-maven
 # Crea y edita .env con las credenciales de tu base de datos
 # Edita config/application.properties según el entorno (desarrollo, producción, etc.)
 # Compila el backend
-ant compile
+mvn clean install
 # Ejecuta el servidor
-ant run
+mvn spring-boot:run
 ```
 
 ### **4️⃣ Configurar el Frontend**
@@ -74,12 +78,12 @@ dotnet run
 
 ---
 
-## 📌 Ejecutar Pruebas
+## 📌 **Ejecutar Pruebas**
 
 ### **Backend**
 ```sh
-cd backend-java-ant
-ant test
+cd backend-java-maven
+mvn test
 ```
 
 ### **Frontend**
@@ -90,13 +94,13 @@ dotnet test
 
 ---
 
-## 📌 Despliegue
+## 📌 **Despliegue**
 
 Para un entorno de producción:
 
 1. **Backend**:
-   - Compila con `ant build`.
-   - Despliega el archivo JAR en `dist/` en tu servidor.
+   - Compila con `mvn clean install`.
+   - Despliega el archivo JAR generado en `target/` en tu servidor.
 
 2. **Frontend**:
    - Publica con `dotnet publish`.
@@ -104,7 +108,7 @@ Para un entorno de producción:
 
 ---
 
-## 📌 Contribuir al Proyecto
+## 📌 **Contribuir al Proyecto**
 
 1. **Haz un Fork** del repositorio.
 2. Crea una nueva rama:
@@ -123,20 +127,19 @@ Para un entorno de producción:
 
 ---
 
-## 📌 Documentación Adicional
+## 📌 **Documentación Adicional**
 
 - [Arquitectura del Sistema](docs/arquitectura.md)
 - [Guía de Desarrollo](docs/desarrollo.md)
 
 ---
 
-## 📌 Licencia
+## 📌 **Licencia**
 
 Este proyecto está bajo la [Licencia MIT](LICENSE).
 
 ---
 
-## 📌 Contacto
+## 📌 **Contacto**
 
 Para dudas o sugerencias, escríbenos a **gabrielchg6@gmail.com**.
-
