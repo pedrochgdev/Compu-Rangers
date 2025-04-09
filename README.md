@@ -1,7 +1,3 @@
-Aquí tienes el README actualizado, tomando en cuenta que ahora trabajas con Maven:
-
----
-
 # 🖥️ **Compu Rangers - Tienda Virtual**
 
 **Compu Rangers** es un sistema de comercio electrónico diseñado para ofrecer una experiencia de compra en línea fluida y eficiente. Este proyecto se centra en la venta de productos tecnológicos y componentes. Los usuarios pueden navegar por un catálogo de productos, agregar artículos al carrito, realizar pagos seguros y gestionar sus pedidos. La aplicación consta de un **backend** en **Java con Maven** y un **frontend** en **C# con .NET**, conectados mediante **servicios web SOAP**.
