@@ -1,17 +1,17 @@
 package com.compurangers.platform.service;
 
-import com.compurangers.platform.core.domain.Product;
-import com.compurangers.platform.dao.IProductDAO;
+import com.compurangers.platform.core.domain.catalog.Producto;
 import java.util.List;
+import com.compurangers.platform.dao.IProductoDAO;
 
-public class ProductService {
-    private final IProductDAO productDAO;
+public class ProductoService {
+    private final IProductoDAO productDAO;
 
-    public ProductService(IProductDAO productDAO) {
+    public ProductoService(IProductoDAO productDAO) {
         this.productDAO = productDAO;
     }
 
-    public List<Product> getAllProducts() {
+    public List<Producto> getAllProducts() {
         return productDAO.getAllProducts();
     }
 }
