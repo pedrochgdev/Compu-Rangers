@@ -1,12 +1,11 @@
 package com.compurangers.platform.core.domain.sales;
 
 import com.compurangers.platform.core.domain.user.Usuario;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Cliente extends Usuario {
-    private List<String> historialCompras;
+    private final List<String> historialCompras;
     private String metodoPagoPreferido;
 
     public Cliente(String id, String nombreCompleto, String correoElectronico, String telefono,
