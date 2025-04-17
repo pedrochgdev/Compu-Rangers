@@ -7,23 +7,28 @@ import java.util.List;
 public class OrdenDeVentaDAO implements IOrdenDeVentaDAO{
 
     @Override
-    public int addSale(OrdenDeVenta sale) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public int add(OrdenDeVenta modelo) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int updateSale(OrdenDeVenta sale) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean update(OrdenDeVenta modelo) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int deleteSale(int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean delete(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<OrdenDeVenta> getAllSales() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public OrdenDeVenta search(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<OrdenDeVenta> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

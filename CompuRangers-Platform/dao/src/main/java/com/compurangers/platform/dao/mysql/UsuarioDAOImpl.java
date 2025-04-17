@@ -7,23 +7,28 @@ import java.util.List;
 public class UsuarioDAOImpl implements IUsuarioDAO{
 
     @Override
-    public int addUser(Usuario user) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public int add(Usuario modelo) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int updateUser(Usuario user) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean update(Usuario modelo) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int deleteUser(int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean delete(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<Usuario> getAllUsers() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Usuario search(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Usuario> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

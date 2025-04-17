@@ -4,40 +4,45 @@ import com.compurangers.platform.core.domain.catalog.Producto;
 import com.compurangers.platform.util.DatabaseUtil;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import com.compurangers.platform.dao.IProductoDAO;
 
 public class ProductoDAOImpl implements IProductoDAO {
-    
+
     @Override
-    public int addProduct(Producto product) {
+    public int add(Producto modelo) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int updateProduct(Producto product) {
+    public boolean update(Producto modelo) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int deleteProduct(int id) {
+    public boolean delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
-    public List<Producto> getAllProducts() {
+    public Producto search(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Producto> getAll() {
         List<Producto> products = new ArrayList<>();
-        try (Connection conn = DatabaseUtil.getConnection();
+        try (Connection conn = DatabaseUtil.getInstance().getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT * FROM products")) {
             while (rs.next()) {
                 Producto product = new Producto();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println(e);
+            throw new RuntimeException("No se pudo listar las areas.");
         }
         return products;
     }

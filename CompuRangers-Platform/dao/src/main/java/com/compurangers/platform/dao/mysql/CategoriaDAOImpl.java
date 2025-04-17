@@ -7,23 +7,28 @@ import java.util.List;
 public class CategoriaDAOImpl implements ICategoriaDAO{
 
     @Override
-    public int addCategory(Categoria category) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public int add(Categoria modelo) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int updateCategory(Categoria category) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean update(Categoria modelo) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int deleteCategory(int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean delete(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
-    public List<Categoria> getAllCategory() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Categoria search(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Categoria> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

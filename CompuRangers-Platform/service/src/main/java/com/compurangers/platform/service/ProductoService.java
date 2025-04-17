@@ -12,6 +12,6 @@ public class ProductoService {
     }
 
     public List<Producto> getAllProducts() {
-        return productDAO.getAllProducts();
+        return productDAO.getAll();
     }
 }
