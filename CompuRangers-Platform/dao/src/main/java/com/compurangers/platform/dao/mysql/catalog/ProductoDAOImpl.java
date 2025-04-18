@@ -1,4 +1,4 @@
-package com.compurangers.platform.dao.mysql;
+package com.compurangers.platform.dao.mysql.catalog;
 
 import com.compurangers.platform.core.domain.catalog.Producto;
 import com.compurangers.platform.util.DatabaseUtil;
@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import com.compurangers.platform.dao.IProductoDAO;
+import com.compurangers.platform.dao.catalog.IProductoDAO;
 
 public class ProductoDAOImpl implements IProductoDAO {
 

@@ -1,7 +1,7 @@
-package com.compurangers.platform.dao.mysql;
+package com.compurangers.platform.dao.mysql.catalog;
 
 import com.compurangers.platform.core.domain.catalog.Categoria;
-import com.compurangers.platform.dao.ICategoriaDAO;
+import com.compurangers.platform.dao.catalog.ICategoriaDAO;
 import java.util.List;
 
 public class CategoriaDAOImpl implements ICategoriaDAO{
