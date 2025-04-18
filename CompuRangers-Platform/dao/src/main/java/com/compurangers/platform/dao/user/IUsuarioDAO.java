@@ -1,8 +1,9 @@
-package com.compurangers.platform.dao;
+package com.compurangers.platform.dao.user;
 
 import com.compurangers.platform.core.domain.user.Usuario;
-import java.util.List;
+import com.compurangers.platform.dao.ICrud;
 
 public interface IUsuarioDAO extends ICrud<Usuario>{
-    
+    Usuario login(String correo, String contraseña);
+    boolean existsByEmail(String correo);
 }
