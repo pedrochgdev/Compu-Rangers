@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cliente extends Usuario {
-    private final List<String> historialCompras;
+    private final List<OrdenDeVenta> historialCompras;
     private String metodoPagoPreferido;
 
     public Cliente(String id, String nombreCompleto, String correoElectronico, String telefono,
@@ -15,11 +15,11 @@ public class Cliente extends Usuario {
         this.metodoPagoPreferido = "No definido";
     }
 
-    public List<String> getHistorialCompras() {
+    public List<OrdenDeVenta> getHistorialCompras() {
         return historialCompras;
     }
 
-    public void agregarCompra(String compra) {
+    public void agregarCompra(OrdenDeVenta compra) {
         historialCompras.add(compra);
     }
 
