@@ -10,10 +10,8 @@ public class OrdenDeVenta {
     private char estado;
     private double total;
     private List<DetalleVenta> detalles;
-    
-    public OrdenDeVenta(){}
 
-    public OrdenDeVenta(List<ItemCarrito> carrito) {
+    public OrdenDeVenta() {
         this.fecha = new Date();
         this.estado = 'C'; // Estado por defecto
         this.detalles = new ArrayList<>();

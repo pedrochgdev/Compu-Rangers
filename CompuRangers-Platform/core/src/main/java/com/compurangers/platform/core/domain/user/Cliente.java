@@ -1,6 +1,6 @@
-package com.compurangers.platform.core.domain.sales;
+package com.compurangers.platform.core.domain.user;
 
-import com.compurangers.platform.core.domain.user.Usuario;
+import com.compurangers.platform.core.domain.sales.OrdenDeVenta;
 import java.util.ArrayList;
 import java.util.List;
 

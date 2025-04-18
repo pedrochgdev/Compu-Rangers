@@ -6,22 +6,22 @@ public class Producto {
     private String nombre;
     private String descripcion;
     private double precioVenta;
-    private int categoriaId;
-    private int marcaId;
+    private Categoria categoria;
+    private Marca marca;
 
     // Constructor vacío
     public Producto() {}
 
     // Constructor completo
     public Producto(int id, String sku, String nombre, String descripcion, 
-                    double precioVenta, int categoriaId, int marcaId) {
+                    double precioVenta, Categoria categoria, Marca marca) {
         this.id = id;
         this.sku = sku;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precioVenta = precioVenta;
-        this.categoriaId = categoriaId;
-        this.marcaId = marcaId;
+        this.categoria = categoria;
+        this.marca = marca;
     }
 
     // Getters y Setters
@@ -40,9 +40,9 @@ public class Producto {
     public double getPrecioVenta() { return precioVenta; }
     public void setPrecioVenta(double precioVenta) { this.precioVenta = precioVenta; }
 
-    public int getCategoriaId() { return categoriaId; }
-    public void setCategoriaId(int categoriaId) { this.categoriaId = categoriaId; }
+    public Categoria getCategoria() { return categoria; }
+    public void setCategoriaId(Categoria categoria) { this.categoria = categoria; }
 
-    public int getMarcaId() { return marcaId; }
-    public void setMarcaId(int marcaId) { this.marcaId = marcaId; }
+    public Marca getMarcaId() { return marca; }
+    public void setMarcaId(Marca marca) { this.marca = marca; }
 }
