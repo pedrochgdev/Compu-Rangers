@@ -1,7 +1,7 @@
-package com.compurangers.platform.dao.mysql;
+package com.compurangers.platform.dao.mysql.sales;
 
 import com.compurangers.platform.core.domain.sales.OrdenDeVenta;
-import com.compurangers.platform.dao.IOrdenDeVentaDAO;
+import com.compurangers.platform.dao.sales.IOrdenDeVentaDAO;
 import java.util.List;
 
 public class OrdenDeVentaDAO implements IOrdenDeVentaDAO{
