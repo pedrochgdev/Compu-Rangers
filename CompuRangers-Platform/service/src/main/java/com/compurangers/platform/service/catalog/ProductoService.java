@@ -1,4 +1,4 @@
-package com.compurangers.platform.service;
+package com.compurangers.platform.service.catalog;
 
 import com.compurangers.platform.core.domain.catalog.Producto;
 import java.util.List;

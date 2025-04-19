@@ -1,6 +1,6 @@
 package com.compurangers.platform.appprueba;
 
-import com.compurangers.platform.service.ProductoService;
+import com.compurangers.platform.service.catalog.ProductoService;
 import com.compurangers.platform.core.domain.catalog.Producto;
 import com.compurangers.platform.dao.mysql.catalog.ProductoDAOImpl;
 import java.util.List;
