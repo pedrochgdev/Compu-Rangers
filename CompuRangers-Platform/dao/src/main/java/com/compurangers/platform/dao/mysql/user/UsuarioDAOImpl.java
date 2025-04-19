@@ -1,5 +1,7 @@
 package com.compurangers.platform.dao.mysql.user;
 
+import com.compurangers.platform.core.domain.user.Admin;
+import com.compurangers.platform.core.domain.user.Cliente;
 import com.compurangers.platform.core.domain.user.Usuario;
 import com.compurangers.platform.dao.user.IUsuarioDAO;
 import java.util.List;
@@ -38,6 +40,16 @@ public class UsuarioDAOImpl implements IUsuarioDAO{
 
     @Override
     public boolean existsByEmail(String correo) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Cliente> getAllClientes() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Admin> getAllAdmins() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
