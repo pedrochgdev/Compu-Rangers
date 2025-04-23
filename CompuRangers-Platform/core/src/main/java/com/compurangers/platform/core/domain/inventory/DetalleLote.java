@@ -1,18 +1,22 @@
 package com.compurangers.platform.core.domain.inventory;
 
+import com.compurangers.platform.core.domain.catalog.Producto;
+
 public class DetalleLote {
     private int id;
     private int cantidad;
     private double precioCompra;
     private int loteId;
-    private int productoId;
-
-    public DetalleLote(int id, int cantidad, double precioCompra, int loteId, int productoId) {
+    private Producto producto;
+    
+    public DetalleLote() {}
+    
+    public DetalleLote(int id, int cantidad, double precioCompra, int loteId, Producto producto) {
         this.id = id;
         this.cantidad = cantidad;
         this.precioCompra = precioCompra;
         this.loteId = loteId;
-        this.productoId = productoId;
+        this.producto = producto;
     }
 
     // Getters y Setters
@@ -28,6 +32,6 @@ public class DetalleLote {
     public int getLoteId() { return loteId; }
     public void setLoteId(int loteId) { this.loteId = loteId; }
 
-    public int getProductoId() { return productoId; }
-    public void setProductoId(int productoId) { this.productoId = productoId; }
+    public Producto getProducto() { return producto; }
+    public void setProducto(Producto producto) { this.producto = producto; }
 }
