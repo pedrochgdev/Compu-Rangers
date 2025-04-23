@@ -2,6 +2,7 @@
 # Archivos de entorno (excepto el ejemplo)
 .env
 !.env.example
+nb-configuration.xml
 
 # Directorios de proyectos hijos
 **/target/
@@ -34,7 +35,7 @@ dependency-reduced-pom.xml
 .settings/
 .factorypath
 .springBeans
-nb-configuration.xml
+
 
 # Archivos temporales
 *.log
