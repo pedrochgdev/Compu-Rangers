@@ -41,8 +41,21 @@ public class Producto {
     public void setPrecioVenta(double precioVenta) { this.precioVenta = precioVenta; }
 
     public Categoria getCategoria() { return categoria; }
-    public void setCategoriaId(Categoria categoria) { this.categoria = categoria; }
+    public void setCategoria(Categoria categoria) { this.categoria = categoria; }
 
-    public Marca getMarcaId() { return marca; }
-    public void setMarcaId(Marca marca) { this.marca = marca; }
+    public Marca getMarca() { return marca; }
+    public void setMarca(Marca marca) { this.marca = marca; }
+    
+    @Override
+    public String toString() {
+        return "Producto{" +
+               "id=" + id +
+               ", descripcion='" + descripcion + '\'' +
+               ", sku='" + sku + '\'' +
+               ", precioVenta=" + precioVenta +
+               ", categoria=" + (categoria != null ? categoria.getNombre() : "null") +
+               ", marca=" + (marca != null ? marca.getNombre() : "null") +
+               '}';
+    }
+    
 }

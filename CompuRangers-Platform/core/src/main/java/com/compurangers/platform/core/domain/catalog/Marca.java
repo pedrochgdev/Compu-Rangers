@@ -3,7 +3,7 @@ package com.compurangers.platform.core.domain.catalog;
 public class Marca {
     private int id;
     private String nombre;
-    private String descripcion;
+    //private String descripcion;
 
     // Constructor vacío
     public Marca() {}
@@ -24,5 +24,11 @@ public class Marca {
 
     public String getDescripcion() { return descripcion; }
     public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+    
+    @Override
+    public String toString() {
+        return nombre;
+    }
+    
 }
 

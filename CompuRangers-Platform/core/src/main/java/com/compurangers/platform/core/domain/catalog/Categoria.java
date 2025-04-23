@@ -52,5 +52,11 @@ public class Categoria {
         subcategoria.setCategoriaPadre(this);
         this.subcategorias.add(subcategoria);
     }
+    
+    @Override
+    public String toString() {
+        return nombre;
+    }
+    
 }
 
