@@ -5,7 +5,6 @@ import com.compurangers.platform.core.domain.catalog.Producto;
 public class Inventario {
     private int id;
     private int cantidadDisponible;
-    private int cantidadReservada;
     private int loteId;
     private Producto producto;
 
@@ -24,15 +23,7 @@ public class Inventario {
     public void setCantidadDisponible(int cantidadDisponible) {
         this.cantidadDisponible = cantidadDisponible;
     }
-
-    public int getCantidadReservada() {
-        return cantidadReservada;
-    }
-
-    public void setCantidadReservada(int cantidadReservada) {
-        this.cantidadReservada = cantidadReservada;
-    }
-
+    
     public int getLoteId() {
         return loteId;
     }

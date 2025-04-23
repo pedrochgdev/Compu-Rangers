@@ -6,13 +6,12 @@ import java.util.List;
 
 public class Cliente extends Usuario {
     private final List<OrdenDeVenta> historialCompras;
-    private String metodoPagoPreferido;
-
+    private String direccionPreferida;
+    
     public Cliente(String id, String nombreCompleto, String correoElectronico, String telefono,
                    String direccion, String contrasena) {
         super(id, nombreCompleto, correoElectronico, telefono, direccion, contrasena);
         this.historialCompras = new ArrayList<>();
-        this.metodoPagoPreferido = "No definido";
     }
 
     public List<OrdenDeVenta> getHistorialCompras() {
@@ -22,18 +21,19 @@ public class Cliente extends Usuario {
     public void agregarCompra(OrdenDeVenta compra) {
         historialCompras.add(compra);
     }
-
-    public String getMetodoPagoPreferido() {
-        return metodoPagoPreferido;
+    
+    public String getDireccionPreferida() {
+        return direccionPreferida;
     }
 
-    public void setMetodoPagoPreferido(String metodoPagoPreferido) {
-        this.metodoPagoPreferido = metodoPagoPreferido;
+    public void setDireccionPreferida(String direccionPreferida) {
+        this.direccionPreferida = direccionPreferida;
     }
 
     @Override
     public String obtenerRol() {
         return "Cliente";
     }
+
 }
 

@@ -10,6 +10,7 @@ public class Pago {
     private String referencia;
 
     private int documentoDeVentasNumero;
+    private int documentoDeComprasNumero;
     private int metodoDePagoId;
 
     private int monedaId;
@@ -61,6 +62,14 @@ public class Pago {
 
     public void setDocumentoDeVentasNumero(int documentoDeVentasNumero) {
         this.documentoDeVentasNumero = documentoDeVentasNumero;
+    }
+    
+    public int getDocumentoDeComprasNumero() {
+        return documentoDeComprasNumero;
+    }
+
+    public void setDocumentoDeComprasNumero(int documentoDeComprasNumero) {
+        this.documentoDeComprasNumero = documentoDeComprasNumero;
     }
 
     public int getMetodoDePagoId() {

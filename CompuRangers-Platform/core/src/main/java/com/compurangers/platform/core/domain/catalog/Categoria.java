@@ -10,25 +10,24 @@ import java.util.List;
 public class Categoria {
     private int id;
     private String nombre;
-    private String descripcion;
     private Categoria categoriaPadre;
-    private List<Categoria> subcategorias = new ArrayList<>();
+    private List<Categoria> subcategorias;
 
     // Constructor vacío
-    public Categoria() {}
+    public Categoria() {this.subcategorias = new ArrayList<>();}
 
     // Constructor básico
-    public Categoria(int id, String nombre, String descripcion) {
+    public Categoria(int id, String nombre) {
+        this.subcategorias = new ArrayList<>();
         this.id = id;
         this.nombre = nombre;
-        this.descripcion = descripcion;
     }
 
     // Constructor con padre
-    public Categoria(int id, String nombre, String descripcion, Categoria categoriaPadre) {
+    public Categoria(int id, String nombre, Categoria categoriaPadre) {
+        this.subcategorias = new ArrayList<>();
         this.id = id;
         this.nombre = nombre;
-        this.descripcion = descripcion;
         this.categoriaPadre = categoriaPadre;
     }
 
@@ -39,16 +38,15 @@ public class Categoria {
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public String getDescripcion() { return descripcion; }
-    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
-
     public Categoria getCategoriaPadre() { return categoriaPadre; }
     public void setCategoriaPadre(Categoria categoriaPadre) { 
         this.categoriaPadre = categoriaPadre;
     }
 
     public List<Categoria> getSubcategorias() { return subcategorias; }
-    public void agregarSubcategoria(Categoria subcategoria) {
+    public void setSubcategorias(List<Categoria> subcategorias) { this.subcategorias = subcategorias; }
+    
+    public void addSubcategoria(Categoria subcategoria) {
         subcategoria.setCategoriaPadre(this);
         this.subcategorias.add(subcategoria);
     }

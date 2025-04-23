@@ -1,12 +1,13 @@
 package com.compurangers.platform.core.domain.user;
 
 public abstract class Usuario {
-    private String id; // ID único del usuario
-    private String nombreCompleto; // PII
-    private String correoElectronico; // PII
-    private String telefono; // PII
-    private String direccion; // PII
-    private String contrasena; // Debería almacenarse encriptada
+    private String id;
+    private String username;
+    private String nombreCompleto;
+    private String correoElectronico;
+    private String telefono; 
+    private String direccion;
+    private String contrasena;
 
     public Usuario(String id, String nombreCompleto, String correoElectronico, String telefono, String direccion, String contrasena) {
         this.id = id;
@@ -20,6 +21,18 @@ public abstract class Usuario {
     // Getters y Setters
     public String getId() {
         return id;
+    }
+    
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getNombreCompleto() {

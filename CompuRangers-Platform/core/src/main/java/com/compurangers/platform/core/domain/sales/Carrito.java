@@ -18,6 +18,10 @@ public class Carrito {
     public List<ItemCarrito> getItems() {
         return items;
     }
+    
+    public void setItems(List<ItemCarrito> items) {
+        this.items = items;
+    }
 
     public int getId() {
         return id;

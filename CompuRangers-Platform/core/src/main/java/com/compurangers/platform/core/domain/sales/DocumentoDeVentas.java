@@ -6,8 +6,8 @@ public class DocumentoDeVentas {
     private double impuestos;
     private double total;
     private double totalPagado;
-    private double totalPendiente;
     private int ordenDeVentaId; 
+    private String direccionEnvio;
 
     public int getNumero() {
         return numero;
@@ -49,20 +49,20 @@ public class DocumentoDeVentas {
         this.totalPagado = totalPagado;
     }
 
-    public double getTotalPendiente() {
-        return totalPendiente;
-    }
-
-    public void setTotalPendiente(double totalPendiente) {
-        this.totalPendiente = totalPendiente;
-    }
-
     public int getOrdenDeVentaId() {
         return ordenDeVentaId;
     }
 
     public void setOrdenDeVentaId(int ordenDeVentaId) {
         this.ordenDeVentaId = ordenDeVentaId;
+    }
+    
+    public String getDireccionEnvio() {
+        return direccionEnvio;
+    }
+
+    public void setDireccionEnvio(String direccionEnvio) {
+        this.direccionEnvio = direccionEnvio;
     }
     
 }

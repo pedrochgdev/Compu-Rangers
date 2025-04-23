@@ -7,13 +7,14 @@ import java.util.List;
 public class OrdenDeVenta {
     private int id;
     private Date fecha;
-    private char estado;
+    private String estado;
     private double total;
     private List<DetalleVenta> detalles;
+    private int clienteId;
 
     public OrdenDeVenta() {
         this.fecha = new Date();
-        this.estado = 'C'; // Estado por defecto
+        this.estado = "PROCESADO"; // Estado por defecto
         this.detalles = new ArrayList<>();
         this.total = 0.0;
     }
@@ -34,11 +35,11 @@ public class OrdenDeVenta {
         this.fecha = fecha;
     }
 
-    public char getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(char estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
@@ -66,6 +67,14 @@ public class OrdenDeVenta {
             this.total += detalle.getPrecio();
         }
 
+    }
+    
+    public int getClienteId() {
+        return clienteId;
+    }
+
+    public void setClienteId(int clienteId) {
+        this.clienteId = clienteId;
     }
     
     @Override
