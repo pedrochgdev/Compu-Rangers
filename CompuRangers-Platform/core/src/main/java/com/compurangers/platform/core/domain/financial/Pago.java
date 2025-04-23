@@ -11,9 +11,9 @@ public class Pago {
 
     private int documentoDeVentasNumero;
     private int metodoDePagoId;
-    private int tipoCambioPeriodoMonedaId;
-    private int tipoCambioPeriodoTipoDeCambioId;
-    private int tipoCambioPeriodoPeriodoId;
+
+    private int monedaId;
+    private int periodoId;
 
     public int getId() {
         return id;
@@ -71,27 +71,20 @@ public class Pago {
         this.metodoDePagoId = metodoDePagoId;
     }
 
-    public int getTipoCambioPeriodoMonedaId() {
-        return tipoCambioPeriodoMonedaId;
+    public int getMonedaId() {
+        return monedaId;
     }
 
-    public void setTipoCambioPeriodoMonedaId(int tipoCambioPeriodoMonedaId) {
-        this.tipoCambioPeriodoMonedaId = tipoCambioPeriodoMonedaId;
+    public void setMonedaId(int monedaId) {
+        this.monedaId = monedaId;
     }
 
-    public int getTipoCambioPeriodoTipoDeCambioId() {
-        return tipoCambioPeriodoTipoDeCambioId;
+    public int getPeriodoId() {
+        return periodoId;
     }
 
-    public void setTipoCambioPeriodoTipoDeCambioId(int tipoCambioPeriodoTipoDeCambioId) {
-        this.tipoCambioPeriodoTipoDeCambioId = tipoCambioPeriodoTipoDeCambioId;
+    public void setPeriodoId(int periodoId) {
+        this.periodoId = periodoId;
     }
-
-    public int getTipoCambioPeriodoPeriodoId() {
-        return tipoCambioPeriodoPeriodoId;
-    }
-
-    public void setTipoCambioPeriodoPeriodoId(int tipoCambioPeriodoPeriodoId) {
-        this.tipoCambioPeriodoPeriodoId = tipoCambioPeriodoPeriodoId;
-    }
+    
 }
