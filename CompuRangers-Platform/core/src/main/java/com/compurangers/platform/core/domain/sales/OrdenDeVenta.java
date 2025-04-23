@@ -68,4 +68,10 @@ public class OrdenDeVenta {
 
     }
     
+    @Override
+    public String toString() {
+        return "OrdenDeVenta{id=" + id + ", fecha=" + fecha + ", estado=" + estado +
+               ", total=" + total + ", detalles=" + detalles + "}";
+    }
+    
 }

@@ -39,7 +39,7 @@ public class ProductoDAOImpl implements IProductoDAO {
         try (Connection conn = DatabaseUtil.getInstance().getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(
-                 "SELECT p.*, c.nombre AS categoria_nombre, m.nmbre AS marca_nombre " +
+                 "SELECT p.*, c.nombre AS categoria_nombre, m.nombre AS marca_nombre " +
                  "FROM PRODUCTO p " +
                  "JOIN CATEGORIA c ON p.categoria_id = c.id " +
                  "JOIN MARCA m ON p.marca_id = m.id")) {

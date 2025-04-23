@@ -1,14 +1,14 @@
 package com.compurangers.platform.core.domain.inventory;
 
 public class Proveedor {
-    private Long id;
+    private int id;
     private String razonSocial;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -19,5 +19,11 @@ public class Proveedor {
     public void setRazonSocial(String razonSocial) {
         this.razonSocial = razonSocial;
     }
+    
+    @Override
+    public String toString() {
+        return "Proveedor{id=" + id + ", razonSocial='" + razonSocial + "'}";
+    }
+    
 }
 

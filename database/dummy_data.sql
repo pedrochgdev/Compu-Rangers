@@ -90,7 +90,7 @@ VALUES (216.00, 1, NULL, 1, 1);
 
 -- MONEDA: Currency
 INSERT INTO MONEDA (codigo, nombre)
-VALUES ('US', 'Dolar Estado Unidense');
+VALUES ('US', 'Dolar EEUU');
 
 -- MONEDA_PERIODO: Exchange rate for a period
 INSERT INTO MONEDA_PERIODO (moneda_id, periodo_id, tipoCambio, estado, valor)

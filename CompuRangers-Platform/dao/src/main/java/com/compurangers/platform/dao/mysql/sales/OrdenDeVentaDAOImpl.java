@@ -4,7 +4,7 @@ import com.compurangers.platform.core.domain.sales.OrdenDeVenta;
 import com.compurangers.platform.dao.sales.IOrdenDeVentaDAO;
 import java.util.List;
 
-public class OrdenDeVentaDAO implements IOrdenDeVentaDAO{
+public class OrdenDeVentaDAOImpl implements IOrdenDeVentaDAO{
 
     @Override
     public int add(OrdenDeVenta modelo) {
