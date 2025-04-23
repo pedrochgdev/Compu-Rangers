@@ -27,7 +27,7 @@ public class ItemCarritoDAOImpl implements IItemCarritoDAO {
             ps.setInt(1, modelo.getProducto().getId());
             ps.setInt(2, modelo.getCantidad());
             ps.setDouble(3, modelo.getSubtotal());
-            ps.setInt(4, modelo.getCarrito_id());
+            ps.setInt(4, modelo.getCarritoId());
             if (ps.executeUpdate() == 0) {
                 System.err.println("El ítem no se insertó");
                 return 0;
@@ -47,9 +47,9 @@ public class ItemCarritoDAOImpl implements IItemCarritoDAO {
         try (Connection conn = DatabaseUtil.getInstance().getConnection(); CallableStatement cs = conn.prepareCall(sql)) {
             cs.setInt(1, modelo.getProducto().getId());
             cs.setInt(2, modelo.getCantidad());
-            cs.setInt(3, modelo.getCarrito_id());
-            cs.setInt(4, modelo.getProducto().getId());
-            cs.setDouble(5, modelo.getSubtotal());
+            cs.setInt(3, modelo.getCarritoId());
+            cs.setDouble(4, modelo.getSubtotal());
+            cs.setInt(5, modelo.getId());
             return cs.executeUpdate() > 0;
         } catch (Exception e) {
             System.err.println(e);
@@ -80,7 +80,7 @@ public class ItemCarritoDAOImpl implements IItemCarritoDAO {
                     Producto producto = productoDAO.search(rs.getInt("producto_id"));
                     item.setProducto(producto);
                     item.setCantidad(rs.getInt("cantidad"));
-                    item.setCarrito_id(rs.getInt("carrito_id"));
+                    item.setCarritoId(rs.getInt("carrito_id"));
                     item.setSubtotal(rs.getDouble("subtotal"));
                     return item;
                 }
@@ -103,8 +103,9 @@ public class ItemCarritoDAOImpl implements IItemCarritoDAO {
                 Producto producto = productoDAO.search(rs.getInt("producto_id"));
                 item.setProducto(producto);
                 item.setCantidad(rs.getInt("cantidad"));
-                item.setCarrito_id(rs.getInt("carrito_id"));
+                item.setCarritoId(rs.getInt("carrito_id"));
                 item.setSubtotal(rs.getDouble("subtotal"));
+                item.setId(rs.getInt("id"));
                 items.add(item);
             }
         } catch (Exception e) {

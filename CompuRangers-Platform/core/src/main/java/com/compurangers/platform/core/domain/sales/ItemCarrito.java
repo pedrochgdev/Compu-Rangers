@@ -4,9 +4,10 @@ import com.compurangers.platform.core.domain.catalog.Producto;
 
 public class ItemCarrito {
     
+    private int id;
     private Producto producto;
     private int cantidad;
-    private int carrito_id;
+    private int carritoId;
     private double subtotal;
     
     public ItemCarrito() {}
@@ -37,10 +38,25 @@ public class ItemCarrito {
     public void setSubtotal(double subtotal){
         this.subtotal= subtotal;
     }
-    public int getCarrito_id(){
-        return carrito_id;
+    public int getCarritoId(){
+        return carritoId;
     }
-    public void setCarrito_id(int c_id){
-        this.carrito_id = c_id;
+    public void setCarritoId(int c_id){
+        this.carritoId = c_id;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    @Override
+    public String toString() {
+        return "ItemCarrito{id=" + id + ", cantidad=" + cantidad + ", subtotal=" + subtotal +
+               ", carritoId=" + carritoId + ", productoId=" + (producto != null ? producto.getId() : "null") + "}";
+    }
+    
 }

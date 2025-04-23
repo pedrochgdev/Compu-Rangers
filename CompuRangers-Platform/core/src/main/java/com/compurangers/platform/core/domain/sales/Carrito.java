@@ -8,8 +8,8 @@ public class Carrito {
     private int id;
     private List<ItemCarrito> items;
     private double total;
-    private int cantidad_productos;
-    private int usuario_id;
+    private int cantidadProductos;
+    private int usuarioId;
 
     public Carrito() {
         this.items = new ArrayList<>();
@@ -39,20 +39,25 @@ public class Carrito {
         this.total = total;
     }
 
-    public int getCantidad_productos() {
-        return cantidad_productos;
+    public int getCantidadProductos() {
+        return cantidadProductos;
     }
 
-    public void setCantidad_productos(int cantidad_productos) {
-        this.cantidad_productos = cantidad_productos;
+    public void setCantidadProductos(int cantidad_productos) {
+        this.cantidadProductos = cantidad_productos;
     }
 
-    public int getUsuario_id() {
-        return usuario_id;
+    public int getUsuarioId() {
+        return usuarioId;
     }
 
-    public void setUsuario_id(int usuario_id) {
-        this.usuario_id = usuario_id;
+    public void setUsuarioId(int usuario_id) {
+        this.usuarioId = usuario_id;
+    }
+    
+    @Override
+    public String toString() {
+        return "Carrito{id=" + id + ", total=" + total + ", items=" + items + "}";
     }
 
 }

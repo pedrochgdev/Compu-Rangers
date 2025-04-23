@@ -19,8 +19,8 @@ public class CarritoDAOImpl implements ICarritoDAO {
         String sql = "INSERT INTO CARRITO (total, cantidad_productos, cliente_usuario_id) VALUES (?, ?, ?)";
         try (Connection conn = DatabaseUtil.getInstance().getConnection(); PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setDouble(1, modelo.getTotal());
-            ps.setInt(2, modelo.getCantidad_productos());
-            ps.setInt(3, modelo.getUsuario_id());
+            ps.setInt(2, modelo.getCantidadProductos());
+            ps.setInt(3, modelo.getUsuarioId());
 
             if (ps.executeUpdate() == 0) {
                 System.err.println("El carrito no se insertó");
@@ -40,8 +40,8 @@ public class CarritoDAOImpl implements ICarritoDAO {
         String sql = "UPDATE CARRITO SET total = ?, cantidad_productos = ?, cliente_usuario_id = ? WHERE id = ?";
         try (Connection conn = DatabaseUtil.getInstance().getConnection(); CallableStatement cs = conn.prepareCall(sql)) {
             cs.setDouble(1, modelo.getTotal());
-            cs.setInt(2, modelo.getCantidad_productos());
-            cs.setInt(3, modelo.getUsuario_id());
+            cs.setInt(2, modelo.getCantidadProductos());
+            cs.setInt(3, modelo.getUsuarioId());
             cs.setInt(4, modelo.getId());
             return cs.executeUpdate() > 0;
         } catch (Exception e) {
@@ -72,11 +72,12 @@ public class CarritoDAOImpl implements ICarritoDAO {
                     Carrito carrito = new Carrito();
                     carrito.setId(rs.getInt("id"));
                     carrito.setTotal(rs.getDouble("total"));
-                    carrito.setCantidad_productos(rs.getInt("cantidad_productos"));
-                    carrito.setUsuario_id(rs.getInt("cliente_usuario_id"));
+                    carrito.setCantidadProductos(rs.getInt("cantidad_productos"));
+                    carrito.setUsuarioId(rs.getInt("cliente_usuario_id"));
 
-                    // Obtener los items del carrito desde la tabla DETALLE_CARRITO
-                    String itemSql = "SELECT dc.*, p.descripcion AS producto_descripcion, p.precio_venta, p.sku "
+                    String itemSql = "SELECT dc.*, p.descripcion AS producto_descripcion, p.precio_venta as producto_precio_venta, p.sku as producto_sku,"
+                            + "c.id AS categoria_id, c.nombre AS categoria_nombre, "
+                            + "m.id AS marca_id, m.nombre AS marca_nombre "
                             + "FROM DETALLE_CARRITO dc "
                             + "JOIN PRODUCTO p ON dc.producto_id = p.id "
                             + "JOIN CATEGORIA c ON p.categoria_id = c.id "
@@ -103,9 +104,10 @@ public class CarritoDAOImpl implements ICarritoDAO {
                                 marca.setNombre(rs.getString("marca_nombre"));
 
                                 producto.setMarca(marca);
+                                item.setId(rsItems.getInt("id"));
                                 item.setProducto(producto);
                                 item.setCantidad(rsItems.getInt("cantidad"));
-                                item.setCarrito_id(rsItems.getInt("carrito_id"));
+                                item.setCarritoId(rsItems.getInt("carrito_id"));
                                 item.setSubtotal(rsItems.getDouble("subtotal"));
 
                                 carrito.getItems().add(item);
@@ -133,11 +135,11 @@ public class CarritoDAOImpl implements ICarritoDAO {
                 Carrito carrito = new Carrito();
                 carrito.setId(rs.getInt("id"));
                 carrito.setTotal(rs.getDouble("total"));
-                carrito.setCantidad_productos(rs.getInt("cantidad_productos"));
-                carrito.setUsuario_id(rs.getInt("cliente_usuario_id"));
+                carrito.setCantidadProductos(rs.getInt("cantidad_productos"));
+                carrito.setUsuarioId(rs.getInt("cliente_usuario_id"));
 
                 // Obtener los items del carrito desde la tabla DETALLE_CARRITO
-                String itemSql = "SELECT dc.*, p.descripcion AS producto_descripcion, p.precio_venta, p.sku, "
+                String itemSql = "SELECT dc.*, p.descripcion AS producto_descripcion, p.precio_venta as producto_precio_venta, p.sku as producto_sku, "
                         + "c.id AS categoria_id, c.nombre AS categoria_nombre, "
                         + "m.id AS marca_id, m.nombre AS marca_nombre "
                         + "FROM DETALLE_CARRITO dc "
@@ -170,7 +172,7 @@ public class CarritoDAOImpl implements ICarritoDAO {
 
                             item.setProducto(producto);
                             item.setCantidad(rsItems.getInt("cantidad"));
-                            item.setCarrito_id(rsItems.getInt("carrito_id"));
+                            item.setCarritoId(rsItems.getInt("carrito_id"));
                             item.setSubtotal(rsItems.getDouble("subtotal"));
 
                             carrito.getItems().add(item);

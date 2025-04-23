@@ -16,11 +16,10 @@ public class MarcaDAOImpl implements IMarcaDAO {
 
     @Override
     public int add(Marca modelo) {
-        String sql = "INSERT INTO MARCA (nombre, descripcion) VALUES (?, ?)";
+        String sql = "INSERT INTO MARCA (nombre) VALUES (?)";
         try (Connection conn = DatabaseUtil.getInstance().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, modelo.getNombre());
-            ps.setString(2, modelo.getDescripcion());
             if(ps.executeUpdate() == 0){
                 System.err.println("La marca no se insertó");
                 return 0;
@@ -36,11 +35,10 @@ public class MarcaDAOImpl implements IMarcaDAO {
     
     @Override
     public boolean update(Marca modelo) {
-        String sql = "UPDATE MARCA SET nombre = ?, descripcion = ? WHERE id = ?";
+        String sql = "UPDATE MARCA SET nombre = ? WHERE id = ?";
         try (Connection conn = DatabaseUtil.getInstance().getConnection(); CallableStatement cs = conn.prepareCall(sql)) {
             cs.setString(1, modelo.getNombre());
-            cs.setString(2, modelo.getDescripcion());
-            cs.setInt(3, modelo.getId());
+            cs.setInt(2, modelo.getId());
             return cs.executeUpdate() > 0;
         } catch (Exception e) {
             System.err.println(e);
@@ -70,7 +68,6 @@ public class MarcaDAOImpl implements IMarcaDAO {
                     Marca marca = new Marca();
                     marca.setId(rs.getInt("id"));
                     marca.setNombre(rs.getString("nombre"));
-                    marca.setDescripcion(rs.getString("descripcion"));
                     return marca;
                 }
             }
@@ -90,7 +87,6 @@ public class MarcaDAOImpl implements IMarcaDAO {
                 Marca marca = new Marca();
                 marca.setId(rs.getInt("id"));
                 marca.setNombre(rs.getString("nombre"));
-                marca.setDescripcion(rs.getString("descripcion"));
                 marcas.add(marca);
             }
         } catch (Exception e) {

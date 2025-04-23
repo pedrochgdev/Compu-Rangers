@@ -4,20 +4,17 @@ import com.compurangers.platform.core.domain.catalog.Categoria;
 import com.compurangers.platform.core.domain.catalog.Marca;
 import com.compurangers.platform.service.catalog.ProductoService;
 import com.compurangers.platform.core.domain.catalog.Producto;
-import com.compurangers.platform.core.domain.inventory.Proveedor;
-import com.compurangers.platform.core.domain.sales.DetalleVenta;
-import com.compurangers.platform.core.domain.sales.OrdenDeVenta;
+import com.compurangers.platform.core.domain.sales.Carrito;
+import com.compurangers.platform.core.domain.sales.ItemCarrito;
 import com.compurangers.platform.dao.mysql.catalog.CategoriaDAOImpl;
 import com.compurangers.platform.dao.mysql.catalog.MarcaDAOImpl;
 import com.compurangers.platform.dao.mysql.catalog.ProductoDAOImpl;
-import com.compurangers.platform.dao.mysql.inventory.ProveedorDAOImpl;
-import com.compurangers.platform.dao.mysql.sales.OrdenDeVentaDAOImpl;
+import com.compurangers.platform.dao.mysql.sales.CarritoDAOImpl;
+import com.compurangers.platform.dao.mysql.sales.ItemCarritoDAOImpl;
 import com.compurangers.platform.service.catalog.CategoriaService;
 import com.compurangers.platform.service.catalog.MarcaService;
-import com.compurangers.platform.service.inventory.ProveedorService;
-import com.compurangers.platform.service.sales.OrdenDeVentaService;
-import java.util.ArrayList;
-import java.util.Date;
+import com.compurangers.platform.service.sales.CarritoService;
+import com.compurangers.platform.service.sales.ItemCarritoService;
 import java.util.List;
 
 public class AppPrueba {
@@ -188,124 +185,134 @@ public class AppPrueba {
             System.out.println("Error al eliminar marca: " + e.getMessage());
         }
 
-        // OrdenDeVenta Tests
-        OrdenDeVentaService ordenService = new OrdenDeVentaService(new OrdenDeVentaDAOImpl());
-        System.out.println("\n=== Probando OrdenDeVenta ===");
+        // Carrito Tests
+        CarritoService carritoService = new CarritoService(new CarritoDAOImpl());
+        System.out.println("\n=== Probando Carrito ===");
         try {
-            List<OrdenDeVenta> ordenes = ordenService.getAllOrdenDeVenta();
-            if (ordenes.isEmpty()) {
-                System.out.println("No se encontraron órdenes de venta o hubo un error en la conexión.");
+            List<Carrito> carritos = carritoService.getAllCarrito();
+            if (carritos.isEmpty()) {
+                System.out.println("No se encontraron carritos o hubo un error en la conexión.");
             } else {
-                System.out.println("Órdenes de venta encontradas:");
-                for (OrdenDeVenta orden : ordenes) {
-                    System.out.println(orden);
+                System.out.println("Carritos encontrados:");
+                for (Carrito carrito : carritos) {
+                    System.out.println(carrito);
                 }
             }
         } catch (Exception e) {
-            System.out.println("Error al listar órdenes de venta: " + e.getMessage());
+            System.out.println("Error al listar carritos: " + e.getMessage());
         }
         try {
-            OrdenDeVenta newOrden = new OrdenDeVenta();
-            newOrden.setFecha(new Date());
-            newOrden.setEstado('A');
-            newOrden.setTotal(999.99);
-            List<DetalleVenta> detalles = new ArrayList<>();
-            DetalleVenta detalle = new DetalleVenta();
-            detalle.setCantidad(1);
-            detalle.setPrecio(999.99);
-            detalle.setProducto(new Producto());
-            detalle.getProducto().setId(1);
-            detalles.add(detalle);
-            newOrden.setDetalles(detalles);
-            int newId = ordenService.addOrdenDeVenta(newOrden);
-            System.out.println("Orden de venta añadida con ID: " + newId);
+            Carrito newCarrito = new Carrito();
+            newCarrito.setUsuarioId(1);
+            ItemCarrito item = new ItemCarrito();
+            item.setCantidad(1);
+            item.setSubtotal(999.99 * 100); // 999.99 in cents
+            item.setCarritoId(0); // Will be set by DB
+            Producto producto = new Producto();
+            producto.setId(1);
+            item.setProducto(producto);
+            newCarrito.getItems().add(item);
+            newCarrito.setTotal(999.99);
+            newCarrito.setCantidadProductos(1);
+            int newId = carritoService.addCarrito(newCarrito);
+            System.out.println("Carrito añadido con ID: " + newId);
         } catch (Exception e) {
-            System.out.println("Error al añadir orden de venta: " + e.getMessage());
+            System.out.println("Error al añadir carrito: " + e.getMessage());
         }
         try {
-            OrdenDeVenta updatedOrden = new OrdenDeVenta();
-            updatedOrden.setId(1);
-            updatedOrden.setFecha(new Date());
-            updatedOrden.setEstado('C');
-            updatedOrden.setTotal(1199.99);
-            List<DetalleVenta> detalles = new ArrayList<>();
-            DetalleVenta detalle = new DetalleVenta();
-            detalle.setCantidad(2);
-            detalle.setPrecio(599.99);
-            detalle.setProducto(new Producto());
-            detalle.getProducto().setId(1);
-            detalles.add(detalle);
-            updatedOrden.setDetalles(detalles);
-            boolean updated = ordenService.updateOrdenDeVenta(updatedOrden);
-            System.out.println("Orden de venta actualizada: " + (updated ? "Éxito" : "Fallo"));
+            Carrito updatedCarrito = new Carrito();
+            updatedCarrito.setId(1);
+            updatedCarrito.setUsuarioId(1);
+            ItemCarrito item = new ItemCarrito();
+            item.setCantidad(2);
+            item.setSubtotal(599.99 * 2 * 100); // 1199.98 in cents
+            item.setCarritoId(1);
+            Producto producto = new Producto();
+            producto.setId(1);
+            item.setProducto(producto);
+            updatedCarrito.getItems().add(item);
+            updatedCarrito.setTotal(1199.98);
+            updatedCarrito.setCantidadProductos(2);
+            boolean updated = carritoService.updateCarrito(updatedCarrito);
+            System.out.println("Carrito actualizado: " + (updated ? "Éxito" : "Fallo"));
         } catch (Exception e) {
-            System.out.println("Error al actualizar orden de venta: " + e.getMessage());
+            System.out.println("Error al actualizar carrito: " + e.getMessage());
         }
         try {
-            OrdenDeVenta foundOrden = ordenService.searchOrdenDeVenta(1);
-            if (foundOrden != null) {
-                System.out.println("Orden de venta encontrada: " + foundOrden);
+            Carrito foundCarrito = carritoService.searchCarrito(1);
+            if (foundCarrito != null) {
+                System.out.println("Carrito encontrado: " + foundCarrito);
             } else {
-                System.out.println("No se encontró la orden de venta con ID 1.");
+                System.out.println("No se encontró el carrito con ID 1.");
             }
         } catch (Exception e) {
-            System.out.println("Error al buscar orden de venta: " + e.getMessage());
+            System.out.println("Error al buscar carrito: " + e.getMessage());
         }
         try {
-            boolean deleted = ordenService.deleteOrdenDeVenta(1);
-            System.out.println("Orden de venta eliminada: " + (deleted ? "Éxito" : "Fallo"));
+            boolean deleted = carritoService.deleteCarrito(1);
+            System.out.println("Carrito eliminado: " + (deleted ? "Éxito" : "Fallo"));
         } catch (Exception e) {
-            System.out.println("Error al eliminar orden de venta: " + e.getMessage());
+            System.out.println("Error al eliminar carrito: " + e.getMessage());
         }
 
-        // Proveedor Tests
-        ProveedorService proveedorService = new ProveedorService(new ProveedorDAOImpl());
-        System.out.println("\n=== Probando Proveedor ===");
+        // ItemCarrito Tests
+        ItemCarritoService itemCarritoService = new ItemCarritoService(new ItemCarritoDAOImpl());
+        System.out.println("\n=== Probando ItemCarrito ===");
         try {
-            List<Proveedor> proveedores = proveedorService.getAllProveedores();
-            if (proveedores.isEmpty()) {
-                System.out.println("No se encontraron proveedores o hubo un error en la conexión.");
+            List<ItemCarrito> items = itemCarritoService.getAllItemCarrito();
+            if (items.isEmpty()) {
+                System.out.println("No se encontraron ítems de carrito o hubo un error en la conexión.");
             } else {
-                System.out.println("Proveedores encontrados:");
-                for (Proveedor proveedor : proveedores) {
-                    System.out.println(proveedor);
+                System.out.println("Ítems de carrito encontrados:");
+                for (ItemCarrito item : items) {
+                    System.out.println(item);
                 }
             }
         } catch (Exception e) {
-            System.out.println("Error al listar proveedores: " + e.getMessage());
+            System.out.println("Error al listar ítems de carrito: " + e.getMessage());
         }
         try {
-            Proveedor newProveedor = new Proveedor();
-            newProveedor.setRazonSocial("NewSupplier SAC");
-            int newId = proveedorService.addProveedor(newProveedor);
-            System.out.println("Proveedor añadido con ID: " + newId);
+            ItemCarrito newItem = new ItemCarrito();
+            newItem.setCantidad(1);
+            newItem.setSubtotal(999.99 * 100); // 999.99 in cents
+            newItem.setCarritoId(1);
+            Producto producto = new Producto();
+            producto.setId(1);
+            newItem.setProducto(producto);
+            int newId = itemCarritoService.addItemCarrito(newItem);
+            System.out.println("Ítem de carrito añadido con ID: " + newId);
         } catch (Exception e) {
-            System.out.println("Error al añadir proveedor: " + e.getMessage());
+            System.out.println("Error al añadir ítem de carrito: " + e.getMessage());
         }
         try {
-            Proveedor updatedProveedor = new Proveedor();
-            updatedProveedor.setId(1);
-            updatedProveedor.setRazonSocial("TechSupplier Updated SAC");
-            boolean updated = proveedorService.updateProveedor(updatedProveedor);
-            System.out.println("Proveedor actualizado: " + (updated ? "Éxito" : "Fallo"));
+            ItemCarrito updatedItem = new ItemCarrito();
+            updatedItem.setId(1);
+            updatedItem.setCantidad(2);
+            updatedItem.setSubtotal(599.99 * 2 * 100); // 1199.98 in cents
+            updatedItem.setCarritoId(1);
+            Producto producto = new Producto();
+            producto.setId(1);
+            updatedItem.setProducto(producto);
+            boolean updated = itemCarritoService.updateItemCarrito(updatedItem);
+            System.out.println("Ítem de carrito actualizado: " + (updated ? "Éxito" : "Fallo"));
         } catch (Exception e) {
-            System.out.println("Error al actualizar proveedor: " + e.getMessage());
+            System.out.println("Error al actualizar ítem de carrito: " + e.getMessage());
         }
         try {
-            Proveedor foundProveedor = proveedorService.searchProveedor(1);
-            if (foundProveedor != null) {
-                System.out.println("Proveedor encontrado: " + foundProveedor);
+            ItemCarrito foundItem = itemCarritoService.searchItemCarrito(1);
+            if (foundItem != null) {
+                System.out.println("Ítem de carrito encontrado: " + foundItem);
             } else {
-                System.out.println("No se encontró el proveedor con ID 1.");
+                System.out.println("No se encontró el ítem de carrito con ID 1.");
             }
         } catch (Exception e) {
-            System.out.println("Error al buscar proveedor: " + e.getMessage());
+            System.out.println("Error al buscar ítem de carrito: " + e.getMessage());
         }
         try {
-            boolean deleted = proveedorService.deleteProveedor(1);
-            System.out.println("Proveedor eliminado: " + (deleted ? "Éxito" : "Fallo"));
+            boolean deleted = itemCarritoService.deleteItemCarrito(1);
+            System.out.println("Ítem de carrito eliminado: " + (deleted ? "Éxito" : "Fallo"));
         } catch (Exception e) {
-            System.out.println("Error al eliminar proveedor: " + e.getMessage());
+            System.out.println("Error al eliminar ítem de carrito: " + e.getMessage());
         }
     }
 }
