@@ -24,7 +24,7 @@ INSERT INTO CATEGORIA (nombre)
 VALUES ('Electrónica');
 
 -- MARCA: Product brand
-INSERT INTO MARCA (nmbre)
+INSERT INTO MARCA (nombre)
 VALUES ('TechBrand');
 
 -- PRODUCTO: Products for the store (two products for DETALLE_LOTE)

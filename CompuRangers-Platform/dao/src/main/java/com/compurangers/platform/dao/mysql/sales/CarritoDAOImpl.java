@@ -75,13 +75,13 @@ public class CarritoDAOImpl implements ICarritoDAO {
                     carrito.setCantidadProductos(rs.getInt("cantidad_productos"));
                     carrito.setUsuarioId(rs.getInt("cliente_usuario_id"));
 
-                    String itemSql = "SELECT dc.*, p.descripcion AS producto_descripcion, p.precio_venta as producto_precio_venta, p.sku as producto_sku,"
+                    String itemSql = "SELECT dc.*, p.descripcion AS producto_descripcion, p.precio_venta as producto_precio_venta, p.sku as producto_sku, "
                             + "c.id AS categoria_id, c.nombre AS categoria_nombre, "
                             + "m.id AS marca_id, m.nombre AS marca_nombre "
                             + "FROM DETALLE_CARRITO dc "
                             + "JOIN PRODUCTO p ON dc.producto_id = p.id "
                             + "JOIN CATEGORIA c ON p.categoria_id = c.id "
-                            + "JOIN MARCA m ON p.marca_id = m.id"
+                            + "JOIN MARCA m ON p.marca_id = m.id "
                             + "WHERE dc.carrito_id = ?";
                     try (PreparedStatement psItems = conn.prepareStatement(itemSql)) {
                         psItems.setInt(1, carrito.getId());
@@ -94,14 +94,14 @@ public class CarritoDAOImpl implements ICarritoDAO {
                                 producto.setPrecioVenta(rsItems.getDouble("producto_precio_venta"));
                                 producto.setSku(rsItems.getString("producto_sku"));
                                 Categoria categoria = new Categoria();
-                                categoria.setId(rs.getInt("categoria_id"));
-                                categoria.setNombre(rs.getString("categoria_nombre"));
+                                categoria.setId(rsItems.getInt("categoria_id"));
+                                categoria.setNombre(rsItems.getString("categoria_nombre"));
 
                                 producto.setCategoria(categoria);
 
                                 Marca marca = new Marca();
-                                marca.setId(rs.getInt("marca_id"));
-                                marca.setNombre(rs.getString("marca_nombre"));
+                                marca.setId(rsItems.getInt("marca_id"));
+                                marca.setNombre(rsItems.getString("marca_nombre"));
 
                                 producto.setMarca(marca);
                                 item.setId(rsItems.getInt("id"));

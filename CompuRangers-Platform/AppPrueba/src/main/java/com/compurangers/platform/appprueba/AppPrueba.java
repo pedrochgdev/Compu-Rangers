@@ -286,7 +286,7 @@ public class AppPrueba {
         }
         try {
             ItemCarrito updatedItem = new ItemCarrito();
-            updatedItem.setId(1);
+            updatedItem.setId(2);
             updatedItem.setCantidad(2);
             updatedItem.setSubtotal(599.99 * 2 * 100); // 1199.98 in cents
             updatedItem.setCarritoId(1);
@@ -299,7 +299,7 @@ public class AppPrueba {
             System.out.println("Error al actualizar ítem de carrito: " + e.getMessage());
         }
         try {
-            ItemCarrito foundItem = itemCarritoService.searchItemCarrito(1);
+            ItemCarrito foundItem = itemCarritoService.searchItemCarrito(2);
             if (foundItem != null) {
                 System.out.println("Ítem de carrito encontrado: " + foundItem);
             } else {
@@ -309,7 +309,7 @@ public class AppPrueba {
             System.out.println("Error al buscar ítem de carrito: " + e.getMessage());
         }
         try {
-            boolean deleted = itemCarritoService.deleteItemCarrito(1);
+            boolean deleted = itemCarritoService.deleteItemCarrito(2);
             System.out.println("Ítem de carrito eliminado: " + (deleted ? "Éxito" : "Fallo"));
         } catch (Exception e) {
             System.out.println("Error al eliminar ítem de carrito: " + e.getMessage());
