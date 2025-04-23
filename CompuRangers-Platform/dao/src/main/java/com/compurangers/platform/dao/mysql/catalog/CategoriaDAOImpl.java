@@ -13,11 +13,10 @@ public class CategoriaDAOImpl implements ICategoriaDAO {
 
     @Override
     public int add(Categoria modelo) {
-        String sql = "INSERT INTO CATEGORIA (nombre, descripcion) VALUES (?, ?)";
+        String sql = "INSERT INTO CATEGORIA (nombre) VALUES (?)";
         try (Connection conn = DatabaseUtil.getInstance().getConnection(); CallableStatement cs = conn.prepareCall(sql)) {
             cs.setString(1, modelo.getNombre());
-            cs.setString(2, modelo.getDescripcion());
-            return cs.executeUpdate(); // Retorna 1 si se insertó correctamente
+            return cs.executeUpdate();
         } catch (Exception e) {
             System.err.println(e);
             throw new RuntimeException("No se pudo agregar la categoría");
@@ -26,11 +25,10 @@ public class CategoriaDAOImpl implements ICategoriaDAO {
 
     @Override
     public boolean update(Categoria modelo) {
-        String sql = "UPDATE CATEGORIA SET nombre = ?, descripcion = ? WHERE id = ?";
+        String sql = "UPDATE CATEGORIA SET nombre = ? WHERE id = ?";
         try (Connection conn = DatabaseUtil.getInstance().getConnection(); CallableStatement cs = conn.prepareCall(sql)) {
             cs.setString(1, modelo.getNombre());
-            cs.setString(2, modelo.getDescripcion());
-            cs.setInt(3, modelo.getId());
+            cs.setInt(2, modelo.getId());
             return cs.executeUpdate() > 0;
         } catch (Exception e) {
             System.err.println(e);
@@ -60,7 +58,6 @@ public class CategoriaDAOImpl implements ICategoriaDAO {
                     Categoria categoria = new Categoria();
                     categoria.setId(rs.getInt("id"));
                     categoria.setNombre(rs.getString("nombre"));
-                    categoria.setDescripcion(rs.getString("descripcion"));
                     return categoria;
                 }
             }
@@ -80,7 +77,6 @@ public class CategoriaDAOImpl implements ICategoriaDAO {
                 Categoria categoria = new Categoria();
                 categoria.setId(rs.getInt("id"));
                 categoria.setNombre(rs.getString("nombre"));
-                categoria.setDescripcion(rs.getString("descripcion"));
                 categorias.add(categoria);
             }
         } catch (Exception e) {

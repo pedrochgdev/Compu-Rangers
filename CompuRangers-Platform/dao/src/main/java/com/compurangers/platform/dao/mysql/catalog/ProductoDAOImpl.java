@@ -16,16 +16,15 @@ public class ProductoDAOImpl implements IProductoDAO {
 
     @Override
     public int add(Producto modelo) {
-        String sql = "INSERT INTO PRODUCTO (sku, nombre, descripcion, precio_venta,categoria_id,marca_id) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO PRODUCTO (sku, descripcion, precio_venta,categoria_id,marca_id) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseUtil.getInstance().getConnection(); 
                 CallableStatement cs = conn.prepareCall(sql)) {
             cs.setString(1, modelo.getSku());
-            cs.setString(2, modelo.getNombre());
-            cs.setString(3, modelo.getDescripcion());
-            cs.setDouble(4, modelo.getPrecioVenta());
-            cs.setInt(5, modelo.getCategoria().getId());
-            cs.setInt(6, modelo.getMarca().getId());
-            return cs.executeUpdate(); // Retorna 1 si se insertó correctamente
+            cs.setString(2, modelo.getDescripcion());
+            cs.setDouble(3, modelo.getPrecioVenta());
+            cs.setInt(4, modelo.getCategoria().getId());
+            cs.setInt(5, modelo.getMarca().getId());
+            return cs.executeUpdate(); 
         } catch (Exception e) {
             System.err.println(e);
             throw new RuntimeException("No se pudo insertar el producto.");
@@ -34,15 +33,14 @@ public class ProductoDAOImpl implements IProductoDAO {
 
     @Override
     public boolean update(Producto modelo) {
-        String sql = "UPDATE PRODUCTO SET sku = ?, nombre = ?, descripcion = ?, precio_venta = ?, categoria_id = ?, marca_id = ? WHERE id = ?";
+        String sql = "UPDATE PRODUCTO SET sku = ?, descripcion = ?, precio_venta = ?, categoria_id = ?, marca_id = ? WHERE id = ?";
         try (Connection conn = DatabaseUtil.getInstance().getConnection(); CallableStatement cs = conn.prepareCall(sql)) {
             cs.setString(1, modelo.getSku());
-            cs.setString(2, modelo.getNombre());
-            cs.setString(3, modelo.getDescripcion());
-            cs.setDouble(4, modelo.getPrecioVenta());
-            cs.setInt(5, modelo.getCategoria().getId());
-            cs.setInt(6, modelo.getMarca().getId());
-            cs.setInt(7, modelo.getId());
+            cs.setString(2, modelo.getDescripcion());
+            cs.setDouble(3, modelo.getPrecioVenta());
+            cs.setInt(4, modelo.getCategoria().getId());
+            cs.setInt(5, modelo.getMarca().getId());
+            cs.setInt(6, modelo.getId());
             return cs.executeUpdate() > 0;
         } catch (Exception e) {
             System.err.println(e);
@@ -77,7 +75,6 @@ public class ProductoDAOImpl implements IProductoDAO {
                     Producto p = new Producto();
                     p.setId(rs.getInt("id"));
                     p.setSku(rs.getString("sku"));
-                    p.setNombre(rs.getString("nombre"));
                     p.setDescripcion(rs.getString("descripcion"));
                     p.setPrecioVenta(rs.getDouble("precio_venta"));
 
@@ -118,18 +115,17 @@ public class ProductoDAOImpl implements IProductoDAO {
                 producto.setSku(rs.getString("sku"));
                 producto.setPrecioVenta(rs.getDouble("precio_venta"));
 
-                // Populate Categoria object
+
                 Categoria categoria = new Categoria();
                 categoria.setId(rs.getInt("categoria_id"));
                 categoria.setNombre(rs.getString("categoria_nombre"));
-                // descripcion and categoriaPadre are not in DB, so left as null
+
                 producto.setCategoria(categoria);
 
-                // Populate Marca object
                 Marca marca = new Marca();
                 marca.setId(rs.getInt("marca_id"));
                 marca.setNombre(rs.getString("marca_nombre"));
-                // descripcion is not in DB, so left as null
+
                 producto.setMarca(marca);
 
                 productos.add(producto);
