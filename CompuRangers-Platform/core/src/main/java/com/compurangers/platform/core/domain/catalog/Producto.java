@@ -45,4 +45,16 @@ public class Producto {
 
     public Marca getMarca() { return marca; }
     public void setMarca(Marca marca) { this.marca = marca; }
+  
+    @Override
+    public String toString() {
+        return "Producto{" +
+               "id=" + id +
+               ", descripcion='" + descripcion + '\'' +
+               ", sku='" + sku + '\'' +
+               ", precioVenta=" + precioVenta +
+               ", categoria=" + (categoria != null ? categoria.getNombre() : "null") +
+               ", marca=" + (marca != null ? marca.getNombre() : "null") +
+               '}';
+    }
 }

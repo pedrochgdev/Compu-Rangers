@@ -75,4 +75,10 @@ public class DetalleVenta {
         this.idOrdenVenta = id;
     }
     
+    @Override
+    public String toString() {
+        return "DetalleVenta{id=" + id + ", cantidad=" + cantidad + ", precioProducto=" + precio +
+               ", cantidadDevuelta=" + devuelto + ", productoId=" + producto.getId() + "}";
+    }
+    
 }

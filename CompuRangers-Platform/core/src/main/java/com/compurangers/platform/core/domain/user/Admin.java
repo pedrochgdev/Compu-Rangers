@@ -1,21 +1,21 @@
 package com.compurangers.platform.core.domain.user;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 public class Admin extends Usuario {
-    private LocalDate fechaIngreso;
+    private Date fechaIngreso;
 
     public Admin(String id, String nombreCompleto, String correoElectronico, String telefono,
-                 String direccion, String contrasena, LocalDate fechaIngreso) {
+                 String direccion, String contrasena, Date fechaIngreso) {
         super(id, nombreCompleto, correoElectronico, telefono, direccion, contrasena);
         this.fechaIngreso = fechaIngreso;
     }
 
-    public LocalDate getFechaIngreso() {
+    public Date getFechaIngreso() {
         return fechaIngreso;
     }
 
-    public void setFechaIngreso(LocalDate fechaIngreso) {
+    public void setFechaIngreso(Date fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
 
