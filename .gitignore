@@ -34,6 +34,7 @@ dependency-reduced-pom.xml
 .settings/
 .factorypath
 .springBeans
+nb-configuration.xml
 
 # Archivos temporales
 *.log
