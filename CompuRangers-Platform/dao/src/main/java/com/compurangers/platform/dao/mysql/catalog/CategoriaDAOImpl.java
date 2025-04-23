@@ -5,7 +5,9 @@ import com.compurangers.platform.dao.catalog.ICategoriaDAO;
 import com.compurangers.platform.util.DatabaseUtil;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,10 +15,18 @@ public class CategoriaDAOImpl implements ICategoriaDAO {
 
     @Override
     public int add(Categoria modelo) {
-        String sql = "INSERT INTO CATEGORIA (nombre) VALUES (?)";
-        try (Connection conn = DatabaseUtil.getInstance().getConnection(); CallableStatement cs = conn.prepareCall(sql)) {
-            cs.setString(1, modelo.getNombre());
-            return cs.executeUpdate();
+        String sql = "INSERT INTO CATEGORIA (nombre, descripcion) VALUES (?, ?)";
+        try (Connection conn = DatabaseUtil.getInstance().getConnection(); 
+                PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, modelo.getNombre());
+            ps.setString(2, modelo.getDescripcion());
+            if (ps.executeUpdate() == 0) {
+                System.err.println("La categoría no se insertó");
+                return 0;
+            }
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                return rs.next() ? rs.getInt(1) : -1;
+            }
         } catch (Exception e) {
             System.err.println(e);
             throw new RuntimeException("No se pudo agregar la categoría");
@@ -25,10 +35,11 @@ public class CategoriaDAOImpl implements ICategoriaDAO {
 
     @Override
     public boolean update(Categoria modelo) {
-        String sql = "UPDATE CATEGORIA SET nombre = ? WHERE id = ?";
+        String sql = "UPDATE CATEGORIA SET nombre = ?, descripcion = ? WHERE id = ?";
         try (Connection conn = DatabaseUtil.getInstance().getConnection(); CallableStatement cs = conn.prepareCall(sql)) {
             cs.setString(1, modelo.getNombre());
-            cs.setInt(2, modelo.getId());
+            cs.setString(2, modelo.getDescripcion());
+            cs.setInt(3, modelo.getId());
             return cs.executeUpdate() > 0;
         } catch (Exception e) {
             System.err.println(e);
@@ -58,6 +69,7 @@ public class CategoriaDAOImpl implements ICategoriaDAO {
                     Categoria categoria = new Categoria();
                     categoria.setId(rs.getInt("id"));
                     categoria.setNombre(rs.getString("nombre"));
+                    categoria.setDescripcion(rs.getString("descripcion"));
                     return categoria;
                 }
             }
@@ -77,6 +89,7 @@ public class CategoriaDAOImpl implements ICategoriaDAO {
                 Categoria categoria = new Categoria();
                 categoria.setId(rs.getInt("id"));
                 categoria.setNombre(rs.getString("nombre"));
+                categoria.setDescripcion(rs.getString("descripcion"));
                 categorias.add(categoria);
             }
         } catch (Exception e) {

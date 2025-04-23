@@ -10,21 +10,27 @@ import java.util.ArrayList;
 import java.util.List;
 import com.compurangers.platform.dao.catalog.IProductoDAO;
 import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 
 public class ProductoDAOImpl implements IProductoDAO {
 
     @Override
     public int add(Producto modelo) {
-        String sql = "INSERT INTO PRODUCTO (sku, descripcion, precio_venta,categoria_id,marca_id) VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = DatabaseUtil.getInstance().getConnection(); 
-                CallableStatement cs = conn.prepareCall(sql)) {
-            cs.setString(1, modelo.getSku());
-            cs.setString(2, modelo.getDescripcion());
-            cs.setDouble(3, modelo.getPrecioVenta());
-            cs.setInt(4, modelo.getCategoria().getId());
-            cs.setInt(5, modelo.getMarca().getId());
-            return cs.executeUpdate(); 
+        String sql = "INSERT INTO PRODUCTO (sku, descripcion, precio_venta, categoria_id, marca_id) VALUES (?, ?, ?, ?, ?)";
+        try (Connection conn = DatabaseUtil.getInstance().getConnection(); PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, modelo.getSku());
+            ps.setString(2, modelo.getDescripcion());
+            ps.setDouble(3, modelo.getPrecioVenta());
+            ps.setInt(4, modelo.getCategoria().getId());
+            ps.setInt(5, modelo.getMarca().getId());
+            if (ps.executeUpdate() == 0) {
+                System.err.println("El producto no se insertó");
+                return 0;
+            }
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                return rs.next() ? rs.getInt(1) : -1;
+            }
         } catch (Exception e) {
             System.err.println(e);
             throw new RuntimeException("No se pudo insertar el producto.");
@@ -62,13 +68,12 @@ public class ProductoDAOImpl implements IProductoDAO {
 
     @Override
     public Producto search(int id) {
-        String sql = "SELECT p.*, c.nombre AS categoria_nombre, m.nombre AS marca_nombre " +
-                     "FROM PRODUCTO p " +
-                     "JOIN CATEGORIA c ON p.categoria_id = c.id " +
-                     "JOIN MARCA m ON p.marca_id = m.id " +
-                     "WHERE p.id = ?";
-        try (Connection conn = DatabaseUtil.getInstance().getConnection();
-             CallableStatement cs = conn.prepareCall(sql)) {
+        String sql = "SELECT p.*, c.nombre AS categoria_nombre, m.nombre AS marca_nombre "
+                + "FROM PRODUCTO p "
+                + "JOIN CATEGORIA c ON p.categoria_id = c.id "
+                + "JOIN MARCA m ON p.marca_id = m.id "
+                + "WHERE p.id = ?";
+        try (Connection conn = DatabaseUtil.getInstance().getConnection(); CallableStatement cs = conn.prepareCall(sql)) {
             cs.setInt(1, id);
             try (ResultSet rs = cs.executeQuery()) {
                 if (rs.next()) {
@@ -101,20 +106,17 @@ public class ProductoDAOImpl implements IProductoDAO {
     @Override
     public List<Producto> getAll() {
         List<Producto> productos = new ArrayList<>();
-        try (Connection conn = DatabaseUtil.getInstance().getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(
-                 "SELECT p.*, c.nombre AS categoria_nombre, m.nombre AS marca_nombre " +
-                 "FROM PRODUCTO p " +
-                 "JOIN CATEGORIA c ON p.categoria_id = c.id " +
-                 "JOIN MARCA m ON p.marca_id = m.id")) {
+        try (Connection conn = DatabaseUtil.getInstance().getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(
+                "SELECT p.*, c.nombre AS categoria_nombre, m.nombre AS marca_nombre "
+                + "FROM PRODUCTO p "
+                + "JOIN CATEGORIA c ON p.categoria_id = c.id "
+                + "JOIN MARCA m ON p.marca_id = m.id")) {
             while (rs.next()) {
                 Producto producto = new Producto();
                 producto.setId(rs.getInt("id"));
                 producto.setDescripcion(rs.getString("descripcion"));
                 producto.setSku(rs.getString("sku"));
                 producto.setPrecioVenta(rs.getDouble("precio_venta"));
-
 
                 Categoria categoria = new Categoria();
                 categoria.setId(rs.getInt("categoria_id"));

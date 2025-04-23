@@ -6,7 +6,9 @@ public class ItemCarrito {
     
     private Producto producto;
     private int cantidad;
-
+    private int carrito_id;
+    private double subtotal;
+    
     public ItemCarrito() {}
 
     public ItemCarrito(Producto producto, int cantidad) {
@@ -29,9 +31,16 @@ public class ItemCarrito {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-    
     public double getSubtotal() {
         return producto.getPrecioVenta() * cantidad;
     }
-    
+    public void setSubtotal(double subtotal){
+        this.subtotal= subtotal;
+    }
+    public int getCarrito_id(){
+        return carrito_id;
+    }
+    public void setCarrito_id(int c_id){
+        this.carrito_id = c_id;
+    }
 }
