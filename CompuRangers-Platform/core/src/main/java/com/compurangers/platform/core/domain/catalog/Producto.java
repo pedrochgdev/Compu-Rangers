@@ -45,7 +45,7 @@ public class Producto {
 
     public Marca getMarca() { return marca; }
     public void setMarca(Marca marca) { this.marca = marca; }
-    
+  
     @Override
     public String toString() {
         return "Producto{" +
@@ -57,5 +57,4 @@ public class Producto {
                ", marca=" + (marca != null ? marca.getNombre() : "null") +
                '}';
     }
-    
 }
