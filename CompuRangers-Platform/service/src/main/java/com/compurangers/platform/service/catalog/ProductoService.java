@@ -14,4 +14,20 @@ public class ProductoService {
     public List<Producto> getAllProducts() {
         return productDAO.getAll();
     }
+
+    public int addProducto(Producto producto) {
+        return productDAO.add(producto);
+    }
+
+    public boolean updateProducto(Producto producto) {
+        return productDAO.update(producto);
+    }
+
+    public boolean deleteProducto(int id) {
+        return productDAO.delete(id);
+    }
+
+    public Producto searchProducto(int id) {
+        return productDAO.search(id);
+    }
 }
