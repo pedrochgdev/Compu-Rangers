@@ -37,6 +37,7 @@ public class AppPrueba {
         }
         try {
             Producto newProduct = new Producto();
+            newProduct.setNombre("Laptop Lenovo 16\"");
             newProduct.setDescripcion("Laptop 16GB");
             newProduct.setSku("LT16GB");
             newProduct.setPrecioVenta(999.99);
@@ -54,6 +55,7 @@ public class AppPrueba {
         try {
             Producto updatedProduct = new Producto();
             updatedProduct.setId(1);
+            updatedProduct.setNombre("Nombre actualizado");
             updatedProduct.setDescripcion("Smartphone 256GB");
             updatedProduct.setSku("SM256GB");
             updatedProduct.setPrecioVenta(699.99);
@@ -203,7 +205,7 @@ public class AppPrueba {
         }
         try {
             Carrito newCarrito = new Carrito();
-            newCarrito.setUsuarioId(1);
+            newCarrito.setUsuarioId(2);
             ItemCarrito item = new ItemCarrito();
             item.setCantidad(1);
             item.setSubtotal(999.99 * 100); // 999.99 in cents
@@ -222,7 +224,7 @@ public class AppPrueba {
         try {
             Carrito updatedCarrito = new Carrito();
             updatedCarrito.setId(1);
-            updatedCarrito.setUsuarioId(1);
+            updatedCarrito.setUsuarioId(2);
             ItemCarrito item = new ItemCarrito();
             item.setCantidad(2);
             item.setSubtotal(599.99 * 2 * 100); // 1199.98 in cents
@@ -286,7 +288,7 @@ public class AppPrueba {
         }
         try {
             ItemCarrito updatedItem = new ItemCarrito();
-            updatedItem.setId(2);
+            updatedItem.setId(8);
             updatedItem.setCantidad(2);
             updatedItem.setSubtotal(599.99 * 2 * 100); // 1199.98 in cents
             updatedItem.setCarritoId(1);
@@ -299,7 +301,7 @@ public class AppPrueba {
             System.out.println("Error al actualizar ítem de carrito: " + e.getMessage());
         }
         try {
-            ItemCarrito foundItem = itemCarritoService.searchItemCarrito(2);
+            ItemCarrito foundItem = itemCarritoService.searchItemCarrito(8);
             if (foundItem != null) {
                 System.out.println("Ítem de carrito encontrado: " + foundItem);
             } else {
