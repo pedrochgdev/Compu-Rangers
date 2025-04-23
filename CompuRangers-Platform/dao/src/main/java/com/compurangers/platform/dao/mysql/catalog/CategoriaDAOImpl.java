@@ -3,13 +3,11 @@ package com.compurangers.platform.dao.mysql.catalog;
 import com.compurangers.platform.core.domain.catalog.Categoria;
 import com.compurangers.platform.dao.catalog.ICategoriaDAO;
 import com.compurangers.platform.dao.mysql.BaseDetalleDAOImpl;
-import com.compurangers.platform.util.DatabaseUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CategoriaDAOImpl extends BaseDetalleDAOImpl<Categoria> implements ICategoriaDAO {
