@@ -11,7 +11,8 @@ public class OrdenDeVenta {
     private double total;
     private List<DetalleVenta> detalles;
     private int clienteId;
-
+    private String direccion;
+    
     public OrdenDeVenta() {
         this.fecha = new Date();
         this.estado = "PROCESADO"; // Estado por defecto
@@ -60,11 +61,10 @@ public class OrdenDeVenta {
     }
     
     public void cargarListaDetalle(List<ItemCarrito> carrito) {
-
         for (ItemCarrito item : carrito) {
             DetalleVenta detalle = new DetalleVenta(item.getProducto(), item.getCantidad());
             this.detalles.add(detalle);
-            this.total += detalle.getPrecio();
+            this.total += detalle.getSubtotal();
         }
 
     }
@@ -75,6 +75,14 @@ public class OrdenDeVenta {
 
     public void setClienteId(int clienteId) {
         this.clienteId = clienteId;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
     
     @Override
