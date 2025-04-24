@@ -3,33 +3,43 @@ package com.compurangers.platform.dao.mysql.user;
 import com.compurangers.platform.core.domain.user.Admin;
 import com.compurangers.platform.core.domain.user.Cliente;
 import com.compurangers.platform.core.domain.user.Usuario;
+import com.compurangers.platform.dao.mysql.BaseDAOImpl;
 import com.compurangers.platform.dao.user.IUsuarioDAO;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
-public class UsuarioDAOImpl implements IUsuarioDAO{
+public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO{
 
     @Override
-    public int add(Usuario modelo) {
+    protected PreparedStatement addCommand(Connection conn, Usuario modelo) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public boolean update(Usuario modelo) {
+    protected PreparedStatement updateCommand(Connection conn, Usuario modelo) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public boolean delete(int id) {
+    protected PreparedStatement deleteCommand(Connection conn, int id) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Usuario search(int id) {
+    protected PreparedStatement searchCommand(Connection conn, int id) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<Usuario> getAll() {
+    protected PreparedStatement getAllCommand(Connection conn) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    protected Usuario mapModel(ResultSet rs) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

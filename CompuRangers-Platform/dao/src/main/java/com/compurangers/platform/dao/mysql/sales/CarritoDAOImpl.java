@@ -59,7 +59,6 @@ public class CarritoDAOImpl extends BaseDAOImpl<Carrito> implements ICarritoDAO 
         carrito.setCantidadProductos(rs.getInt("cantidad_productos"));
         carrito.setUsuarioId(rs.getInt("cliente_usuario_id"));
         carrito.setItems(new ItemCarritoDAOImpl().getAllByForeignKey(carrito.getId()));
-
         return carrito;
     }
     
