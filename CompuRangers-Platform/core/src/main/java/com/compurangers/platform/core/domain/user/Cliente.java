@@ -8,6 +8,8 @@ public class Cliente extends Usuario {
     private final List<OrdenDeVenta> historialCompras;
     private String direccionPreferida;
     
+    public Cliente() { this.historialCompras = new ArrayList<>(); }
+    
     public Cliente(String id, String nombreCompleto, String correoElectronico, String telefono,
                    String direccion, String contrasena) {
         super(id, nombreCompleto, correoElectronico, telefono, direccion, contrasena);

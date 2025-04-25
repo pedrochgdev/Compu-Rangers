@@ -9,6 +9,8 @@ public abstract class Usuario {
     private String direccion;
     private String contrasena;
 
+    public Usuario() {}
+    
     public Usuario(String id, String nombreCompleto, String correoElectronico, String telefono, String direccion, String contrasena) {
         this.id = id;
         this.nombreCompleto = nombreCompleto;
