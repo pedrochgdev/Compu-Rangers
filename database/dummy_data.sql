@@ -41,8 +41,8 @@ INSERT INTO ORDEN_DE_VENTA (estado, fecha, total, cliente_usuario_id, direccion)
 VALUES ('PAGADO', '2025-04-22', 1415.98, 2, 'Calle Secundaria 456');
 
 -- DETALLE_VENTA: Sales order details
-INSERT INTO DETALLE_VENTA (cantidad, precio_producto, cantidad_devuelta, orden_de_venta_id, producto_id)
-VALUES (2, 599.99, 0, 1, 1); -- Matches ORDEN_DE_VENTA total (2 * 599.99 + taxes)
+INSERT INTO DETALLE_VENTA (cantidad, subtotal, cantidad_devuelta, orden_de_venta_id, producto_id)
+VALUES (2, 1998.98, 0, 1, 1); -- Matches ORDEN_DE_VENTA total (2 * 599.99 + taxes)
 
 -- DOCUMENTO_DE_VENTAS: Sales document (subtotal = 2 * 599.99, impuestos = 18%)
 INSERT INTO DOCUMENTO_DE_VENTAS (subtotal, impuestos, total, total_pagado, orden_de_venta_id)
