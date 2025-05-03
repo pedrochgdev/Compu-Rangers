@@ -1,11 +1,20 @@
 package com.compurangers.platform.core.domain.inventory;
 
 public class DocumentoCompras {
+    private int id;
     private int numero;
     private double subtotal;
     private double impuestos;
     private double total;
     private int proveedorId;
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
     public int getNumero() {
         return numero;

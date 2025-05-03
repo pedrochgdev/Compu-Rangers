@@ -1,6 +1,7 @@
 package com.compurangers.platform.core.domain.user;
 
 import com.compurangers.platform.core.domain.sales.OrdenDeVenta;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,9 +11,9 @@ public class Cliente extends Usuario {
     
     public Cliente() { this.historialCompras = new ArrayList<>(); }
     
-    public Cliente(String id, String nombreCompleto, String correoElectronico, String telefono,
-                   String direccion, String contrasena) {
-        super(id, nombreCompleto, correoElectronico, telefono, direccion, contrasena);
+    public Cliente(int id, String username, String nombreCompleto, String correoElectronico, 
+                  String telefono, String direccion, String contrasena, Timestamp created, Timestamp updated){
+        super(id, username, nombreCompleto, correoElectronico, telefono, direccion, contrasena, created, updated);
         this.historialCompras = new ArrayList<>();
     }
 

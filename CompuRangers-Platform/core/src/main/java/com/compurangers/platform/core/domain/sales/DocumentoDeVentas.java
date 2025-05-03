@@ -1,6 +1,7 @@
 package com.compurangers.platform.core.domain.sales;
 
 public class DocumentoDeVentas {
+    private int id;
     private int numero;
     private double subtotal;
     private double impuestos;
@@ -8,7 +9,15 @@ public class DocumentoDeVentas {
     private double totalPagado;
     private int ordenDeVentaId; 
     private String direccionEnvio;
+    
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public int getNumero() {
         return numero;
     }
