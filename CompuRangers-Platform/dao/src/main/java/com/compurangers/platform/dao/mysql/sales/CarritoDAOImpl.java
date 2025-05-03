@@ -6,49 +6,48 @@ import com.compurangers.platform.dao.sales.ICarritoDAO;
 import java.sql.*;
 
 public class CarritoDAOImpl extends BaseDAOImpl<Carrito> implements ICarritoDAO {
-    
+
     @Override
-    protected PreparedStatement addCommand(Connection conn, Carrito modelo) throws SQLException {
-        String sql = "INSERT INTO CARRITO (total, cantidad_productos, cliente_usuario_id) VALUES (?, ?, ?)";
-        PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ps.setDouble(1, modelo.getTotal());
-        ps.setInt(2, modelo.getCantidadProductos());
-        ps.setInt(3, modelo.getUsuarioId());
-        return ps;
+    protected CallableStatement addCommand(Connection conn, Carrito modelo) throws SQLException {
+        String sql = "{call add_carrito(?, ?, ?, ?)}";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.registerOutParameter(1, Types.INTEGER);
+        cs.setDouble(2, modelo.getTotal());
+        cs.setInt(3, modelo.getCantidadProductos());
+        cs.setInt(4, modelo.getUsuarioId());
+        return cs;
     }
 
     @Override
-    protected PreparedStatement updateCommand(Connection conn, Carrito modelo) throws SQLException {
-        String sql = "UPDATE CARRITO SET total = ?, cantidad_productos = ?, cliente_usuario_id = ? WHERE id = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setDouble(1, modelo.getTotal());
-        ps.setInt(2, modelo.getCantidadProductos());
-        ps.setInt(3, modelo.getUsuarioId());
-        ps.setInt(4, modelo.getId());
-        return ps;
+    protected CallableStatement updateCommand(Connection conn, Carrito modelo) throws SQLException {
+        String sql = "{call update_carrito(?, ?, ?, ?)}";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.setInt(1, modelo.getId());
+        cs.setDouble(2, modelo.getTotal());
+        cs.setInt(3, modelo.getCantidadProductos());
+        cs.setInt(4, modelo.getUsuarioId());
+        return cs;
     }
 
     @Override
-    protected PreparedStatement deleteCommand(Connection conn, int id) throws SQLException {
-        String sql = "DELETE FROM CARRITO WHERE id = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, id);
-        return ps;
+    protected CallableStatement deleteCommand(Connection conn, int id) throws SQLException {
+        String sql = "{call delete_carrito(?)}";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.setInt(1, id);
+        return cs;
     }
 
     @Override
-    protected PreparedStatement searchCommand(Connection conn, int id) throws SQLException {
-        String sql = "SELECT * FROM CARRITO WHERE id = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, id);
-        return ps;
+    protected CallableStatement searchCommand(Connection conn, int id) throws SQLException {
+        String sql = "{call search_carrito(?)}";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.setInt(1, id);
+        return cs;
     }
 
     @Override
-    protected PreparedStatement getAllCommand(Connection conn) throws SQLException {
-        String sql = "SELECT * FROM CARRITO";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        return ps;
+    protected CallableStatement getAllCommand(Connection conn) throws SQLException {
+        return conn.prepareCall("{call get_all_carrito()}");
     }
 
     @Override

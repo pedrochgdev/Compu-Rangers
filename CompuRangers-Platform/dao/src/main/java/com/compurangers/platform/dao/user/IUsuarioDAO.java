@@ -9,6 +9,4 @@ import java.util.List;
 public interface IUsuarioDAO extends ICrud<Usuario>{
     Usuario login(String correo, String contraseña);
     boolean existsByEmail(String correo);
-    List<Cliente> getAllClientes();
-    List<Admin> getAllAdmins();
 }

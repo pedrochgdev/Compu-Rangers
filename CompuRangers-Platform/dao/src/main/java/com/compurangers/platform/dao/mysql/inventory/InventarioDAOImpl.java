@@ -5,55 +5,54 @@ import com.compurangers.platform.dao.inventory.IInventarioDAO;
 import com.compurangers.platform.dao.mysql.BaseDAOImpl;
 import com.compurangers.platform.dao.mysql.catalog.ProductoDAOImpl;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.Types;
 
-public class InventarioDAOImpl extends BaseDAOImpl<Inventario> implements IInventarioDAO{
+public class InventarioDAOImpl extends BaseDAOImpl<Inventario> implements IInventarioDAO {
 
     @Override
-    protected PreparedStatement addCommand(Connection conn, Inventario modelo) throws SQLException {
-        String sql = "INSERT INTO INVENTARIO (cantidad_disponible, lote_id, producto_id) VALUES (?, ?, ?)";
-        PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ps.setInt(1, modelo.getCantidadDisponible());
-        ps.setInt(2, modelo.getLoteId());
-        ps.setInt(3, modelo.getProducto().getId());
-        return ps;
+    protected CallableStatement addCommand(Connection conn, Inventario modelo) throws SQLException {
+        String sql = "{call add_inventario(?, ?, ?, ?)}";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.registerOutParameter(1, Types.INTEGER);
+        cs.setInt(2, modelo.getCantidadDisponible());
+        cs.setInt(3, modelo.getLoteId());
+        cs.setInt(4, modelo.getProducto().getId());
+        return cs;
     }
 
     @Override
-    protected PreparedStatement updateCommand(Connection conn, Inventario modelo) throws SQLException {
-        String sql = "UPDATE INVENTARIO SET cantidad_disponible=?, lote_id=?, producto_id=? WHERE id=?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, modelo.getCantidadDisponible());
-        ps.setInt(2, modelo.getLoteId());
-        ps.setInt(3, modelo.getProducto().getId());
-        ps.setInt(4, modelo.getId());
-        return ps;
+    protected CallableStatement updateCommand(Connection conn, Inventario modelo) throws SQLException {
+        String sql = "{call update_inventario(?, ?, ?, ?)}";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.setInt(1, modelo.getId());
+        cs.setInt(2, modelo.getCantidadDisponible());
+        cs.setInt(3, modelo.getLoteId());
+        cs.setInt(4, modelo.getProducto().getId());
+        return cs;
     }
 
     @Override
-    protected PreparedStatement deleteCommand(Connection conn, int id) throws SQLException {
-        String sql = "DELETE FROM INVENTARIO WHERE id = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, id);
-        return ps;
+    protected CallableStatement deleteCommand(Connection conn, int id) throws SQLException {
+        String sql = "{call delete_inventario(?)}";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.setInt(1, id);
+        return cs;
     }
 
     @Override
-    protected PreparedStatement searchCommand(Connection conn, int id) throws SQLException {
-        String sql = "SELECT * FROM INVENTARIO WHERE id = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, id);
-        return ps;
+    protected CallableStatement searchCommand(Connection conn, int id) throws SQLException {
+        String sql = "{call search_inventario(?)}";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.setInt(1, id);
+        return cs;
     }
 
     @Override
-    protected PreparedStatement getAllCommand(Connection conn) throws SQLException {
-        String sql = "SELECT * FROM INVENTARIO";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        return ps;
+    protected CallableStatement getAllCommand(Connection conn) throws SQLException {
+        return conn.prepareCall("{call get_all_inventario()}");
     }
 
     @Override

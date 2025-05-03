@@ -3,55 +3,56 @@ package com.compurangers.platform.dao.mysql.inventory;
 import com.compurangers.platform.core.domain.inventory.Lote;
 import com.compurangers.platform.dao.inventory.ILoteDAO;
 import com.compurangers.platform.dao.mysql.BaseDAOImpl;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.Types;
 
-public class LoteDAOImpl extends BaseDAOImpl<Lote> implements ILoteDAO{
+public class LoteDAOImpl extends BaseDAOImpl<Lote> implements ILoteDAO {
 
     @Override
-    protected PreparedStatement addCommand(Connection conn, Lote modelo) throws SQLException {
-        String sql = "INSERT INTO LOTE (fecha_creacion, estado, documento_compras_numero) VALUES (?, ?, ?)";
-        PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ps.setDate(1, new Date(modelo.getFechaCreacion().getTime()));
-        return ps;
+    protected CallableStatement addCommand(Connection conn, Lote modelo) throws SQLException {
+        String sql = "{call add_lote(?, ?, ?, ?)}";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.registerOutParameter(1, Types.INTEGER);
+        cs.setDate(2, new Date(modelo.getFechaCreacion().getTime()));
+        cs.setString(3, modelo.getEstado());
+        cs.setInt(4, modelo.getDocumentoCompraId());
+        return cs;
     }
 
     @Override
-    protected PreparedStatement updateCommand(Connection conn, Lote modelo) throws SQLException {
-        String sql = "UPDATE LOTE SET fecha_creacion=?, estado=?, documento_compras_numero=? WHERE id = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setDate(1, new Date(modelo.getFechaCreacion().getTime()));
-        ps.setString(2, modelo.getEstado());
-        ps.setInt(3, modelo.getDocumentoCompraId());
-        ps.setInt(4, modelo.getId());
-        return ps;   
+    protected CallableStatement updateCommand(Connection conn, Lote modelo) throws SQLException {
+        String sql = "{call update_lote(?, ?, ?, ?)}";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.setInt(1, modelo.getId());
+        cs.setDate(2, new Date(modelo.getFechaCreacion().getTime()));
+        cs.setString(3, modelo.getEstado());
+        cs.setInt(4, modelo.getDocumentoCompraId());
+        return cs;
     }
 
     @Override
-    protected PreparedStatement deleteCommand(Connection conn, int id) throws SQLException {
-        String sql = "DELETE FROM LOTE WHERE id = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, id);
-        return ps;
+    protected CallableStatement deleteCommand(Connection conn, int id) throws SQLException {
+        String sql = "{call delete_lote(?)}";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.setInt(1, id);
+        return cs;
     }
 
     @Override
-    protected PreparedStatement searchCommand(Connection conn, int id) throws SQLException {
-        String sql = "SELECT * FROM LOTE WHERE id = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, id);
-        return ps;
+    protected CallableStatement searchCommand(Connection conn, int id) throws SQLException {
+        String sql = "{call search_lote(?)}";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.setInt(1, id);
+        return cs;
     }
 
     @Override
-    protected PreparedStatement getAllCommand(Connection conn) throws SQLException {
-        String sql = "SELECT * FROM LOTE";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        return ps;
+    protected CallableStatement getAllCommand(Connection conn) throws SQLException {
+        return conn.prepareCall("{call get_all_lote()}");
     }
 
     @Override

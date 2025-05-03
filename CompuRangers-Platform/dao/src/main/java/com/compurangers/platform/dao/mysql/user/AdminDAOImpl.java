@@ -3,57 +3,64 @@ package com.compurangers.platform.dao.mysql.user;
 import com.compurangers.platform.core.domain.user.Admin;
 import com.compurangers.platform.core.domain.user.Usuario;
 import com.compurangers.platform.dao.user.IAdminDAO;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AdminDAOImpl extends UsuarioDAOImpl implements IAdminDAO {
-    
-    @Override
-    protected PreparedStatement addCommand(Connection conn, Usuario modelo) throws SQLException {
-        PreparedStatement psUsuario = super.addCommand(conn, modelo);
-        psUsuario.executeUpdate();
-
-        ResultSet generatedKeys = psUsuario.getGeneratedKeys();
-        int usuarioId = 0;
-        if (generatedKeys.next()) {
-            usuarioId = generatedKeys.getInt(1);
-        }
-
-        String sqlAdmin = "INSERT INTO ADMIN (usuario_id, fecha_ingreso) VALUES (?, ?)";
-        PreparedStatement psAdmin = conn.prepareStatement(sqlAdmin);
-        psAdmin.setInt(1, usuarioId);
-        psAdmin.setDate(2, new Date(((Admin) modelo).getFechaIngreso().getTime()));
-        psAdmin.executeUpdate();
-
-        return psUsuario;
-    }
-
 
     @Override
-    protected PreparedStatement updateCommand(Connection conn, Usuario modelo) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    protected CallableStatement addCommand(Connection conn, Usuario modelo) throws SQLException {
+        CallableStatement csUsuario = super.addCommand(conn, modelo);
+        csUsuario.execute();
+        int usuarioId = csUsuario.getInt(1);
+
+        CallableStatement csAdmin = conn.prepareCall("{call add_admin(?, ?)}");
+        csAdmin.setInt(1, usuarioId);
+        csAdmin.setDate(2, new Date(((Admin) modelo).getFechaIngreso().getTime()));
+        csAdmin.execute();
+        
+        return csAdmin;
     }
 
     @Override
-    protected PreparedStatement deleteCommand(Connection conn, int id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    protected CallableStatement updateCommand(Connection conn, Usuario modelo) throws SQLException {
+        return super.updateCommand(conn, modelo);
     }
 
     @Override
-    protected PreparedStatement searchCommand(Connection conn, int id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    protected CallableStatement deleteCommand(Connection conn, int id) throws SQLException {
+        return super.deleteCommand(conn, id);
     }
 
     @Override
-    protected PreparedStatement getAllCommand(Connection conn) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    protected CallableStatement searchCommand(Connection conn, int id) throws SQLException {
+        CallableStatement cs = conn.prepareCall("{call search_admin(?)}");
+        cs.setInt(1, id);
+        return cs;
     }
 
     @Override
-    protected Usuario mapModel(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    protected CallableStatement getAllCommand(Connection conn) throws SQLException {
+        return conn.prepareCall("{call get_all_admins()}");
+    }
+
+    @Override
+    protected Admin mapModel(ResultSet rs) throws SQLException {
+        Admin admin = new Admin();
+        admin.setId(rs.getInt("id"));
+        admin.setUsername(rs.getString("username"));
+        admin.setNombreCompleto(rs.getString("nombre"));
+        admin.setTelefono(rs.getString("telefono"));
+        admin.setCorreoElectronico(rs.getString("correo"));
+        admin.setDireccion(rs.getString("direccion"));
+        admin.setContrasena(rs.getString("password"));
+        admin.setCreated(rs.getTimestamp("created_at"));
+        admin.setUpdated(rs.getTimestamp("updated_at"));
+        admin.setFechaIngreso(rs.getDate("fecha_ingreso"));
+        
+        return admin;
     }
 }

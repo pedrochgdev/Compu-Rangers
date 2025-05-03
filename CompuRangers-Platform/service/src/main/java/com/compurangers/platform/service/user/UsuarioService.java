@@ -1,8 +1,6 @@
 package com.compurangers.platform.service.user;
 
 import com.compurangers.platform.core.domain.user.Usuario;
-import com.compurangers.platform.core.domain.user.Cliente;
-import com.compurangers.platform.core.domain.user.Admin;
 import com.compurangers.platform.dao.user.IUsuarioDAO;
 import java.util.List;
 
@@ -31,14 +29,6 @@ public class UsuarioService {
 
     public List<Usuario> getAllUsuario() {
         return usuarioDAO.getAll();
-    }
-
-    public List<Cliente> getAllClientes() {
-        return usuarioDAO.getAllClientes();
-    }
-
-    public List<Admin> getAllAdmins() {
-        return usuarioDAO.getAllAdmins();
     }
     
 }

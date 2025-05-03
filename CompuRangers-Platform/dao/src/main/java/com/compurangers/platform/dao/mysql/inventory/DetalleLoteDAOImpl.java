@@ -5,58 +5,59 @@ import com.compurangers.platform.dao.inventory.IDetalleLoteDAO;
 import com.compurangers.platform.dao.mysql.BaseDetalleDAOImpl;
 import com.compurangers.platform.dao.mysql.catalog.ProductoDAOImpl;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.Types;
 
 
-public class DetalleLoteDAOImpl extends BaseDetalleDAOImpl<DetalleLote> implements IDetalleLoteDAO{
+public class DetalleLoteDAOImpl extends BaseDetalleDAOImpl<DetalleLote> implements IDetalleLoteDAO {
 
     @Override
-    protected PreparedStatement addCommand(Connection conn, DetalleLote modelo) throws SQLException {
-        String sql = "INSERT INTO DETALLE_LOTE (cantidad, precio_compra, lote_id, producto_id) VALUES (?, ?, ?, ?)";
-        PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ps.setInt(1, modelo.getCantidad());
-        ps.setDouble(2, modelo.getPrecioCompra());
-        ps.setInt(3, modelo.getLoteId());
-        ps.setInt(4, modelo.getProducto().getId());
-        return ps;
+    protected CallableStatement addCommand(Connection conn, DetalleLote modelo) throws SQLException {
+        String sql = "{call add_detalle_lote(?, ?, ?, ?, ?)}";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.registerOutParameter(1, Types.INTEGER);
+        cs.setInt(2, modelo.getCantidad());
+        cs.setDouble(3, modelo.getPrecioCompra());
+        cs.setInt(4, modelo.getLoteId());
+        cs.setInt(5, modelo.getProducto().getId());
+        return cs;
     }
 
     @Override
-    protected PreparedStatement updateCommand(Connection conn, DetalleLote modelo) throws SQLException {
-        String sql = "UPDATE DETALLE_LOTE SET cantidad = ?, precio_compra = ?, lote_id = ?, producto_id = ? WHERE id = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, modelo.getCantidad());
-        ps.setDouble(2, modelo.getPrecioCompra());
-        ps.setInt(3, modelo.getLoteId());
-        ps.setInt(4, modelo.getProducto().getId());
-        ps.setInt(5, modelo.getId());
-        return ps;
+    protected CallableStatement updateCommand(Connection conn, DetalleLote modelo) throws SQLException {
+        String sql = "{call update_detalle_lote(?, ?, ?, ?, ?)}";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.setInt(1, modelo.getId());
+        cs.setInt(2, modelo.getCantidad());
+        cs.setDouble(3, modelo.getPrecioCompra());
+        cs.setInt(4, modelo.getLoteId());
+        cs.setInt(5, modelo.getProducto().getId());
+        return cs;
     }
 
     @Override
-    protected PreparedStatement deleteCommand(Connection conn, int id) throws SQLException {
-        String sql = "DELETE FROM DETALLE_LOTE WHERE id = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, id);
-        return ps;
+    protected CallableStatement deleteCommand(Connection conn, int id) throws SQLException {
+        String sql = "{call delete_detalle_lote(?)}";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.setInt(1, id);
+        return cs;
     }
 
     @Override
-    protected PreparedStatement searchCommand(Connection conn, int id) throws SQLException {
-        String sql = "SELECT * FROM DETALLE_LOTE WHERE id = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, id);
-        return ps;
+    protected CallableStatement searchCommand(Connection conn, int id) throws SQLException {
+        String sql = "{call search_detalle_lote(?)}";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.setInt(1, id);
+        return cs;
     }
 
     @Override
-    protected PreparedStatement getAllCommand(Connection conn) throws SQLException {
-        String sql = "SELECT * FROM DETALLE_LOTE";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        return ps;
+    protected CallableStatement getAllCommand(Connection conn) throws SQLException {
+        String sql = "{call get_all_detalle_lote()}";
+        CallableStatement cs = conn.prepareCall(sql);
+        return cs;
     }
 
     @Override
@@ -66,16 +67,17 @@ public class DetalleLoteDAOImpl extends BaseDetalleDAOImpl<DetalleLote> implemen
         dt.setCantidad(rs.getInt("cantidad"));
         dt.setPrecioCompra(rs.getDouble("precio_compra"));
         dt.setLoteId(rs.getInt("lote_id"));
-        dt.setProducto(new ProductoDAOImpl().search(rs.getInt("producto_id")));
+        int productoId = rs.getInt("producto_id");
+        dt.setProducto(new ProductoDAOImpl().search(productoId));
         return dt;
     }
-    
+
     @Override
-    protected PreparedStatement getAllFromFkCommand(Connection conn, int foreignKey) throws SQLException {
-        String sql = "SELECT * FROM DETALLE_LOTE WHERE lote_id = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, foreignKey);
-        return ps;
+    protected CallableStatement getAllFromFkCommand(Connection conn, int foreignKey) throws SQLException {
+        String sql = "{call get_all_detalle_lote_from_lote(?)}";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.setInt(1, foreignKey);
+        return cs;
     }
 
 }

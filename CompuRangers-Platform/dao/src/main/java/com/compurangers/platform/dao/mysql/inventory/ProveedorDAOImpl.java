@@ -3,52 +3,51 @@ package com.compurangers.platform.dao.mysql.inventory;
 import com.compurangers.platform.core.domain.inventory.Proveedor;
 import com.compurangers.platform.dao.inventory.IProveedorDAO;
 import com.compurangers.platform.dao.mysql.BaseDAOImpl;
+import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.Types;
 
-public class ProveedorDAOImpl extends BaseDAOImpl<Proveedor> implements IProveedorDAO{
+public class ProveedorDAOImpl extends BaseDAOImpl<Proveedor> implements IProveedorDAO {
 
     @Override
-    protected PreparedStatement addCommand(Connection conn, Proveedor modelo) throws SQLException {
-        String sql = "INSERT INTO PROVEEDOR (razon_social) VALUES (?)";
-        PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ps.setString(1, modelo.getRazonSocial());
-        return ps;
+    protected CallableStatement addCommand(Connection conn, Proveedor modelo) throws SQLException {
+        String sql = "{call add_proveedor(?, ?)}";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.registerOutParameter(1, Types.INTEGER);
+        cs.setString(2, modelo.getRazonSocial());
+        return cs;
     }
 
     @Override
-    protected PreparedStatement updateCommand(Connection conn, Proveedor modelo) throws SQLException {
-        String sql = "UPDATE PROVEEDOR SET razon_social=? WHERE id=?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1, modelo.getRazonSocial());
-        ps.setInt(2, modelo.getId());
-        return ps;
+    protected CallableStatement updateCommand(Connection conn, Proveedor modelo) throws SQLException {
+        String sql = "{call update_proveedor(?, ?)}";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.setInt(1, modelo.getId());
+        cs.setString(2, modelo.getRazonSocial());
+        return cs;
     }
 
     @Override
-    protected PreparedStatement deleteCommand(Connection conn, int id) throws SQLException {
-        String sql = "DELETE FROM PROVEEDOR WHERE id = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, id);
-        return ps;    
+    protected CallableStatement deleteCommand(Connection conn, int id) throws SQLException {
+        String sql = "{call delete_proveedor(?)}";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.setInt(1, id);
+        return cs;
     }
 
     @Override
-    protected PreparedStatement searchCommand(Connection conn, int id) throws SQLException {
-        String sql = "SELECT * FROM PROVEEDOR WHERE id = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, id);
-        return ps;
+    protected CallableStatement searchCommand(Connection conn, int id) throws SQLException {
+        String sql = "{call search_proveedor(?)}";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.setInt(1, id);
+        return cs;
     }
 
     @Override
-    protected PreparedStatement getAllCommand(Connection conn) throws SQLException {
-        String sql = "SELECT * FROM CATEGORIA";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        return ps;
+    protected CallableStatement getAllCommand(Connection conn) throws SQLException {
+        return conn.prepareCall("{call get_all_proveedor()}");
     }
 
     @Override
@@ -58,5 +57,5 @@ public class ProveedorDAOImpl extends BaseDAOImpl<Proveedor> implements IProveed
         prov.setRazonSocial(rs.getString("razon_social"));
         return prov;
     }
-
+    
 }

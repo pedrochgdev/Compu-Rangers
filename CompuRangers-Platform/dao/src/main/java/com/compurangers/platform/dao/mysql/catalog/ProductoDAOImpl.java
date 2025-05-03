@@ -1,71 +1,63 @@
 package com.compurangers.platform.dao.mysql.catalog;
 
 import com.compurangers.platform.core.domain.catalog.Producto;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import com.compurangers.platform.dao.catalog.IProductoDAO;
 import com.compurangers.platform.dao.mysql.BaseDAOImpl;
-import java.sql.PreparedStatement;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.Types;
 
 public class ProductoDAOImpl extends BaseDAOImpl<Producto> implements IProductoDAO {
-    
+
     @Override
-    protected PreparedStatement addCommand(Connection conn, Producto modelo) throws SQLException {
-        String sql = "INSERT INTO PRODUCTO (sku, nombre,descripcion, precio_venta, categoria_id, marca_id) VALUES (?, ?, ?, ?, ?, ?)";     
-        PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ps.setString(1, modelo.getSku());
-        ps.setString(2, modelo.getNombre());
-        ps.setString(3, modelo.getDescripcion());
-        ps.setDouble(4, modelo.getPrecioVenta());
-        ps.setInt(5, modelo.getCategoria().getId());
-        ps.setInt(6, modelo.getMarca().getId());
-        return ps;
+    protected CallableStatement addCommand(Connection conn, Producto modelo) throws SQLException {
+        String sql = "{CALL add_producto(?, ?, ?, ?, ?, ?, ?)}";
+        CallableStatement cmd = conn.prepareCall(sql);
+        cmd.registerOutParameter(1, Types.INTEGER);
+        cmd.setString(2, modelo.getSku());
+        cmd.setString(3, modelo.getNombre());
+        cmd.setString(4, modelo.getDescripcion());
+        cmd.setDouble(5, modelo.getPrecioVenta());
+        cmd.setInt(6, modelo.getCategoria().getId());
+        cmd.setInt(7, modelo.getMarca().getId());
+        return cmd;
     }
 
     @Override
-    protected PreparedStatement updateCommand(Connection conn, Producto modelo) throws SQLException {
-        String sql = "UPDATE PRODUCTO SET sku = ?, nombre = ?,descripcion = ?, precio_venta = ?, categoria_id = ?, marca_id = ? WHERE id = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1, modelo.getSku());
-        ps.setString(2, modelo.getNombre());
-        ps.setString(3, modelo.getDescripcion());
-        ps.setDouble(4, modelo.getPrecioVenta());
-        ps.setInt(5, modelo.getCategoria().getId());
-        ps.setInt(6, modelo.getMarca().getId());
-        ps.setInt(7, modelo.getId());
-        return ps;
+    protected CallableStatement updateCommand(Connection conn, Producto modelo) throws SQLException {
+        String sql = "{CALL update_producto(?, ?, ?, ?, ?, ?, ?)}";
+        CallableStatement cmd = conn.prepareCall(sql);
+        cmd.setInt(1, modelo.getId());
+        cmd.setString(2, modelo.getSku());
+        cmd.setString(3, modelo.getNombre());
+        cmd.setString(4, modelo.getDescripcion());
+        cmd.setDouble(5, modelo.getPrecioVenta());
+        cmd.setInt(6, modelo.getCategoria().getId());
+        cmd.setInt(7, modelo.getMarca().getId());
+        return cmd;
     }
 
     @Override
-    protected PreparedStatement deleteCommand(Connection conn, int id) throws SQLException {
-        String sql = "DELETE FROM PRODUCTO WHERE id = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, id);
-        return ps;
+    protected CallableStatement deleteCommand(Connection conn, int id) throws SQLException {
+        String sql = "{CALL delete_producto(?)}";
+        CallableStatement cmd = conn.prepareCall(sql);
+        cmd.setInt(1, id);
+        return cmd;
     }
 
     @Override
-    protected PreparedStatement searchCommand(Connection conn, int id) throws SQLException {
-        String sql = "SELECT p.*, c.id AS cid, m.id AS mid "
-                        + "FROM PRODUCTO p "
-                        + "JOIN CATEGORIA c ON p.categoria_id = c.id "
-                        + "JOIN MARCA m ON p.marca_id = m.id "
-                        + "WHERE p.id = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, id);
-        return ps;    
+    protected CallableStatement searchCommand(Connection conn, int id) throws SQLException {
+        String sql = "{CALL search_producto(?)}";
+        CallableStatement cmd = conn.prepareCall(sql);
+        cmd.setInt(1, id);
+        return cmd;
     }
 
     @Override
-    protected PreparedStatement getAllCommand(Connection conn) throws SQLException {
-        String sql =  "SELECT p.*, c.id AS cid, m.id AS mid "
-                        + "FROM PRODUCTO p "
-                        + "JOIN CATEGORIA c ON p.categoria_id = c.id "
-                        + "JOIN MARCA m ON p.marca_id = m.id";
-        PreparedStatement ps = conn.prepareStatement(sql);
-       return ps;
+    protected CallableStatement getAllCommand(Connection conn) throws SQLException {
+        return conn.prepareCall("{CALL get_all_productos()}");
     }
 
     @Override
@@ -80,7 +72,6 @@ public class ProductoDAOImpl extends BaseDAOImpl<Producto> implements IProductoD
         p.setCategoria(new CategoriaDAOImpl().search(rs.getInt("cid")));
         p.setMarca(new MarcaDAOImpl().search(rs.getInt("mid")));
 
-        return p;   
+        return p;
     }
-    
 }

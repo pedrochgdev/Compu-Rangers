@@ -4,52 +4,71 @@ import com.compurangers.platform.core.domain.catalog.Categoria;
 import com.compurangers.platform.dao.catalog.ICategoriaDAO;
 import com.compurangers.platform.dao.mysql.BaseDetalleDAOImpl;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.Types;
 import java.util.List;
 
 public class CategoriaDAOImpl extends BaseDetalleDAOImpl<Categoria> implements ICategoriaDAO {
     
     @Override
-    protected PreparedStatement addCommand(Connection conn, Categoria modelo) throws SQLException {
-        String sql = "INSERT INTO CATEGORIA (nombre) VALUES (?)";
-        PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ps.setString(1, modelo.getNombre());
-        return ps;
+    protected CallableStatement addCommand(Connection conn, Categoria modelo) throws SQLException {
+        String sql = "{CALL add_categoria(?, ?, ?)}";
+        CallableStatement cmd = conn.prepareCall(sql);
+        cmd.registerOutParameter(1, Types.INTEGER);
+        cmd.setString(2, modelo.getNombre());
+        if (modelo.getCategoriaPadre() != null) {
+            cmd.setInt(3, modelo.getCategoriaPadre().getId());
+        } else {
+            cmd.setNull(3, Types.INTEGER);
+        }
+        return cmd;
     }
 
     @Override
-    protected PreparedStatement updateCommand(Connection conn, Categoria modelo) throws SQLException {
-        String sql = "UPDATE CATEGORIA SET nombre = ? WHERE id = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1, modelo.getNombre());
-        ps.setInt(2, modelo.getId());
-        return ps;
+    protected CallableStatement updateCommand(Connection conn, Categoria modelo) throws SQLException {
+        String sql = "{CALL update_categoria(?, ?, ?)}";
+        CallableStatement cmd = conn.prepareCall(sql);
+        cmd.setInt(1, modelo.getId());
+        cmd.setString(2, modelo.getNombre());
+        if (modelo.getCategoriaPadre() != null) {
+            cmd.setInt(3, modelo.getCategoriaPadre().getId());
+        } else {
+            cmd.setNull(3, Types.INTEGER);
+        }
+        return cmd;
     }
 
     @Override
-    protected PreparedStatement deleteCommand(Connection conn, int id) throws SQLException {
-        String sql = "DELETE FROM CATEGORIA WHERE id = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, id);
-        return ps;
+    protected CallableStatement deleteCommand(Connection conn, int id) throws SQLException {
+        String sql = "{CALL delete_categoria(?)}";
+        CallableStatement cmd = conn.prepareCall(sql);
+        cmd.setInt(1, id);
+        return cmd;
     }
 
     @Override
-    protected PreparedStatement searchCommand(Connection conn, int id) throws SQLException {
-        String sql = "SELECT * FROM CATEGORIA WHERE id = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, id);
-        return ps;
+    protected CallableStatement searchCommand(Connection conn, int id) throws SQLException {
+        String sql = "{CALL search_categoria(?)}";
+        CallableStatement cmd = conn.prepareCall(sql);
+        cmd.setInt(1, id);
+        return cmd;
     }
 
     @Override
-    protected PreparedStatement getAllCommand(Connection conn) throws SQLException {
-        String sql = "SELECT * FROM CATEGORIA";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        return ps;
+    protected CallableStatement getAllCommand(Connection conn) throws SQLException {
+        String sql = "{CALL get_all_categorias()}";
+        CallableStatement cmd = conn.prepareCall(sql);
+        return cmd;
+    }
+
+    @Override
+    protected CallableStatement getAllFromFkCommand(Connection conn, int foreignKey) throws SQLException {
+        String sql = "{CALL get_all_categorias_from_padre(?)}";
+        CallableStatement cmd = conn.prepareCall(sql);
+        cmd.setInt(1, foreignKey);
+        return cmd;
     }
 
     @Override
@@ -87,13 +106,5 @@ public class CategoriaDAOImpl extends BaseDetalleDAOImpl<Categoria> implements I
 
         return categoria;
     }
-
-    @Override
-    protected PreparedStatement getAllFromFkCommand(Connection conn, int foreignKey) throws SQLException {
-        String sql = "SELECT id FROM CATEGORIA WHERE padre_id = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, foreignKey);
-        return ps;
-    }
-
+    
 }
