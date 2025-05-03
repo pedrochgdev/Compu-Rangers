@@ -2,21 +2,21 @@ package com.compurangers.platform.dao.mysql;
 
 import com.compurangers.platform.util.DatabaseUtil;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseDetalleDAOImpl<T> extends BaseDAOImpl<T> {
-    protected abstract PreparedStatement getAllFromFkCommand(Connection conn, int foreignKey) throws SQLException;
+    protected abstract CallableStatement getAllFromFkCommand(Connection conn, int foreignKey) throws SQLException;
     
     public List<T> getAllByForeignKey(int foreignKey) {
         try (
             Connection conn = DatabaseUtil.getInstance().getConnection();
-            PreparedStatement ps = this.getAllFromFkCommand(conn, foreignKey)
+            CallableStatement cmd = this.getAllFromFkCommand(conn, foreignKey)
         ) {
-            ResultSet rs = ps.executeQuery();
+            ResultSet rs = cmd.executeQuery();
             List<T> detalles = new ArrayList<>();
             while (rs.next()) {
                 detalles.add(this.mapModel(rs));
@@ -32,19 +32,19 @@ public abstract class BaseDetalleDAOImpl<T> extends BaseDAOImpl<T> {
     }
     
     @Override
-    protected abstract PreparedStatement addCommand(Connection conn, T modelo) throws SQLException;
+    protected abstract CallableStatement addCommand(Connection conn, T modelo) throws SQLException;
     
     @Override
-    protected abstract PreparedStatement updateCommand(Connection conn, T modelo) throws SQLException;
+    protected abstract CallableStatement updateCommand(Connection conn, T modelo) throws SQLException;
     
     @Override
-    protected abstract PreparedStatement deleteCommand(Connection conn, int id) throws SQLException;
+    protected abstract CallableStatement deleteCommand(Connection conn, int id) throws SQLException;
     
     @Override
-    protected abstract PreparedStatement searchCommand(Connection conn, int id) throws SQLException;
+    protected abstract CallableStatement searchCommand(Connection conn, int id) throws SQLException;
     
     @Override
-    protected abstract PreparedStatement getAllCommand(Connection conn) throws SQLException;
+    protected abstract CallableStatement getAllCommand(Connection conn) throws SQLException;
     
     @Override
     protected abstract T mapModel(ResultSet rs) throws SQLException;

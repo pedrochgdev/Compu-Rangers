@@ -3,18 +3,18 @@ package com.compurangers.platform.dao.mysql;
 import com.compurangers.platform.dao.ICrud;
 import com.compurangers.platform.util.DatabaseUtil;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseDAOImpl<T> implements ICrud<T>{
-    protected abstract PreparedStatement addCommand(Connection conn, T modelo) throws SQLException;
-    protected abstract PreparedStatement updateCommand(Connection conn, T modelo) throws SQLException;
-    protected abstract PreparedStatement deleteCommand(Connection conn, int id) throws SQLException;
-    protected abstract PreparedStatement searchCommand(Connection conn, int id) throws SQLException;
-    protected abstract PreparedStatement getAllCommand(Connection conn) throws SQLException;
+    protected abstract CallableStatement addCommand(Connection conn, T modelo) throws SQLException;
+    protected abstract CallableStatement updateCommand(Connection conn, T modelo) throws SQLException;
+    protected abstract CallableStatement deleteCommand(Connection conn, int id) throws SQLException;
+    protected abstract CallableStatement searchCommand(Connection conn, int id) throws SQLException;
+    protected abstract CallableStatement getAllCommand(Connection conn) throws SQLException;
     
     protected abstract T mapModel(ResultSet rs) throws SQLException;
     
@@ -22,16 +22,14 @@ public abstract class BaseDAOImpl<T> implements ICrud<T>{
     public int add(T modelo) {
         try (
             Connection conn = DatabaseUtil.getInstance().getConnection();
-            PreparedStatement cmd = this.addCommand(conn, modelo);
+            CallableStatement cmd = this.addCommand(conn, modelo);
         ) {
             if (cmd.executeUpdate() == 0) {
                 System.err.println("El registro no se inserto.");
                 return 0;
             }
             
-            try (ResultSet rs = cmd.getGeneratedKeys()) {
-                return rs.next() ? rs.getInt(1) : -1;
-            }
+            return cmd.getInt(1);
         }
         catch (SQLException e) {
             System.err.println("Error SQL durante la insercion: " + e.getMessage());
@@ -47,9 +45,9 @@ public abstract class BaseDAOImpl<T> implements ICrud<T>{
     public boolean update(T modelo) {
         try (
             Connection conn = DatabaseUtil.getInstance().getConnection();
-            PreparedStatement ps = this.updateCommand(conn, modelo);
+            CallableStatement cmd = this.updateCommand(conn, modelo);
         ) {
-            return ps.executeUpdate() > 0;
+            return cmd.executeUpdate() > 0;
         }
         catch (SQLException e) {
             System.err.println("Error SQL durante la modificacion: " + e.getMessage());
@@ -65,9 +63,9 @@ public abstract class BaseDAOImpl<T> implements ICrud<T>{
     public boolean delete(int id) {
         try (
             Connection conn = DatabaseUtil.getInstance().getConnection();
-            PreparedStatement ps = this.deleteCommand(conn, id);
+            CallableStatement cmd = this.deleteCommand(conn, id);
         ) {
-            return ps.executeUpdate() > 0;
+            return cmd.executeUpdate() > 0;
         }
         catch (SQLException e) {
             System.err.println("Error SQL durante la eliminacion: " + e.getMessage());
@@ -83,9 +81,9 @@ public abstract class BaseDAOImpl<T> implements ICrud<T>{
     public T search(int id) {
         try (
             Connection conn = DatabaseUtil.getInstance().getConnection();
-            PreparedStatement ps = this.searchCommand(conn, id);
+            CallableStatement cmd = this.searchCommand(conn, id);
         ) {
-            ResultSet rs = ps.executeQuery();
+            ResultSet rs = cmd.executeQuery();
             
             if (!rs.next()) {
                 System.err.println("No se encontro el registro con id: " + id);
@@ -108,9 +106,9 @@ public abstract class BaseDAOImpl<T> implements ICrud<T>{
     public List<T> getAll() {
         try (
             Connection conn = DatabaseUtil.getInstance().getConnection();
-            PreparedStatement ps = this.getAllCommand(conn);
+            CallableStatement cmd = this.getAllCommand(conn);
         ) {
-            ResultSet rs = ps.executeQuery();
+            ResultSet rs = cmd.executeQuery();
             
             List<T> modelos = new ArrayList<>();
             while (rs.next()) {
