@@ -76,35 +76,26 @@ public class CategoriaDAOImpl extends BaseDetalleDAOImpl<Categoria> implements I
         Categoria categoria = new Categoria();
         categoria.setId(rs.getInt("id"));
         categoria.setNombre(rs.getString("nombre"));
-        categoria.setCategoriaPadre(search(rs.getInt("padre_id")));
+        categoria.setCategoriaPadre(rs.getObject("padre_id") != null ? search(rs.getInt("padre_id")) : null);
         return categoria;
     }
-    
-    @Override
-    public Categoria search(int id) {
-        Categoria categoria = super.search(id);
 
-        if (categoria != null) {
-            categoria.setSubcategorias(getCategoriaSons(categoria.getId()));
-        }
-
-        return categoria;
-    }
-    
     @Override
     public List<Categoria> getCategoriaSons(int categoriaId) {
         return getAllByForeignKey(categoriaId);
     }
-    
-    @Override
-    public Categoria getCategoriaWithParents(int categoriaId) {
-        Categoria categoria = this.search(categoriaId);
-
-        if (categoria != null && categoria.getCategoriaPadre() != null) {
-            categoria.setCategoriaPadre(getCategoriaWithParents(categoria.getCategoriaPadre().getId()));
-        }
-
-        return categoria;
-    }
+    /*
+    *Mandar a Service, tiene mas sentido en ese modulo
+    */
+//    @Override
+//    public Categoria getCategoriaWithParents(int categoriaId) {
+//        Categoria categoria = this.search(categoriaId);
+//
+//        if (categoria != null && categoria.getCategoriaPadre() != null) {
+//            categoria.setCategoriaPadre(getCategoriaWithParents(categoria.getCategoriaPadre().getId()));
+//        }
+//
+//        return categoria;
+//    }
     
 }
