@@ -233,7 +233,7 @@ CREATE TABLE MONEDA_PERIODO (
     tipoCambio ENUM('COMPRA', 'VENTA') NOT NULL COMMENT 'TIPO DE CAMBIO',
     estado ENUM('ACTIVO', 'INACTIVO') COMMENT 'ESTADO DEL TIPO DE CAMBIO POR PERIODO',
     valor DECIMAL(10,2) NOT NULL COMMENT 'VALOR DEL TIPO DE CAMBIO POR PERIODO',
-    PRIMARY KEY (moneda_id, periodo_id),
+    PRIMARY KEY (moneda_id, periodo_id, tipoCambio),
     CONSTRAINT MONPER_moneda_FK FOREIGN KEY (moneda_id) REFERENCES MONEDA (id),
     CONSTRAINT MONPER_periodo_FK FOREIGN KEY (periodo_id) REFERENCES PERIODO (id)
 ) ENGINE=InnoDB;
@@ -252,8 +252,8 @@ CREATE TABLE PAGO (
     fecha_pago DATE NOT NULL COMMENT 'FECHA EN LA QUE SE EFECTUO EL PAGO',
     estado ENUM('P', 'F', 'E') NOT NULL COMMENT 'ESTADO EN EL QUE SE ENCUENTRA EL PAGO',
     referencia VARCHAR(50) CHARACTER SET utf8mb4 COMMENT 'REFERENCIA DE PAGO',
-    documento_de_ventas_numero INT NOT NULL,
-    documento_de_compras_numero INT NOT NULL,
+    documento_de_ventas_numero INT,
+    documento_de_compras_numero INT,
     metodo_de_pago_id INT NOT NULL,
     moneda_periodo_moneda_id INT NOT NULL,
     moneda_periodo_periodo_id INT NOT NULL,
