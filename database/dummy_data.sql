@@ -76,7 +76,7 @@ VALUES (2001, 10000.00, 0.00, 10000.00, 1);
 
 -- Insert into LOTE (lot for the purchase)
 INSERT INTO LOTE (fecha_creacion, estado, documento_compras_numero)
-VALUES (CURDATE(), 'C', 2001);
+VALUES (CURDATE(), 'ABIERTO', 2001);
 
 -- Insert into DETALLE_LOTE (lot details)
 INSERT INTO DETALLE_LOTE (cantidad, precio_compra, lote_id, producto_id)
@@ -92,7 +92,9 @@ VALUES ('Value Added Tax', 'VAT', 'VENTA');
 
 -- Insert into PERIODO (tax period)
 INSERT INTO PERIODO (fecha_inicio, fecha_fin)
-VALUES ('2023-01-01', '2023-12-31');
+VALUES ('2023-01-01', '2023-12-31'),
+	   ('2023-01-01', '2023-12-31');
+
 
 -- Insert into IMPUESTO_PERIODO (tax rate for the period)
 INSERT INTO IMPUESTO_PERIODO (periodo_id, impuesto_id, tasa, estado)
@@ -124,8 +126,9 @@ VALUES
 
 -- Insert into PAGO (payment for the sales document)
 -- Note: Using 0 for documento_de_compras_numero as a workaround since it’s NOT NULL but not applicable here
-INSERT INTO PAGO (monto, fecha_pago, estado, referencia, documento_de_ventas_numero, documento_de_compras_numero, metodo_de_pago_id, moneda_periodo_moneda_id, moneda_periodo_periodo_id)
-VALUES (3303.98, CURDATE(), 'P', 'CC12345', 1001, NULL, 1, 1, 1);
+INSERT INTO PAGO (monto, fecha_pago, estado, referencia, documento_de_ventas_numero, documento_de_compras_numero, metodo_de_pago_id, moneda_periodo_id)
+VALUES (3303.98, CURDATE(), 'PENDIENTE', 'CC12345', 1001, NULL, 1, 1),
+		(3303.98, CURDATE(), 'PENDIENTE', 'CC12345', NULL, 2001, 2, 2);
 
 -- Insert into LOG (log entry for admin)
 INSERT INTO LOG (accion, fecha, usuario_id)

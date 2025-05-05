@@ -128,6 +128,19 @@ DROP PROCEDURE IF EXISTS update_periodo;
 DROP PROCEDURE IF EXISTS delete_periodo;
 DROP PROCEDURE IF EXISTS search_periodo;
 DROP PROCEDURE IF EXISTS get_all_periodo;
+DROP PROCEDURE IF EXISTS add_usuario;
+DROP PROCEDURE IF EXISTS update_usuario;
+DROP PROCEDURE IF EXISTS delete_usuario;
+DROP PROCEDURE IF EXISTS search_usuario;
+DROP PROCEDURE IF EXISTS get_all_usuarios;
+DROP PROCEDURE IF EXISTS add_admin;
+DROP PROCEDURE IF EXISTS update_admin;
+DROP PROCEDURE IF EXISTS search_admin;
+DROP PROCEDURE IF EXISTS get_all_admins;
+DROP PROCEDURE IF EXISTS add_cliente;
+DROP PROCEDURE IF EXISTS update_cliente;
+DROP PROCEDURE IF EXISTS search_cliente;
+DROP PROCEDURE IF EXISTS get_all_clientes;
 
 /* CATALOG */
 /* PROCEDURES CATEGORIA */
@@ -509,7 +522,7 @@ DELIMITER //
 CREATE PROCEDURE add_lote(
     OUT generated_id INT,
     IN fecha_creacion_in DATE,
-    IN estado_in VARCHAR(50),
+    IN estado_in ENUM('ABIERTO', 'CERRADO', 'CANCELADO'),
     IN documento_compras_numero_in INT
 )
 BEGIN
@@ -525,7 +538,7 @@ DELIMITER //
 CREATE PROCEDURE update_lote(
     IN id_in INT,
     IN fecha_creacion_in DATE,
-    IN estado_in VARCHAR(50),
+    IN estado_in ENUM('ABIERTO', 'CERRADO', 'CANCELADO'),
     IN documento_compras_numero_in INT
 )
 BEGIN
@@ -1777,24 +1790,23 @@ CREATE PROCEDURE add_pago(
     OUT generated_id INT,
     IN monto_in DECIMAL(10,2),
     IN fecha_pago_in DATE,
-    IN estado_in ENUM('P', 'F', 'E'),
+    IN estado_in ENUM('PENDIENTE', 'PROCESADO', 'COMPLETADO', 'FALLIDO', 'CANCELADO', 'REEMBOLSADO', 'EN_REVISION', 'PROGRAMADO'),
     IN referencia_in VARCHAR(50),
     IN doc_venta_num INT,
     IN doc_compra_num INT,
     IN metodo_pago_id INT,
-    IN moneda_id INT,
-    IN periodo_id INT
+    IN moneda_periodo_id_in INT
 )
 BEGIN
     INSERT INTO PAGO (
         monto, fecha_pago, estado, referencia,
         documento_de_ventas_numero, documento_de_compras_numero,
-        metodo_de_pago_id, moneda_periodo_moneda_id, moneda_periodo_periodo_id
+        metodo_de_pago_id, moneda_periodo_id
     )
     VALUES (
         monto_in, fecha_pago_in, estado_in, referencia_in,
         doc_venta_num, doc_compra_num,
-        metodo_pago_id, moneda_id, periodo_id
+        metodo_pago_id, moneda_periodo_id_in
     );
 
     SET generated_id = LAST_INSERT_ID();
@@ -1807,13 +1819,12 @@ CREATE PROCEDURE update_pago(
     IN id_in INT,
     IN monto_in DECIMAL(10,2),
     IN fecha_pago_in DATE,
-    IN estado_in ENUM('P', 'F', 'E'),
+    IN estado_in ENUM('PENDIENTE', 'PROCESADO', 'COMPLETADO', 'FALLIDO', 'CANCELADO', 'REEMBOLSADO', 'EN_REVISION', 'PROGRAMADO'),
     IN referencia_in VARCHAR(50),
     IN doc_venta_num INT,
     IN doc_compra_num INT,
     IN metodo_pago_id INT,
-    IN moneda_id INT,
-    IN periodo_id INT
+    moneda_periodo_id_in INT
 )
 BEGIN
     UPDATE PAGO
@@ -1824,8 +1835,7 @@ BEGIN
         documento_de_ventas_numero = doc_venta_num,
         documento_de_compras_numero = doc_compra_num,
         metodo_de_pago_id = metodo_pago_id,
-        moneda_periodo_moneda_id = moneda_id,
-        moneda_periodo_periodo_id = periodo_id
+        moneda_periodo_id = moneda_periodo_id_in
     WHERE id = id_in;
 END;
 //
@@ -1887,7 +1897,7 @@ CREATE PROCEDURE add_impuesto_periodo(
     OUT generated_id INT,
     IN periodo_id_in INT,
     IN impuesto_id_in INT,
-    IN tasa_in DECIMAL(5,4),
+    IN tasa_in DECIMAL(10,2),
     IN estado_in ENUM('ACTIVO', 'INACTIVO')
 )
 BEGIN
@@ -1904,40 +1914,37 @@ DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE update_impuesto_periodo(
-    IN periodo_id_in INT,
-    IN impuesto_id_in INT,
-    IN tasa_in DECIMAL(5,4),
+    IN id_in INT,
+    IN tasa_in DECIMAL(10,2),
     IN estado_in ENUM('ACTIVO', 'INACTIVO')
 )
 BEGIN
     UPDATE IMPUESTO_PERIODO
     SET tasa = tasa_in,
         estado = estado_in
-    WHERE periodo_id = periodo_id_in AND impuesto_id = impuesto_id_in;
+    WHERE id = id_in;
 END;
 //
 DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE delete_impuesto_periodo(
-    IN periodo_id_in INT,
-    IN impuesto_id_in INT
+    IN id_in INT
 )
 BEGIN
     DELETE FROM IMPUESTO_PERIODO
-    WHERE periodo_id = periodo_id_in AND impuesto_id = impuesto_id_in;
+    WHERE id = id_in;
 END;
 //
 DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE search_impuesto_periodo(
-    IN periodo_id_in INT,
-    IN impuesto_id_in INT
+    IN id_in INT
 )
 BEGIN
     SELECT * FROM IMPUESTO_PERIODO
-    WHERE periodo_id = periodo_id_in AND impuesto_id = impuesto_id_in;
+    WHERE id = id_in;
 END;
 //
 DELIMITER ;
@@ -1959,7 +1966,7 @@ CREATE PROCEDURE add_moneda_periodo(
     IN periodo_id_in INT,
     IN tipoCambio_in ENUM('COMPRA', 'VENTA'),
     IN estado_in ENUM('ACTIVO', 'INACTIVO'),
-    IN valor_in DECIMAL(10,2)
+    IN valor_in DECIMAL(10,4)
 )
 BEGIN
     INSERT INTO MONEDA_PERIODO (
@@ -1975,42 +1982,39 @@ DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE update_moneda_periodo(
-    IN moneda_id_in INT,
-    IN periodo_id_in INT,
+    IN id_in INT,
     IN tipoCambio_in ENUM('COMPRA', 'VENTA'),
     IN estado_in ENUM('ACTIVO', 'INACTIVO'),
-    IN valor_in DECIMAL(10,2)
+    IN valor_in DECIMAL(10,4)
 )
 BEGIN
     UPDATE MONEDA_PERIODO
     SET tipoCambio = tipoCambio_in,
         estado = estado_in,
         valor = valor_in
-    WHERE moneda_id = moneda_id_in AND periodo_id = periodo_id_in;
+    WHERE id = id_in;
 END;
 //
 DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE delete_moneda_periodo(
-    IN moneda_id_in INT,
-    IN periodo_id_in INT
+    IN id_in INT
 )
 BEGIN
     DELETE FROM MONEDA_PERIODO
-    WHERE moneda_id = moneda_id_in AND periodo_id = periodo_id_in;
+    WHERE id = id_in;
 END;
 //
 DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE search_moneda_periodo(
-    IN moneda_id_in INT,
-    IN periodo_id_in INT
+    IN id_in INT
 )
 BEGIN
     SELECT * FROM MONEDA_PERIODO
-    WHERE moneda_id = moneda_id_in AND periodo_id = periodo_id_in;
+    WHERE id = id_in;
 END;
 //
 DELIMITER ;
