@@ -116,8 +116,7 @@ public class CategoriaDAOTest implements ICrudDAOTest {
     @Order(9)
     public void shouldGetCategoriaSons() {
         ICategoriaDAO categoriaDao = new CategoriaDAOImpl();
-        // Note: This test assumes a parent category exists in the database
-        int parentId = 1; // Replace with a valid parent category ID from your DB
+        int parentId = 1;
         List<Categoria> sons = categoriaDao.getCategoriaSons(parentId);
         assertNotNull(sons);
     }

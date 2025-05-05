@@ -4,8 +4,6 @@ import com.compurangers.platform.core.domain.catalog.Producto;
 import com.compurangers.platform.core.domain.catalog.Categoria;
 import com.compurangers.platform.core.domain.catalog.Marca;
 import com.compurangers.platform.dao.catalog.IProductoDAO;
-import com.compurangers.platform.dao.catalog.ICategoriaDAO;
-import com.compurangers.platform.dao.catalog.IMarcaDAO;
 import com.compurangers.platform.dao.ICrudDAOTest;
 import org.junit.jupiter.api.*;
 
@@ -19,7 +17,6 @@ public class ProductoDAOTest implements ICrudDAOTest {
     private int testId;
     private final int idIncorrecto = 99999;
 
-    // Asume que ya existen en tu DB
     private final int categoriaId = 1;
     private final int marcaId = 1;
 
