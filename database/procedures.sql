@@ -141,6 +141,9 @@ DROP PROCEDURE IF EXISTS add_cliente;
 DROP PROCEDURE IF EXISTS update_cliente;
 DROP PROCEDURE IF EXISTS search_cliente;
 DROP PROCEDURE IF EXISTS get_all_clientes;
+DROP PROCEDURE IF EXISTS get_user_id_by_email;
+DROP PROCEDURE IF EXISTS get_user_id_by_username;
+DROP PROCEDURE IF EXISTS get_user_password_by_id;
 
 /* CATALOG */
 /* PROCEDURES CATEGORIA */
@@ -644,8 +647,8 @@ DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE add_documento_compras(
-    OUT generated_id INT,
     OUT generated_numero INT,
+    OUT generated_id INT,
     IN subtotal_in DECIMAL(10,2),
     IN impuestos_in DECIMAL(10,2),
     IN total_in DECIMAL(10,2),
@@ -877,7 +880,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE add_orden_de_venta(
     OUT generated_id INT,
-    IN estado_in VARCHAR(50),
+    IN estado_in ENUM('PAGADO', 'ENVIADO', 'ENTREGADO'),
     IN fecha_in DATE,
     IN total_in DECIMAL(10,2),
     IN cliente_usuario_id_in INT,
@@ -1040,7 +1043,7 @@ CREATE PROCEDURE add_orden_devolucion(
     OUT generated_id INT,
     IN motivo_in VARCHAR(200),
     IN fecha_registro_in DATE,
-    IN tipo_devolucion_in CHAR(1),
+    IN tipo_devolucion_in ENUM('REEMBOLSO', 'GIFTCARD'),
     IN documento_de_ventas_numero_in INT
 )
 BEGIN
@@ -1057,7 +1060,7 @@ CREATE PROCEDURE update_orden_devolucion(
     IN id_in INT,
     IN motivo_in VARCHAR(200),
     IN fecha_registro_in DATE,
-    IN tipo_devolucion_in CHAR(1),
+    IN tipo_devolucion_in ENUM('REEMBOLSO', 'GIFTCARD'),
     IN documento_de_ventas_numero_in INT
 )
 BEGIN
@@ -1187,8 +1190,8 @@ DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE add_documento_de_ventas(
-    OUT generated_id INT,
     OUT generated_numero INT,
+    OUT generated_id INT,
     IN subtotal_in DECIMAL(10,2),
     IN impuestos_in DECIMAL(8,2),
     IN total_in DECIMAL(10,2),
@@ -1451,16 +1454,76 @@ END;
 //
 DELIMITER ;
 
+DELIMITER //
+
+CREATE PROCEDURE get_user_id_by_email(
+    IN p_correo VARCHAR(255),
+    OUT p_id INT
+)
+BEGIN
+    SELECT id INTO p_id
+    FROM usuario
+    WHERE correo COLLATE utf8mb4_unicode_ci = p_correo
+    LIMIT 1;
+
+    IF p_id IS NULL THEN
+        SET p_id = -1;
+    END IF;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE get_user_id_by_username(
+    IN p_username VARCHAR(100),
+    OUT p_id INT
+)
+BEGIN
+    SELECT id INTO p_id
+    FROM usuario
+    WHERE username COLLATE utf8mb4_unicode_ci = p_username
+    LIMIT 1;
+
+    IF p_id IS NULL THEN
+        SET p_id = -1;
+    END IF;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE get_user_password_by_id(
+    IN p_id INT,
+    OUT p_password VARCHAR(255)
+)
+BEGIN
+    SELECT password INTO p_password
+    FROM usuario
+    WHERE id = p_id
+    LIMIT 1;
+
+    IF p_password IS NULL THEN
+        SET p_password = '';
+    END IF;
+END //
+
+DELIMITER ;
+
+
 /* PROCEDURES ADMIN */
 
 DELIMITER //
 CREATE PROCEDURE add_admin(
-    IN usuario_id_in INT,
+    INOUT usuario_id_in INT,
     IN fecha_ingreso_in DATE
 )
 BEGIN
     INSERT INTO ADMIN (usuario_id, fecha_ingreso)
     VALUES (usuario_id_in, fecha_ingreso_in);
+    
+    SET usuario_id_in = LAST_INSERT_ID();
 END;
 //
 DELIMITER ;
@@ -1525,12 +1588,14 @@ DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE add_cliente(
-    IN usuario_id_in INT,
+    INOUT usuario_id_in INT,
     IN direccion_envio_in VARCHAR(100)
 )
 BEGIN
     INSERT INTO CLIENTE (usuario_id, direccion_envio)
     VALUES (usuario_id_in, direccion_envio_in);
+    
+    SET usuario_id_in = LAST_INSERT_ID();
 END;
 //
 DELIMITER ;

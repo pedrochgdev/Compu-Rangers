@@ -66,6 +66,10 @@ VALUES
 INSERT INTO DOCUMENTO_DE_VENTAS (numero, subtotal, impuestos, total, total_pagado, orden_de_venta_id)
 VALUES (1001, 2799.98, 504.00, 3303.98, 3303.98, 1);
 
+-- Insert into ORDEN_DEVOLUCION 
+INSERT INTO orden_devolucion (fecha_registro, motivo, tipo_devolucion, documento_de_ventas_numero)
+VALUES (CURRENT_DATE, 'Cliente devolvió productos defectuosos', 'REEMBOLSO', 1001);
+
 -- Insert into PROVEEDOR (supplier)
 INSERT INTO PROVEEDOR (razon_social)
 VALUES ('Apple Inc.');
