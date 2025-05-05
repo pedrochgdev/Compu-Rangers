@@ -15,7 +15,7 @@ public class LogDAOImpl extends BaseDetalleDAOImpl<Log> implements ILogDAO {
         cs.registerOutParameter(1, Types.INTEGER);
         cs.setString(2, modelo.getAccion());
         cs.setDate(3, new java.sql.Date(modelo.getFecha().getTime()));
-        cs.setInt(4, modelo.getUsuarioId().intValue());
+        cs.setInt(4, modelo.getUsuarioId());
         return cs;
     }
 
@@ -23,10 +23,10 @@ public class LogDAOImpl extends BaseDetalleDAOImpl<Log> implements ILogDAO {
     protected CallableStatement updateCommand(Connection conn, Log modelo) throws SQLException {
         String sql = "{call update_log(?, ?, ?, ?)}";
         CallableStatement cs = conn.prepareCall(sql);
-        cs.setInt(1, modelo.getId().intValue());
+        cs.setInt(1, modelo.getId());
         cs.setString(2, modelo.getAccion());
         cs.setDate(3, new java.sql.Date(modelo.getFecha().getTime()));
-        cs.setInt(4, modelo.getUsuarioId().intValue());
+        cs.setInt(4, modelo.getUsuarioId());
         return cs;
     }
 
@@ -54,13 +54,13 @@ public class LogDAOImpl extends BaseDetalleDAOImpl<Log> implements ILogDAO {
     @Override
     protected Log mapModel(ResultSet rs) throws SQLException {
         Log log = new Log();
-        log.setId(rs.getLong("id"));
+        log.setId(rs.getInt("id"));
         log.setAccion(rs.getString("accion"));
         
         Date fecha = rs.getDate("fecha");
         log.setFecha(fecha != null ? new Date(fecha.getTime()) : null);
         
-        log.setUsuarioId(rs.getLong("usuario_id"));
+        log.setUsuarioId(rs.getInt("usuario_id"));
         return log;
     }
     

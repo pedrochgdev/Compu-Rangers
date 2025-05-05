@@ -20,7 +20,6 @@ public class AdminDAOImpl extends UsuarioDAOImpl implements IAdminDAO {
         CallableStatement csAdmin = conn.prepareCall("{call add_admin(?, ?)}");
         csAdmin.setInt(1, usuarioId);
         csAdmin.setDate(2, new Date(((Admin) modelo).getFechaIngreso().getTime()));
-        csAdmin.execute();
         
         return csAdmin;
     }
@@ -56,11 +55,22 @@ public class AdminDAOImpl extends UsuarioDAOImpl implements IAdminDAO {
         admin.setTelefono(rs.getString("telefono"));
         admin.setCorreoElectronico(rs.getString("correo"));
         admin.setDireccion(rs.getString("direccion"));
-        admin.setContrasena(rs.getString("password"));
+        //admin.setContrasena(rs.getString("password"));
         admin.setCreated(rs.getTimestamp("created_at"));
         admin.setUpdated(rs.getTimestamp("updated_at"));
         admin.setFechaIngreso(rs.getDate("fecha_ingreso"));
         
         return admin;
     }
+    
+    @Override
+    public int getUserByField(String field, String value) {
+        return super.getUserByField(field, value);
+    }
+    
+    @Override
+    public String getPasswordHash(int userId) {
+        return super.getPasswordHash(userId);
+    }
+    
 }

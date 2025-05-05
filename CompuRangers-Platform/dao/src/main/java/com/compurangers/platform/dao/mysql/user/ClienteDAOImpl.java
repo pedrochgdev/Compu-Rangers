@@ -12,16 +12,13 @@ public class ClienteDAOImpl extends UsuarioDAOImpl implements IClienteDAO {
 
     @Override
     protected CallableStatement addCommand(Connection conn, Usuario modelo) throws SQLException {
-        // 1. Insertar en USUARIO usando el DAO padre
         CallableStatement csUsuario = super.addCommand(conn, modelo);
         csUsuario.execute();
-        int usuarioId = csUsuario.getInt(1); // Obtener ID generado
-        
-        // 2. Insertar en CLIENTE usando el stored procedure
+        int usuarioId = csUsuario.getInt(1);
+
         CallableStatement csCliente = conn.prepareCall("{call add_cliente(?, ?)}");
         csCliente.setInt(1, usuarioId);
         csCliente.setString(2, ((Cliente) modelo).getDireccionPreferida());
-        csCliente.execute();
         
         return csCliente;
     }
@@ -36,7 +33,6 @@ public class ClienteDAOImpl extends UsuarioDAOImpl implements IClienteDAO {
 
     @Override
     protected CallableStatement deleteCommand(Connection conn, int id) throws SQLException {
-        // ON DELETE CASCADE eliminará automáticamente el CLIENTE
         return super.deleteCommand(conn, id); 
     }
 
@@ -55,20 +51,29 @@ public class ClienteDAOImpl extends UsuarioDAOImpl implements IClienteDAO {
     @Override
     protected Cliente mapModel(ResultSet rs) throws SQLException {
         Cliente cliente = new Cliente();
-        // Campos de USUARIO
         cliente.setId(rs.getInt("id"));
         cliente.setUsername(rs.getString("username"));
         cliente.setNombreCompleto(rs.getString("nombre"));
         cliente.setTelefono(rs.getString("telefono"));
         cliente.setCorreoElectronico(rs.getString("correo"));
         cliente.setDireccion(rs.getString("direccion"));
-        cliente.setContrasena(rs.getString("password"));
+        //cliente.setContrasena(rs.getString("password")); Por seguridad no se devolvera la contraseña en los SELECT
         cliente.setCreated(rs.getTimestamp("created_at"));
         cliente.setUpdated(rs.getTimestamp("updated_at"));
         
-        // Campos específicos de CLIENTE
         cliente.setDireccionPreferida(rs.getString("direccion_envio"));
         
         return cliente;
     }
+    
+    @Override
+    public int getUserByField(String field, String value) {
+        return super.getUserByField(field, value);
+    }
+    
+    @Override
+    public String getPasswordHash(int userId) {
+        return super.getPasswordHash(userId);
+    }
+    
 }

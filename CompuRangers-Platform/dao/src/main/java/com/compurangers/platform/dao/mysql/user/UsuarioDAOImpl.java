@@ -3,6 +3,7 @@ package com.compurangers.platform.dao.mysql.user;
 import com.compurangers.platform.core.domain.user.Usuario;
 import com.compurangers.platform.dao.mysql.BaseDAOImpl;
 import com.compurangers.platform.dao.user.IUsuarioDAO;
+import com.compurangers.platform.util.DatabaseUtil;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -72,14 +73,54 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    public Usuario login(String correo, String contraseña) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+   @Override
+    public int getUserByField(String field, String value) {
+        String sql = "";
+        if ("email".equalsIgnoreCase(field)) {
+            sql = "{call get_user_id_by_email(?, ?)}";
+        } else if ("username".equalsIgnoreCase(field)) {
+            sql = "{call get_user_id_by_username(?, ?)}";
+        } else {
+            throw new IllegalArgumentException("Campo no soportado: " + field);
+        }
+
+        try (Connection conn = DatabaseUtil.getInstance().getConnection();
+             CallableStatement cs = conn.prepareCall(sql)) {
+
+            cs.setString(1, value);
+            cs.registerOutParameter(2, Types.INTEGER);
+
+            cs.execute();
+            return cs.getInt(2);
+
+        } catch (SQLException e) {
+            System.err.println("Error SQL al obtener id" + field + ": " + e.getMessage());
+            throw new RuntimeException("No se pudo encontrar el ID del usuario.", e);
+        } catch (Exception e) {
+            System.err.println("Error inesperado" + e.getMessage());
+            throw new RuntimeException("Error inesperado al obtener el id.", e);
+        }
     }
 
     @Override
-    public boolean existsByEmail(String correo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String getPasswordHash(int userId) {
+        try (Connection conn = DatabaseUtil.getInstance().getConnection();
+             CallableStatement cs = conn.prepareCall("{call get_user_password_by_id(?, ?)}")) {
+
+            cs.setInt(1, userId);
+            cs.registerOutParameter(2, Types.VARCHAR);
+
+            cs.execute();
+
+            return cs.getString(2);
+
+        } catch (SQLException e) {
+            System.err.println("Error SQL al obtener: " + e.getMessage());
+            throw new RuntimeException("No se pudo encontrar la contraseña.", e);
+        } catch (Exception e) {
+            System.err.println("Error inesperado: " + e.getMessage());
+            throw new RuntimeException("Error inesperado al obtener el hash de la contraseña.", e);
+        }
     }
-    
+
 }

@@ -1,8 +1,8 @@
 package com.compurangers.platform.dao.sales;
 
 import com.compurangers.platform.core.domain.sales.OrdenDeDevolucion;
-import com.compurangers.platform.dao.ICrud;
+import com.compurangers.platform.dao.IListByFk;
 
-public interface IOrdenDeDevolucionDAO extends ICrud<OrdenDeDevolucion> {
+public interface IOrdenDeDevolucionDAO extends IListByFk<OrdenDeDevolucion> {
     
 }

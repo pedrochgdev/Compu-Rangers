@@ -45,7 +45,7 @@ public class DocumentoDeVentasDAOImpl extends BaseDetalleDAOImpl<DocumentoDeVent
     protected CallableStatement deleteCommand(Connection conn, int id) throws SQLException {
         String sql = "{call delete_documento_de_ventas(?)}";
         CallableStatement cs = conn.prepareCall(sql);
-        cs.setInt(1, id); // Se asume que el parámetro id corresponde al número del documento
+        cs.setInt(1, id);
         return cs;
     }
 
@@ -53,7 +53,7 @@ public class DocumentoDeVentasDAOImpl extends BaseDetalleDAOImpl<DocumentoDeVent
     protected CallableStatement searchCommand(Connection conn, int id) throws SQLException {
         String sql = "{call search_documento_de_ventas(?)}";
         CallableStatement cs = conn.prepareCall(sql);
-        cs.setInt(1, id); // Búsqueda por número de documento
+        cs.setInt(1, id);
         return cs;
     }
 
