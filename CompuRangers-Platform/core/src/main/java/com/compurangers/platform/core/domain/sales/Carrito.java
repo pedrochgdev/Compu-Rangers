@@ -32,10 +32,6 @@ public class Carrito {
     }
 
     public double getTotal() {
-        total = 0;
-        for (ItemCarrito item : items) {
-            total += item.getSubtotal();
-        }
         return total;
     }
 

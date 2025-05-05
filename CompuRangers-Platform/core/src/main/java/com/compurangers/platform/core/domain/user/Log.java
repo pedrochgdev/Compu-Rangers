@@ -3,16 +3,16 @@ package com.compurangers.platform.core.domain.user;
 import java.util.Date;
 
 public class Log {
-    private Long id;
+    private int id;
     private String accion;
     private Date fecha;
-    private Long usuarioId;
+    private int usuarioId;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -32,11 +32,11 @@ public class Log {
         this.fecha = fecha;
     }
 
-    public Long getUsuarioId() {
+    public int getUsuarioId() {
         return usuarioId;
     }
 
-    public void setUsuarioId(Long usuarioId) {
+    public void setUsuarioId(int usuarioId) {
         this.usuarioId = usuarioId;
     }
 }
