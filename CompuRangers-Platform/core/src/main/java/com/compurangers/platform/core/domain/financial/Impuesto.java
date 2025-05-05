@@ -4,7 +4,7 @@ public class Impuesto {
     private int id;
     private String nombre;
     private String abreviacion;
-    private char tipo;
+    private String tipo;
 
     public int getId() {
         return id;
@@ -30,11 +30,11 @@ public class Impuesto {
         this.abreviacion = abreviacion;
     }
     
-    public char getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(char tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
     

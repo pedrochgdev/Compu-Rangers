@@ -31,8 +31,8 @@ public class Lote {
     public String getEstado() { return estado; }
     public void setEstado(String estado) { this.estado = estado; }
 
-    public int getDocumentoCompraId() { return documentoCompraNo; }
-    public void setDocumentoCompraId(int documentoCompraNo) { this.documentoCompraNo = documentoCompraNo; }
+    public int getDocumentoCompraNo() { return documentoCompraNo; }
+    public void setDocumentoCompraNo(int documentoCompraNo) { this.documentoCompraNo = documentoCompraNo; }
     
     public List<DetalleLote> getDetalle() { return detalle; }
     public void setDetalle(List<DetalleLote> detalle) { this.detalle = detalle; }

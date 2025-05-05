@@ -13,8 +13,7 @@ public class Pago {
     private int documentoDeComprasNumero;
     private int metodoDePagoId;
 
-    private int monedaId;
-    private int periodoId;
+    private int monedaPeriodoId;
 
     public int getId() {
         return id;
@@ -80,20 +79,12 @@ public class Pago {
         this.metodoDePagoId = metodoDePagoId;
     }
 
-    public int getMonedaId() {
-        return monedaId;
+    public int getMonedaPeriodoId() {
+        return monedaPeriodoId;
     }
 
-    public void setMonedaId(int monedaId) {
-        this.monedaId = monedaId;
-    }
-
-    public int getPeriodoId() {
-        return periodoId;
-    }
-
-    public void setPeriodoId(int periodoId) {
-        this.periodoId = periodoId;
+    public void setMonedaPeriodoId(int monedaPeriodoId) {
+        this.monedaPeriodoId = monedaPeriodoId;
     }
     
 }

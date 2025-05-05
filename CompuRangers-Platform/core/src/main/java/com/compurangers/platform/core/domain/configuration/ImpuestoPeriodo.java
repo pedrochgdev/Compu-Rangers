@@ -1,11 +1,20 @@
 package com.compurangers.platform.core.domain.configuration;
 
 public class ImpuestoPeriodo {
+    private int id;
     private int periodoId;
     private int impuestoId;
     private double tasa;
     private String estado;
+    
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public int getPeriodoId() {
         return periodoId;
     }

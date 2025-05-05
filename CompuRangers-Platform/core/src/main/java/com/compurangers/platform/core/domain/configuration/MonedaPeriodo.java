@@ -1,12 +1,21 @@
 package com.compurangers.platform.core.domain.configuration;
 
 public class MonedaPeriodo {
+    private int id;
     private int monedaId;
     private int periodoId;
     private double valor;
-    private char tipoCambio;
+    private String tipoCambio;
     private String estado;
+    
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public int getMonedaId() {
         return monedaId;
     }
@@ -15,11 +24,11 @@ public class MonedaPeriodo {
         this.monedaId = monedaId;
     }
 
-    public char getTipoCambio() {
+    public String getTipoCambio() {
         return tipoCambio;
     }
 
-    public void setTipoCambio(char tipoCambio) {
+    public void setTipoCambio(String tipoCambio) {
         this.tipoCambio = tipoCambio;
     }
 
