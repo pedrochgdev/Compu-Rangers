@@ -19,7 +19,7 @@ public class LoteDAOImpl extends BaseDAOImpl<Lote> implements ILoteDAO {
         cs.registerOutParameter(1, Types.INTEGER);
         cs.setDate(2, new Date(modelo.getFechaCreacion().getTime()));
         cs.setString(3, modelo.getEstado());
-        cs.setInt(4, modelo.getDocumentoCompraId());
+        cs.setInt(4, modelo.getDocumentoCompraNo());
         return cs;
     }
 
@@ -30,7 +30,7 @@ public class LoteDAOImpl extends BaseDAOImpl<Lote> implements ILoteDAO {
         cs.setInt(1, modelo.getId());
         cs.setDate(2, new Date(modelo.getFechaCreacion().getTime()));
         cs.setString(3, modelo.getEstado());
-        cs.setInt(4, modelo.getDocumentoCompraId());
+        cs.setInt(4, modelo.getDocumentoCompraNo());
         return cs;
     }
 
@@ -60,7 +60,7 @@ public class LoteDAOImpl extends BaseDAOImpl<Lote> implements ILoteDAO {
         Lote lote = new Lote();
         lote.setId(rs.getInt("id"));
         lote.setEstado(rs.getString("estado"));
-        lote.setDocumentoCompraId(rs.getInt("documento_compras_numero"));
+        lote.setDocumentoCompraNo(rs.getInt("documento_compras_numero"));
         lote.setDetalle(new DetalleLoteDAOImpl().getAllByForeignKey(lote.getId()));
         return lote;
     }
