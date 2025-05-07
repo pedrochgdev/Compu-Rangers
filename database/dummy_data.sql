@@ -63,8 +63,8 @@ VALUES
     (1, 799.99, 1, 2);   -- Galaxy S21
 
 -- Insert into DOCUMENTO_DE_VENTAS (sales document with tax)
-INSERT INTO DOCUMENTO_DE_VENTAS (numero, subtotal, impuestos, total, total_pagado, orden_de_venta_id)
-VALUES (1001, 2799.98, 504.00, 3303.98, 3303.98, 1);
+INSERT INTO DOCUMENTO_DE_VENTAS (numero, subtotal, impuestos, total, orden_de_venta_id)
+VALUES (1001, 2799.98, 504.00, 3303.98, 1);
 
 -- Insert into ORDEN_DEVOLUCION 
 INSERT INTO orden_devolucion (fecha_registro, motivo, tipo_devolucion, documento_de_ventas_numero)

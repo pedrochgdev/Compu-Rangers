@@ -144,6 +144,10 @@ DROP PROCEDURE IF EXISTS get_all_clientes;
 DROP PROCEDURE IF EXISTS get_user_id_by_email;
 DROP PROCEDURE IF EXISTS get_user_id_by_username;
 DROP PROCEDURE IF EXISTS get_user_password_by_id;
+DROP PROCEDURE IF EXISTS add_token_recuperacion;
+DROP PROCEDURE IF EXISTS search_by_token;
+DROP PROCEDURE IF EXISTS mark_token_as_used;
+DROP PROCEDURE IF EXISTS update_user_password;
 
 /* CATALOG */
 /* PROCEDURES CATEGORIA */
@@ -1195,7 +1199,6 @@ CREATE PROCEDURE add_documento_de_ventas(
     IN subtotal_in DECIMAL(10,2),
     IN impuestos_in DECIMAL(8,2),
     IN total_in DECIMAL(10,2),
-    IN total_pagado_in DECIMAL(10,2),
     IN orden_de_venta_id_in INT
 )
 BEGIN
@@ -1203,8 +1206,8 @@ BEGIN
     
     SELECT IFNULL(MAX(numero), 0) + 1 INTO next_numero FROM DOCUMENTO_DE_VENTAS;
     
-    INSERT INTO DOCUMENTO_DE_VENTAS (numero, subtotal, impuestos, total, total_pagado, orden_de_venta_id)
-    VALUES (next_numero, subtotal_in, impuestos_in, total_in, total_pagado_in, orden_de_venta_id_in);
+    INSERT INTO DOCUMENTO_DE_VENTAS (numero, subtotal, impuestos, total, orden_de_venta_id)
+    VALUES (next_numero, subtotal_in, impuestos_in, total_in, orden_de_venta_id_in);
 
     SET generated_id = LAST_INSERT_ID();
     SET generated_numero = next_numero;
@@ -1218,7 +1221,6 @@ CREATE PROCEDURE update_documento_de_ventas(
     IN subtotal_in DECIMAL(10,2),
     IN impuestos_in DECIMAL(8,2),
     IN total_in DECIMAL(10,2),
-    IN total_pagado_in DECIMAL(10,2),
     IN orden_de_venta_id_in INT
 )
 BEGIN
@@ -1226,7 +1228,6 @@ BEGIN
     SET subtotal = subtotal_in,
         impuestos = impuestos_in,
         total = total_in,
-        total_pagado = total_pagado_in,
         orden_de_venta_id = orden_de_venta_id_in
     WHERE numero = numero_in;
 END;
@@ -1403,6 +1404,20 @@ BEGIN
         direccion = direccion_in,
         password = password_in
     WHERE id = id_in;
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE update_user_password (
+    IN p_user_id INT,
+    IN p_new_password_hash VARCHAR(255)
+)
+BEGIN
+    UPDATE usuarios
+    SET password = p_new_password_hash
+    WHERE id = p_user_id;
 END;
 //
 DELIMITER ;
@@ -2150,6 +2165,51 @@ DELIMITER //
 CREATE PROCEDURE get_all_periodo()
 BEGIN
     SELECT * FROM PERIODO;
+END;
+//
+DELIMITER ;
+
+-- Procedure TokenRecuperacion --
+
+DELIMITER //
+
+CREATE PROCEDURE add_token_recuperacion(
+	OUT generated_id INT,
+    IN p_user_id INT,
+    IN p_token VARCHAR(255),
+    IN p_fecha_expiracion DATETIME
+)
+BEGIN
+    INSERT INTO token_recuperacion (user_id, token, fecha_expiracion)
+    VALUES (p_user_id, p_token, p_fecha_expiracion);
+    
+	SET generated_id = last_insert_id();
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE search_by_token(
+    IN p_token VARCHAR(255)
+)
+BEGIN
+    SELECT * 
+    FROM TOKEN_RECUPERACION 
+    WHERE token = p_token AND usado = FALSE;
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE mark_token_as_used(
+    IN p_id INT
+)
+BEGIN
+    UPDATE TOKEN_RECUPERACION
+    SET usado = TRUE
+    WHERE id = p_id;
 END;
 //
 DELIMITER ;
