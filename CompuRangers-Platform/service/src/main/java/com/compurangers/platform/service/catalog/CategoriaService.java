@@ -30,4 +30,15 @@ public class CategoriaService {
     public List<Categoria> getAllCategorias() {
         return categoriaDAO.getAll();
     }
+    
+    public Categoria getCategoriaWithParents(int categoriaId) {
+        Categoria categoria = categoriaDAO.search(categoriaId);
+
+        if (categoria != null && categoria.getCategoriaPadre() != null) {
+            categoria.setCategoriaPadre(getCategoriaWithParents(categoria.getCategoriaPadre().getId()));
+        }
+
+        return categoria;
+    }
+
 }
