@@ -4,4 +4,5 @@ import java.util.List;
 
 public interface IListByFk<T> extends ICrud<T>{
     List<T> getAllByForeignKey(int foreignKey);
+    T getByForeignKey(int fk);
 }

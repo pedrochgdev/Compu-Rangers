@@ -97,5 +97,10 @@ public class CategoriaDAOImpl extends BaseDetalleDAOImpl<Categoria> implements I
 //
 //        return categoria;
 //    }
+
+    @Override
+    protected CallableStatement getByFkCommand(Connection conn, int foreignKey) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

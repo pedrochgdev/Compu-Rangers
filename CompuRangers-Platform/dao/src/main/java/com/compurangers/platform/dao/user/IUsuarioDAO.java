@@ -6,4 +6,5 @@ import com.compurangers.platform.dao.ICrud;
 public interface IUsuarioDAO extends ICrud<Usuario>{
     int getUserByField(String field, String value);
     String getPasswordHash(int userId);
+    boolean updatePassword(int userId, String hashedPassword);
 }

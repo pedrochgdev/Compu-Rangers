@@ -10,6 +10,7 @@ import java.util.List;
 
 public abstract class BaseDetalleDAOImpl<T> extends BaseDAOImpl<T> {
     protected abstract CallableStatement getAllFromFkCommand(Connection conn, int foreignKey) throws SQLException;
+    protected abstract CallableStatement getByFkCommand(Connection conn, int foreignKey) throws SQLException;
     
     public List<T> getAllByForeignKey(int foreignKey) {
         try (
@@ -22,6 +23,22 @@ public abstract class BaseDetalleDAOImpl<T> extends BaseDAOImpl<T> {
                 detalles.add(this.mapModel(rs));
             }
             return detalles;
+        } catch (SQLException e) {
+            System.err.println("Error SQL al obtener detalles: " + e.getMessage());
+            throw new RuntimeException("No se pudo obtener los detalles.", e);
+        } catch (Exception e) {
+            System.err.println("Error inesperado al obtener detalles: " + e.getMessage());
+            throw new RuntimeException("Error inesperado al obtener los detalles.", e);
+        }
+    }
+    
+    public T getByForeignKey(int foreignKey) {
+        try (
+            Connection conn = DatabaseUtil.getInstance().getConnection();
+            CallableStatement cmd = this.getByFkCommand(conn, foreignKey)
+        ) {
+            ResultSet rs = cmd.executeQuery();
+            return this.mapModel(rs);
         } catch (SQLException e) {
             System.err.println("Error SQL al obtener detalles: " + e.getMessage());
             throw new RuntimeException("No se pudo obtener los detalles.", e);

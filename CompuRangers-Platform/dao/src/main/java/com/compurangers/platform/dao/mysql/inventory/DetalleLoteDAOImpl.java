@@ -80,4 +80,9 @@ public class DetalleLoteDAOImpl extends BaseDetalleDAOImpl<DetalleLote> implemen
         return cs;
     }
 
+    @Override
+    protected CallableStatement getByFkCommand(Connection conn, int foreignKey) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

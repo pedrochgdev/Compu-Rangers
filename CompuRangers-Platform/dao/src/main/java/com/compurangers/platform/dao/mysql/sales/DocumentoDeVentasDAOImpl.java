@@ -13,30 +13,28 @@ public class DocumentoDeVentasDAOImpl extends BaseDetalleDAOImpl<DocumentoDeVent
 
     @Override
     protected CallableStatement addCommand(Connection conn, DocumentoDeVentas modelo) throws SQLException {
-        String sql = "{call add_documento_de_ventas(?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{call add_documento_de_ventas(?, ?, ?, ?, ?, ?)}";
         CallableStatement cs = conn.prepareCall(sql);
         cs.registerOutParameter(1, Types.INTEGER);
         cs.registerOutParameter(2, Types.INTEGER);
         cs.setDouble(3, modelo.getSubtotal());
         cs.setDouble(4, modelo.getImpuestos());
         cs.setDouble(5, modelo.getTotal());
-        cs.setDouble(6, modelo.getTotalPagado());
-        cs.setInt(7, modelo.getOrdenDeVentaId());
+        cs.setInt(6, modelo.getOrdenDeVentaId());
         
         return cs;
     }
 
     @Override
     protected CallableStatement updateCommand(Connection conn, DocumentoDeVentas modelo) throws SQLException {
-        String sql = "{call update_documento_de_ventas(?, ?, ?, ?, ?, ?)}";
+        String sql = "{call update_documento_de_ventas(?, ?, ?, ?, ?)}";
         CallableStatement cs = conn.prepareCall(sql);
         
         cs.setInt(1, modelo.getNumero());
         cs.setDouble(2, modelo.getSubtotal());
         cs.setDouble(3, modelo.getImpuestos());
         cs.setDouble(4, modelo.getTotal());
-        cs.setDouble(5, modelo.getTotalPagado());
-        cs.setInt(6, modelo.getOrdenDeVentaId());
+        cs.setInt(5, modelo.getOrdenDeVentaId());
         
         return cs;
     }
@@ -70,7 +68,6 @@ public class DocumentoDeVentasDAOImpl extends BaseDetalleDAOImpl<DocumentoDeVent
         doc.setSubtotal(rs.getDouble("subtotal"));
         doc.setImpuestos(rs.getDouble("impuestos"));
         doc.setTotal(rs.getDouble("total"));
-        doc.setTotalPagado(rs.getDouble("total_pagado"));
         doc.setOrdenDeVentaId(rs.getInt("orden_de_venta_id"));
         return doc;
     }
@@ -81,6 +78,11 @@ public class DocumentoDeVentasDAOImpl extends BaseDetalleDAOImpl<DocumentoDeVent
         CallableStatement cs = conn.prepareCall(sql);
         cs.setInt(1, foreignKey);
         return cs;
+    }
+
+    @Override
+    protected CallableStatement getByFkCommand(Connection conn, int foreignKey) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

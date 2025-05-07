@@ -75,5 +75,10 @@ public class OrdenDeDevolucionDAOImpl extends BaseDetalleDAOImpl<OrdenDeDevoluci
         cs.setInt(1, foreignKey);
         return cs;
     }
+
+    @Override
+    protected CallableStatement getByFkCommand(Connection conn, int foreignKey) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

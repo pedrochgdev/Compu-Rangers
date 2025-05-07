@@ -103,4 +103,9 @@ public class PagoDAOImpl extends BaseDetalleDAOImpl<Pago> implements IPagoDAO {
         return pago;
     }
 
+    @Override
+    protected CallableStatement getByFkCommand(Connection conn, int foreignKey) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

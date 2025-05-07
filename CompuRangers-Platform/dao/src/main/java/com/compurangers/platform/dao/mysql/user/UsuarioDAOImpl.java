@@ -123,4 +123,22 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
         }
     }
 
+    @Override
+    public boolean updatePassword(int userId, String hashedPassword) {
+        try (Connection conn = DatabaseUtil.getInstance().getConnection();
+         CallableStatement cs = conn.prepareCall("{CALL sp_update_user_password(?, ?)}")) {
+
+            cs.setInt(1, userId);
+            cs.setString(2, hashedPassword);
+            return cs.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.err.println("Error SQL al actualizar: " + e.getMessage());
+            throw new RuntimeException("No se pudo actualizar la contraseña.", e);
+        }catch (Exception e) {
+            System.err.println("Error inesperado: " + e.getMessage());
+            throw new RuntimeException("Error inesperado al obtener el actualizar la contraseña.", e);
+        }
+    }
+
 }

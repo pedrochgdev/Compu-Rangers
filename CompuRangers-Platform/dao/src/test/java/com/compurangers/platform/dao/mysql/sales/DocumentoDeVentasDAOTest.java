@@ -31,7 +31,6 @@ public class DocumentoDeVentasDAOTest implements ICrudDAOTest {
         doc.setSubtotal(150.0);
         doc.setImpuestos(27.0);
         doc.setTotal(177.0);
-        doc.setTotalPagado(177.0);
         doc.setOrdenDeVentaId(ordenVentaId);
 
         this.testId = dao.add(doc);
@@ -48,7 +47,6 @@ public class DocumentoDeVentasDAOTest implements ICrudDAOTest {
         doc.setSubtotal(300.0);
         doc.setImpuestos(54.0);
         doc.setTotal(354.0);
-        doc.setTotalPagado(354.0);
         doc.setOrdenDeVentaId(ordenVentaId);
 
         boolean updated = dao.update(doc);
@@ -69,7 +67,6 @@ public class DocumentoDeVentasDAOTest implements ICrudDAOTest {
         doc.setSubtotal(100.0);
         doc.setImpuestos(18.0);
         doc.setTotal(118.0);
-        doc.setTotalPagado(118.0);
         doc.setOrdenDeVentaId(ordenVentaId);
 
         boolean updated = dao.update(doc);
