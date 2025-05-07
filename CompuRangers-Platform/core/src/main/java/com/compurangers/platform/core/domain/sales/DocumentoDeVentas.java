@@ -6,7 +6,6 @@ public class DocumentoDeVentas {
     private double subtotal;
     private double impuestos;
     private double total;
-    private double totalPagado;
     private int ordenDeVentaId; 
     private String direccionEnvio;
     
@@ -48,14 +47,6 @@ public class DocumentoDeVentas {
 
     public void setTotal(double total) {
         this.total = total;
-    }
-
-    public double getTotalPagado() {
-        return totalPagado;
-    }
-
-    public void setTotalPagado(double totalPagado) {
-        this.totalPagado = totalPagado;
     }
 
     public int getOrdenDeVentaId() {
