@@ -49,6 +49,7 @@
     <module>dao</module>
     <module>service</module>
     <module>util</module>
+    <module>AppPrueba</module>
   </modules>
       
 
