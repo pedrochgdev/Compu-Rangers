@@ -126,7 +126,7 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
     @Override
     public boolean updatePassword(int userId, String hashedPassword) {
         try (Connection conn = DatabaseUtil.getInstance().getConnection();
-         CallableStatement cs = conn.prepareCall("{CALL sp_update_user_password(?, ?)}")) {
+         CallableStatement cs = conn.prepareCall("{CALL update_user_password(?, ?)}")) {
 
             cs.setInt(1, userId);
             cs.setString(2, hashedPassword);

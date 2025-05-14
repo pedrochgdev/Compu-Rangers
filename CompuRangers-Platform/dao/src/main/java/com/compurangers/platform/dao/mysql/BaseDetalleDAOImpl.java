@@ -38,6 +38,10 @@ public abstract class BaseDetalleDAOImpl<T> extends BaseDAOImpl<T> {
             CallableStatement cmd = this.getByFkCommand(conn, foreignKey)
         ) {
             ResultSet rs = cmd.executeQuery();
+            if (!rs.next()) {
+                System.err.println("No se encontro el registro con id: " + foreignKey);
+                return null;
+            }
             return this.mapModel(rs);
         } catch (SQLException e) {
             System.err.println("Error SQL al obtener detalles: " + e.getMessage());
