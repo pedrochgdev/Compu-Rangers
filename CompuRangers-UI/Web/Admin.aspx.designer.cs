@@ -11,7 +11,7 @@ namespace Web
 {
 
 
-    public partial class VerMas
+    public partial class Admin
     {
     }
 }

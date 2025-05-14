@@ -73,6 +73,17 @@
 
                 <!-- Contenido colapsable alineado a la derecha -->
                 <div class="collapse navbar-collapse justify-content-end" id="navbarRight">
+                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" runat="server" href="~/Admin">Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Ordenes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Ventas</a>
+                        </li>
+                    </ul>
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a href="#" class="nav-link text-white position-relative" data-bs-toggle="modal" data-bs-target="#carritoModal">

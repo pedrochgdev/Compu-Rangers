@@ -42,7 +42,7 @@
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <strong class="text-primary">$389.99</strong>
                         <div class="d-flex flex-row justify-content-end align-item-center gap-2">
-                            <button class="btn btn-sm btn-warning">Ver más</button>
+                            <a class="btn btn-sm btn-warning" runat="server" href="~/VerMas">Ver más</a>
                             <button class="btn btn-sm btn-success">Añadir al carrito</button>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <strong class="text-primary">$289.50</strong>
                         <div class="d-flex flex-row justify-content-end align-item-center gap-2">
-                            <button class="btn btn-sm btn-warning">Ver más</button>
+                            <a class="btn btn-sm btn-warning" runat="server" href="~/VerMas">Ver más</a>
                             <button class="btn btn-sm btn-success">Añadir al carrito</button>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <strong class="text-primary">$79.99</strong>
                         <div class="d-flex flex-row justify-content-end align-item-center gap-2">
-                            <button class="btn btn-sm btn-warning">Ver más</button>
+                            <a class="btn btn-sm btn-warning" runat="server" href="~/VerMas">Ver más</a>
                             <button class="btn btn-sm btn-success">Añadir al carrito</button>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <strong class="text-primary">$129.90</strong>
                         <div class="d-flex flex-row justify-content-end align-item-center gap-2">
-                            <button class="btn btn-sm btn-warning">Ver más</button>
+                            <a class="btn btn-sm btn-warning" runat="server" href="~/VerMas">Ver más</a>
                             <button class="btn btn-sm btn-success">Añadir al carrito</button>
                         </div>
                     </div>
@@ -122,7 +122,7 @@
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <strong class="text-primary">$49.99</strong>
                         <div class="d-flex flex-row justify-content-end align-item-center gap-2">
-                            <button class="btn btn-sm btn-warning">Ver más</button>
+                            <a class="btn btn-sm btn-warning" runat="server" href="~/VerMas">Ver más</a>
                             <button class="btn btn-sm btn-success">Añadir al carrito</button>
                         </div>
                     </div>
