@@ -38,7 +38,10 @@ CREATE TABLE CARRITO (
     total DECIMAL(10,2) NOT NULL COMMENT 'COSTO TOTAL DEL CARRITO',
     cliente_usuario_id INT NOT NULL,
     PRIMARY KEY (ID),
-    CONSTRAINT CARRITO_cliente_FK FOREIGN KEY (cliente_usuario_id) REFERENCES CLIENTE (usuario_id)
+    CONSTRAINT CARRITO_cliente_FK 
+        FOREIGN KEY (cliente_usuario_id) 
+        REFERENCES CLIENTE (usuario_id)
+        ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE CATEGORIA (

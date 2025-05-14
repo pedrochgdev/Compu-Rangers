@@ -800,6 +800,17 @@ END;
 //
 DELIMITER ;
 
+DELIMITER //
+
+CREATE PROCEDURE get_carrito_by_user(IN p_user_id INT)
+BEGIN
+    SELECT id, cantidad_productos, total, cliente_usuario_id
+    FROM CARRITO
+    WHERE cliente_usuario_id = p_user_id;
+END //
+
+DELIMITER ;
+
 /* PROCEDURES DETALLE_CARRITO */
 
 DELIMITER //
@@ -1415,7 +1426,7 @@ CREATE PROCEDURE update_user_password (
     IN p_new_password_hash VARCHAR(255)
 )
 BEGIN
-    UPDATE usuarios
+    UPDATE usuario
     SET password = p_new_password_hash
     WHERE id = p_user_id;
 END;
