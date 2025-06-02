@@ -1,8 +1,10 @@
 package com.compurangers.platform.dao.mysql.sales;
 
 import com.compurangers.platform.core.domain.sales.Carrito;
+import com.compurangers.platform.core.domain.sales.ItemCarrito;
 import com.compurangers.platform.dao.mysql.BaseDetalleDAOImpl;
 import com.compurangers.platform.dao.sales.ICarritoDAO;
+import com.compurangers.platform.util.DatabaseUtil;
 import java.sql.*;
 
 public class CarritoDAOImpl extends BaseDetalleDAOImpl<Carrito> implements ICarritoDAO {

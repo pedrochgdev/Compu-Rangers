@@ -4,6 +4,7 @@ import com.compurangers.platform.core.domain.sales.ItemCarrito;
 import com.compurangers.platform.dao.mysql.BaseDetalleDAOImpl;
 import com.compurangers.platform.dao.mysql.catalog.ProductoDAOImpl;
 import com.compurangers.platform.dao.sales.IItemCarritoDAO;
+import com.compurangers.platform.util.DatabaseUtil;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -79,6 +80,39 @@ public class ItemCarritoDAOImpl extends BaseDetalleDAOImpl<ItemCarrito> implemen
     @Override
     protected CallableStatement getByFkCommand(Connection conn, int foreignKey) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    @Override
+    public ItemCarrito searchItem(int carritoId, int productoId) {
+        try (
+            Connection conn = DatabaseUtil.getInstance().getConnection();
+            CallableStatement cmd = this.searchItemCommand(conn, carritoId, productoId);
+        ) {
+            ResultSet rs = cmd.executeQuery();
+            
+            if (!rs.next()) {
+                System.err.println("No se encontro el registro con id: " + carritoId + " " + productoId);
+                return null;
+            }
+            
+            return this.mapModel(rs);
+        }
+        catch (SQLException e) {
+            System.err.println("Error SQL durante la busqueda: " + e.getMessage());
+            throw new RuntimeException("No se pudo buscar el registro.", e);
+        }
+        catch (Exception e) {
+            System.err.println("Error inpesperado: " + e.getMessage());
+            throw new RuntimeException("Error inesperado al buscar el registro.", e);
+        }
+    }
+    
+    private CallableStatement searchItemCommand(Connection conn, int cid, int pid) throws SQLException {
+        String sql = "{call search_item_in_carrito(?, ?)}";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.setInt(1, cid);
+        cs.setInt(2, pid);
+        return cs;
     }
     
 }
