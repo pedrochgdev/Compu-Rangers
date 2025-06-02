@@ -890,6 +890,18 @@ END;
 //
 DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE search_item_in_carrito(
+	IN carrito_id_in INT,
+    IN prducto_id_in INT
+)
+BEGIN
+	SELECT * FROM DETALLE_CARRITO
+    WHERE carrito_id = carrito_id_in AND producto_id_in = producto_id;
+END;
+//
+DELIMITER ;
+
 /* PROCEDURES ORDEN_DE_VENTA */
 
 DELIMITER //
