@@ -14,7 +14,7 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
 
     @Override
     protected CallableStatement addCommand(Connection conn, Usuario modelo) throws SQLException {
-        String sql = "{call add_usuario(?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{call add_usuario(?, ?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement cs = conn.prepareCall(sql);
         
         // Registrar parámetro OUT
@@ -27,13 +27,14 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
         cs.setString(5, modelo.getCorreoElectronico());
         cs.setString(6, modelo.getDireccion());
         cs.setString(7, modelo.getContrasena());
+        cs.setBoolean(8, modelo.isAdmin());
         
         return cs;
     }
 
     @Override
     protected CallableStatement updateCommand(Connection conn, Usuario modelo) throws SQLException {
-        String sql = "{call update_usuario(?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{call update_usuario(?, ?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement cs = conn.prepareCall(sql);
         
         cs.setInt(1, modelo.getId());
@@ -43,6 +44,7 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
         cs.setString(5, modelo.getCorreoElectronico());
         cs.setString(6, modelo.getDireccion());
         cs.setString(7, modelo.getContrasena());
+        cs.setBoolean(8, modelo.isAdmin());
         
         return cs;
     }

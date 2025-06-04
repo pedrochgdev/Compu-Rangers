@@ -7,6 +7,7 @@ public abstract class Usuario {
     private String username;
     private String nombreCompleto;
     private String correoElectronico;
+    private boolean isAdmin;
     private String telefono; 
     private String direccion;
     private String contrasena;
@@ -103,5 +104,14 @@ public abstract class Usuario {
     }
 
     public abstract String obtenerRol();
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+    
 }
 

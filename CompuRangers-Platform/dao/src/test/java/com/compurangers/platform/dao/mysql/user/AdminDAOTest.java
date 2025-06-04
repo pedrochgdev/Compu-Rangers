@@ -28,6 +28,7 @@ public class AdminDAOTest implements ICrudDAOTest {
         admin.setTelefono("987654321");
         admin.setCorreoElectronico("admin@correo.com");
         admin.setDireccion("Av. Admin #123");
+        admin.setAdmin(true);
         admin.setContrasena("adminPass123");
         admin.setFechaIngreso(new java.util.Date());
 
@@ -48,6 +49,7 @@ public class AdminDAOTest implements ICrudDAOTest {
         admin.setTelefono("912345678");
         admin.setCorreoElectronico("actualizado@correo.com");
         admin.setDireccion("Av. Nueva Admin #456");
+        admin.setAdmin(true);
         admin.setContrasena("nuevoPass456");
         admin.setFechaIngreso(new java.util.Date()); // Actualiza la fecha de ingreso
 

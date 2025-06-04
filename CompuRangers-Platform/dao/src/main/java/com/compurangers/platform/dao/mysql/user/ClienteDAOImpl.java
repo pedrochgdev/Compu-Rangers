@@ -57,7 +57,7 @@ public class ClienteDAOImpl extends UsuarioDAOImpl implements IClienteDAO {
         cliente.setTelefono(rs.getString("telefono"));
         cliente.setCorreoElectronico(rs.getString("correo"));
         cliente.setDireccion(rs.getString("direccion"));
-        //cliente.setContrasena(rs.getString("password")); Por seguridad no se devolvera la contraseña en los SELECT
+        cliente.setAdmin(rs.getBoolean("isAdmin"));
         cliente.setCreated(rs.getTimestamp("created_at"));
         cliente.setUpdated(rs.getTimestamp("updated_at"));
         

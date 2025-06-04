@@ -55,7 +55,7 @@ public class AdminDAOImpl extends UsuarioDAOImpl implements IAdminDAO {
         admin.setTelefono(rs.getString("telefono"));
         admin.setCorreoElectronico(rs.getString("correo"));
         admin.setDireccion(rs.getString("direccion"));
-        //admin.setContrasena(rs.getString("password"));
+        admin.setAdmin(rs.getBoolean("isAdmin"));
         admin.setCreated(rs.getTimestamp("created_at"));
         admin.setUpdated(rs.getTimestamp("updated_at"));
         admin.setFechaIngreso(rs.getDate("fecha_ingreso"));

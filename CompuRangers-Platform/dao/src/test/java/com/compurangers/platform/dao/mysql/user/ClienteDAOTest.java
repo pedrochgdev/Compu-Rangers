@@ -28,6 +28,7 @@ public class ClienteDAOTest implements ICrudDAOTest {
         cliente.setTelefono("123456789");
         cliente.setCorreoElectronico("cliente@correo.com");
         cliente.setDireccion("Av. Test #123");
+        cliente.setAdmin(false);
         cliente.setContrasena("password123");
         cliente.setDireccionPreferida("Calle Siempre Viva 742");
 
@@ -48,6 +49,7 @@ public class ClienteDAOTest implements ICrudDAOTest {
         cliente.setTelefono("987654321");
         cliente.setCorreoElectronico("actualizado@correo.com");
         cliente.setDireccion("Av. Nueva #456");
+        cliente.setAdmin(false);
         cliente.setContrasena("nuevaPass456");
         cliente.setDireccionPreferida("Calle Renovada 101");
 
