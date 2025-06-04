@@ -1,8 +1,8 @@
 -- Insert into USUARIO (two users: an admin and a client)
-INSERT INTO USUARIO (username, nombre, telefono, correo, direccion, password)
+INSERT INTO USUARIO (username, nombre, telefono, correo, direccion, isAdmin, password)
 VALUES 
-    ('admin1', 'Admin User', '+1234567890', 'admin@example.com', '123 Admin St', 'hashed_password1'),
-    ('client1', 'Client User', '+0987654321', 'client@example.com', '456 Client Ave', 'hashed_password2');
+    ('admin1', 'Admin User', '+1234567890', 'admin@example.com', '123 Admin St', true, 'hashed_password1'),
+    ('client1', 'Client User', '+0987654321', 'client@example.com', '456 Client Ave', false, 'hashed_password2');
 
 -- Insert into ADMIN (for admin1)
 INSERT INTO ADMIN (usuario_id, fecha_ingreso)

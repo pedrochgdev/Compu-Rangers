@@ -148,6 +148,8 @@ DROP PROCEDURE IF EXISTS add_token_recuperacion;
 DROP PROCEDURE IF EXISTS search_by_token;
 DROP PROCEDURE IF EXISTS mark_token_as_used;
 DROP PROCEDURE IF EXISTS update_user_password;
+DROP PROCEDURE IF EXISTS get_carrito_by_user;
+DROP PROCEDURE IF EXISTS search_item_in_carrito;
 
 /* CATALOG */
 /* PROCEDURES CATEGORIA */
@@ -1383,7 +1385,8 @@ CREATE PROCEDURE add_usuario(
     IN telefono_in VARCHAR(15),
     IN correo_in VARCHAR(100),
     IN direccion_in VARCHAR(100),
-    IN password_in VARCHAR(255)
+    IN password_in VARCHAR(255),
+    IN isadmin_in BOOLEAN
 )
 BEGIN
     INSERT INTO USUARIO (
@@ -1392,6 +1395,7 @@ BEGIN
         telefono, 
         correo, 
         direccion, 
+        isAdmin,
         password
     ) VALUES (
         username_in, 
@@ -1399,6 +1403,7 @@ BEGIN
         telefono_in, 
         correo_in, 
         direccion_in, 
+        isadmin_in,
         password_in
     );
     
@@ -1415,7 +1420,8 @@ CREATE PROCEDURE update_usuario(
     IN telefono_in VARCHAR(15),
     IN correo_in VARCHAR(100),
     IN direccion_in VARCHAR(100),
-    IN password_in VARCHAR(255)
+    IN password_in VARCHAR(255),
+    IN isadmin_in BOOLEAN
 )
 BEGIN
     UPDATE USUARIO
@@ -1425,6 +1431,7 @@ BEGIN
         telefono = telefono_in,
         correo = correo_in,
         direccion = direccion_in,
+        isAdmin = isadmin_in,
         password = password_in
     WHERE id = id_in;
 END;
@@ -1465,6 +1472,7 @@ BEGIN
         telefono,
         correo,
         direccion,
+        isAdmin,
         password,
         created_at,
         updated_at
@@ -1484,6 +1492,7 @@ BEGIN
         telefono,
         correo,
         direccion,
+        isAdmin,
         password,
         created_at,
         updated_at
@@ -1593,6 +1602,7 @@ BEGIN
         u.telefono,
         u.correo,
         u.direccion,
+        u.isAdmin,
         u.created_at,
         u.updated_at
     FROM ADMIN a
@@ -1614,6 +1624,7 @@ BEGIN
         u.telefono,
         u.correo,
         u.direccion,
+        u.isAdmin,
         u.created_at,
         u.updated_at
     FROM ADMIN a
@@ -1664,6 +1675,7 @@ BEGIN
         u.telefono,
         u.correo,
         u.direccion,
+        u.isAdmin,
         u.created_at,
         u.updated_at
     FROM CLIENTE c
@@ -1685,6 +1697,7 @@ BEGIN
         u.telefono,
         u.correo,
         u.direccion,
+        u.isAdmin,
         u.created_at,
         u.updated_at
     FROM CLIENTE c
