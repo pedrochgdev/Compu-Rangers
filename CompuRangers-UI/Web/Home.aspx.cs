@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml.Linq;
 
 namespace Web
 {
@@ -13,5 +14,15 @@ namespace Web
         {
 
         }
+
+        protected void btnLogin(object sender, EventArgs e)
+        {
+            //Llamar a una función Javascript
+            string script = "window.onload = function() { showModalFormLogin()};";
+            
+            ClientScript.RegisterStartupScript(GetType(), "", script, true);
+        }
+
+        
     }
 }

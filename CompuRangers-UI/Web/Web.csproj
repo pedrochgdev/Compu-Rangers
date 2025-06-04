@@ -100,7 +100,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
-    <Content Include="Admin.aspx" />
+    <Content Include="PurchaseHistory.aspx" />
+    <Content Include="Scripts\CompuRangers\Login.js" />
+    <Content Include="Ventas.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -186,12 +188,19 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin.aspx.cs">
-      <DependentUpon>Admin.aspx</DependentUpon>
+    <Compile Include="PurchaseHistory.aspx.cs">
+      <DependentUpon>PurchaseHistory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin.aspx.designer.cs">
-      <DependentUpon>Admin.aspx</DependentUpon>
+    <Compile Include="PurchaseHistory.aspx.designer.cs">
+      <DependentUpon>PurchaseHistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ventas.aspx.cs">
+      <DependentUpon>Ventas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ventas.aspx.designer.cs">
+      <DependentUpon>Ventas.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
