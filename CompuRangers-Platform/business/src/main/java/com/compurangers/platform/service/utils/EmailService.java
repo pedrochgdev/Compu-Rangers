@@ -28,7 +28,6 @@ public class EmailService {
                     + "Haz clic en el siguiente enlace para continuar:\n"
                     + link + "\n\n"
                     + "Este enlace expirará en 5 minutos.";
-
         sendEmail(toEmail, subject, body);
     }
     

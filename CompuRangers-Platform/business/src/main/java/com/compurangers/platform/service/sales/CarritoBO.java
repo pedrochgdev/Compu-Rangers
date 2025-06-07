@@ -33,6 +33,10 @@ public class CarritoBO {
         return carritoDAO.getAll();
     }
     
+    public Carrito getCarritoFromUser(int userId){
+        return carritoDAO.getByForeignKey(userId);
+    }
+    
     public boolean addItem(ItemCarrito ic){
         ItemCarritoBO itemCarritoBO = new ItemCarritoBO(new ItemCarritoDAOImpl());
         ItemCarrito existente = itemCarritoBO.searchItem(ic.getCarritoId(), ic.getProducto().getId());
@@ -46,8 +50,6 @@ public class CarritoBO {
                 
                 itemCarritoBO.updateItemCarrito(existente);
              }else{
-                 double subtotal = ic.getCantidad() * ic.getProducto().getPrecioVenta();
-                ic.setSubtotal(subtotal);
                 itemCarritoBO.addItemCarrito(ic);
              }
              return true;

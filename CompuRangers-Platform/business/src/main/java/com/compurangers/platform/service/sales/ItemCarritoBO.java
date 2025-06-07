@@ -31,8 +31,8 @@ public class ItemCarritoBO {
         return itemCarritoDAO.getAll();
     }
     
-    public List<ItemCarrito> getAllFromCarrito(int carritoId){
-        return itemCarritoDAO.getAllByForeignKey(carritoId);
+    public List<ItemCarrito> getAllFromCarrito(int userId){
+        return itemCarritoDAO.getAllByForeignKey(userId);
     }
     
     public ItemCarrito searchItem(int carritoId, int productoId){

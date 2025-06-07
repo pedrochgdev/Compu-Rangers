@@ -52,7 +52,8 @@ public class UsuarioBO<T extends IUsuarioDAO> {
 
     public int getUserIdByField(String input) {
         int userID;
-        if ((userID = usuarioDAO.getUserByField("email", input)) > 0 || (userID = usuarioDAO.getUserByField("username", input)) > 0) {
+        userID = usuarioDAO.getUserByField("username", input);
+        if (userID > 0) { //(userID = usuarioDAO.getUserByField("email", input)) > 0 || 
             return userID;
         }
         return -1;

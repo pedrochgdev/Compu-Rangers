@@ -37,14 +37,14 @@ public class InventarioBO {
     public Map<Producto, Integer> getCatalog(){
         Map<Producto, Integer> totalPorProducto = new HashMap<>();
     
-    for (Inventario inv : getAllInventarios()) {
-        Producto producto = inv.getProducto();
-        int cantidad = inv.getCantidadDisponible();
+        for (Inventario inv : getAllInventarios()) {
+            Producto producto = inv.getProducto();
+            int cantidad = inv.getCantidadDisponible();
 
-        totalPorProducto.merge(producto, cantidad, Integer::sum);
-    }
+            totalPorProducto.merge(producto, cantidad, Integer::sum);
+        }
 
-    return totalPorProducto;
+        return totalPorProducto;
     }
     
 }
