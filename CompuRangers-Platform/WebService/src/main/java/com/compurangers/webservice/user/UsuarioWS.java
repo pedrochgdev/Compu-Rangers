@@ -41,4 +41,9 @@ public class UsuarioWS {
         return user.searchUsuario(usuario);
     }
     
+    @WebMethod(operationName = "getRole")
+    public boolean getRole(@WebParam(name = "usuarioId") int usuario) {
+        return user.searchUsuario(usuario).isAdmin();
+    }
+    
 }
