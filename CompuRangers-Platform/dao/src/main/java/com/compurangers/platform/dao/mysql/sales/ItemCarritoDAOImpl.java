@@ -71,7 +71,7 @@ public class ItemCarritoDAOImpl extends BaseDetalleDAOImpl<ItemCarrito> implemen
 
     @Override
     protected CallableStatement getAllFromFkCommand(Connection conn, int foreignKey) throws SQLException {
-        String sql = "{call get_all_item_from_carrito(?)}";
+        String sql = "{call get_all_item_from_user(?)}";
         CallableStatement cs = conn.prepareCall(sql);
         cs.setInt(1, foreignKey);
         return cs;

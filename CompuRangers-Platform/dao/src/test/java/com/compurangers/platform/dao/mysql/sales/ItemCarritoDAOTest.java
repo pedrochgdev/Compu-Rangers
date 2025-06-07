@@ -22,6 +22,7 @@ public class ItemCarritoDAOTest implements ICrudDAOTest {
     private final int idIncorrecto = 99999;
     private final int productoId = 1;
     private final int carritoId = 1; 
+    private final int userId = 2; 
 
     @Test
     @Order(1)
@@ -125,9 +126,9 @@ public class ItemCarritoDAOTest implements ICrudDAOTest {
 
     @Test
     @Order(9)
-    public void shouldGetAllByCarritoId() {
+    public void shouldGetAllByUserId() {
         IItemCarritoDAO dao = new ItemCarritoDAOImpl();
-        List<ItemCarrito> items = dao.getAllByForeignKey(carritoId);
+        List<ItemCarrito> items = dao.getAllByForeignKey(userId);
         assertNotNull(items);
     }
     

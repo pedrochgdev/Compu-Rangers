@@ -1,5 +1,6 @@
 package com.compurangers.platform.dao.mysql.user;
 
+import com.compurangers.platform.core.domain.user.Admin;
 import com.compurangers.platform.core.domain.user.Usuario;
 import com.compurangers.platform.dao.mysql.BaseDAOImpl;
 import com.compurangers.platform.dao.user.IUsuarioDAO;
@@ -72,7 +73,17 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
 
     @Override
     protected Usuario mapModel(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Usuario admin = new Admin();
+        admin.setId(rs.getInt("id"));
+        admin.setUsername(rs.getString("username"));
+        admin.setNombreCompleto(rs.getString("nombre"));
+        admin.setTelefono(rs.getString("telefono"));
+        admin.setCorreoElectronico(rs.getString("correo"));
+        admin.setDireccion(rs.getString("direccion"));
+        admin.setAdmin(rs.getBoolean("isAdmin"));
+        admin.setCreated(rs.getTimestamp("created_at"));
+        admin.setUpdated(rs.getTimestamp("updated_at"));
+        return admin;
     }
 
    @Override
