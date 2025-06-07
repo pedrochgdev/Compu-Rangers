@@ -1,8 +1,8 @@
 -- Insert into USUARIO (two users: an admin and a client)
 INSERT INTO USUARIO (username, nombre, telefono, correo, direccion, isAdmin, password)
 VALUES 
-    ('admin1', 'Admin User', '+1234567890', 'admin@example.com', '123 Admin St', true, 'hashed_password1'),
-    ('client1', 'Client User', '+0987654321', 'client@example.com', '456 Client Ave', false, 'hashed_password2');
+    ('admin1', 'Admin User', '+1234567890', 'admin@example.com', '123 Admin St', true, '$2a$12$62ZMWlAmDvGxgDTjyJyRT.PA7eIi0/57FMnqhk6sRQ2gBrwoo.KNG'),
+    ('client1', 'Client User', '+0987654321', 'client@example.com', '456 Client Ave', false, '$2a$12$5TrHpKLDxq0cUUVu/M86zeEEYjfcNe34VfCsbozDV1sxaU0CJf62G');
 
 -- Insert into ADMIN (for admin1)
 INSERT INTO ADMIN (usuario_id, fecha_ingreso)
@@ -38,9 +38,14 @@ VALUES
 -- Insert into PRODUCTO (products)
 INSERT INTO PRODUCTO (nombre, descripcion, sku, precio_venta, categoria_id, marca_id)
 VALUES 
-    ('MacBook Pro', 'Laptop Apple MacBook Pro', 'MBP123', 1999.99, 3, 1),
-    ('Galaxy S21', 'Smartphone Samsung Galaxy S21', 'GS21123', 799.99, 4, 2),
-    ('Inspiron 15', 'Laptop Dell Inspiron 15', 'INSP15', 899.99, 3, 3);
+    ('iPhone 14', 'Smartphone Apple iPhone 14', 'IP14123', 999.99, 1, 1),
+    ('Galaxy Tab S7', 'Tablet Samsung Galaxy Tab S7', 'GTS7123', 649.99, 1, 1),
+    ('XPS 13', 'Laptop Dell XPS 13', 'XPS1323', 1199.99, 1, 1),
+    ('ThinkPad X1', 'Laptop Lenovo ThinkPad X1 Carbon', 'TPX1123', 1399.99, 1, 1),
+    ('iPad Air', 'Tablet Apple iPad Air', 'IPAD123', 599.99, 1, 1),
+    ('Moto G Power', 'Smartphone Motorola Moto G Power', 'MOTOG123', 249.99, 1, 1),
+    ('Yoga Smart Tab', 'Tablet Lenovo Yoga Smart Tab', 'YST123', 299.99, 1, 1),
+    ('Surface Laptop 5', 'Laptop Microsoft Surface Laptop 5', 'SL5123', 1299.99, 1, 1);
 
 -- Insert into CARRITO (cart for client1)
 INSERT INTO CARRITO (cantidad_productos, total, cliente_usuario_id)
@@ -88,7 +93,14 @@ VALUES (10, 1500.00, 1, 1);  -- 10 MacBook Pros
 
 -- Insert into INVENTARIO (inventory for the lot)
 INSERT INTO INVENTARIO (cantidad_disponible, lote_id, producto_id)
-VALUES (10, 1, 1);
+VALUES (10, 1, 1),
+(10, 1, 2),
+(10, 1, 3),
+(10, 1, 4),
+(10, 1, 5),
+(10, 1, 6),
+(10, 1, 7),
+(10, 1, 8);
 
 -- Insert into IMPUESTO (tax type)
 INSERT INTO IMPUESTO (nombre, abreviacion, tipo)

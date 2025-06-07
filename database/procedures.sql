@@ -54,7 +54,7 @@ DROP PROCEDURE IF EXISTS update_item_carrito;
 DROP PROCEDURE IF EXISTS delete_item_carrito;
 DROP PROCEDURE IF EXISTS search_item_carrito;
 DROP PROCEDURE IF EXISTS get_all_item_carrito;
-DROP PROCEDURE IF EXISTS get_all_item_from_carrito;
+DROP PROCEDURE IF EXISTS get_all_item_from_user;
 DROP PROCEDURE IF EXISTS add_orden_de_venta;
 DROP PROCEDURE IF EXISTS update_orden_de_venta;
 DROP PROCEDURE IF EXISTS delete_orden_de_venta;
@@ -882,12 +882,14 @@ END;
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE get_all_item_from_carrito(
-    IN carrito_id_in INT
+CREATE PROCEDURE get_all_item_from_user(
+    IN user_id_in INT
 )
 BEGIN
-    SELECT * FROM DETALLE_CARRITO
-    WHERE carrito_id = carrito_id_in;
+    SELECT dc.*
+    FROM DETALLE_CARRITO dc
+    JOIN CARRITO c ON dc.carrito_id = c.id
+    WHERE c.cliente_usuario_id = user_id_in;
 END;
 //
 DELIMITER ;
@@ -895,7 +897,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE search_item_in_carrito(
 	IN carrito_id_in INT,
-    IN prducto_id_in INT
+    IN producto_id_in INT
 )
 BEGIN
 	SELECT * FROM DETALLE_CARRITO
@@ -1523,7 +1525,7 @@ DELIMITER ;
 DELIMITER //
 
 CREATE PROCEDURE get_user_id_by_username(
-    IN p_username VARCHAR(100),
+    IN p_username VARCHAR(20),
     OUT p_id INT
 )
 BEGIN
