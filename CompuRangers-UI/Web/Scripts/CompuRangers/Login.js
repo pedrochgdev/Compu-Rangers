@@ -1,4 +1,4 @@
-﻿function showModalFormLogin() {
-    var modalFormCliente = new bootstrap.Modal(document.getElementById('form-modal-login'));
-    modalFormCliente.toggle();
+﻿function showModal(modalId) {
+    var modalForm = new bootstrap.Modal(document.getElementById(modalId));
+    modalForm.toggle();
 }

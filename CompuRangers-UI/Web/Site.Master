@@ -16,12 +16,14 @@
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
      
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
@@ -88,103 +90,143 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link text-white position-relative" data-bs-toggle="modal" data-bs-target="#carritoModal">
                                 <i class="bi bi-cart3" style="font-size: 2rem;"></i>
-                                <span class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger">
-                                    2
+                                <span id="spanCantidadCarrito" runat="server"
+                                      class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger"
+                                      style="display:none;">
+                                    0
                                 </span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a  class="nav-link text-white" runat="server" href="~/LogIn">
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link text-white dropdown-toggle d-flex align-items-center"
+                               id="navbarUserDropdown"
+                               role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-person-circle" style="font-size: 2.2rem;"></i>
                             </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarUserDropdown">
+                                <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><asp:LinkButton runat="server" CssClass="dropdown-item text-danger" OnClick="btnLogOut" Text ="Log Out"/></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <!-- Modal Carrito -->
         <div class="modal fade" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable" >
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Carrito de Compras</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="d-flex flex-column gap-3">
-                            <!-- Producto 1 -->
-                            <div class="card shadow-sm p-3">
-                                <div class="row g-2 align-items-center">
-                                    <!-- Imagen -->
-                                    <div class="col-3 col-md-1">
-                                        <img src="https://www.shutterstock.com/image-photo/set-home-kitchen-appliances-room-260nw-2473408983.jpg"
-                                             alt="Intel Core i7 12700K"
-                                             class="img-fluid rounded"
-                                             style="object-fit: cover;">
-                                    </div>
+                        <asp:Repeater ID="rptCarrito" runat="server">
+                            <ItemTemplate>
+                                <div class="card shadow-sm p-3">
+                                    <div class="row g-2 align-items-center">
+                                        <!-- Imagen -->
+                                        <div class="col-3 col-md-1">
+                                            <img src="https://www.shutterstock.com/image-photo/set-home-kitchen-appliances-room-260nw-2473408983.jpg"
+                                                 alt='<%# Eval("producto.nombre") %>'
+                                                 class="img-fluid rounded"
+                                                 style="object-fit: cover;">
+                                        </div>
 
-                                    <!-- Nombre y precio unitario -->
-                                    <div class="col-9 col-md-4">
-                                        <h6 class="mb-1">Intel Core i7 12700K</h6>
-                                        <small class="text-muted">Precio: $389.99</small>
-                                    </div>
+                                        <!-- Nombre y precio unitario -->
+                                        <div class="col-9 col-md-4">
+                                            <h6 class="mb-1"><%# Eval("producto.nombre") %></h6>
+                                            <small class="text-muted">Precio: $<%# Eval("producto.precioVenta", "{0:N2}") %></small>
+                                        </div>
 
-                                    <!-- Controles de cantidad -->
-                                    <div class="col-6 col-md-3 d-flex align-items-center justify-content-center gap-2">
-                                        <button class="btn btn-sm btn-outline-secondary px-2">-</button>
-                                        <span class="fw-semibold">2</span>
-                                        <button class="btn btn-sm btn-outline-secondary px-2">+</button>
-                                    </div>
+                                        <!-- Controles de cantidad -->
+                                        <div class="col-6 col-md-3 d-flex align-items-center justify-content-center gap-2">
+                                            <asp:LinkButton ID="btnRestar" runat="server" CommandName="actualizar" OnCommand="btnActualizarCantidad_Command"
+                                                CommandArgument='<%# Eval("id") + ";-1" %>'
+                                                CssClass="btn btn-sm btn-outline-secondary px-2">-</asp:LinkButton>
 
-                                    <!-- Total y eliminar -->
-                                    <div class="col-6 col-md-4 text-end">
-                                        <div>
-                                            <strong class="d-block mb-1">Total: $779.98</strong>
-                                            <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+                                            <span class="fw-semibold"><%# Eval("cantidad") %></span>
+
+                                            <asp:LinkButton ID="btnSumar" runat="server" CommandName="actualizar" OnCommand="btnActualizarCantidad_Command"
+                                                CommandArgument='<%# Eval("id") + ";1" %>'
+                                                CssClass="btn btn-sm btn-outline-secondary px-2">+</asp:LinkButton>
+                                        </div>
+
+                                        <!-- Total y eliminar -->
+                                        <div class="col-6 col-md-4 text-end">
+                                            <div>
+                                                <strong class="d-block mb-1">Total: $<%# Eval("subtotal", "{0:N2}") %></strong>
+                    
+                                                <%-- HiddenField con el ID --%>
+                                                <asp:HiddenField ID="hfItemCarritoId" runat="server" Value='<%# Eval("id") %>' />
+
+                                                <%-- Botón que llama al evento OnClick en código servidor --%>
+                                                <asp:LinkButton ID="btnEliminar" runat="server" CommandName="Eliminar" OnClick="btnEliminar_Click">Eliminar</asp:LinkButton>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </ItemTemplate>
 
-                            <!-- Producto 2 -->
-                            <div class="card shadow-sm p-3">
-                                <div class="row g-2 align-items-center">
-                                    <!-- Imagen -->
-                                    <div class="col-3 col-md-1">
-                                        <img src="https://www.shutterstock.com/image-photo/set-home-kitchen-appliances-room-260nw-2473408983.jpg"
-                                             alt="Mouse Logitech G502"
-                                             class="img-fluid rounded"
-                                             style="object-fit: cover;">
-                                    </div>
-
-                                    <!-- Nombre y precio unitario -->
-                                    <div class="col-9 col-md-4">
-                                        <h6 class="mb-1">Mouse Logitech G502</h6>
-                                        <small class="text-muted">Precio: $49.99</small>
-                                    </div>
-
-                                    <!-- Controles de cantidad -->
-                                    <div class="col-6 col-md-3 d-flex align-items-center justify-content-center gap-2">
-                                        <button class="btn btn-sm btn-outline-secondary px-2">-</button>
-                                        <span class="fw-semibold">1</span>
-                                        <button class="btn btn-sm btn-outline-secondary px-2">+</button>
-                                    </div>
-
-                                    <!-- Total y eliminar -->
-                                    <div class="col-6 col-md-4 text-end">
-                                        <div>
-                                            <strong class="d-block mb-1">Total: $49.99</strong>
-                                            <button class="btn btn-sm btn-outline-danger">Eliminar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </asp:Repeater>
                     </div>
                     <div class="modal-footer d-flex gap-4">
-                        <h5 class="mb-3">Total del Carrito: <strong>$829.97</strong></h5>
+                        <h5 class="mb-3">Total del Carrito: <strong> $<%= TotalCarritoFormatted %></strong></h5>
                         <button class="btn btn-success">Proceder al Pago</button>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="form-modal-login">
+            <div class="modal-dialog modal-s">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                         <div class="d-flex justify-content-center align-items-center">
+			                   <div class="card-body p-5">
+				                   <div class="text-center mb-4">
+					                   <span class="fw-bold" style="color: black; font-size: calc(1.5rem + 0.3vw);">COMPU</span>
+					                   <span class="fw-bold" style="color: #EB484C; font-size: calc(1.5rem + 0.3vw);">RANGERS</span>
+				                   </div>
+
+				                   <h5 class="text-center mb-4">Inicia sesión en tu cuenta</h5>
+
+						                <div class="mb-3">
+							                <label for="email" class="form-label">Username o Correo electrónico</label>
+
+							                <asp:TextBox ID="txtEmail" runat="server" Enabled="true" CssClass="form-control" placeholder="Introduce tu correo"/>
+
+						                </div>
+
+						                <div class="mb-3">
+							                <label for="password" class="form-label">Contraseña</label>
+							                <asp:TextBox ID="txtPassword" runat="server" type="password" Enabled="true" CssClass="form-control" placeholder="Introduce tu contraseña" />
+
+						                </div>
+
+						                <div class="d-flex justify-content-between mb-3">
+							                <div class="form-check">
+								                <input class="form-check-input" type="checkbox" id="remember" name="remember">
+								                <label class="form-check-label" for="remember">
+									                Recordarme
+								                </label>
+							                </div>
+							                <a href="#" class="text-decoration-none small" style="color: #EB484C;">¿Olvidaste tu contraseña?</a>
+						                </div>
+
+						                <asp:LinkButton ID="LinkButton2" runat="server" CssClass="btn btn-danger w-100 py-2" Text="Iniciar sesión" OnClick="btnIniciarLogin" />
+
+
+				                   <div class="mt-3 text-center">
+					                   <p class="small">¿No tienes cuenta? <a href="#" class="text-decoration-none" style="color: #EB484C;">Regístrate aquí</a></p>
+				                   </div>
+			                   </div>
+		                </div>
+                    </div>
+                    <div class="modal-footer"></div>
                 </div>
             </div>
         </div>
@@ -192,13 +234,63 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Mi aplicación ASP.NET</p>
-            </footer>
+            
         </div>
     </form>
+    <footer class="bg-dark text-light pt-4 pb-2 mt-5">
+        <div class="container">
+            <div class="row align-items-start gy-4">
+                <!-- Logo y Nombre -->
+                <div class="col-12 col-md-4 text-center text-md-start mb-2 mb-md-0">
+                    <a class="navbar-brand d-inline-flex align-items-center mb-2" href="#">
+                        <span class="fw-bold" style="color: white; font-size: 2rem;">COMPU</span>
+                        <span class="fw-bold" style="color: #EB484C; font-size: 2rem;">RANGERS</span>
+                    </a>
+                    <div class="fw-bold text-secondary" style="letter-spacing:2px;">MiTiendaPC</div>
+                </div>
+                <!-- Enlaces -->
+                <div class="col-12 col-md-4 text-center mb-3 mb-md-0">
+                    <h6 class="mb-3 text-uppercase text-secondary" style="letter-spacing:1px;">Enlaces</h6>
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item mx-2"><a href="#" class="text-light text-decoration-none">Inicio</a></li>
+                        <li class="list-inline-item mx-2"><a href="#" class="text-light text-decoration-none">Productos</a></li>
+                        <li class="list-inline-item mx-2"><a href="#" class="text-light text-decoration-none">Mi cuenta</a></li>
+                        <li class="list-inline-item mx-2"><a href="#" class="text-light text-decoration-none">Contacto</a></li>
+                    </ul>
+                </div>
+                <!-- Contacto -->
+                <div class="col-12 col-md-4 text-center text-md-end">
+                    <h6 class="mb-3 text-uppercase text-secondary" style="letter-spacing:1px;">Contáctanos</h6>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-1">
+                            <i class="bi bi-envelope me-1"></i>
+                            <a href="mailto:soporte@mitiendapc.com" class="text-light text-decoration-none">soporte@mitiendapc.com</a>
+                        </li>
+                        <li class="mb-1">
+                            <i class="bi bi-telephone me-1"></i>
+                            <a href="tel:+51987654321" class="text-light text-decoration-none">+51 987 654 321</a>
+                        </li>
+                        <li>
+                            <i class="bi bi-geo-alt me-1"></i>
+                            Lima, Perú
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-secondary my-4">
+            <div class="row">
+                <div class="col text-center small text-secondary">
+                    &copy; {{ date('Y') }} MiTiendaPC. Todos los derechos reservados.
+                </div>
+            </div>
+        </div>
+    </footer>
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/Scripts/bootstrap.js") %>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+        <script src="/Script/bootstrap.min.js" type="text/javascript"></script>
+        <script src="/Script/bootstrap.bundle.min.js" type="text/javascript"></script>
+        <script src="/CompuRangers/Login.js" type="text/javascript"></script>
     </asp:PlaceHolder>
 </body>
 </html>

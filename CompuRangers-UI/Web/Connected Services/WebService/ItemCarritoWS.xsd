@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://services.compurangers.com" targetNamespace="http://services.compurangers.com" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="deleteItem" type="tns:deleteItem" />
+  <xs:element name="deleteItemResponse" type="tns:deleteItemResponse" />
+  <xs:element name="getAllFromCarrito" type="tns:getAllFromCarrito" />
+  <xs:element name="getAllFromCarritoResponse" type="tns:getAllFromCarritoResponse" />
+  <xs:element name="updateItem" type="tns:updateItem" />
+  <xs:element name="updateItemResponse" type="tns:updateItemResponse" />
+  <xs:complexType name="getAllFromCarrito">
+    <xs:sequence>
+      <xs:element name="userId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getAllFromCarritoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:itemCarrito" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="itemCarrito">
+    <xs:sequence>
+      <xs:element name="cantidad" type="xs:int" />
+      <xs:element name="carritoId" type="xs:int" />
+      <xs:element name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="producto" type="tns:producto" />
+      <xs:element name="subtotal" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="producto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="categoria" type="tns:categoria" />
+      <xs:element minOccurs="0" name="descripcion" type="xs:string" />
+      <xs:element name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="marca" type="tns:marca" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element name="precioVenta" type="xs:double" />
+      <xs:element minOccurs="0" name="sku" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="categoria">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="categoriaPadre" type="tns:categoria" />
+      <xs:element name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="subcategorias" nillable="true" type="tns:categoria" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="marca">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteItem">
+    <xs:sequence>
+      <xs:element name="itemId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteItemResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="itemCarrito" type="tns:itemCarrito" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateItemResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

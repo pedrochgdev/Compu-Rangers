@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://services.compurangers.com" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="ClienteWS" targetNamespace="http://services.compurangers.com" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/WebService/ClienteWS?xsd=1" namespace="http://services.compurangers.com" />
+    </xsd:schema>
+  </types>
+  <message name="addCliente">
+    <part name="parameters" element="tns:addCliente" />
+  </message>
+  <message name="addClienteResponse">
+    <part name="parameters" element="tns:addClienteResponse" />
+  </message>
+  <message name="payment">
+    <part name="parameters" element="tns:payment" />
+  </message>
+  <message name="paymentResponse">
+    <part name="parameters" element="tns:paymentResponse" />
+  </message>
+  <portType name="ClienteWS">
+    <operation name="addCliente">
+      <input wsam:Action="http://services.compurangers.com/ClienteWS/addClienteRequest" message="tns:addCliente" />
+      <output wsam:Action="http://services.compurangers.com/ClienteWS/addClienteResponse" message="tns:addClienteResponse" />
+    </operation>
+    <operation name="payment">
+      <input wsam:Action="http://services.compurangers.com/ClienteWS/paymentRequest" message="tns:payment" />
+      <output wsam:Action="http://services.compurangers.com/ClienteWS/paymentResponse" message="tns:paymentResponse" />
+    </operation>
+  </portType>
+  <binding name="ClienteWSPortBinding" type="tns:ClienteWS">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="addCliente">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="payment">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="ClienteWS">
+    <port name="ClienteWSPort" binding="tns:ClienteWSPortBinding">
+      <soap:address location="http://localhost:8080/WebService/ClienteWS" />
+    </port>
+  </service>
+</definitions>

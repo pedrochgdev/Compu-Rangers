@@ -1,184 +1,58 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="Web._Default" %>
+﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="Web.Home" %>
 
 <asp:Content ID="HomeContent" ContentPlaceHolderID="MainContent" runat="server">
     <script src="Scripts/CompuRangers/Login.js"></script>
 
     <main>
-        <form method="GET" >
+        
             <div class="row g-3 mb-4">
                 <div class="col-md-4">
-                    <input type="text" name="nombre" class="form-control" placeholder="Buscar por nombre">
+                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" placeholder="Buscar por nombre" />
                 </div>
                 <div class="col-md-3">
-                    <select name="categoria" class="form-select">
-                        <option value="">Todas las categorías</option>
-                        <option value="Procesadores">Procesadores</option>
-                        <option value="Placas Madre">Placas Madre</option>
-                        <option value="Memorias RAM">Memorias RAM</option>
-                        <option value="Almacenamiento">Almacenamiento</option>
-                        <option value="Periféricos">Periféricos</option>
-                    </select>
+                    <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-select">
+                        <asp:ListItem Text="Todas las categorías" Value="" />
+                        <asp:ListItem Text="Procesadores" Value="Procesadores" />
+                        <asp:ListItem Text="Placas Madre" Value="Placas Madre" />
+                        <asp:ListItem Text="Memorias RAM" Value="Memorias RAM" />
+                        <asp:ListItem Text="Almacenamiento" Value="Almacenamiento" />
+                        <asp:ListItem Text="Periféricos" Value="Periféricos" />
+                    </asp:DropDownList>
                 </div>
                 <div class="col-md-3">
-                    <input type="number" name="precio" class="form-control" placeholder="Precio máximo">
+                    <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" placeholder="Precio máximo" TextMode="Number" />
                 </div>
                 <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+                    <asp:Button ID="btnFiltrar" runat="server" CssClass="btn btn-primary w-100" Text="Filtrar" OnClick="btnFiltrar_Click" />
                 </div>
             </div>
 
-        </form>
-
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            <div class="col">
-                <div class="card h-100">
-                    <img src="https://www.shutterstock.com/image-photo/set-home-kitchen-appliances-room-260nw-2473408983.jpg" class="card-img-top" alt="Intel Core i7 12700K">
-                    <div class="card-body">
-                        <h5 class="card-title">Intel Core i7 12700K</h5>
-                        <p class="card-text">Procesador de 12 núcleos para alto rendimiento.</p>
-                        <div class="d-flex gap-2">
-                            <span class="badge bg-secondary">Procesadores</span>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <asp:Repeater ID="rptProductos" runat="server" OnItemCommand="rptProductos_ItemCommand">
+                    <ItemTemplate>
+                        <div class="col">
+                            <div class="card h-100">
+                                <img src="https://www.shutterstock.com/image-photo/set-home-kitchen-appliances-room-260nw-2473408983.jpg" class="card-img-top" alt="producto">
+                                <div class="card-body">
+                                    <asp:HiddenField ID="hiddenId" runat="server" Value='<%# Eval("id") %>' />
+                                    <h5 id="lblNombre" runat="server" class="card-title"><%# Eval("nombre") %></h5>
+                                    <p class="card-text"><%# Eval("descripcion") %></p>
+                                    <div class="d-flex gap-2">
+                                        <span class="badge bg-secondary"><%# Eval("categoria.nombre") %></span>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                    <strong id="lblPrecioVenta" runat="server" class="text-primary">$<%# Eval("precioVenta", "{0:N2}") %></strong>
+                                    <div class="d-flex flex-row justify-content-end align-item-center gap-2">
+                                        <a class="btn btn-sm btn-warning" href='VerMas.aspx?id=<%# Eval("id") %>'>Ver más</a>
+                                        <asp:LinkButton ID="btnAddCart" runat="server" CssClass="btn btn-sm btn-success" OnClick="btnAddCart" Text="Añadir al carrito"/>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <strong class="text-primary">$389.99</strong>
-                        <div class="d-flex flex-row justify-content-end align-item-center gap-2">
-                            <a class="btn btn-sm btn-warning" runat="server" href="~/VerMas">Ver más</a>
-                            <asp:LinkButton ID="lbAgregarLOV" runat="server" CssClass="btn btn-sm btn-success" Text="Añadir al carrito" OnClick="btnLogin" />
-                        </div>
-                    </div>
-                </div>
+                    </ItemTemplate>
+                </asp:Repeater>
             </div>
-
-            <div class="col">
-                <div class="card h-100">
-                    <img src="https://www.shutterstock.com/image-photo/set-home-kitchen-appliances-room-260nw-2473408983.jpg" class="card-img-top" alt="ASUS ROG STRIX Z790">
-                    <div class="card-body">
-                        <h5 class="card-title">ASUS ROG STRIX Z790</h5>
-                        <p class="card-text">Placa madre de alto desempeño con soporte DDR5.</p>
-                        <div class="d-flex gap-2">
-                            <span class="badge bg-secondary">Placas Madre</span>
-                        </div>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <strong class="text-primary">$289.50</strong>
-                        <div class="d-flex flex-row justify-content-end align-item-center gap-2">
-                            <a class="btn btn-sm btn-warning" runat="server" href="~/VerMas">Ver más</a>
-                            <button class="btn btn-sm btn-success" onclick = "btnLogin">Añadir al carrito</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card h-100">
-                    <img src="https://www.shutterstock.com/image-photo/set-home-kitchen-appliances-room-260nw-2473408983.jpg" class="card-img-top" alt="Corsair Vengeance 16GB DDR4">
-                    <div class="card-body">
-                        <h5 class="card-title">Corsair Vengeance 16GB DDR4</h5>
-                        <p class="card-text">Memoria RAM de alta velocidad.</p>
-                        <div class="d-flex gap-2">
-                            <span class="badge bg-secondary">Memorias RAM</span>
-                        </div>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <strong class="text-primary">$79.99</strong>
-                        <div class="d-flex flex-row justify-content-end align-item-center gap-2">
-                            <a class="btn btn-sm btn-warning" runat="server" href="~/VerMas">Ver más</a>
-                            <button class="btn btn-sm btn-success" onclick = "btnLogin">Añadir al carrito</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card h-100">
-                    <img src="https://www.shutterstock.com/image-photo/set-home-kitchen-appliances-room-260nw-2473408983.jpg" class="card-img-top" alt="Samsung 970 EVO 1TB SSD">
-                    <div class="card-body">
-                        <h5 class="card-title">Samsung 970 EVO 1TB SSD</h5>
-                        <p class="card-text">Disco sólido NVMe ultrarrápido.</p>
-                        <div class="d-flex gap-2">
-                            <span class="badge bg-secondary">Almacenamiento</span>
-                        </div>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <strong class="text-primary">$129.90</strong>
-                        <div class="d-flex flex-row justify-content-end align-item-center gap-2">
-                            <a class="btn btn-sm btn-warning" runat="server" href="~/VerMas">Ver más</a>
-                            <button class="btn btn-sm btn-success" onclick = "btnLogin">Añadir al carrito</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card h-100">
-                    <img src="https://www.shutterstock.com/image-photo/set-home-kitchen-appliances-room-260nw-2473408983.jpg" class="card-img-top" alt="Mouse Logitech G502">
-                    <div class="card-body">
-                        <h5 class="card-title">Mouse Logitech G502</h5>
-                        <p class="card-text">Mouse gamer con alta precisión.</p>
-                        <div class="d-flex gap-2">
-                            <span class="badge bg-secondary">Periféricos</span>
-                        </div>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <strong class="text-primary">$49.99</strong>
-                        <div class="d-flex flex-row justify-content-end align-item-center gap-2">
-                            <a class="btn btn-sm btn-warning" runat="server" href="~/VerMas">Ver más</a>
-                            <button class="btn btn-sm btn-success" onclick = "btnLogin">Añadir al carrito</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal" id="form-modal-login">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="d-flex justify-content-center align-items-center vh-100 bg-dark">
-                           <div class="card shadow-lg" style="width: 100%; max-width: 400px;">
-                               <div class="card-body p-5">
-                                   <div class="text-center mb-4">
-                                       <span class="fw-bold" style="color: black; font-size: calc(1.5rem + 0.3vw);">COMPU</span>
-                                       <span class="fw-bold" style="color: #EB484C; font-size: calc(1.5rem + 0.3vw);">RANGERS</span>
-                                   </div>
-
-                                   <h5 class="text-center mb-4">Inicia sesión en tu cuenta</h5>
-
-                                   <form method="POST">
-                                       <div class="mb-3">
-                                           <label for="email" class="form-label">Correo electrónico</label>
-                                           <input type="email" class="form-control" id="email" name="email" placeholder="Introduce tu correo" required>
-                                       </div>
-
-                                       <div class="mb-3">
-                                           <label for="password" class="form-label">Contraseña</label>
-                                           <input type="password" class="form-control" id="password" name="password" placeholder="Introduce tu contraseña" required>
-                                       </div>
-
-                                       <div class="d-flex justify-content-between mb-3">
-                                           <div class="form-check">
-                                               <input class="form-check-input" type="checkbox" id="remember" name="remember">
-                                               <label class="form-check-label" for="remember">
-                                                   Recordarme
-                                               </label>
-                                           </div>
-                                           <a href="#" class="text-decoration-none small" style="color: #EB484C;">¿Olvidaste tu contraseña?</a>
-                                       </div>
-
-                                       <button type="submit" class="btn btn-danger w-100 py-2">Iniciar sesión</button>
-                                   </form>
-
-                                   <div class="mt-3 text-center">
-                                       <p class="small">¿No tienes cuenta? <a href="#" class="text-decoration-none" style="color: #EB484C;">Regístrate aquí</a></p>
-                                   </div>
-                               </div>
-                           </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer"></div>
-                </div>
-            </div>
-        </div>
     </main>
 
 </asp:Content>
