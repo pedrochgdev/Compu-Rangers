@@ -195,6 +195,7 @@
                 </div>
             </div>
         </div>
+        <asp:HiddenField ID="hfLoginStatus" runat="server" />
         <div class="modal" id="form-modal-login">
             <div class="modal-dialog modal-s">
                 <div class="modal-content">
@@ -215,7 +216,7 @@
 							                <label for="email" class="form-label">Username o Correo electrónico</label>
 
 							                <asp:TextBox ID="txtEmail" runat="server" Enabled="true" CssClass="form-control" placeholder="Introduce tu correo"/>
-
+                                            <asp:Label ID="lblLoginFeedback" runat="server" CssClass="text-danger small d-block mt-2" />
 						                </div>
 
 						                <div class="mb-3">
@@ -233,7 +234,7 @@
 							                </div>
 							                <a href="#" class="text-decoration-none small" style="color: #EB484C;">¿Olvidaste tu contraseña?</a>
 						                </div>
-
+                                        
 						                <asp:LinkButton ID="LinkButton2" runat="server" CssClass="btn btn-danger w-100 py-2" Text="Iniciar sesión" OnClick="btnIniciarLogin" />
 
 
@@ -308,7 +309,15 @@
         <script src="/Scripts/CompuRangers/Login.js" type="text/javascript"></script> 
          <script src="/Scripts/CompuRangers/Alert.js" type="text/javascript"></script>  
     </asp:PlaceHolder>
-
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            var loginStatus = document.getElementById('<%= hfLoginStatus.ClientID %>');
+        if (loginStatus && loginStatus.value === 'failed') {
+            var loginModal = new bootstrap.Modal(document.getElementById('form-modal-login'));
+            loginModal.show();
+        }
+    });
+    </script>
 </body>
     
 </html>

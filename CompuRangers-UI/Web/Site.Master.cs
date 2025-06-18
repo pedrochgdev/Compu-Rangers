@@ -111,25 +111,27 @@ namespace Web
             }
             else
             {
-                //mostar icno user
             }
             this.clientScriptManager = Page.ClientScript;
-
-
         }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-
+                if (hfLoginStatus.Value == "failed")
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "ShowLoginModal", "$('#form-modal-login').modal('show');", true);
+                }
                 // Mostrar/ocultar bloques dependiendo del login
                 bool loggedIn = Session["user"] != null;
                 phUserLogged.Visible = loggedIn;
                 phUserNotLogged.Visible = !loggedIn;
-                
+
 
                 if (loggedIn)
                 {
+                    clientScriptManager.RegisterStartupScript(GetType(), "",
+                        "window.onload = function() { showAlert('Acabas de iniciar sesion','success');};", true);
                     bool isadmin = userWS.getRole(Convert.ToInt32(Session["user"]));
                     if (!isadmin)
                         CargarCarrito();
@@ -138,6 +140,9 @@ namespace Web
                         adminLogged.Visible = true;
                         adminNotLogged.Visible = false;
                     }
+                }else {
+                    clientScriptManager.RegisterStartupScript(GetType(), "",
+                    "window.onload = function() { showAlert('Inicia sessión para comprar ','danger');};", true);
                 }
 
                 
@@ -175,8 +180,7 @@ namespace Web
             {
                 Session["user"] = id;
               
-                clientScriptManager.RegisterStartupScript(GetType(), "",
-                    "window.onload = function() { showAlert('Acabas de iniciar session oe feo','success');};", true);
+                
                 FormsAuthenticationTicket tkt;
                 string cookiestr;
                 HttpCookie ck;
@@ -196,12 +200,13 @@ namespace Web
                 else
                     strRedirect = "../Catalogo/Home.aspx";
 
-                
+                Response.Redirect(strRedirect, true);
             }
             else
             {
-
                 Session["user"] = null;
+                hfLoginStatus.Value = "failed";
+                lblLoginFeedback.Text = "Usuario o contraseña incorrectos.";
             }
         }
 
