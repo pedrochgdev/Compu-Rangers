@@ -34,9 +34,11 @@
     <MetadataFile FileName="servicio.disco" MetadataType="Disco" ID="1c4693c8-e36c-44da-b9c6-92475981de11" SourceId="1" SourceUrl="http://localhost:8080/WebService/servicio.disco" />
     <MetadataFile FileName="UsuarioWS.xsd" MetadataType="Schema" ID="90d43ba0-7430-4ef4-ba17-160b2421b358" SourceId="1" SourceUrl="http://localhost:8080/WebService/UsuarioWS?xsd=1" />
     <MetadataFile FileName="UsuarioWS.wsdl" MetadataType="Wsdl" ID="2d38fff0-c7cc-4cfb-8df0-a495835c7462" SourceId="1" SourceUrl="http://localhost:8080/WebService/UsuarioWS?WSDL" />
+    <MetadataFile FileName="CategoriaWS.wsdl" MetadataType="Wsdl" ID="9762b169-a422-4c4f-bc40-02e7e55779bb" SourceId="1" SourceUrl="http://localhost:8080/WebService/CategoriaWS?WSDL" />
     <MetadataFile FileName="ClienteWS.xsd" MetadataType="Schema" ID="f2a65f06-062c-4f6f-90d3-bd930e438163" SourceId="1" SourceUrl="http://localhost:8080/WebService/ClienteWS?xsd=1" />
     <MetadataFile FileName="OrdenDeVentaWS.wsdl" MetadataType="Wsdl" ID="ddb9a32d-b755-49a7-93bd-e14d8f1acaa0" SourceId="1" SourceUrl="http://localhost:8080/WebService/OrdenDeVentaWS?WSDL" />
     <MetadataFile FileName="ItemCarritoWS.wsdl" MetadataType="Wsdl" ID="28350da8-4fe2-4573-bd56-f554a4f745ec" SourceId="1" SourceUrl="http://localhost:8080/WebService/ItemCarritoWS?WSDL" />
+    <MetadataFile FileName="CategoriaWS.xsd" MetadataType="Schema" ID="138eaa92-5835-453a-bfdb-e734a708f598" SourceId="1" SourceUrl="http://localhost:8080/WebService/CategoriaWS?xsd=1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -2022,6 +2022,97 @@ namespace Web.WebService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.compurangers.com", ConfigurationName="WebService.CategoriaWS")]
+    public interface CategoriaWS {
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/CategoriaWS/getAllCategoriasRequest", ReplyAction="http://services.compurangers.com/CategoriaWS/getAllCategoriasResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        Web.WebService.getAllCategoriasResponse getAllCategorias(Web.WebService.getAllCategoriasRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/CategoriaWS/getAllCategoriasRequest", ReplyAction="http://services.compurangers.com/CategoriaWS/getAllCategoriasResponse")]
+        System.Threading.Tasks.Task<Web.WebService.getAllCategoriasResponse> getAllCategoriasAsync(Web.WebService.getAllCategoriasRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getAllCategorias", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class getAllCategoriasRequest {
+        
+        public getAllCategoriasRequest() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getAllCategoriasResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class getAllCategoriasResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Web.WebService.categoria[] @return;
+        
+        public getAllCategoriasResponse() {
+        }
+        
+        public getAllCategoriasResponse(Web.WebService.categoria[] @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface CategoriaWSChannel : Web.WebService.CategoriaWS, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class CategoriaWSClient : System.ServiceModel.ClientBase<Web.WebService.CategoriaWS>, Web.WebService.CategoriaWS {
+        
+        public CategoriaWSClient() {
+        }
+        
+        public CategoriaWSClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public CategoriaWSClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public CategoriaWSClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public CategoriaWSClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Web.WebService.getAllCategoriasResponse Web.WebService.CategoriaWS.getAllCategorias(Web.WebService.getAllCategoriasRequest request) {
+            return base.Channel.getAllCategorias(request);
+        }
+        
+        public Web.WebService.categoria[] getAllCategorias() {
+            Web.WebService.getAllCategoriasRequest inValue = new Web.WebService.getAllCategoriasRequest();
+            Web.WebService.getAllCategoriasResponse retVal = ((Web.WebService.CategoriaWS)(this)).getAllCategorias(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Web.WebService.getAllCategoriasResponse> Web.WebService.CategoriaWS.getAllCategoriasAsync(Web.WebService.getAllCategoriasRequest request) {
+            return base.Channel.getAllCategoriasAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Web.WebService.getAllCategoriasResponse> getAllCategoriasAsync() {
+            Web.WebService.getAllCategoriasRequest inValue = new Web.WebService.getAllCategoriasRequest();
+            return ((Web.WebService.CategoriaWS)(this)).getAllCategoriasAsync(inValue);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.compurangers.com", ConfigurationName="WebService.OrdenDeVentaWS")]
     public interface OrdenDeVentaWS {
         

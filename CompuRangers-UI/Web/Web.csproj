@@ -110,6 +110,10 @@
     <None Include="Connected Services\WebService\CarritoWS.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\WebService\CategoriaWS.wsdl" />
+    <None Include="Connected Services\WebService\CategoriaWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\WebService\ClienteWS.wsdl" />
     <None Include="Connected Services\WebService\ClienteWS.xsd">
       <SubType>Designer</SubType>
@@ -263,6 +267,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\WebService\Web.WebService.deleteOrdenResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.categoria.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.getAllCategoriasResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
