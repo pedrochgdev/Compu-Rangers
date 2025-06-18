@@ -111,22 +111,22 @@ namespace Web
             }
             else
             {
-                //mostar icno user
             }
             this.clientScriptManager = Page.ClientScript;
-
-
         }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-
+                if (hfLoginStatus.Value == "failed")
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "ShowLoginModal", "$('#form-modal-login').modal('show');", true);
+                }
                 // Mostrar/ocultar bloques dependiendo del login
                 bool loggedIn = Session["user"] != null;
                 phUserLogged.Visible = loggedIn;
                 phUserNotLogged.Visible = !loggedIn;
-                
+
 
                 if (loggedIn)
                 {
@@ -140,6 +140,9 @@ namespace Web
                         adminLogged.Visible = true;
                         adminNotLogged.Visible = false;
                     }
+                }else {
+                    clientScriptManager.RegisterStartupScript(GetType(), "",
+                    "window.onload = function() { showAlert('Inicia sessión para comprar ','danger');};", true);
                 }
                 else
                 {
@@ -206,8 +209,9 @@ namespace Web
             }
             else
             {
-                clientScriptManager.RegisterStartupScript(GetType(), "",
-                    "window.onload = function() { showAlert('Usuario o contraseña incorrecto','warning');};", true);
+                Session["user"] = null;
+                hfLoginStatus.Value = "failed";
+                lblLoginFeedback.Text = "Usuario o contraseña incorrectos.";
             }
         }
 
