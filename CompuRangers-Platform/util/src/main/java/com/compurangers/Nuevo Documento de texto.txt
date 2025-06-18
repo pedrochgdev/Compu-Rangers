@@ -1,0 +1,5 @@
+DB_HOST="dbprog.cnurf2xwqqx1.us-east-1.rds.amazonaws.com"
+DB_PORT="3306"
+DB_SCHEME="TA"
+DB_USER="admin"
+DB_PASSWORD="prog320251"

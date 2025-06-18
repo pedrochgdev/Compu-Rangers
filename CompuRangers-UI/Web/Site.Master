@@ -203,7 +203,7 @@
                     </div>
                     <div class="modal-body">
                          <div class="d-flex justify-content-center align-items-center">
-			                   <div class="card-body p-5">
+			                   <div class="card-body p-4">
 				                   <div class="text-center mb-4">
 					                   <span class="fw-bold" style="color: black; font-size: calc(1.5rem + 0.3vw);">COMPU</span>
 					                   <span class="fw-bold" style="color: #EB484C; font-size: calc(1.5rem + 0.3vw);">RANGERS</span>
@@ -213,10 +213,8 @@
 
 						                <div class="mb-3">
 							                <label for="email" class="form-label">Username o Correo electrónico</label>
-
-							                <asp:TextBox ID="txtEmail" runat="server" Enabled="true" CssClass="form-control" placeholder="Introduce tu correo"/>
-
-						                </div>
+                                            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="Introduce tu correo" />
+                                        </div>
 
 						                <div class="mb-3">
 							                <label for="password" class="form-label">Contraseña</label>
@@ -238,7 +236,7 @@
 
 
 				                   <div class="mt-3 text-center">
-					                   <p class="small">¿No tienes cuenta? <a href="#" class="text-decoration-none" style="color: #EB484C;">Regístrate aquí</a></p>
+					                   <p class="small">¿No tienes cuenta? <a href="/Auth/SignUp.aspx" class="text-decoration-none" style="color: #EB484C;">Regístrate aquí</a></p>
 				                   </div>
 			                   </div>
 		                </div>
@@ -297,7 +295,7 @@
             <hr class="border-secondary my-4">
             <div class="row">
                 <div class="col text-center small text-secondary">
-                    &copy; {{ date('Y') }} MiTiendaPC. Todos los derechos reservados.
+                    &copy; <%: DateTime.Now.Year %> MiTiendaPC. Todos los derechos reservados.
                 </div>
             </div>
         </div>
@@ -312,7 +310,7 @@
             const container = document.getElementById('alert-container');
             const alertId = `alert-${Date.now()}`;
             const alert = document.createElement('div');
-            alert.className = `alert alert - ${type} alert - dismissible fade show`;
+            alert.className = `alert alert-${type} alert-dismissible fade show`;
             alert.id = alertId;
             alert.role = 'alert';
             alert.innerHTML =`
