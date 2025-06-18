@@ -131,7 +131,11 @@ namespace Web
                 if (loggedIn)
                 {
                     clientScriptManager.RegisterStartupScript(GetType(), "",
+<<<<<<< HEAD
                         "window.onload = function() { showAlert('Acabas de iniciar sesion','success');};", true);
+=======
+                    "window.onload = function() { showAlert('Acabas de iniciar sesion','success');};", true);
+>>>>>>> 9ad7ba8f6cc81eae5be183993f3cd9956c41905c
                     bool isadmin = userWS.getRole(Convert.ToInt32(Session["user"]));
                     if (!isadmin)
                         CargarCarrito();
@@ -204,9 +208,14 @@ namespace Web
             }
             else
             {
+<<<<<<< HEAD
                 Session["user"] = null;
                 hfLoginStatus.Value = "failed";
                 lblLoginFeedback.Text = "Usuario o contraseña incorrectos.";
+=======
+                clientScriptManager.RegisterStartupScript(GetType(), "",
+                    "window.onload = function() { showAlert('Usuario o contraseña incorrecto','warning');};", true);
+>>>>>>> 9ad7ba8f6cc81eae5be183993f3cd9956c41905c
             }
         }
 

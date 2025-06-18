@@ -10,14 +10,7 @@
                     <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" placeholder="Buscar por nombre" />
                 </div>
                 <div class="col-md-3">
-                    <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-select">
-                        <asp:ListItem Text="Todas las categorías" Value="" />
-                        <asp:ListItem Text="Procesadores" Value="Procesadores" />
-                        <asp:ListItem Text="Placas Madre" Value="Placas Madre" />
-                        <asp:ListItem Text="Memorias RAM" Value="Memorias RAM" />
-                        <asp:ListItem Text="Almacenamiento" Value="Almacenamiento" />
-                        <asp:ListItem Text="Periféricos" Value="Periféricos" />
-                    </asp:DropDownList>
+                    <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" />
                 </div>
                 <div class="col-md-3">
                     <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" placeholder="Precio máximo" TextMode="Number" />

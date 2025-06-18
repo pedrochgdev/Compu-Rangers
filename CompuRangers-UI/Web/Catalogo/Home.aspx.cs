@@ -21,6 +21,7 @@ namespace Web
         private readonly InventoryWSClient invWS;
         private readonly CarritoWSClient carritoWSClient;
         private readonly ItemCarritoWSClient icWS;
+        private readonly CategoriaWSClient categoriaWS;
         private BindingList<producto> catalogo;
         private carrito shoppingcart;
 
@@ -32,6 +33,7 @@ namespace Web
             this.invWS = new InventoryWSClient();
             this.icWS = new ItemCarritoWSClient();
             this.carritoWSClient = new CarritoWSClient();
+            this.categoriaWS = new CategoriaWSClient();
         }
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -51,6 +53,14 @@ namespace Web
                 catalogo = new BindingList<producto>(invWS.getCatalog());
                 rptProductos.DataSource = catalogo;
                 rptProductos.DataBind();
+                categoria[] categorias = categoriaWS.getAllCategorias();
+                ddlCategoria.Items.Clear();
+                ddlCategoria.Items.Add(new ListItem("Todas las categorías", ""));
+
+                foreach (categoria cat in categorias)
+                {
+                    ddlCategoria.Items.Add(new ListItem(cat.nombre, cat.nombre));
+                }
             }
             SiteMaster master = (SiteMaster)this.Master;
             if (master != null)
@@ -58,6 +68,22 @@ namespace Web
                 master.CargarCarrito();
             }
         }
+
+        protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string categoria = ddlCategoria.SelectedValue;
+            List<producto> productos = invWS.getCatalog().ToList(); ;
+
+            if (!string.IsNullOrEmpty(categoria))
+            {
+                productos = productos.Where(p => p.categoria.nombre == categoria).ToList();
+            }
+
+            catalogo = new BindingList<producto>(productos);
+            rptProductos.DataSource = catalogo;
+            rptProductos.DataBind();
+        }
+
 
         protected void btnAddCart(object sender, EventArgs e)
         {
