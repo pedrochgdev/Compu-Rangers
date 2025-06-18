@@ -1,6 +1,9 @@
 -- Converted from Oracle SQL to MySQL
 -- Generated on: 2025-04-22
 -- Modifications: Removed TIPO_DE_CAMBIO table, renamed TIPO_CAMBIO_PERIODO to MONEDA_PERIODO, added tipoCambio attribute, added ENGINE=InnoDB, added AUTO_INCREMENT to primary keys, fixed comment syntax
+create database if not exists compurangers;
+
+use compurangers;
 
 CREATE TABLE USUARIO (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -85,7 +88,7 @@ CREATE TABLE DETALLE_CARRITO (
 
 CREATE TABLE ORDEN_DE_VENTA (
     id INT AUTO_INCREMENT NOT NULL,
-    estado ENUM('PAGADO', 'ENVIADO', 'ENTREGADO') NOT NULL COMMENT 'ESTADO DE LA ORDEN DE VENTA',
+    estado ENUM('EN_PROCESO', 'PAGADO', 'ENVIADO', 'ENTREGADO') NOT NULL COMMENT 'ESTADO DE LA ORDEN DE VENTA',
     fecha DATE NOT NULL COMMENT 'FECHA DE REGISTRO DE  LA ORDEN DE VENTA',
     total DECIMAL(8,2) NOT NULL COMMENT 'TOTAL DE LA ORDEN',
     cliente_usuario_id INT NOT NULL,
