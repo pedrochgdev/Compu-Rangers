@@ -130,6 +130,8 @@ namespace Web
 
                 if (loggedIn)
                 {
+                    clientScriptManager.RegisterStartupScript(GetType(), "",
+                    "window.onload = function() { showAlert('Acabas de iniciar sesion','success');};", true);
                     bool isadmin = userWS.getRole(Convert.ToInt32(Session["user"]));
                     if (!isadmin)
                         CargarCarrito();
@@ -175,8 +177,7 @@ namespace Web
             {
                 Session["user"] = id;
               
-                clientScriptManager.RegisterStartupScript(GetType(), "",
-                    "window.onload = function() { showAlert('Acabas de iniciar session oe feo','success');};", true);
+                
                 FormsAuthenticationTicket tkt;
                 string cookiestr;
                 HttpCookie ck;
@@ -196,12 +197,12 @@ namespace Web
                 else
                     strRedirect = "../Catalogo/Home.aspx";
 
-                
+                Response.Redirect(strRedirect, true);
             }
             else
             {
-
-                Session["user"] = null;
+                clientScriptManager.RegisterStartupScript(GetType(), "",
+                    "window.onload = function() { showAlert('Usuario o contraseña incorrecto','warning');};", true);
             }
         }
 
