@@ -114,6 +114,8 @@ namespace Web
                 //mostar icno user
             }
             this.clientScriptManager = Page.ClientScript;
+
+
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -128,6 +130,8 @@ namespace Web
 
                 if (loggedIn)
                 {
+                    clientScriptManager.RegisterStartupScript(GetType(), "",
+                    "window.onload = function() { showAlert('Acabas de iniciar sesion','success');};", true);
                     bool isadmin = userWS.getRole(Convert.ToInt32(Session["user"]));
                     if (!isadmin)
                         CargarCarrito();
@@ -136,6 +140,11 @@ namespace Web
                         adminLogged.Visible = true;
                         adminNotLogged.Visible = false;
                     }
+                }
+                else
+                {
+                    clientScriptManager.RegisterStartupScript(GetType(), "",
+                    "window.onload = function() { showAlert('Cerraste sesion','danger');};", true);
                 }
 
                 
@@ -172,16 +181,8 @@ namespace Web
             if (id > 0)
             {
                 Session["user"] = id;
-                string script = @"
-                setTimeout(function () {
-                    if (typeof showAlert === 'function') {
-                        showAlert('¡Alerta generada desde el servidor!', 'success');
-                    } else {
-                        alert('La función showAlert aún no está cargada.');
-                    }
-                }, 300);";
-
-                ScriptManager.RegisterStartupScript(this, GetType(), "mostrarAlerta", script, true);
+              
+                
                 FormsAuthenticationTicket tkt;
                 string cookiestr;
                 HttpCookie ck;
@@ -205,8 +206,8 @@ namespace Web
             }
             else
             {
-
-                Session["user"] = null;
+                clientScriptManager.RegisterStartupScript(GetType(), "",
+                    "window.onload = function() { showAlert('Usuario o contraseña incorrecto','warning');};", true);
             }
         }
 

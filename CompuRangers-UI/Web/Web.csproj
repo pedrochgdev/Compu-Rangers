@@ -107,6 +107,10 @@
     <None Include="Connected Services\WebService\CarritoWS.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\WebService\CategoriaWS.wsdl" />
+    <None Include="Connected Services\WebService\CategoriaWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\WebService\ClienteWS.wsdl" />
     <None Include="Connected Services\WebService\ClienteWS.xsd">
       <SubType>Designer</SubType>
@@ -131,6 +135,13 @@
     </None>
     <Content Include="Cliente\DetalleCompra.aspx" />
     <Content Include="Cliente\PurchaseHistory.aspx" />
+<<<<<<< HEAD
+=======
+    <Content Include="Scripts\CompuRangers\Alert.js" />
+    <Content Include="Scripts\CompuRangers\Login.js" />
+    <Content Include="Admin\Ventas.aspx" />
+    <Content Include="Contact.aspx" />
+>>>>>>> 999378540df98f8ca2c7a630bf634e5e20a105e2
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -240,6 +251,20 @@
     <Content Include="Connected Services\WebService\Web.WebService.deleteOrdenResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+<<<<<<< HEAD
+=======
+    <Content Include="Connected Services\WebService\Web.WebService.categoria.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.getAllCategoriasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-3.7.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.7.0.js" />
+    <Content Include="Scripts\jquery-3.7.0.min.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.min.js" />
+>>>>>>> 999378540df98f8ca2c7a630bf634e5e20a105e2
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
