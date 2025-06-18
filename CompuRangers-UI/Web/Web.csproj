@@ -134,6 +134,7 @@
     </None>
     <Content Include="Cliente\DetalleCompra.aspx" />
     <Content Include="Cliente\PurchaseHistory.aspx" />
+    <Content Include="Scripts\CompuRangers\Alert.js" />
     <Content Include="Scripts\CompuRangers\Login.js" />
     <Content Include="Admin\Ventas.aspx" />
     <Content Include="Contact.aspx" />
