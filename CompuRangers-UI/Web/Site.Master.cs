@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Web;
+using System.Web.Optimization;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -18,9 +19,26 @@ namespace Web
         private readonly InventoryWSClient invWS;
         private readonly CarritoWSClient carritoWSClient;
         private readonly ItemCarritoWSClient icWS;
-        private BindingList<itemCarrito> listItems;
+        public BindingList<itemCarrito> listItems;
         private carrito shoppingcart;
         private ClientScriptManager clientScriptManager;
+
+        public BindingList<itemCarrito> ListItems
+        {
+            get
+            {
+                if (listItems == null && Session["user"] != null)
+                {
+                    int userId = Convert.ToInt32(Session["user"]);
+                    object items = icWS.getAllFromCarrito(userId);
+                    if (items != null)
+                        listItems = new BindingList<itemCarrito>(((itemCarrito[])items).ToList());
+                    else
+                        listItems = new BindingList<itemCarrito>();
+                }
+                return listItems;
+            }
+        }
         public carrito ShoppingCart
         {
             get
@@ -87,13 +105,40 @@ namespace Web
         }
         protected void Page_Init(object sender, EventArgs e)
         {
+            if (Session["user"] == null)
+            {
+                //ms¿ostrar btnes login
+            }
+            else
+            {
+                //mostar icno user
+            }
             this.clientScriptManager = Page.ClientScript;
         }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                CargarCarrito();
+
+                // Mostrar/ocultar bloques dependiendo del login
+                bool loggedIn = Session["user"] != null;
+                phUserLogged.Visible = loggedIn;
+                phUserNotLogged.Visible = !loggedIn;
+                
+
+                if (loggedIn)
+                {
+                    bool isadmin = userWS.getRole(Convert.ToInt32(Session["user"]));
+                    if (!isadmin)
+                        CargarCarrito();
+                    else
+                    {
+                        adminLogged.Visible = true;
+                        adminNotLogged.Visible = false;
+                    }
+                }
+
+                
             }
         }
 
@@ -101,7 +146,21 @@ namespace Web
         {
             Session.Clear();
             FormsAuthentication.SignOut();
-            Response.Redirect("~/Home.aspx");
+            Response.Redirect("~/Catalogo/Home.aspx");
+        }
+
+        protected void bttnCarrito_Show(object sender, EventArgs e)
+        {
+            string script;
+            if (Session["user"] == null)
+
+                script = "window.onload = function() { showModal('form-modal-login');};";
+            else
+            {
+                
+                script = "window.onload = function() { showModal('carritoModal');};";
+            }
+            clientScriptManager.RegisterStartupScript(GetType(), "", script, true);
         }
         protected void btnIniciarLogin(object sender, EventArgs e)
         {
@@ -109,13 +168,24 @@ namespace Web
             string usuario = txtEmail.Text;
             Console.WriteLine(usuario + "" + password);
             int id = authWS.login(usuario, password);
-            Session["user"] = id;
+            
             if (id > 0)
             {
+                Session["user"] = id;
+                string script = @"
+                setTimeout(function () {
+                    if (typeof showAlert === 'function') {
+                        showAlert('¡Alerta generada desde el servidor!', 'success');
+                    } else {
+                        alert('La función showAlert aún no está cargada.');
+                    }
+                }, 300);";
+
+                ScriptManager.RegisterStartupScript(this, GetType(), "mostrarAlerta", script, true);
                 FormsAuthenticationTicket tkt;
                 string cookiestr;
                 HttpCookie ck;
-                tkt = new FormsAuthenticationTicket(1, usuario, DateTime.Now,
+                tkt = new FormsAuthenticationTicket(30, usuario, DateTime.Now,
                 DateTime.Now.AddMinutes(1), true, "datos adicionales del usuario");
                 cookiestr = FormsAuthentication.Encrypt(tkt);
                 ck = new HttpCookie(FormsAuthentication.FormsCookieName, cookiestr);
@@ -126,15 +196,18 @@ namespace Web
                 bool user = userWS.getRole(id);
                 if (user)
                 {
-                    strRedirect = "Ventas.aspx";
+                    strRedirect = "../Admin/Ventas.aspx";
                 }
                 else
-                    strRedirect = "Home.aspx";
+                    strRedirect = "../Catalogo/Home.aspx";
 
                 Response.Redirect(strRedirect, true);
             }
             else
+            {
+
                 Session["user"] = null;
+            }
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e)

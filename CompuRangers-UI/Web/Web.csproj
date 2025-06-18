@@ -121,6 +121,10 @@
     <None Include="Connected Services\WebService\ItemCarritoWS.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\WebService\OrdenDeVentaWS.wsdl" />
+    <None Include="Connected Services\WebService\OrdenDeVentaWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\WebService\servicio.disco" />
     <None Include="Connected Services\WebService\configuration91.svcinfo" />
     <None Include="Connected Services\WebService\configuration.svcinfo" />
@@ -128,10 +132,10 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="DetalleCompra.aspx" />
-    <Content Include="PurchaseHistory.aspx" />
+    <Content Include="Cliente\DetalleCompra.aspx" />
+    <Content Include="Cliente\PurchaseHistory.aspx" />
     <Content Include="Scripts\CompuRangers\Login.js" />
-    <Content Include="Ventas.aspx" />
+    <Content Include="Admin\Ventas.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -150,10 +154,12 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="Home.aspx" />
+    <Content Include="Catalogo\Home.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="LogIn.aspx" />
+    <Content Include="Auth\SignUp.aspx">
+      <BrowseToURL>~/Auth/SignUp.aspx</BrowseToURL>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -247,6 +253,18 @@
     <Content Include="Connected Services\WebService\Web.WebService.updateItemResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.cliente.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.searchClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.addOrdenResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.deleteOrdenResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -275,7 +293,8 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
-    <Content Include="VerMas.aspx" />
+    <Content Include="Catalogo\VerMas.aspx" />
+    <Content Include="Usuario\MiPerfil.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -287,25 +306,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="DetalleCompra.aspx.cs">
+    <Compile Include="Cliente\DetalleCompra.aspx.cs">
       <DependentUpon>DetalleCompra.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="DetalleCompra.aspx.designer.cs">
+    <Compile Include="Cliente\DetalleCompra.aspx.designer.cs">
       <DependentUpon>DetalleCompra.aspx</DependentUpon>
     </Compile>
-    <Compile Include="PurchaseHistory.aspx.cs">
+    <Compile Include="Cliente\PurchaseHistory.aspx.cs">
       <DependentUpon>PurchaseHistory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="PurchaseHistory.aspx.designer.cs">
+    <Compile Include="Cliente\PurchaseHistory.aspx.designer.cs">
       <DependentUpon>PurchaseHistory.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Ventas.aspx.cs">
+    <Compile Include="Admin\Ventas.aspx.cs">
       <DependentUpon>Ventas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Ventas.aspx.designer.cs">
+    <Compile Include="Admin\Ventas.aspx.designer.cs">
       <DependentUpon>Ventas.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -324,22 +343,22 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Home.aspx.cs">
+    <Compile Include="Catalogo\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Home.aspx.designer.cs">
+    <Compile Include="Catalogo\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="LogIn.aspx.cs">
-      <DependentUpon>LogIn.aspx</DependentUpon>
+    <Compile Include="Auth\SignUp.aspx.cs">
+      <DependentUpon>SignUp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LogIn.aspx.designer.cs">
-      <DependentUpon>LogIn.aspx</DependentUpon>
+    <Compile Include="Auth\SignUp.aspx.designer.cs">
+      <DependentUpon>SignUp.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
@@ -356,12 +375,19 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
-    <Compile Include="VerMas.aspx.cs">
+    <Compile Include="Catalogo\VerMas.aspx.cs">
       <DependentUpon>VerMas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VerMas.aspx.designer.cs">
+    <Compile Include="Catalogo\VerMas.aspx.designer.cs">
       <DependentUpon>VerMas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Usuario\MiPerfil.aspx.cs">
+      <DependentUpon>MiPerfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Usuario\MiPerfil.aspx.designer.cs">
+      <DependentUpon>MiPerfil.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

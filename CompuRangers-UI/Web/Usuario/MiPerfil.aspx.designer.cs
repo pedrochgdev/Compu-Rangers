@@ -7,11 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Web
+namespace Web.Usuario
 {
 
 
-    public partial class LogIn
+    public partial class MiPerfil
     {
     }
 }

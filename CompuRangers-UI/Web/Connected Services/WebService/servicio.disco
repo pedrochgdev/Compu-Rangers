@@ -6,4 +6,5 @@
   <contractRef ref="http://localhost:8080/WebService/InventoryWS?WSDL" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
   <contractRef ref="http://localhost:8080/WebService/CarritoWS?WSDL" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
   <contractRef ref="http://localhost:8080/WebService/ItemCarritoWS?WSDL" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <contractRef ref="http://localhost:8080/WebService/OrdenDeVentaWS?WSDL" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
 </discovery>
