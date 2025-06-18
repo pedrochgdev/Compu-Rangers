@@ -14,7 +14,7 @@ import org.json.JSONObject;
 public class PaymentService {
 
     public String generarPago(String email, String amount, String currency, String mode, String language, String orderId) {
-    String tunnelUrl = "https://ngg811nc-9090.brs.devtunnels.ms/"; //"https://huge-mastiff-solid.ngrok-free.app"; //Cambiar al tunel local 
+    String tunnelUrl = "https://huge-mastiff-solid.ngrok-free.app"; //"https://huge-mastiff-solid.ngrok-free.app"; //Cambiar al tunel local 
 
     try {
         // Construcción del JSON
@@ -64,7 +64,9 @@ public class PaymentService {
             return null; // Devolver null en caso de error
         }
     } catch (IOException | JSONException e) {
-        return null; // Devolver null en caso de excepción
+        System.err.println("Excepción en generarPago:");
+        e.printStackTrace(); // <-- Muy importante para ver la causa real
+        return null;
     }
 }
 

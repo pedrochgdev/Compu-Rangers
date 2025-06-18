@@ -1,5 +1,6 @@
 package com.compurangers.platform.appprueba;
 
+import com.compurangers.platform.core.domain.sales.OrdenDeVenta;
 import com.compurangers.platform.core.domain.user.Cliente;
 import com.compurangers.platform.core.domain.user.Usuario;
 import com.compurangers.platform.dao.mysql.sales.CarritoDAOImpl;
@@ -10,36 +11,26 @@ import com.compurangers.platform.dao.sales.ICarritoDAO;
 import com.compurangers.platform.dao.user.IClienteDAO;
 import com.compurangers.platform.dao.user.auth.ITokenRecuperacionDAO;
 import com.compurangers.platform.service.payment.PaymentService;
+import com.compurangers.platform.service.user.ClienteBO;
 import com.compurangers.platform.service.user.UsuarioBO;
 import com.compurangers.platform.service.user.auth.AuthService;
 import com.compurangers.platform.service.user.auth.TokenRecuperacionBO;
 import com.compurangers.platform.service.user.auth.utils.PasswordUtils;
+import java.util.Date;
 import java.util.List;
 
 public class AppPrueba {
     public static void main(String[] args) {
-        
-          AuthService ps = new AuthService(new UsuarioBO(new UsuarioDAOImpl(), new TokenRecuperacionBO(new TokenRecuperacionDAOImpl())));
-          int id= ps.login("admin1", "admin123");
-          
-          UsuarioBO user = new UsuarioBO(new UsuarioDAOImpl(), new TokenRecuperacionBO(new TokenRecuperacionDAOImpl()));
-          
-          Usuario u = user.searchUsuario(id);
-          
-          
-          if(u.isAdmin())
-            System.out.println(id);
-          
-          
-//         // Instancias necesarias para el servicio
-//        IClienteDAO usuarioDAO = new ClienteDAOImpl(); // Tu implementación real
-//        ICarritoDAO carritoDAO = new CarritoDAOImpl(); // Tu implementación real
-//        ITokenRecuperacionDAO tokenDAO = new TokenRecuperacionDAOImpl(); // Tu implementación real
-//        TokenRecuperacionService tokenService = new TokenRecuperacionService(tokenDAO);
-//        PaymentService paymentService = new PaymentService(); // Tu implementación real
-//
-//        // Instanciar UsuarioService
-//        ClienteService usuarioService = new ClienteService(usuarioDAO, tokenService, carritoDAO, paymentService);
+                  
+         // Instancias necesarias para el servicio
+        IClienteDAO usuarioDAO = new ClienteDAOImpl(); // Tu implementación real
+        ICarritoDAO carritoDAO = new CarritoDAOImpl(); // Tu implementación real
+        ITokenRecuperacionDAO tokenDAO = new TokenRecuperacionDAOImpl(); // Tu implementación real
+        TokenRecuperacionBO tokenService = new TokenRecuperacionBO(tokenDAO);
+        PaymentService paymentService = new PaymentService(); // Tu implementación real
+
+        // Instanciar UsuarioService
+        ClienteBO usuarioService = new ClienteBO(usuarioDAO, tokenService, carritoDAO, paymentService);
 //
 //        // Crear nuevo usuario
 //        Cliente nuevoUsuario = new Cliente();
@@ -63,9 +54,19 @@ public class AppPrueba {
 //        boolean recoveryStatus = usuarioService.forgotPassword("johndoe@example.com");
 //        System.out.println("¿Se envió correo de recuperación? " + recoveryStatus);
 //
-//        // Simular pago
-//        usuarioService.payment(userId);
-//
+        // Simular pago
+        OrdenDeVenta ov = new OrdenDeVenta();
+        
+        ov.setClienteId(2);
+        ov.setDireccion("456 Client Ave");
+        ov.setFecha(new Date());
+        ov.setTotal(2799.98);
+        ov.setEstado("EN_PROCESO");
+        
+        String abc = usuarioService.payment(ov);
+        
+        System.out.println(abc);
+
 //        // Actualizar usuario
 //        nuevoUsuario.setId(userId); // Asegúrate de asignar el ID para la actualización
 //        nuevoUsuario.setNombreCompleto("John Doe Jr.");

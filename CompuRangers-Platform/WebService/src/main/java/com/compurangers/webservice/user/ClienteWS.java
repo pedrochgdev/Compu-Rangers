@@ -1,5 +1,6 @@
 package com.compurangers.webservice.user;
 
+import com.compurangers.platform.core.domain.sales.OrdenDeVenta;
 import com.compurangers.platform.dao.mysql.sales.CarritoDAOImpl;
 import com.compurangers.platform.dao.mysql.user.ClienteDAOImpl;
 import com.compurangers.platform.dao.mysql.user.auth.TokenRecuperacionDAOImpl;
@@ -24,8 +25,13 @@ public class ClienteWS {
         return user.addCliente(cliente);
     }
     
+    @WebMethod(operationName = "searchCliente")
+    public Cliente searchCliente(@WebParam(name = "id") int id) {
+        return user.searchCliente(id);
+    }
+    
     @WebMethod(operationName = "payment")
-    public void payment(@WebParam(name = "usuarioId") int cliente) {
-        user.payment(cliente);
+    public String payment(@WebParam(name = "ordenVenta") OrdenDeVenta ov) {
+        return user.payment(ov);
     }
 }
