@@ -141,6 +141,11 @@ namespace Web
                         adminNotLogged.Visible = false;
                     }
                 }
+                else
+                {
+                    clientScriptManager.RegisterStartupScript(GetType(), "",
+                    "window.onload = function() { showAlert('Cerraste sesion','danger');};", true);
+                }
 
                 
             }
