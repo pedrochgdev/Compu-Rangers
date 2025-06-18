@@ -114,6 +114,8 @@ namespace Web
                 //mostar icno user
             }
             this.clientScriptManager = Page.ClientScript;
+
+
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -172,16 +174,9 @@ namespace Web
             if (id > 0)
             {
                 Session["user"] = id;
-                string script = @"
-                setTimeout(function () {
-                    if (typeof showAlert === 'function') {
-                        showAlert('¡Alerta generada desde el servidor!', 'success');
-                    } else {
-                        alert('La función showAlert aún no está cargada.');
-                    }
-                }, 300);";
-
-                ScriptManager.RegisterStartupScript(this, GetType(), "mostrarAlerta", script, true);
+              
+                clientScriptManager.RegisterStartupScript(GetType(), "",
+                    "window.onload = function() { showAlert('Acabas de iniciar session oe feo','success');};", true);
                 FormsAuthenticationTicket tkt;
                 string cookiestr;
                 HttpCookie ck;
@@ -201,7 +196,7 @@ namespace Web
                 else
                     strRedirect = "../Catalogo/Home.aspx";
 
-                Response.Redirect(strRedirect, true);
+                
             }
             else
             {
