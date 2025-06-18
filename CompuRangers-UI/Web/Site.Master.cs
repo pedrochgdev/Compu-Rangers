@@ -144,13 +144,6 @@ namespace Web
                     clientScriptManager.RegisterStartupScript(GetType(), "",
                     "window.onload = function() { showAlert('Inicia sessión para comprar ','danger');};", true);
                 }
-                else
-                {
-                    clientScriptManager.RegisterStartupScript(GetType(), "",
-                    "window.onload = function() { showAlert('Cerraste sesion','danger');};", true);
-                }
-
-                
             }
         }
 

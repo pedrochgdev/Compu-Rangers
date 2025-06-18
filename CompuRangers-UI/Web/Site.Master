@@ -239,7 +239,7 @@
 
 
 				                   <div class="mt-3 text-center">
-					                   <p class="small">¿No tienes cuenta? <a href="#" class="text-decoration-none" style="color: #EB484C;">Regístrate aquí</a></p>
+					                   <p class="small">¿No tienes cuenta? <a href="/Auth/SignUp.aspx" class="text-decoration-none" style="color: #EB484C;">Regístrate aquí</a></p>
 				                   </div>
 			                   </div>
 		                </div>
@@ -298,7 +298,7 @@
             <hr class="border-secondary my-4">
             <div class="row">
                 <div class="col text-center small text-secondary">
-                    &copy; {{ date('Y') }} MiTiendaPC. Todos los derechos reservados.
+                    &copy; <%: DateTime.Now.Year %> MiTiendaPC. Todos los derechos reservados.
                 </div>
             </div>
         </div>
