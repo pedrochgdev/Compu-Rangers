@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - CmpuRangers Store</title>
+    <title><%: Page.Title %> - CompuRangers Store</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -232,7 +232,7 @@
 									                Recordarme
 								                </label>
 							                </div>
-							                <a href="#" class="text-decoration-none small" style="color: #EB484C;">¿Olvidaste tu contraseña?</a>
+							                <a class="text-decoration-none small" href="/Auth/PasswordRecovery.aspx" style="color: #EB484C;">¿Olvidaste tu contraseña?</a>
 						                </div>
                                         
 						                <asp:LinkButton ID="LinkButton2" runat="server" CssClass="btn btn-danger w-100 py-2" Text="Iniciar sesión" OnClick="btnIniciarLogin" />

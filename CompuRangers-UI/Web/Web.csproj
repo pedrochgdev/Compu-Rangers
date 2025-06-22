@@ -140,6 +140,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Auth\PasswordRecovery.aspx" />
     <Content Include="Cliente\DetalleCompra.aspx" />
     <Content Include="Cliente\PaymentResponse\Cancel.aspx" />
     <Content Include="Cliente\PaymentResponse\Error.aspx" />
@@ -345,6 +346,13 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auth\PasswordRecovery.aspx.cs">
+      <DependentUpon>PasswordRecovery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auth\PasswordRecovery.aspx.designer.cs">
+      <DependentUpon>PasswordRecovery.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Cliente\PaymentResponse\Cancel.aspx.cs">
       <DependentUpon>Cancel.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
