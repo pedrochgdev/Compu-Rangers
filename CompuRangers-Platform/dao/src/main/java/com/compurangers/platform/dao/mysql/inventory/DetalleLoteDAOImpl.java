@@ -4,6 +4,7 @@ import com.compurangers.platform.core.domain.inventory.DetalleLote;
 import com.compurangers.platform.dao.inventory.IDetalleLoteDAO;
 import com.compurangers.platform.dao.mysql.BaseDetalleDAOImpl;
 import com.compurangers.platform.dao.mysql.catalog.ProductoDAOImpl;
+import com.compurangers.platform.util.DatabaseUtil;
 import java.sql.Connection;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
@@ -84,5 +85,26 @@ public class DetalleLoteDAOImpl extends BaseDetalleDAOImpl<DetalleLote> implemen
     protected CallableStatement getByFkCommand(Connection conn, int foreignKey) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+    @Override
+    public int getCantidadDeLote(int productoId, int loteId) {
+        try (
+            Connection conn = DatabaseUtil.getInstance().getConnection();
+            CallableStatement cmd = conn.prepareCall("{CALL obtener_cantidad_de_lote(?, ?, ?)}");
+        ) {
+            cmd.setInt(1, productoId);
+            cmd.setInt(2, loteId);
+            cmd.registerOutParameter(3, java.sql.Types.INTEGER); // OUT param
 
+            cmd.execute();
+
+            return cmd.getInt(3);
+        } catch (SQLException e) {
+            System.err.println("Error SQL al obtener la cantidad del lote: " + e.getMessage());
+            throw new RuntimeException("No se pudo obtener la cantidad del lote.", e);
+        } catch (Exception e) {
+            System.err.println("Error inesperado: " + e.getMessage());
+            throw new RuntimeException("Error inesperado al obtener la cantidad del lote.", e);
+        }
+    }     
 }

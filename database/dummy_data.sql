@@ -49,13 +49,7 @@ VALUES
 
 -- Insert into CARRITO (cart for client1)
 INSERT INTO CARRITO (cantidad_productos, total, cliente_usuario_id)
-VALUES (2, 2799.98, 2);
-
--- Insert into DETALLE_CARRITO (cart details)
-INSERT INTO DETALLE_CARRITO (cantidad, subtotal, carrito_id, producto_id)
-VALUES 
-    (1, 1999.99, 1, 1),  -- MacBook Pro
-    (1, 799.99, 1, 2);   -- Galaxy S21
+VALUES (0, 0, 2);
 
 -- Insert into ORDEN_DE_VENTA (order from the cart)
 INSERT INTO ORDEN_DE_VENTA (estado, fecha, total, cliente_usuario_id, direccion)
@@ -89,7 +83,15 @@ VALUES (CURDATE(), 'ABIERTO', 2001);
 
 -- Insert into DETALLE_LOTE (lot details)
 INSERT INTO DETALLE_LOTE (cantidad, precio_compra, lote_id, producto_id)
-VALUES (10, 1500.00, 1, 1);  -- 10 MacBook Pros
+VALUES 
+(10, 1500.00, 1, 1),  -- 10 MacBook Pros
+(10, 1500.00, 1, 2),
+(10, 1500.00, 1, 3),
+(10, 1500.00, 1, 4),
+(10, 1500.00, 1, 5),
+(10, 1500.00, 1, 6),
+(10, 1500.00, 1, 7),
+(10, 1500.00, 1, 8);
 
 -- Insert into INVENTARIO (inventory for the lot)
 INSERT INTO INVENTARIO (cantidad_disponible, lote_id, producto_id)
@@ -104,7 +106,7 @@ VALUES (10, 1, 1),
 
 -- Insert into IMPUESTO (tax type)
 INSERT INTO IMPUESTO (nombre, abreviacion, tipo)
-VALUES ('Value Added Tax', 'VAT', 'VENTA');
+VALUES ('Impuesto General a las ventas', 'IGV', 'VENTA');
 
 -- Insert into PERIODO (tax period)
 INSERT INTO PERIODO (fecha_inicio, fecha_fin)
@@ -123,22 +125,23 @@ VALUES (504.00, 1001, 1, 1);
 -- Insert into MONEDA (currencies)
 INSERT INTO MONEDA (codigo, nombre)
 VALUES 
-    ('USD', 'US Dollar'),
-    ('EUR', 'Euro');
+    ('SOL', 'Sol Peruano'),
+    ('USD', 'US Dollar');
 
 -- Insert into MONEDA_PERIODO (exchange rates for the period)
 INSERT INTO MONEDA_PERIODO (moneda_id, periodo_id, tipoCambio, estado, valor)
 VALUES 
     (1, 1, 'COMPRA', 'ACTIVO', 1.00),  -- USD buy rate
     (1, 1, 'VENTA', 'ACTIVO', 1.00),   -- USD sell rate
-    (2, 1, 'COMPRA', 'ACTIVO', 1.10),  -- EUR buy rate
-    (2, 1, 'VENTA', 'ACTIVO', 1.20);   -- EUR sell rate
+    (2, 1, 'COMPRA', 'ACTIVO', 3.60),  -- EUR buy rate
+    (2, 1, 'VENTA', 'ACTIVO', 3.80);   -- EUR sell rate
 
 -- Insert into METODO_DE_PAGO (payment methods)
 INSERT INTO METODO_DE_PAGO (nombre, descripcion, estado)
 VALUES 
-    ('Credit Card', 'Payment by credit card', 'ACTIVO'),
-    ('PayPal', 'Payment by PayPal', 'ACTIVO');
+    ('IZIPAY', 'Payment by credit card', 'ACTIVO'),
+    ('POS', 'Payment by credit card', 'ACTIVO'),
+    ('PAYPAL', 'Payment by PayPal', 'ACTIVO');
 
 -- Insert into PAGO (payment for the sales document)
 -- Note: Using 0 for documento_de_compras_numero as a workaround since it’s NOT NULL but not applicable here

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="Ventas.aspx.cs" Inherits="Web.Admin" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="Ventas.aspx.cs" Inherits="Web.Ventas" %>
 
 <asp:Content ID="HomeContent" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -10,7 +10,7 @@
                 <div class="card shadow-sm border-0">
                     <div class="card-body text-center">
                         <h6 class="card-title text-muted">Total Ventas</h6>
-                        <h2 class="fw-bold text-success">$12,300</h2>
+                        <h2 class="fw-bold text-success">$<asp:Label ID="lblTotalVentas" runat="server" Text="0.00" /></h2>
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                 <div class="card shadow-sm border-0">
                     <div class="card-body text-center">
                         <h6 class="card-title text-muted">Pedidos Hoy</h6>
-                        <h2 class="fw-bold text-info">38</h2>
+                        <h2 class="fw-bold text-info"><asp:Label ID="lblPedidosHoy" runat="server" Text="0" /></h2>
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 <div class="card shadow-sm border-0">
                     <div class="card-body text-center">
                         <h6 class="card-title text-muted">Clientes Nuevos</h6>
-                        <h2 class="fw-bold text-warning">7</h2>
+                        <h2 class="fw-bold text-warning"><asp:Label ID="lblClientesNuevos" runat="server" Text="0" /></h2>
                     </div>
                 </div>
             </div>

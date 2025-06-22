@@ -31,4 +31,8 @@ public class ProductoBO {
         return productDAO.getAll();
     }
     
+    public List<Producto> getRanking(){
+        return productDAO.getRanking();
+    }
+    
 }

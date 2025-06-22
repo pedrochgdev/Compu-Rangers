@@ -129,6 +129,10 @@
     <None Include="Connected Services\WebService\OrdenDeVentaWS.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\WebService\ProductoWS.wsdl" />
+    <None Include="Connected Services\WebService\ProductoWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\WebService\servicio.disco" />
     <None Include="Connected Services\WebService\configuration91.svcinfo" />
     <None Include="Connected Services\WebService\configuration.svcinfo" />
@@ -137,9 +141,14 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Cliente\DetalleCompra.aspx" />
+    <Content Include="Cliente\PaymentResponse\Cancel.aspx" />
+    <Content Include="Cliente\PaymentResponse\Error.aspx" />
+    <Content Include="Cliente\PaymentResponse\Refused.aspx" />
+    <Content Include="Cliente\PaymentResponse\Success.aspx" />
+    <Content Include="Cliente\PaymentResponse\WaitingPayment.aspx" />
     <Content Include="Cliente\PurchaseHistory.aspx" />
     <Content Include="Scripts\CompuRangers\Alert.js" />
-    <Content Include="Scripts\CompuRangers\Login.js" />
+    <Content Include="Scripts\CompuRangers\Modal.js" />
     <Content Include="Admin\Ventas.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -276,6 +285,30 @@
     <Content Include="Connected Services\WebService\Web.WebService.getAllCategoriasResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.getClientesNuevosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.getPedidosHoyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.getTotalHistoricoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.getPedidosSemanalResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.getRankingResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.pedidoPorDiaDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.productoDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.reservarInventarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -312,6 +345,41 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cliente\PaymentResponse\Cancel.aspx.cs">
+      <DependentUpon>Cancel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cliente\PaymentResponse\Cancel.aspx.designer.cs">
+      <DependentUpon>Cancel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cliente\PaymentResponse\Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cliente\PaymentResponse\Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cliente\PaymentResponse\Refused.aspx.cs">
+      <DependentUpon>Refused.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cliente\PaymentResponse\Refused.aspx.designer.cs">
+      <DependentUpon>Refused.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cliente\PaymentResponse\Success.aspx.cs">
+      <DependentUpon>Success.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cliente\PaymentResponse\Success.aspx.designer.cs">
+      <DependentUpon>Success.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cliente\PaymentResponse\WaitingPayment.aspx.cs">
+      <DependentUpon>WaitingPayment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cliente\PaymentResponse\WaitingPayment.aspx.designer.cs">
+      <DependentUpon>WaitingPayment.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\WebService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

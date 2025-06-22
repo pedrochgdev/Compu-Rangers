@@ -30,4 +30,13 @@ public class OrdenDeVentaBO {
     public List<OrdenDeVenta> getAllOrdenDeVenta() {
         return ordenDeVentaDAO.getAll();
     }
+    
+    public double getTotalHistorico(){
+        return ordenDeVentaDAO.getTotalHistorico();
+    }
+    
+    public int getPedidosHoy(){
+        return ordenDeVentaDAO.getPedidosHoy();
+    }
+    
 }

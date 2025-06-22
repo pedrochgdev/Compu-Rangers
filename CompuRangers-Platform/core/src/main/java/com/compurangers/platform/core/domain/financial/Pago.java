@@ -14,6 +14,8 @@ public class Pago {
     private int metodoDePagoId;
 
     private int monedaPeriodoId;
+    
+    public Pago(){}
 
     public int getId() {
         return id;

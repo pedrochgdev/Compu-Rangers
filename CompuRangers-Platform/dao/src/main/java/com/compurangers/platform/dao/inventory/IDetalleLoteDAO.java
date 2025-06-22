@@ -4,5 +4,5 @@ import com.compurangers.platform.core.domain.inventory.DetalleLote;
 import com.compurangers.platform.dao.IListByFk;
 
 public interface IDetalleLoteDAO extends IListByFk<DetalleLote> {
-
+    int getCantidadDeLote(int productoId, int loteId);
 }

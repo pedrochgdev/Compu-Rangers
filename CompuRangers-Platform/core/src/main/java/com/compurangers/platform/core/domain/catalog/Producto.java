@@ -8,13 +8,14 @@ public class Producto {
     private double precioVenta;
     private Categoria categoria;
     private Marca marca;
+    private int cantidadVendida;
 
     // Constructor vacío
     public Producto() {}
 
     // Constructor completo
     public Producto(int id, String sku, String nombre, String descripcion, 
-                    double precioVenta, Categoria categoria, Marca marca) {
+                    double precioVenta, Categoria categoria, Marca marca, int cantidadVendida) {
         this.id = id;
         this.sku = sku;
         this.nombre = nombre;
@@ -22,6 +23,7 @@ public class Producto {
         this.precioVenta = precioVenta;
         this.categoria = categoria;
         this.marca = marca;
+        this.cantidadVendida = cantidadVendida;
     }
 
     // Getters y Setters
@@ -45,6 +47,9 @@ public class Producto {
 
     public Marca getMarca() { return marca; }
     public void setMarca(Marca marca) { this.marca = marca; }
+
+    public int getCantidadVendida() { return cantidadVendida; }
+    public void setCantidadVendida(int cantidadVendida) { this.cantidadVendida = cantidadVendida; }
   
     @Override
     public String toString() {

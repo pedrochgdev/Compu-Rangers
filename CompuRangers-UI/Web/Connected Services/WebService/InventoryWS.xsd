@@ -2,16 +2,25 @@
 <xs:schema xmlns:tns="http://services.compurangers.com" targetNamespace="http://services.compurangers.com" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="getCatalog" type="tns:getCatalog" />
   <xs:element name="getCatalogResponse" type="tns:getCatalogResponse" />
+  <xs:element name="reservarInventario" type="tns:reservarInventario" />
+  <xs:element name="reservarInventarioResponse" type="tns:reservarInventarioResponse" />
   <xs:complexType name="getCatalog">
     <xs:sequence />
   </xs:complexType>
   <xs:complexType name="getCatalogResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:producto" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:productoDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="productoDTO">
+    <xs:sequence>
+      <xs:element name="cantidadDisponible" type="xs:int" />
+      <xs:element minOccurs="0" name="producto" type="tns:producto" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="producto">
     <xs:sequence>
+      <xs:element name="cantidadVendida" type="xs:int" />
       <xs:element minOccurs="0" name="categoria" type="tns:categoria" />
       <xs:element minOccurs="0" name="descripcion" type="xs:string" />
       <xs:element name="id" type="xs:int" />
@@ -34,5 +43,34 @@
       <xs:element name="id" type="xs:int" />
       <xs:element minOccurs="0" name="nombre" type="xs:string" />
     </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="reservarInventario">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ordenVenta" type="tns:ordenDeVenta" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ordenDeVenta">
+    <xs:sequence>
+      <xs:element name="clienteId" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="detalles" nillable="true" type="tns:detalleVenta" />
+      <xs:element minOccurs="0" name="direccion" type="xs:string" />
+      <xs:element minOccurs="0" name="estado" type="xs:string" />
+      <xs:element minOccurs="0" name="fecha" type="xs:dateTime" />
+      <xs:element name="id" type="xs:int" />
+      <xs:element name="total" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="detalleVenta">
+    <xs:sequence>
+      <xs:element name="cantidad" type="xs:int" />
+      <xs:element name="devuelto" type="xs:int" />
+      <xs:element name="id" type="xs:int" />
+      <xs:element name="idOrdenVenta" type="xs:int" />
+      <xs:element minOccurs="0" name="producto" type="tns:producto" />
+      <xs:element name="subtotal" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="reservarInventarioResponse">
+    <xs:sequence />
   </xs:complexType>
 </xs:schema>

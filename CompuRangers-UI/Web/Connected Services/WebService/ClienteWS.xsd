@@ -2,6 +2,8 @@
 <xs:schema xmlns:tns="http://services.compurangers.com" targetNamespace="http://services.compurangers.com" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="addCliente" type="tns:addCliente" />
   <xs:element name="addClienteResponse" type="tns:addClienteResponse" />
+  <xs:element name="getClientesNuevos" type="tns:getClientesNuevos" />
+  <xs:element name="getClientesNuevosResponse" type="tns:getClientesNuevosResponse" />
   <xs:element name="payment" type="tns:payment" />
   <xs:element name="paymentResponse" type="tns:paymentResponse" />
   <xs:element name="searchCliente" type="tns:searchCliente" />
@@ -34,6 +36,7 @@
   </xs:complexType>
   <xs:complexType name="producto">
     <xs:sequence>
+      <xs:element name="cantidadVendida" type="xs:int" />
       <xs:element minOccurs="0" name="categoria" type="tns:categoria" />
       <xs:element minOccurs="0" name="descripcion" type="xs:string" />
       <xs:element name="id" type="xs:int" />
@@ -62,9 +65,22 @@
       <xs:element minOccurs="0" name="return" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="addCliente">
+  <xs:complexType name="getClientesNuevos">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="getClientesNuevosResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" name="cliente" type="tns:cliente" />
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchCliente">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchClienteResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:cliente" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="cliente">
@@ -95,19 +111,14 @@
       <xs:element name="nanos" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name="addCliente">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cliente" type="tns:cliente" />
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="addClienteResponse">
     <xs:sequence>
       <xs:element name="return" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="searchCliente">
-    <xs:sequence>
-      <xs:element name="id" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="searchClienteResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="tns:cliente" />
     </xs:sequence>
   </xs:complexType>
 </xs:schema>

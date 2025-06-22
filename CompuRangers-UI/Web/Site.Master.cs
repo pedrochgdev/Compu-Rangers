@@ -19,26 +19,9 @@ namespace Web
         private readonly InventoryWSClient invWS;
         private readonly CarritoWSClient carritoWSClient;
         private readonly ItemCarritoWSClient icWS;
-        public BindingList<itemCarrito> listItems;
         private carrito shoppingcart;
         private ClientScriptManager clientScriptManager;
 
-        public BindingList<itemCarrito> ListItems
-        {
-            get
-            {
-                if (listItems == null && Session["user"] != null)
-                {
-                    int userId = Convert.ToInt32(Session["user"]);
-                    object items = icWS.getAllFromCarrito(userId);
-                    if (items != null)
-                        listItems = new BindingList<itemCarrito>(((itemCarrito[])items).ToList());
-                    else
-                        listItems = new BindingList<itemCarrito>();
-                }
-                return listItems;
-            }
-        }
         public carrito ShoppingCart
         {
             get
@@ -59,8 +42,8 @@ namespace Web
         {
             get
             {
-                if (listItems == null) return "0.00";
-                double total = listItems.Sum(i => i.subtotal);
+                if (ShoppingCart == null || ShoppingCart.items == null) return "0.00";
+                double total = ShoppingCart.items.Sum(i => i.subtotal);
                 return total.ToString("N2");
             }
         }
@@ -71,7 +54,7 @@ namespace Web
             int itemId = Convert.ToInt32(args[0]);
             int delta = Convert.ToInt32(args[1]);
 
-            itemCarrito item = listItems.FirstOrDefault(i => i.id == itemId);
+            itemCarrito item = ShoppingCart.items.FirstOrDefault(i => i.id == itemId);
             if (item != null)
             {
                 int nuevaCantidad = item.cantidad + delta;
@@ -142,15 +125,8 @@ namespace Web
                     }
                 }else {
                     clientScriptManager.RegisterStartupScript(GetType(), "",
-                    "window.onload = function() { showAlert('Inicia sessión para comprar ','danger');};", true);
+                    "window.onload = function() { showAlert('Inicia sesión para comprar ','danger');};", true);
                 }
-                else
-                {
-                    clientScriptManager.RegisterStartupScript(GetType(), "",
-                    "window.onload = function() { showAlert('Cerraste sesion','danger');};", true);
-                }
-
-                
             }
         }
 
@@ -183,14 +159,12 @@ namespace Web
             
             if (id > 0)
             {
-                Session["user"] = id;
-              
-                
+                Session["user"] = id;                
                 FormsAuthenticationTicket tkt;
                 string cookiestr;
                 HttpCookie ck;
-                tkt = new FormsAuthenticationTicket(30, usuario, DateTime.Now,
-                DateTime.Now.AddMinutes(1), true, "datos adicionales del usuario");
+                tkt = new FormsAuthenticationTicket(1, usuario, DateTime.Now,
+                DateTime.Now.AddMinutes(30), true, "datos adicionales del usuario");
                 cookiestr = FormsAuthentication.Encrypt(tkt);
                 ck = new HttpCookie(FormsAuthentication.FormsCookieName, cookiestr);
                 ck.Expires = tkt.Expiration;
@@ -233,36 +207,32 @@ namespace Web
             if (Session["user"] == null) return;
 
             int userId = Convert.ToInt32(Session["user"]);
-            object items = icWS.getAllFromCarrito(userId);
-            if (items != null)
-            {
-                listItems = new BindingList<itemCarrito>(((itemCarrito[])items).ToList());
-                int cantidadTotalProductos = listItems.Sum(i => i.cantidad);
-                double totalGeneral = listItems.Sum(i => i.subtotal);
-                shoppingcart = carritoWSClient.getCarritoFromUser(userId);
-                actualizarCarrito(cantidadTotalProductos, totalGeneral);
-                rptCarrito.DataSource = listItems;
-                rptCarrito.DataBind();
+            shoppingcart = carritoWSClient.getCarritoFromUser(userId);
 
-                actualizarIcono(cantidadTotalProductos);
-            }
-            else
-            {
-                listItems = new BindingList<itemCarrito>();
-                rptCarrito.DataSource = listItems;
-                rptCarrito.DataBind();
+            if (shoppingcart == null)
+                shoppingcart = new carrito();
 
-                shoppingcart = carritoWSClient.getCarritoFromUser(userId);
-                if (shoppingcart == null) shoppingcart = new carrito();
+            if (shoppingcart.items == null)
+                shoppingcart.items = new List<itemCarrito>().ToArray();
 
-                actualizarCarrito(0, 0);
-            }
+
+            int cantidadTotalProductos = shoppingcart.items.Sum(i => i.cantidad);
+            double totalGeneral = shoppingcart.items.Sum(i => i.subtotal);
+
+            actualizarCarrito(cantidadTotalProductos, totalGeneral);
+
+            rptCarrito.DataSource = shoppingcart.items;
+            rptCarrito.DataBind();
+
+            actualizarIcono(cantidadTotalProductos);
         }
+
         private void actualizarCarrito(int cantidadTotalProductos, double totalGeneral)
         {
             shoppingcart.cantidadProductos = cantidadTotalProductos;
             shoppingcart.total = totalGeneral;
             carritoWSClient.updateCarrito(shoppingcart);
+            
         }
         private void actualizarIcono(int cantidadTotalProductos)
         {

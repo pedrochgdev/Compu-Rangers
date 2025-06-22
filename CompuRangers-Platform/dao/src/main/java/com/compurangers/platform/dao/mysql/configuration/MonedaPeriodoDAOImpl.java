@@ -3,6 +3,7 @@ package com.compurangers.platform.dao.mysql.configuration;
 import com.compurangers.platform.core.domain.configuration.MonedaPeriodo;
 import com.compurangers.platform.dao.configuration.IMonedaPeriodoDAO;
 import com.compurangers.platform.dao.mysql.BaseDAOImpl;
+import com.compurangers.platform.util.DatabaseUtil;
 import java.sql.Connection;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
@@ -45,6 +46,13 @@ public class MonedaPeriodoDAOImpl extends BaseDAOImpl<MonedaPeriodo> implements 
         cs.setInt(1, id);
         return cs;
     }
+    
+    protected CallableStatement search2Command(Connection conn, int id, String tipo) throws SQLException {
+        CallableStatement cs = conn.prepareCall("{CALL search_moneda_periodo_with_type(?, ?)}");
+        cs.setInt(1, id);
+        cs.setString(2, tipo);
+        return cs;
+    }
 
     @Override
     protected CallableStatement getAllCommand(Connection conn) throws SQLException {
@@ -61,6 +69,31 @@ public class MonedaPeriodoDAOImpl extends BaseDAOImpl<MonedaPeriodo> implements 
         m.setEstado(rs.getString("estado"));
         m.setValor(rs.getDouble("valor"));
         return m;
+    }
+
+    @Override
+    public MonedaPeriodo searchWithType(int id, String tipo) {
+        try (
+            Connection conn = DatabaseUtil.getInstance().getConnection();
+            CallableStatement cmd = this.search2Command(conn, id, tipo);
+        ) {
+            ResultSet rs = cmd.executeQuery();
+            
+            if (!rs.next()) {
+                System.err.println("No se encontro el registro con id: " + id);
+                return null;
+            }
+            
+            return this.mapModel(rs);
+        }
+        catch (SQLException e) {
+            System.err.println("Error SQL durante la busqueda: " + e.getMessage());
+            throw new RuntimeException("No se pudo buscar el registro.", e);
+        }
+        catch (Exception e) {
+            System.err.println("Error inpesperado: " + e.getMessage());
+            throw new RuntimeException("Error inesperado al buscar el registro.", e);
+        }
     }
     
 }

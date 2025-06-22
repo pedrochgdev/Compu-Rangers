@@ -34,4 +34,9 @@ public class ClienteWS {
     public String payment(@WebParam(name = "ordenVenta") OrdenDeVenta ov) {
         return user.payment(ov);
     }
+    
+    @WebMethod(operationName = "getClientesNuevos")
+    public int getClientesNuevos() {
+        return user.getClientesNuevos();
+    }
 }

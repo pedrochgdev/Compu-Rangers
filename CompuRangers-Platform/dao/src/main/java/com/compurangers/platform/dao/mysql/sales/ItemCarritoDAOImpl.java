@@ -91,7 +91,7 @@ public class ItemCarritoDAOImpl extends BaseDetalleDAOImpl<ItemCarrito> implemen
             ResultSet rs = cmd.executeQuery();
             
             if (!rs.next()) {
-                System.err.println("No se encontro el registro con id: " + carritoId + " " + productoId);
+                System.err.println("No se encontro el registro con id xDDD: " + carritoId + " " + productoId);
                 return null;
             }
             
@@ -113,6 +113,31 @@ public class ItemCarritoDAOImpl extends BaseDetalleDAOImpl<ItemCarrito> implemen
         cs.setInt(1, cid);
         cs.setInt(2, pid);
         return cs;
+    }
+    
+    protected CallableStatement deleteAllCommand(Connection conn, int id) throws SQLException {
+        String sql = "{call delete_all_items_from_carrito(?)}";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.setInt(1, id);
+        return cs;
+    }
+
+    @Override
+    public boolean deleteAllByCarritoId(int cid) {
+        try (
+            Connection conn = DatabaseUtil.getInstance().getConnection();
+            CallableStatement cmd = this.deleteAllCommand(conn, cid);
+        ) {
+            return cmd.executeUpdate() > 0;
+        }
+        catch (SQLException e) {
+            System.err.println("Error SQL durante la eliminacion: " + e.getMessage());
+            throw new RuntimeException("No se pudo eliminar el registro.", e);
+        }
+        catch (Exception e) {
+            System.err.println("Error inpesperado: " + e.getMessage());
+            throw new RuntimeException("Error inesperado al eliminar el registro.", e);
+        }
     }
     
 }

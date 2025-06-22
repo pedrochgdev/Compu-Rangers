@@ -4,6 +4,7 @@ import com.compurangers.platform.core.domain.sales.OrdenDeVenta;
 import com.compurangers.platform.core.domain.user.Cliente;
 import com.compurangers.platform.core.domain.user.Usuario;
 import com.compurangers.platform.dao.mysql.sales.CarritoDAOImpl;
+import com.compurangers.platform.dao.mysql.sales.OrdenDeVentaDAOImpl;
 import com.compurangers.platform.dao.mysql.user.ClienteDAOImpl;
 import com.compurangers.platform.dao.mysql.user.UsuarioDAOImpl;
 import com.compurangers.platform.dao.mysql.user.auth.TokenRecuperacionDAOImpl;
@@ -11,11 +12,13 @@ import com.compurangers.platform.dao.sales.ICarritoDAO;
 import com.compurangers.platform.dao.user.IClienteDAO;
 import com.compurangers.platform.dao.user.auth.ITokenRecuperacionDAO;
 import com.compurangers.platform.service.payment.PaymentService;
+import com.compurangers.platform.service.sales.OrdenDeVentaBO;
 import com.compurangers.platform.service.user.ClienteBO;
 import com.compurangers.platform.service.user.UsuarioBO;
 import com.compurangers.platform.service.user.auth.AuthService;
 import com.compurangers.platform.service.user.auth.TokenRecuperacionBO;
 import com.compurangers.platform.service.user.auth.utils.PasswordUtils;
+import com.compurangers.platform.service.utils.EmailService;
 import java.util.Date;
 import java.util.List;
 
@@ -55,17 +58,9 @@ public class AppPrueba {
 //        System.out.println("¿Se envió correo de recuperación? " + recoveryStatus);
 //
         // Simular pago
-        OrdenDeVenta ov = new OrdenDeVenta();
-        
-        ov.setClienteId(2);
-        ov.setDireccion("456 Client Ave");
-        ov.setFecha(new Date());
-        ov.setTotal(2799.98);
-        ov.setEstado("EN_PROCESO");
-        
-        String abc = usuarioService.payment(ov);
-        
-        System.out.println(abc);
+//        OrdenDeVentaBO obo = new OrdenDeVentaBO(new OrdenDeVentaDAOImpl());
+//        int o = usuarioService.getClientesNuevos();
+//        double i = obo.getTotalHistorico();
 
 //        // Actualizar usuario
 //        nuevoUsuario.setId(userId); // Asegúrate de asignar el ID para la actualización
@@ -95,5 +90,12 @@ public class AppPrueba {
 //        // Eliminar usuario
 //        boolean deleteStatus = usuarioService.deleteUsuario(userId);
 //        System.out.println("¿Se eliminó el usuario? " + deleteStatus);
+
+        EmailService emailService = new EmailService();
+        String emailDestino = "gabrielchg2004@gmail.com"; // Cambia esto por uno real que controles
+        String token = "PRUEBA-TOKEN-12345";
+
+        emailService.sendPasswordRecoveryEmail(emailDestino, token);
+        System.out.println("Correo enviado. Revisa tu bandeja.");
     }
 }

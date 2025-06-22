@@ -22,7 +22,7 @@ namespace Web
         private readonly CarritoWSClient carritoWSClient;
         private readonly ItemCarritoWSClient icWS;
         private readonly CategoriaWSClient categoriaWS;
-        private BindingList<producto> catalogo;
+        private BindingList<productoDTO> catalogo;
         private carrito shoppingcart;
 
         public Home()
@@ -50,9 +50,12 @@ namespace Web
         {
             if (!IsPostBack)
             {
-                catalogo = new BindingList<producto>(invWS.getCatalog());
+                List<productoDTO> productos = invWS.getCatalog().ToList();
+                catalogo = new BindingList<productoDTO>(productos);
+
                 rptProductos.DataSource = catalogo;
                 rptProductos.DataBind();
+
                 categoria[] categorias = categoriaWS.getAllCategorias();
                 ddlCategoria.Items.Clear();
                 ddlCategoria.Items.Add(new ListItem("Todas las categorías", ""));
@@ -62,6 +65,7 @@ namespace Web
                     ddlCategoria.Items.Add(new ListItem(cat.nombre, cat.nombre));
                 }
             }
+
             SiteMaster master = (SiteMaster)this.Master;
             if (master != null)
             {
@@ -69,61 +73,83 @@ namespace Web
             }
         }
 
+
         protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
             string categoria = ddlCategoria.SelectedValue;
-            List<producto> productos = invWS.getCatalog().ToList(); ;
+            List<productoDTO> productos = invWS.getCatalog().ToList();
 
             if (!string.IsNullOrEmpty(categoria))
             {
-                productos = productos.Where(p => p.categoria.nombre == categoria).ToList();
+                productos = productos
+                    .Where(p => p.producto.categoria.nombre == categoria)
+                    .ToList();
             }
 
-            catalogo = new BindingList<producto>(productos);
+            catalogo = new BindingList<productoDTO>(productos);
             rptProductos.DataSource = catalogo;
             rptProductos.DataBind();
         }
 
 
+
         protected void btnAddCart(object sender, EventArgs e)
         {
             string script;
-            //Llamar a una función Javascript
+
             if (Session["user"] == null)
+            {
                 script = "window.onload = function() { showModal('form-modal-login');};";
+            }
             else
-            { 
+            {
                 SiteMaster master = (SiteMaster)this.Master;
                 shoppingcart = master.ShoppingCart;
+
                 LinkButton btn = (LinkButton)sender;
                 RepeaterItem item = (RepeaterItem)btn.NamingContainer;
+
                 HiddenField hiddenId = (HiddenField)item.FindControl("hiddenId");
+                HiddenField hiddenCantidad = (HiddenField)item.FindControl("hiddenCantidad"); // tu nuevo campo
+
                 HtmlGenericControl lblNombre = (HtmlGenericControl)item.FindControl("lblNombre");
                 HtmlGenericControl lblPrecioVenta = (HtmlGenericControl)item.FindControl("lblPrecioVenta");
-                producto p = new producto();
-                p.id = Convert.ToInt32(hiddenId.Value);
-                string precioTexto = lblPrecioVenta.InnerText.Replace("$", "").Trim();
-                p.precioVenta = Convert.ToDouble(precioTexto);
-                p.nombre = Convert.ToString(lblNombre.InnerText);
-                itemCarrito ic = new itemCarrito();
-                ic.carritoId = shoppingcart.id;
-                ic.producto = p;
-                ic.cantidad = 1;
-                ic.subtotal = ic.cantidad * p.precioVenta;
-                shoppingcart.cantidadProductos += ic.cantidad;
-                shoppingcart.total += ic.subtotal;
 
-                if (carritoWSClient.addItem(ic))
+                int cantidadDisponible = Convert.ToInt32(hiddenCantidad.Value);
+                if (cantidadDisponible <= 0)
                 {
-                    carritoWSClient.updateCarrito(shoppingcart);
+                    script = "window.onload = function() { showAlert('No hay stock','warning');};";
+                }
+                else
+                {
+                    producto p = new producto();
+                    p.id = Convert.ToInt32(hiddenId.Value);
+                    string precioTexto = lblPrecioVenta.InnerText.Replace("$", "").Trim();
+                    p.precioVenta = Convert.ToDouble(precioTexto);
+                    p.nombre = lblNombre.InnerText;
 
+                    itemCarrito ic = new itemCarrito();
+                    ic.carritoId = shoppingcart.id;
+                    ic.producto = p;
+                    ic.cantidad = 1;
+                    ic.subtotal = ic.cantidad * p.precioVenta;
+
+                    shoppingcart.cantidadProductos += ic.cantidad;
+                    shoppingcart.total += ic.subtotal;
+
+                    if (carritoWSClient.addItem(ic))
+                    {
+                        carritoWSClient.updateCarrito(shoppingcart);
+                    }
+
+                    if (master != null)
+                    {
+                        master.ShoppingCart = shoppingcart;
+                        master.CargarCarrito();
+                    }
+
+                    script = "window.onload = function() { showModal('carritoModal');};";
                 }
-                if (master != null)
-                {
-                    master.ShoppingCart = shoppingcart;
-                    master.CargarCarrito();
-                }
-                script = "window.onload = function() { showModal('carritoModal');};";
             }
 
             ClientScript.RegisterStartupScript(GetType(), "", script, true);

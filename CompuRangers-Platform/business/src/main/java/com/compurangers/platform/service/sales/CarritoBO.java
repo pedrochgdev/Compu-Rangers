@@ -4,6 +4,7 @@ import com.compurangers.platform.core.domain.sales.Carrito;
 import com.compurangers.platform.core.domain.sales.ItemCarrito;
 import com.compurangers.platform.dao.mysql.sales.ItemCarritoDAOImpl;
 import com.compurangers.platform.dao.sales.ICarritoDAO;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CarritoBO {
@@ -34,8 +35,17 @@ public class CarritoBO {
     }
     
     public Carrito getCarritoFromUser(int userId){
-        return carritoDAO.getByForeignKey(userId);
+        Carrito carrito = carritoDAO.getByForeignKey(userId);
+
+        if (carrito != null) {
+            ItemCarritoBO itemCarritoBO = new ItemCarritoBO(new ItemCarritoDAOImpl());
+            List<ItemCarrito> items = itemCarritoBO.getAllFromCarrito(carrito.getUsuarioId());
+            carrito.setItems(items != null ? items : new ArrayList<>());
+        }
+
+        return carrito;
     }
+
     
     public boolean addItem(ItemCarrito ic){
         ItemCarritoBO itemCarritoBO = new ItemCarritoBO(new ItemCarritoDAOImpl());
