@@ -100,6 +100,7 @@ DROP PROCEDURE IF EXISTS add_metodo_pago;
 DROP PROCEDURE IF EXISTS update_metodo_pago;
 DROP PROCEDURE IF EXISTS delete_metodo_pago;
 DROP PROCEDURE IF EXISTS search_metodo_pago;
+DROP PROCEDURE IF EXISTS search_metodo_pago_by_name;
 DROP PROCEDURE IF EXISTS get_all_metodo_pago;
 DROP PROCEDURE IF EXISTS add_moneda;
 DROP PROCEDURE IF EXISTS update_moneda;
@@ -122,6 +123,7 @@ DROP PROCEDURE IF EXISTS add_moneda_periodo;
 DROP PROCEDURE IF EXISTS update_moneda_periodo;
 DROP PROCEDURE IF EXISTS delete_moneda_periodo;
 DROP PROCEDURE IF EXISTS search_moneda_periodo;
+DROP PROCEDURE IF EXISTS search_moneda_periodo_with_type;
 DROP PROCEDURE IF EXISTS get_all_moneda_periodo;
 DROP PROCEDURE IF EXISTS add_periodo;
 DROP PROCEDURE IF EXISTS update_periodo;
@@ -150,6 +152,15 @@ DROP PROCEDURE IF EXISTS mark_token_as_used;
 DROP PROCEDURE IF EXISTS update_user_password;
 DROP PROCEDURE IF EXISTS get_carrito_by_user;
 DROP PROCEDURE IF EXISTS search_item_in_carrito;
+DROP PROCEDURE IF EXISTS GET_TOTAL_HISTORICO;
+DROP PROCEDURE IF EXISTS GET_PEDIDOS_HOY;
+DROP PROCEDURE IF EXISTS GET_CLIENTES_NUEVOS;
+DROP PROCEDURE IF EXISTS GET_RANKING_PRODUCTOS;
+DROP PROCEDURE IF EXISTS GET_PEDIDOS_SEMANA;
+DROP PROCEDURE IF EXISTS obtener_inventario_reabastecer;
+DROP PROCEDURE IF EXISTS obtener_inventario_disponible;
+DROP PROCEDURE IF EXISTS obtener_cantidad_de_lote;
+DROP PROCEDURE IF EXISTS delete_all_items_from_carrito;
 
 /* CATALOG */
 /* PROCEDURES CATEGORIA */
@@ -317,6 +328,7 @@ CREATE PROCEDURE update_producto(
     IN nombre_in VARCHAR(100),
     IN descripcion_in TEXT,
     IN precio_venta_in DECIMAL(10, 2),
+    IN cantidad_ventas_in INT,
     IN categoria_id_in INT,
     IN marca_id_in INT
 )
@@ -326,6 +338,7 @@ BEGIN
         nombre = nombre_in,
         descripcion = descripcion_in,
         precio_venta = precio_venta_in,
+        cantidad_ventas = cantidad_ventas_in,
         categoria_id = categoria_id_in,
         marca_id = marca_id_in
     WHERE id = id_in;
@@ -524,6 +537,51 @@ BEGIN
 END;
 //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE obtener_inventario_disponible (
+    IN producto_id_in INT
+)
+BEGIN
+    SELECT 
+        *
+    FROM INVENTARIO
+    WHERE producto_id = producto_id_in AND cantidad_disponible > 0
+    ORDER BY lote_id ASC;
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE obtener_inventario_reabastecer (
+    IN producto_id_in INT
+)
+BEGIN
+    SELECT 
+        *
+    FROM INVENTARIO
+    WHERE producto_id = producto_id_in
+    ORDER BY lote_id DESC;
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE obtener_cantidad_de_lote (
+    IN producto_id_in INT,
+    IN lote_id_in INT,
+    OUT cantidad_out INT
+)
+BEGIN
+    SELECT cantidad 
+    INTO cantidad_out
+    FROM DETALLE_LOTE 
+    WHERE producto_id = producto_id_in AND lote_id = lote_id_in;
+END;
+//
+DELIMITER ;
+
+
 
 /* PROCEDURES LOTE */
 
@@ -858,6 +916,17 @@ CREATE PROCEDURE delete_item_carrito(
 BEGIN
     DELETE FROM DETALLE_CARRITO
     WHERE id = id_in;
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE delete_all_items_from_carrito (
+    IN carrito_id_in INT
+)
+BEGIN
+    DELETE FROM DETALLE_CARRITO
+    WHERE carrito_id = carrito_id_in;
 END;
 //
 DELIMITER ;
@@ -1231,7 +1300,7 @@ CREATE PROCEDURE add_documento_de_ventas(
 BEGIN
     DECLARE next_numero INT;
     
-    SELECT IFNULL(MAX(numero), 0) + 1 INTO next_numero FROM DOCUMENTO_DE_VENTAS;
+    SELECT IFNULL(MAX(numero), 10000) + 1 INTO next_numero FROM DOCUMENTO_DE_VENTAS;
     
     INSERT INTO DOCUMENTO_DE_VENTAS (numero, subtotal, impuestos, total, orden_de_venta_id)
     VALUES (next_numero, subtotal_in, impuestos_in, total_in, orden_de_venta_id_in);
@@ -1714,7 +1783,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE add_impuesto(
     OUT generated_id INT,
-    IN nombre_in VARCHAR(20),
+    IN nombre_in VARCHAR(50),
     IN abreviacion_in VARCHAR(10),
     IN tipo_in ENUM('COMPRA', 'VENTA')
 )
@@ -1730,7 +1799,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE update_impuesto(
     IN id_in INT,
-    IN nombre_in VARCHAR(20),
+    IN nombre_in VARCHAR(50),
     IN abreviacion_in VARCHAR(10),
     IN tipo_in ENUM('COMPRA', 'VENTA')
 )
@@ -1827,6 +1896,17 @@ CREATE PROCEDURE search_metodo_pago(
 BEGIN
     SELECT * FROM METODO_DE_PAGO
     WHERE id = id_in;
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE search_metodo_pago_by_name(
+    IN name_in varchar(30)
+)
+BEGIN
+    SELECT * FROM METODO_DE_PAGO
+    WHERE nombre = name_in;
 END;
 //
 DELIMITER ;
@@ -2138,6 +2218,18 @@ END;
 DELIMITER ;
 
 DELIMITER //
+CREATE PROCEDURE search_moneda_periodo_with_type(
+    IN id_in INT,
+    IN tipo_in ENUM('COMPRA', 'VENTA')
+)
+BEGIN
+    SELECT * FROM MONEDA_PERIODO
+    WHERE moneda_id = id_in AND tipoCambio = tipo_in;
+END;
+//
+DELIMITER ;
+
+DELIMITER //
 CREATE PROCEDURE get_all_moneda_periodo()
 BEGIN
     SELECT * FROM MONEDA_PERIODO;
@@ -2251,3 +2343,68 @@ BEGIN
 END;
 //
 DELIMITER ;
+
+-- DASHBOARD VENTAS --
+
+DELIMITER //
+
+CREATE PROCEDURE GET_TOTAL_HISTORICO(OUT total_out DECIMAL(8 , 2))
+BEGIN
+	SELECT SUM(total) into total_out FROM ORDEN_DE_VENTA 
+    WHERE estado IN ('PAGADO', 'ENVIADO', 'ENTREGADO');
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE GET_PEDIDOS_HOY(OUT cantidad INT)
+BEGIN
+	SELECT COUNT(*) into cantidad
+	FROM ORDEN_DE_VENTA 
+	WHERE fecha = CURRENT_DATE;
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE GET_CLIENTES_NUEVOS(OUT nuevos INT)
+BEGIN
+	SELECT COUNT(*) into nuevos
+	FROM USUARIO 
+	WHERE isAdmin = false AND created_at >= CURDATE() - INTERVAL 30 DAY;
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE GET_RANKING_PRODUCTOS()
+BEGIN
+	SELECT 
+		*
+	FROM producto
+	ORDER BY cantidad_vendida DESC
+	LIMIT 5;
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE GET_PEDIDOS_SEMANA()
+BEGIN
+	SELECT 
+		DATE(fecha) AS dia, 
+		COUNT(*) AS cantidad
+	FROM ORDEN_DE_VENTA
+	WHERE fecha >= CURDATE() - INTERVAL 7 DAY
+	GROUP BY DATE(fecha);
+END;
+//
+DELIMITER ;
+
+
+
+
