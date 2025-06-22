@@ -141,6 +141,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Auth\PasswordRecovery.aspx" />
+    <Content Include="Auth\ResetPassword.aspx" />
     <Content Include="Cliente\DetalleCompra.aspx" />
     <Content Include="Cliente\PaymentResponse\Cancel.aspx" />
     <Content Include="Cliente\PaymentResponse\Error.aspx" />
@@ -352,6 +353,13 @@
     </Compile>
     <Compile Include="Auth\PasswordRecovery.aspx.designer.cs">
       <DependentUpon>PasswordRecovery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Auth\ResetPassword.aspx.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auth\ResetPassword.aspx.designer.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="Cliente\PaymentResponse\Cancel.aspx.cs">
       <DependentUpon>Cancel.aspx</DependentUpon>
