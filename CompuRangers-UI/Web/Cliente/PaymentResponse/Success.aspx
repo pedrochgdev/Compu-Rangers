@@ -1,22 +1,28 @@
 ﻿<%@ Page Title="Success Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Success.aspx.cs" Inherits="Web.Cliente.PaymentResponse.Success" %>
 
 <asp:Content ID="SuccessPayment" ContentPlaceHolderID="MainContent" runat="server">
-    <div style="text-align:center; padding:50px;">
-        <h2 style="color: #444;">⏳ Esperando confirmación del pago...</h2>
-        <p>Pago Completado</p>
-        <img src="~/images/success.gif" alt="Completado" style="margin-top:20px;" />
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+      <div class="text-center p-4 border rounded shadow-sm bg-light">
+        <svg width="80" height="80" fill="green" class="mb-3" viewBox="0 0 16 16">
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM7 11.5l5-5-1.5-1.5L7 8.5 5.5 7 4 8.5l3 3z"/>
+        </svg>
+        <h2 class="text-success mb-2">¡Pago Completado!</h2>
+        <p class="text-muted">Gracias por tu compra. Puedes cerrar esta ventana.</p>
+      </div>
     </div>
 
-    <script type="text/javascript">
+
+    <script>
         // Notifica a la ventana que abrió esta que el pago ha sido completado
         if (window.opener) {
             window.opener.postMessage('pago-completado', '*');
         }
 
         // Espera 5 segundos y cierra la ventana
-        setTimeout(function () {
+        setTimeout(() => {
             window.close();
         }, 5000);
     </script>
+
 </asp:Content>
 
