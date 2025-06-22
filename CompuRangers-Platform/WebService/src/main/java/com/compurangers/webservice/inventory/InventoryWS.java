@@ -1,10 +1,13 @@
 package com.compurangers.webservice.inventory;
 
+import com.compurangers.platform.core.domain.catalog.dto.ProductoDTO;
 import com.compurangers.platform.core.domain.catalog.Producto;
+import com.compurangers.platform.core.domain.sales.OrdenDeVenta;
 import com.compurangers.platform.dao.mysql.inventory.InventarioDAOImpl;
 import com.compurangers.platform.service.inventory.InventarioBO;
 import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
+import jakarta.jws.WebParam;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -16,16 +19,27 @@ public class InventoryWS {
     public InventoryWS(){
         this.ibo=new InventarioBO(new InventarioDAOImpl());
     }
+    
     @WebMethod(operationName = "getCatalog")
-    public List<Producto> getCatalog() {
+    public List<ProductoDTO> getCatalog() {
         Map<Producto, Integer> catalog = ibo.getCatalog();
-        List<Producto> productos = new ArrayList<>();
+        List<ProductoDTO> productosDTO = new ArrayList<>();
 
         for (Map.Entry<Producto, Integer> entry : catalog.entrySet()) {
-            Producto p = entry.getKey();
-            productos.add(p);
+            Producto producto = entry.getKey();
+            int cantidad = entry.getValue();
+
+            ProductoDTO dto = new ProductoDTO(producto, cantidad);
+            productosDTO.add(dto);
         }
 
-        return productos;
+        return productosDTO;
     }
+
+    
+    @WebMethod(operationName = "reservarInventario")
+    public void reservarInventario(@WebParam(name = "ordenVenta") OrdenDeVenta ov){
+        ibo.reservarInventario(ov);
+    }
+    
 }
