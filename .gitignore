@@ -56,3 +56,7 @@ Thumbs.db
 # Base de datos
 *.db
 *.sqlite
+
+
+CompuRangers-Platform/util/src/main/java/com/compurangers/platform/util/Config.java
+
