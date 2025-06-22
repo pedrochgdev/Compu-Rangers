@@ -5,11 +5,17 @@
       <xsd:import schemaLocation="http://localhost:8080/WebService/OrdenDeVentaWS?xsd=1" namespace="http://services.compurangers.com" />
     </xsd:schema>
   </types>
-  <message name="addOrden">
-    <part name="parameters" element="tns:addOrden" />
+  <message name="getPedidosHoy">
+    <part name="parameters" element="tns:getPedidosHoy" />
   </message>
-  <message name="addOrdenResponse">
-    <part name="parameters" element="tns:addOrdenResponse" />
+  <message name="getPedidosHoyResponse">
+    <part name="parameters" element="tns:getPedidosHoyResponse" />
+  </message>
+  <message name="getTotalHistorico">
+    <part name="parameters" element="tns:getTotalHistorico" />
+  </message>
+  <message name="getTotalHistoricoResponse">
+    <part name="parameters" element="tns:getTotalHistoricoResponse" />
   </message>
   <message name="deleteOrden">
     <part name="parameters" element="tns:deleteOrden" />
@@ -17,19 +23,52 @@
   <message name="deleteOrdenResponse">
     <part name="parameters" element="tns:deleteOrdenResponse" />
   </message>
+  <message name="getPedidosSemanal">
+    <part name="parameters" element="tns:getPedidosSemanal" />
+  </message>
+  <message name="getPedidosSemanalResponse">
+    <part name="parameters" element="tns:getPedidosSemanalResponse" />
+  </message>
+  <message name="addOrden">
+    <part name="parameters" element="tns:addOrden" />
+  </message>
+  <message name="addOrdenResponse">
+    <part name="parameters" element="tns:addOrdenResponse" />
+  </message>
   <portType name="OrdenDeVentaWS">
-    <operation name="addOrden">
-      <input wsam:Action="http://services.compurangers.com/OrdenDeVentaWS/addOrdenRequest" message="tns:addOrden" />
-      <output wsam:Action="http://services.compurangers.com/OrdenDeVentaWS/addOrdenResponse" message="tns:addOrdenResponse" />
+    <operation name="getPedidosHoy">
+      <input wsam:Action="http://services.compurangers.com/OrdenDeVentaWS/getPedidosHoyRequest" message="tns:getPedidosHoy" />
+      <output wsam:Action="http://services.compurangers.com/OrdenDeVentaWS/getPedidosHoyResponse" message="tns:getPedidosHoyResponse" />
+    </operation>
+    <operation name="getTotalHistorico">
+      <input wsam:Action="http://services.compurangers.com/OrdenDeVentaWS/getTotalHistoricoRequest" message="tns:getTotalHistorico" />
+      <output wsam:Action="http://services.compurangers.com/OrdenDeVentaWS/getTotalHistoricoResponse" message="tns:getTotalHistoricoResponse" />
     </operation>
     <operation name="deleteOrden">
       <input wsam:Action="http://services.compurangers.com/OrdenDeVentaWS/deleteOrdenRequest" message="tns:deleteOrden" />
       <output wsam:Action="http://services.compurangers.com/OrdenDeVentaWS/deleteOrdenResponse" message="tns:deleteOrdenResponse" />
     </operation>
+    <operation name="getPedidosSemanal">
+      <input wsam:Action="http://services.compurangers.com/OrdenDeVentaWS/getPedidosSemanalRequest" message="tns:getPedidosSemanal" />
+      <output wsam:Action="http://services.compurangers.com/OrdenDeVentaWS/getPedidosSemanalResponse" message="tns:getPedidosSemanalResponse" />
+    </operation>
+    <operation name="addOrden">
+      <input wsam:Action="http://services.compurangers.com/OrdenDeVentaWS/addOrdenRequest" message="tns:addOrden" />
+      <output wsam:Action="http://services.compurangers.com/OrdenDeVentaWS/addOrdenResponse" message="tns:addOrdenResponse" />
+    </operation>
   </portType>
   <binding name="OrdenDeVentaWSPortBinding" type="tns:OrdenDeVentaWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="addOrden">
+    <operation name="getPedidosHoy">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="getTotalHistorico">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -39,6 +78,24 @@
       </output>
     </operation>
     <operation name="deleteOrden">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="getPedidosSemanal">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="addOrden">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
