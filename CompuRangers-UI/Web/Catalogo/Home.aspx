@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="Web.Home" %>
 
 <asp:Content ID="HomeContent" ContentPlaceHolderID="MainContent" runat="server">
-    <script src="../Scripts/CompuRangers/Login.js"></script>
+    <script src="../Scripts/CompuRangers/Modal.js"></script>
 
     <main>
         
@@ -27,17 +27,18 @@
                             <div class="card h-100">
                                 <img src="https://www.shutterstock.com/image-photo/set-home-kitchen-appliances-room-260nw-2473408983.jpg" class="card-img-top" alt="producto">
                                 <div class="card-body">
-                                    <asp:HiddenField ID="hiddenId" runat="server" Value='<%# Eval("id") %>' />
-                                    <h5 id="lblNombre" runat="server" class="card-title"><%# Eval("nombre") %></h5>
-                                    <p class="card-text"><%# Eval("descripcion") %></p>
+                                    <asp:HiddenField ID="hiddenId" runat="server" Value='<%# Eval("producto.id") %>' />
+                                    <asp:HiddenField ID="hiddenCantidad" runat="server" Value='<%# Eval("cantidadDisponible") %>' />
+                                    <h5 id="lblNombre" runat="server" class="card-title"><%# Eval("producto.nombre") %></h5>
+                                    <p class="card-text"><%# Eval("producto.descripcion") %></p>
                                     <div class="d-flex gap-2">
-                                        <span class="badge bg-secondary"><%# Eval("categoria.nombre") %></span>
+                                        <span class="badge bg-secondary"><%# Eval("producto.categoria.nombre") %></span>
                                     </div>
                                 </div>
                                 <div class="card-footer d-flex justify-content-between align-items-center">
-                                    <strong id="lblPrecioVenta" runat="server" class="text-primary">$<%# Eval("precioVenta", "{0:N2}") %></strong>
+                                    <strong id="lblPrecioVenta" runat="server" class="text-primary">$<%# Eval("producto.precioVenta", "{0:N2}") %></strong>
                                     <div class="d-flex flex-row justify-content-end align-item-center gap-2">
-                                        <a class="btn btn-sm btn-warning" href='VerMas.aspx?id=<%# Eval("id") %>'>Ver más</a>
+                                        <a class="btn btn-sm btn-warning" href='VerMas.aspx?id=<%# Eval("producto.id") %>'>Ver más</a>
                                         <asp:LinkButton ID="btnAddCart" runat="server" CssClass="btn btn-sm btn-success" OnClick="btnAddCart" Text="Añadir al carrito"/>
                                     </div>
                                 </div>
