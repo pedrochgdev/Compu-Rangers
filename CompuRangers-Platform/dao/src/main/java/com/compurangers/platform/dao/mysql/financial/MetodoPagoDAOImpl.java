@@ -3,6 +3,7 @@ package com.compurangers.platform.dao.mysql.financial;
 import com.compurangers.platform.core.domain.financial.MetodoPago;
 import com.compurangers.platform.dao.financial.IMetodoPagoDAO;
 import com.compurangers.platform.dao.mysql.BaseDAOImpl;
+import com.compurangers.platform.util.DatabaseUtil;
 import java.sql.Connection;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
@@ -43,6 +44,12 @@ public class MetodoPagoDAOImpl extends BaseDAOImpl<MetodoPago> implements IMetod
         cs.setInt(1, id);
         return cs;
     }
+    
+    protected CallableStatement searchByNameCommand(Connection conn, String id) throws SQLException {
+        CallableStatement cs = conn.prepareCall("{CALL search_metodo_pago_by_name(?)}");
+        cs.setString(1, id);
+        return cs;
+    }
 
     @Override
     protected CallableStatement getAllCommand(Connection conn) throws SQLException {
@@ -57,6 +64,32 @@ public class MetodoPagoDAOImpl extends BaseDAOImpl<MetodoPago> implements IMetod
         mp.setDescripcion(rs.getString("descripcion"));
         mp.setEstado(rs.getString("estado")); // ACTIVO o INACTIVO
         return mp;
+    }
+    
+    
+    @Override
+    public MetodoPago searchByName(String name) {
+        try (
+            Connection conn = DatabaseUtil.getInstance().getConnection();
+            CallableStatement cmd = this.searchByNameCommand(conn, name);
+        ) {
+            ResultSet rs = cmd.executeQuery();
+            
+            if (!rs.next()) {
+                System.err.println("No se encontro el registro con id: " + name);
+                return null;
+            }
+            
+            return this.mapModel(rs);
+        }
+        catch (SQLException e) {
+            System.err.println("Error SQL durante la busqueda: " + e.getMessage());
+            throw new RuntimeException("No se pudo buscar el registro.", e);
+        }
+        catch (Exception e) {
+            System.err.println("Error inpesperado: " + e.getMessage());
+            throw new RuntimeException("Error inesperado al buscar el registro.", e);
+        }
     }
     
 }

@@ -3,11 +3,14 @@ package com.compurangers.platform.dao.mysql.catalog;
 import com.compurangers.platform.core.domain.catalog.Producto;
 import com.compurangers.platform.dao.catalog.IProductoDAO;
 import com.compurangers.platform.dao.mysql.BaseDAOImpl;
+import com.compurangers.platform.util.DatabaseUtil;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductoDAOImpl extends BaseDAOImpl<Producto> implements IProductoDAO {
 
@@ -27,15 +30,16 @@ public class ProductoDAOImpl extends BaseDAOImpl<Producto> implements IProductoD
 
     @Override
     protected CallableStatement updateCommand(Connection conn, Producto modelo) throws SQLException {
-        String sql = "{CALL update_producto(?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{CALL update_producto(?, ?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setInt(1, modelo.getId());
         cmd.setString(2, modelo.getSku());
         cmd.setString(3, modelo.getNombre());
         cmd.setString(4, modelo.getDescripcion());
         cmd.setDouble(5, modelo.getPrecioVenta());
-        cmd.setInt(6, modelo.getCategoria().getId());
-        cmd.setInt(7, modelo.getMarca().getId());
+        cmd.setInt(6, modelo.getCantidadVendida());
+        cmd.setInt(7, modelo.getCategoria().getId());
+        cmd.setInt(8, modelo.getMarca().getId());
         return cmd;
     }
 
@@ -59,6 +63,10 @@ public class ProductoDAOImpl extends BaseDAOImpl<Producto> implements IProductoD
     protected CallableStatement getAllCommand(Connection conn) throws SQLException {
         return conn.prepareCall("{CALL get_all_productos()}");
     }
+    
+    protected CallableStatement getRankingCommand(Connection conn) throws SQLException {
+        return conn.prepareCall("{CALL get_ranking_productos()}");
+    }
 
     @Override
     protected Producto mapModel(ResultSet rs) throws SQLException {
@@ -68,10 +76,35 @@ public class ProductoDAOImpl extends BaseDAOImpl<Producto> implements IProductoD
         p.setNombre(rs.getString("nombre"));
         p.setDescripcion(rs.getString("descripcion"));
         p.setPrecioVenta(rs.getDouble("precio_venta"));
-
+        p.setCantidadVendida(rs.getInt("cantidad_ventas"));
         p.setCategoria(new CategoriaDAOImpl().search(rs.getInt("cid")));
         p.setMarca(new MarcaDAOImpl().search(rs.getInt("mid")));
 
         return p;
+    }
+
+    @Override
+    public List<Producto> getRanking() {
+        try (
+            Connection conn = DatabaseUtil.getInstance().getConnection();
+            CallableStatement cmd = this.getRankingCommand(conn);
+        ) {
+            ResultSet rs = cmd.executeQuery();
+            
+            List<Producto> modelos = new ArrayList<>();
+            while (rs.next()) {
+                modelos.add(this.mapModel(rs));
+            }
+            
+            return modelos;
+        }
+        catch (SQLException e) {
+            System.err.println("Error SQL durante el ranking: " + e.getMessage());
+            throw new RuntimeException("No se pudo listar el ranking.", e);
+        }
+        catch (Exception e) {
+            System.err.println("Error inpesperado: " + e.getMessage());
+            throw new RuntimeException("Error inesperado al listar el ranking.", e);
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.compurangers.platform.dao.mysql.sales;
 import com.compurangers.platform.core.domain.sales.OrdenDeVenta;
 import com.compurangers.platform.dao.mysql.BaseDAOImpl;
 import com.compurangers.platform.dao.sales.IOrdenDeVentaDAO;
+import com.compurangers.platform.util.DatabaseUtil;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -70,6 +71,44 @@ public class OrdenDeVentaDAOImpl extends BaseDAOImpl<OrdenDeVenta> implements IO
         ov.setDireccion(rs.getString("direccion"));
         ov.setDetalles(new DetalleVentaDAOImpl().getAllByForeignKey(ov.getId()));
         return ov;
+    }
+    
+    @Override
+    public double getTotalHistorico() {
+        try (
+            Connection conn = DatabaseUtil.getInstance().getConnection();
+            CallableStatement stmt = conn.prepareCall("{ CALL GET_TOTAL_HISTORICO(?) }");
+        ) {
+            stmt.registerOutParameter(1, Types.DOUBLE);
+            stmt.execute();
+            return stmt.getDouble(1);
+        } catch (SQLException e) {
+            System.err.println("Error SQL en getTotalHistorico: " + e.getMessage());
+            throw new RuntimeException("No se pudo obtener el total histórico.", e);
+        }
+        catch (Exception e) {
+            System.err.println("Error inpesperado: " + e.getMessage());
+            throw new RuntimeException("Error inesperado al obtener el total histórico.", e);
+        }
+    }
+    
+    @Override
+    public int getPedidosHoy() {
+        try (
+            Connection conn = DatabaseUtil.getInstance().getConnection();
+            CallableStatement stmt = conn.prepareCall("{ CALL GET_PEDIDOS_HOY(?) }");
+        ) {
+            stmt.registerOutParameter(1, Types.INTEGER);
+            stmt.execute();
+            return stmt.getInt(1);
+        } catch (SQLException e) {
+            System.err.println("Error SQL en getPedidosHoy: " + e.getMessage());
+            throw new RuntimeException("No se pudo obtener la cantidad de pedidos de hoy.", e);
+        }
+        catch (Exception e) {
+            System.err.println("Error inpesperado: " + e.getMessage());
+            throw new RuntimeException("Error inesperado al obtener la cantidad de pedidos de hoy.", e);
+        }
     }
     
 }

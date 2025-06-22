@@ -4,5 +4,6 @@ import com.compurangers.platform.core.domain.sales.ItemCarrito;
 import com.compurangers.platform.dao.IListByFk;
 
 public interface IItemCarritoDAO extends IListByFk<ItemCarrito>{
-    public ItemCarrito searchItem(int carritoId, int productoId);
+    ItemCarrito searchItem(int carritoId, int productoId);
+    boolean deleteAllByCarritoId(int cid);
 }

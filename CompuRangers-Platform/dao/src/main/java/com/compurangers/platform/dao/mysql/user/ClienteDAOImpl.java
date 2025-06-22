@@ -3,10 +3,12 @@ package com.compurangers.platform.dao.mysql.user;
 import com.compurangers.platform.core.domain.user.Cliente;
 import com.compurangers.platform.core.domain.user.Usuario;
 import com.compurangers.platform.dao.user.IClienteDAO;
+import com.compurangers.platform.util.DatabaseUtil;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 
 public class ClienteDAOImpl extends UsuarioDAOImpl implements IClienteDAO {
 
@@ -75,5 +77,26 @@ public class ClienteDAOImpl extends UsuarioDAOImpl implements IClienteDAO {
     public String getPasswordHash(int userId) {
         return super.getPasswordHash(userId);
     }
+    
+    @Override
+    public int getClientesNuevos() {
+        try (
+            Connection conn = DatabaseUtil.getInstance().getConnection();
+            CallableStatement stmt = conn.prepareCall("{ CALL GET_CLIENTES_NUEVOS(?) }");
+        ) {
+            stmt.registerOutParameter(1, Types.INTEGER);
+            stmt.execute();
+            return stmt.getInt(1);
+        } catch (SQLException e) {
+            System.err.println("Error SQL en getClientesNuevos: " + e.getMessage());
+            throw new RuntimeException("No se pudo obtener la cantidad de clientes nuevos.", e);
+        }
+        catch (Exception e) {
+            System.err.println("Error inpesperado: " + e.getMessage());
+            throw new RuntimeException("Error inesperado al obtener la cantidad de clientes nuevos.", e);
+        }
+
+    }
+
     
 }
