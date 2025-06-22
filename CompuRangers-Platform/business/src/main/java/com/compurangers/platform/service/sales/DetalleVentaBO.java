@@ -30,4 +30,8 @@ public class DetalleVentaBO {
     public List<DetalleVenta> getAllDetalleVenta() {
         return detalleVentaDAO.getAll();
     }
+    
+    public List<DetalleVenta> getAllDetalleVentaFromOrder(int id) {
+        return detalleVentaDAO.getAllByForeignKey(id);
+    }
 }

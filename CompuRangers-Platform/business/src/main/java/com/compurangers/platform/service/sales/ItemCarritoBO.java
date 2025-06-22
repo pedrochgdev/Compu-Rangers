@@ -38,4 +38,8 @@ public class ItemCarritoBO {
     public ItemCarrito searchItem(int carritoId, int productoId){
         return itemCarritoDAO.searchItem(carritoId, productoId);
     }
+    
+    public boolean deleteAllByCarritoId(int cid){
+        return itemCarritoDAO.deleteAllByCarritoId(cid);
+    }
 }

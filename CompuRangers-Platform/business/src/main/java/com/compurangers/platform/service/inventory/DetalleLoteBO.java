@@ -30,4 +30,9 @@ public class DetalleLoteBO {
     public List<DetalleLote> getAllDetalleLotes() {
         return detalleLoteDAO.getAll();
     }
+    
+    public int getCantidadPorProductoYLote(int producto, int lote){
+        return detalleLoteDAO.getCantidadDeLote(producto, lote);
+    }
+    
 }
