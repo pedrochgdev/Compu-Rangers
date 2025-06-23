@@ -56,16 +56,17 @@ namespace Web
                 rptProductos.DataSource = catalogo;
                 rptProductos.DataBind();
 
-                categoria[] categorias = categoriaWS.getAllCategorias();
+                categoria[] categoriasRaiz = categoriaWS.getAllCategorias();
+                List<categoria> hojas = ObtenerCategoriasHoja(categoriasRaiz.ToList());
+
                 ddlCategoria.Items.Clear();
                 ddlCategoria.Items.Add(new ListItem("Todas las categorías", ""));
 
-                foreach (categoria cat in categorias)
+                foreach (categoria hoja in hojas)
                 {
-                    ddlCategoria.Items.Add(new ListItem(cat.nombre, cat.nombre));
+                    ddlCategoria.Items.Add(new ListItem(hoja.nombre, hoja.nombre));
                 }
             }
-
             SiteMaster master = (SiteMaster)this.Master;
             if (master != null)
             {
@@ -73,16 +74,35 @@ namespace Web
             }
         }
 
+        private List<categoria> ObtenerCategoriasHoja(List<categoria> categorias)
+        {
+            List<categoria> hojas = new List<categoria>();
+
+            foreach (var cat in categorias)
+            {
+                if (cat.subcategorias == null || cat.subcategorias.Length == 0)
+                {
+                    hojas.Add(cat);
+                }
+                else
+                {
+                    hojas.AddRange(ObtenerCategoriasHoja(cat.subcategorias.ToList()));
+                }
+            }
+
+            return hojas;
+        }
+
 
         protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string categoria = ddlCategoria.SelectedValue;
+            string categoriaNombre = ddlCategoria.SelectedValue;
             List<productoDTO> productos = invWS.getCatalog().ToList();
 
-            if (!string.IsNullOrEmpty(categoria))
+            if (!string.IsNullOrEmpty(categoriaNombre))
             {
                 productos = productos
-                    .Where(p => p.producto.categoria.nombre == categoria)
+                    .Where(p => p.producto.categoria.nombre == categoriaNombre)
                     .ToList();
             }
 
@@ -90,8 +110,6 @@ namespace Web
             rptProductos.DataSource = catalogo;
             rptProductos.DataBind();
         }
-
-
 
         protected void btnAddCart(object sender, EventArgs e)
         {
