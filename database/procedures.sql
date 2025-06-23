@@ -1,3 +1,12 @@
+SET GLOBAL event_scheduler = ON;
+
+CREATE EVENT IF NOT EXISTS eliminar_tokens_expirados
+ON SCHEDULE EVERY 1 MINUTE
+DO
+  DELETE FROM TOKEN_RECUPERACION
+  WHERE fecha_expiracion <= NOW();
+
+DROP EVENT eliminar_tokens_expirados;
 /* DROPS */
 
 DROP PROCEDURE IF EXISTS add_categoria;
@@ -1581,8 +1590,7 @@ CREATE PROCEDURE get_user_id_by_email(
 BEGIN
     SELECT id INTO p_id
     FROM usuario
-    WHERE correo COLLATE utf8mb4_unicode_ci = p_correo
-    LIMIT 1;
+    WHERE correo COLLATE utf8mb4_unicode_ci = p_correo;
 
     IF p_id IS NULL THEN
         SET p_id = -1;
@@ -2310,7 +2318,7 @@ CREATE PROCEDURE add_token_recuperacion(
     IN p_fecha_expiracion DATETIME
 )
 BEGIN
-    INSERT INTO token_recuperacion (user_id, token, fecha_expiracion)
+    INSERT INTO token_recuperacion (usuario_id, token, fecha_expiracion)
     VALUES (p_user_id, p_token, p_fecha_expiracion);
     
 	SET generated_id = last_insert_id();
@@ -2383,9 +2391,16 @@ DELIMITER //
 CREATE PROCEDURE GET_RANKING_PRODUCTOS()
 BEGIN
 	SELECT 
-		*
+		id,
+		sku,
+		nombre,
+		descripcion,
+		precio_venta,
+		cantidad_ventas,
+		categoria_id AS cid,
+		marca_id AS mid
 	FROM producto
-	ORDER BY cantidad_vendida DESC
+	ORDER BY cantidad_ventas DESC
 	LIMIT 5;
 END;
 //
