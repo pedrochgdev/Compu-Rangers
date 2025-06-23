@@ -51,12 +51,11 @@ public class UsuarioBO<T extends IUsuarioDAO> {
     }
 
     public int getUserIdByField(String input) {
-        int userID;
-        userID = usuarioDAO.getUserByField("username", input);
-        if (userID > 0) { //(userID = usuarioDAO.getUserByField("email", input)) > 0 || 
-            return userID;
+        int userID = usuarioDAO.getUserByField("email", input);
+        if (userID <= 0) {
+            userID = usuarioDAO.getUserByField("username", input);
         }
-        return -1;
+        return (userID > 0) ? userID : -1;
     }
 
     public String getPasswordHash(int userID) {

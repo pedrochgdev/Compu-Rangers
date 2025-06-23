@@ -91,6 +91,10 @@ public class AppPrueba {
 //        boolean deleteStatus = usuarioService.deleteUsuario(userId);
 //        System.out.println("¿Se eliminó el usuario? " + deleteStatus);
 
+          UsuarioBO user = new UsuarioBO(new UsuarioDAOImpl(), tokenService);
+          
+          user.forgotPassword("gabrielchg6@gmail.com");
+
         EmailService emailService = new EmailService();
         String emailDestino = "gabrielchg2004@gmail.com"; // Cambia esto por uno real que controles
         String token = "PRUEBA-TOKEN-12345";

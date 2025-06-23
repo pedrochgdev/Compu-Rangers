@@ -2,7 +2,10 @@ package com.compurangers.platform.service.catalog;
 
 import com.compurangers.platform.core.domain.catalog.Categoria;
 import com.compurangers.platform.dao.catalog.ICategoriaDAO;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class CategoriaBO {
     private final ICategoriaDAO categoriaDAO;
@@ -28,7 +31,26 @@ public class CategoriaBO {
     }
 
     public List<Categoria> getAllCategorias() {
-        return categoriaDAO.getAll();
+        List<Categoria> todas = categoriaDAO.getAll(); // este trae todas mapeadas con padre
+        Map<Integer, Categoria> mapa = new HashMap<>();
+
+        // Mapear por ID
+        for (Categoria cat : todas) {
+            mapa.put(cat.getId(), cat);
+        }
+
+        // Asignar subcategorías
+        for (Categoria cat : todas) {
+            Categoria padre = cat.getCategoriaPadre();
+            if (padre != null && mapa.containsKey(padre.getId())) {
+                mapa.get(padre.getId()).getSubcategorias().add(cat);
+            }
+        }
+
+        // Devolver solo las raíces
+        return todas.stream()
+            .filter(c -> c.getCategoriaPadre() == null)
+            .collect(Collectors.toList());
     }
     
     public Categoria getCategoriaWithParents(int categoriaId) {

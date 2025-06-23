@@ -25,20 +25,33 @@ public class TokenRecuperacionBO {
     }
     
     public String generateToken(int userId, LocalDateTime fechaExpiracion) {
-        String token = UUID.randomUUID().toString();
+        final int MAX_INTENTOS = 100;
+        int intentos = 0;
 
-        TokenRecuperacion nuevoToken = new TokenRecuperacion();
-        nuevoToken.setUserId(userId);
-        nuevoToken.setToken(token);
-        nuevoToken.setFechaExpiracion(fechaExpiracion);
+        while (intentos < MAX_INTENTOS) {
+            String token = UUID.randomUUID().toString();
 
-        int result = tokenDAO.add(nuevoToken);
+            TokenRecuperacion nuevoToken = new TokenRecuperacion();
+            nuevoToken.setUserId(userId);
+            nuevoToken.setToken(token);
+            nuevoToken.setFechaExpiracion(fechaExpiracion);
 
-        if (result > 0) {
-            return token;
-        } else {
-            throw new RuntimeException("No se pudo guardar el token de recuperación");
+            try {
+                int result = tokenDAO.add(nuevoToken);
+                if (result > 0) {
+                    return token;
+                }
+            } catch (Exception e) {
+                // Si fue por duplicado, reintenta. Si es otra causa, relanza
+                if (!e.getMessage().toLowerCase().contains("duplicate")) {
+                    throw new RuntimeException("Error al guardar token: " + e.getMessage(), e);
+                }
+            }
+
+            intentos++;
         }
+
+        throw new RuntimeException("No se pudo generar un token único tras varios intentos");
     }
     
 }
