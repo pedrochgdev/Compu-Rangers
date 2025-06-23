@@ -22,14 +22,16 @@
     <MetadataSource Address="http://localhost:8080/WebService/servicio.disco" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="OrdenDeVentaWS.xsd" MetadataType="Schema" ID="bb8c649f-5843-4e69-8972-5c6e6f096ee8" SourceId="1" SourceUrl="http://localhost:8080/WebService/OrdenDeVentaWS?xsd=1" />
+    <MetadataFile FileName="TokenRecuperacionWS.wsdl" MetadataType="Wsdl" ID="6b1ed7b2-57b9-4cc4-9cd7-4056de476fc8" SourceId="1" SourceUrl="http://localhost:8080/WebService/TokenRecuperacionWS?WSDL" />
     <MetadataFile FileName="ProductoWS.xsd" MetadataType="Schema" ID="3c86c55a-bfe0-4d9c-a186-767cad442d57" SourceId="1" SourceUrl="http://localhost:8080/WebService/ProductoWS?xsd=1" />
     <MetadataFile FileName="AuthWS.wsdl" MetadataType="Wsdl" ID="efe77dda-dfb5-47d1-b4b3-900a2c3bea7f" SourceId="1" SourceUrl="http://localhost:8080/WebService/AuthWS?WSDL" />
     <MetadataFile FileName="InventoryWS.xsd" MetadataType="Schema" ID="fa63d8c7-5111-4757-9fed-d25b67c46ff0" SourceId="1" SourceUrl="http://localhost:8080/WebService/InventoryWS?xsd=1" />
     <MetadataFile FileName="CarritoWS.xsd" MetadataType="Schema" ID="ef2cf1d9-f87b-41dd-bc45-e4eee2e5f10a" SourceId="1" SourceUrl="http://localhost:8080/WebService/CarritoWS?xsd=1" />
     <MetadataFile FileName="UsuarioWS.xsd" MetadataType="Schema" ID="90d43ba0-7430-4ef4-ba17-160b2421b358" SourceId="1" SourceUrl="http://localhost:8080/WebService/UsuarioWS?xsd=1" />
     <MetadataFile FileName="ItemCarritoWS.xsd" MetadataType="Schema" ID="8adc798c-2984-4a2a-9e69-1b81be69e96c" SourceId="1" SourceUrl="http://localhost:8080/WebService/ItemCarritoWS?xsd=1" />
+    <MetadataFile FileName="TokenRecuperacionWS.xsd" MetadataType="Schema" ID="6e771cf0-f252-46e7-8a61-75920896dc0d" SourceId="1" SourceUrl="http://localhost:8080/WebService/TokenRecuperacionWS?xsd=1" />
     <MetadataFile FileName="InventoryWS.wsdl" MetadataType="Wsdl" ID="c7556030-ae52-468e-aa8c-afad26cea649" SourceId="1" SourceUrl="http://localhost:8080/WebService/InventoryWS?WSDL" />
+    <MetadataFile FileName="OrdenDeVentaWS.xsd" MetadataType="Schema" ID="bb8c649f-5843-4e69-8972-5c6e6f096ee8" SourceId="1" SourceUrl="http://localhost:8080/WebService/OrdenDeVentaWS?xsd=1" />
     <MetadataFile FileName="AuthWS.xsd" MetadataType="Schema" ID="5e016c01-efca-4ef3-b1c8-6298670ae210" SourceId="1" SourceUrl="http://localhost:8080/WebService/AuthWS?xsd=1" />
     <MetadataFile FileName="ClienteWS.wsdl" MetadataType="Wsdl" ID="4451cdf9-8471-4883-a4b6-eb88a8a19b0d" SourceId="1" SourceUrl="http://localhost:8080/WebService/ClienteWS?WSDL" />
     <MetadataFile FileName="CarritoWS.wsdl" MetadataType="Wsdl" ID="3ad1537b-28e8-4f47-a287-339df50023da" SourceId="1" SourceUrl="http://localhost:8080/WebService/CarritoWS?WSDL" />

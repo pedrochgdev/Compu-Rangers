@@ -205,6 +205,10 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="Connected Services\WebService\InventoryWS.wsdl" />
+    <None Include="Connected Services\WebService\TokenRecuperacionWS.wsdl" />
+    <None Include="Connected Services\WebService\TokenRecuperacionWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\WebService\UsuarioWS.wsdl" />
     <None Include="Connected Services\WebService\UsuarioWS.xsd">
       <SubType>Designer</SubType>
@@ -309,6 +313,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\WebService\Web.WebService.reservarInventarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.searchTokenResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.tokenRecuperacion.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
