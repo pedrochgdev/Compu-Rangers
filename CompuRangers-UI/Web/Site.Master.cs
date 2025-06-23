@@ -73,7 +73,7 @@ namespace Web
 
             CargarCarrito();
 
-            string script = "window.onload = function() { updateModal('carritoModal'); };";
+            string script = "window.onload = function() { showModal('carritoModal'); };";
             clientScriptManager.RegisterStartupScript(GetType(), "", script, true);
         }
 
@@ -101,32 +101,78 @@ namespace Web
         {
             if (!IsPostBack)
             {
-                if (hfLoginStatus.Value == "failed")
-                {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "ShowLoginModal", "$('#form-modal-login').modal('show');", true);
-                }
-                // Mostrar/ocultar bloques dependiendo del login
-                bool loggedIn = Session["user"] != null;
-                phUserLogged.Visible = loggedIn;
-                phUserNotLogged.Visible = !loggedIn;
+                MostrarMensajeDesdeQuery();
+                ControlarEstadoSesion();
+            }
+        }
 
+        private void MostrarMensajeDesdeQuery()
+        {
+            string mensaje = Request.QueryString["msg"];
+            if (string.IsNullOrEmpty(mensaje)) return;
 
-                if (loggedIn)
+            string tipo = "info"; // valor por defecto
+            string texto = "";
+
+            switch (mensaje)
+            {
+                case "login-success":
+                    tipo = "success";
+                    texto = "Inicio de sesión exitoso.";
+                    break;
+                case "logout-true":
+                    tipo = "info";
+                    texto = "Sesión cerrada correctamente.";
+                    break;
+                case "reset_success":
+                    tipo = "success";
+                    texto = "Contraseña restablecida exitosamente.";
+                    break;
+                case "reset_error":
+                    tipo = "danger";
+                    texto = "Error al restablecer la contraseña.";
+                    break;
+                case "expired":
+                    tipo = "warning";
+                    texto = "El enlace de recuperación ha expirado.";
+                    break;
+                default:
+                    return;
+            }
+
+            clientScriptManager.RegisterStartupScript(this.GetType(), "",
+                $"window.onload = function() {{ showAlert('{texto}', '{tipo}'); }};", true);
+        }
+
+        private void ControlarEstadoSesion()
+        {
+            if (hfLoginStatus.Value == "failed")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "ShowLoginModal", "$('#form-modal-login').modal('show');", true);
+            }
+
+            bool loggedIn = Session["user"] != null;
+            phUserLogged.Visible = loggedIn;
+            phUserNotLogged.Visible = !loggedIn;
+
+            if (loggedIn)
+            {
+
+                bool isadmin = userWS.getRole(Convert.ToInt32(Session["user"]));
+                if (!isadmin)
                 {
-                    clientScriptManager.RegisterStartupScript(GetType(), "",
-                    "window.onload = function() { showAlert('Acabas de iniciar sesion','success');};", true);
-                    bool isadmin = userWS.getRole(Convert.ToInt32(Session["user"]));
-                    if (!isadmin)
-                        CargarCarrito();
-                    else
-                    {
-                        adminLogged.Visible = true;
-                        adminNotLogged.Visible = false;
-                    }
-                }else {
-                    clientScriptManager.RegisterStartupScript(GetType(), "",
-                    "window.onload = function() { showAlert('Inicia sesión para comprar ','danger');};", true);
+                    CargarCarrito();
                 }
+                else
+                {
+                    adminLogged.Visible = true;
+                    adminNotLogged.Visible = false;
+                }
+            }
+            else
+            {
+                clientScriptManager.RegisterStartupScript(GetType(), "",
+                    "window.onload = function() { showAlert('Inicia sesión para comprar', 'danger'); };", true);
             }
         }
 
@@ -134,7 +180,7 @@ namespace Web
         {
             Session.Clear();
             FormsAuthentication.SignOut();
-            Response.Redirect("~/Catalogo/Home.aspx");
+            Response.Redirect("~/Catalogo/Home.aspx?msg=logout-true");
         }
 
         protected void bttnCarrito_Show(object sender, EventArgs e)
@@ -179,7 +225,7 @@ namespace Web
                 else
                     strRedirect = "../Catalogo/Home.aspx";
 
-                Response.Redirect(strRedirect, true);
+                Response.Redirect(strRedirect+"?msg=login-success", true);
             }
             else
             {
