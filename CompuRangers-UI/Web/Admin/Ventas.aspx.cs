@@ -12,16 +12,20 @@ namespace Web
     {
         private ClienteWSClient clientWS;
         private OrdenDeVentaWSClient ordenWS;
+        private ProductoWSClient prodWS;
 
         public Ventas()
         {
             clientWS = new ClienteWSClient();
             ordenWS = new OrdenDeVentaWSClient();
+            prodWS = new ProductoWSClient();
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             cargarMetricasDashboard();
+            CargarProductosMasVendidos();
+            CargarPedidosPorDia();
         }
 
         private void cargarMetricasDashboard()
@@ -38,6 +42,19 @@ namespace Web
                 lblPedidosHoy.Text = "Error al cargar las métricas.";
                 lblClientesNuevos.Text = "Error al cargar las métricas.";
             }
+        }
+        private void CargarProductosMasVendidos()
+        {
+            var productos = prodWS.getRanking();
+            rptMasVendidos.DataSource = productos;
+            rptMasVendidos.DataBind();
+        }
+
+        private void CargarPedidosPorDia()
+        {
+            var pedidos = ordenWS.getPedidosSemanal();
+            rptPedidosPorDia.DataSource = pedidos;
+            rptPedidosPorDia.DataBind();
         }
     }
 }

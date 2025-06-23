@@ -72,73 +72,25 @@
         </div>
 
         <!-- Productos más vendidos -->
-        <div class="card mb-4 shadow-sm border-0">
-            <div class="card-header bg-white">
-                <h5 class="mb-0">Productos más vendidos</h5>
-            </div>
-            <div class="card-body">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Producto A
-                        <span class="badge bg-success rounded-pill">215</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Producto B
-                        <span class="badge bg-success rounded-pill">178</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Producto C
-                        <span class="badge bg-success rounded-pill">130</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Producto D
-                        <span class="badge bg-success rounded-pill">112</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Producto E
-                        <span class="badge bg-success rounded-pill">96</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <asp:Repeater ID="rptMasVendidos" runat="server">
+            <ItemTemplate>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <%# Eval("nombre") %>
+                    <span class="badge bg-success rounded-pill"><%# Eval("cantidadVendida") %></span>
+                </li>
+            </ItemTemplate>
+        </asp:Repeater>
+
 
         <!-- Pedidos por día -->
-        <div class="card shadow-sm border-0 mb-4">
-            <div class="card-header bg-white">
-                <h5 class="mb-0">Pedidos por día (última semana)</h5>
-            </div>
-            <div class="card-body">
-                <div class="row text-center">
-                    <div class="col">
-                        <div class="fw-bold">Lun</div>
-                        <div>31</div>
-                    </div>
-                    <div class="col">
-                        <div class="fw-bold">Mar</div>
-                        <div>29</div>
-                    </div>
-                    <div class="col">
-                        <div class="fw-bold">Mié</div>
-                        <div>27</div>
-                    </div>
-                    <div class="col">
-                        <div class="fw-bold">Jue</div>
-                        <div>33</div>
-                    </div>
-                    <div class="col">
-                        <div class="fw-bold">Vie</div>
-                        <div>38</div>
-                    </div>
-                    <div class="col">
-                        <div class="fw-bold">Sáb</div>
-                        <div>22</div>
-                    </div>
-                    <div class="col">
-                        <div class="fw-bold">Dom</div>
-                        <div>19</div>
-                    </div>
+        <asp:Repeater ID="rptPedidosPorDia" runat="server">
+            <ItemTemplate>
+                <div class="col text-center">
+                    <div class="fw-bold"><%# String.Format("{0:dd MMM}", Eval("dia")) %></div>
+                    <div><%# Eval("cantidad") %></div>
                 </div>
-            </div>
-        </div>
+            </ItemTemplate>
+        </asp:Repeater>
+
     </main>
 </asp:Content>
