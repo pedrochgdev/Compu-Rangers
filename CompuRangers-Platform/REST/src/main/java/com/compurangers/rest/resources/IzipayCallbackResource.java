@@ -7,6 +7,7 @@ import com.compurangers.platform.dao.mysql.financial.MetodoPagoDAOImpl;
 import com.compurangers.platform.service.financial.MetodoPagoBO;
 import com.compurangers.platform.core.domain.financial.MetodoPago;
 import com.compurangers.platform.core.domain.financial.Pago;
+import com.compurangers.platform.core.domain.catalog.Producto;
 import com.compurangers.platform.core.domain.sales.Carrito;
 import com.compurangers.platform.dao.mysql.configuration.MonedaPeriodoDAOImpl;
 import com.compurangers.platform.core.domain.configuration.MonedaPeriodo;
@@ -16,12 +17,14 @@ import com.compurangers.platform.dao.mysql.sales.DocumentoDeVentasDAOImpl;
 import com.compurangers.platform.service.configuration.MonedaPeriodoBO;
 import com.compurangers.platform.service.sales.DocumentoDeVentasBO;
 import com.compurangers.platform.core.domain.sales.DocumentoDeVentas;
+import com.compurangers.platform.dao.mysql.catalog.ProductoDAOImpl;
 import com.compurangers.platform.dao.mysql.financial.PagoDAOImpl;
 import com.compurangers.platform.dao.mysql.inventory.DetalleLoteDAOImpl;
 import com.compurangers.platform.dao.mysql.inventory.InventarioDAOImpl;
 import com.compurangers.platform.dao.mysql.sales.CarritoDAOImpl;
 import com.compurangers.platform.dao.mysql.sales.DetalleVentaDAOImpl;
 import com.compurangers.platform.dao.mysql.sales.ItemCarritoDAOImpl;
+import com.compurangers.platform.service.catalog.ProductoBO;
 import com.compurangers.platform.service.financial.PagoBO;
 import com.compurangers.platform.service.inventory.DetalleLoteBO;
 import com.compurangers.platform.service.inventory.InventarioBO;
@@ -58,11 +61,12 @@ public class IzipayCallbackResource {
         String estado = form.getFirst("vads_trans_status");
         String orderId = form.getFirst("vads_order_id");
         String amount = form.getFirst("vads_amount");
+        String transId = form.getFirst("vads_trans_id");
         
         int id = Integer.parseInt(orderId.substring(6));
         switch (estado) {
             case "AUTHORISED":
-                procesarPagoExitoso(id);
+                procesarPagoExitoso(id, transId);
                 break;
             case "ABANDONED":
                 procesarPagoFallido(id, estado);
@@ -106,7 +110,7 @@ public class IzipayCallbackResource {
         }
     }
     
-    private void crearPago(int numDocVenta, double total){
+    private void crearPago(int numDocVenta, double total, String transId){
         MetodoPagoBO mp = new MetodoPagoBO(new MetodoPagoDAOImpl());
         MetodoPago metodo = mp.searchByName("IZIPAY");
         MonedaPeriodoBO mpb = new MonedaPeriodoBO(new MonedaPeriodoDAOImpl());
@@ -120,7 +124,7 @@ public class IzipayCallbackResource {
         p.setMetodoDePagoId(metodo.getId());
         p.setMonedaPeriodoId(mpc.getId());
         p.setMonto(total);
-        p.setReferencia("Referencia");
+        p.setReferencia(transId);
         
         int x = pbo.addPago(p);
         
@@ -146,11 +150,32 @@ public class IzipayCallbackResource {
         
     }
     
-    private void procesarPagoExitoso(int orderId) {
+    private void actualizarStockVendidos(int orderId) {
+        DetalleVentaBO detalleVentaBO = new DetalleVentaBO(new DetalleVentaDAOImpl());
+        ProductoBO productoBO = new ProductoBO(new ProductoDAOImpl());
+
+        List<DetalleVenta> detalles = detalleVentaBO.getAllDetalleVentaFromOrder(orderId);
+
+        for (DetalleVenta detalle : detalles) {
+            Producto producto = detalle.getProducto(); // Asumiendo que DetalleVenta ya tiene el producto cargado
+            int cantidadVendida = detalle.getCantidad();
+
+            // Actualizar cantidad vendida acumulada
+            int vendidosActual = producto.getCantidadVendida(); 
+            producto.setCantidadVendida(vendidosActual + cantidadVendida);
+
+            productoBO.updateProducto(producto);
+        }
+
+        System.out.printf("🛒 Productos actualizados para orden %d%n", orderId);
+    }
+    
+    private void procesarPagoExitoso(int orderId, String transId) {
         OrdenDeVentaBO dao = new OrdenDeVentaBO(new OrdenDeVentaDAOImpl());
         OrdenDeVenta ov = dao.searchOrdenDeVenta(orderId);
+        actualizarStockVendidos(orderId);
         int numDocVenta = generarDocVenta(ov);
-        crearPago(numDocVenta, ov.getTotal());
+        crearPago(numDocVenta, ov.getTotal(), transId);
         eliminarCarrito(ov);
         ov.setEstado("PAGADO");
         dao.updateOrdenDeVenta(ov);
