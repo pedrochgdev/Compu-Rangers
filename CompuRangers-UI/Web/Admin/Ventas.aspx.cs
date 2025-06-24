@@ -13,12 +13,14 @@ namespace Web
         private ClienteWSClient clientWS;
         private OrdenDeVentaWSClient ordenWS;
         private ProductoWSClient prodWS;
+        private AdminWSClient adminWS;
 
         public Ventas()
         {
             clientWS = new ClienteWSClient();
             ordenWS = new OrdenDeVentaWSClient();
             prodWS = new ProductoWSClient();
+            adminWS = new AdminWSClient();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -26,21 +28,44 @@ namespace Web
             cargarMetricasDashboard();
             CargarProductosMasVendidos();
             CargarPedidosPorDia();
+            CargarGananciasPorMes();
+        }
+        private void CargarGananciasPorMes()
+        {
+            try
+            {
+                var lista = adminWS.getGananciasMensuales(); // Retorna lista de DTOs
+                rptGananciasMensuales.DataSource = lista;
+                rptGananciasMensuales.DataBind();
+            }
+            catch (Exception ex)
+            {
+                rptGananciasMensuales.DataSource = new List<object>();
+                rptGananciasMensuales.DataBind();
+            }
+        }
+        protected string ObtenerNombreMes(string yearMonth)
+        {
+            if (DateTime.TryParse(yearMonth + "-01", out DateTime fecha))
+                return fecha.ToString("MMMM yyyy", new System.Globalization.CultureInfo("es-ES")); // Ej: junio 2025
+            return yearMonth;
         }
 
         private void cargarMetricasDashboard()
         {
             try
             {
-                lblTotalVentas.Text = ordenWS.getTotalHistorico().ToString("N2");
-                lblPedidosHoy.Text = ordenWS.getPedidosHoy().ToString();
+                lblTotalVentas.Text = adminWS.getTotalHistorico().ToString("N2");
+                lblGananciaMes.Text = adminWS.getGananciaMes().ToString("N2"); // ← nuevo
+                lblPedidosHoy.Text = adminWS.getPedidosHoy().ToString();
                 lblClientesNuevos.Text = clientWS.getClientesNuevos().ToString();
             }
             catch (Exception ex)
             {
-                lblTotalVentas.Text = "Error al cargar las métricas.";
-                lblPedidosHoy.Text = "Error al cargar las métricas.";
-                lblClientesNuevos.Text = "Error al cargar las métricas.";
+                lblTotalVentas.Text = "Error";
+                lblGananciaMes.Text = "Error"; // ← nuevo
+                lblPedidosHoy.Text = "Error";
+                lblClientesNuevos.Text = "Error";
             }
         }
         private void CargarProductosMasVendidos()
@@ -52,7 +77,7 @@ namespace Web
 
         private void CargarPedidosPorDia()
         {
-            var pedidos = ordenWS.getPedidosSemanal();
+            var pedidos = adminWS.getPedidosSemanal();
             rptPedidosPorDia.DataSource = pedidos;
             rptPedidosPorDia.DataBind();
         }

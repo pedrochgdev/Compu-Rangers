@@ -18,7 +18,7 @@
                 <div class="card shadow-sm border-0">
                     <div class="card-body text-center">
                         <h6 class="card-title text-muted">Ganancias Mes</h6>
-                        <h2 class="fw-bold text-primary">$2,150</h2>
+                        <h2 class="fw-bold text-primary">$<asp:Label ID="lblGananciaMes" runat="server" Text="0.00" /></h2>
                     </div>
                 </div>
             </div>
@@ -47,26 +47,14 @@
             </div>
             <div class="card-body">
                 <div class="row text-center">
-                    <div class="col">
-                        <div class="fw-bold">Enero</div>
-                        <div>$1,200</div>
-                    </div>
-                    <div class="col">
-                        <div class="fw-bold">Febrero</div>
-                        <div>$1,350</div>
-                    </div>
-                    <div class="col">
-                        <div class="fw-bold">Marzo</div>
-                        <div>$1,550</div>
-                    </div>
-                    <div class="col">
-                        <div class="fw-bold">Abril</div>
-                        <div>$1,800</div>
-                    </div>
-                    <div class="col">
-                        <div class="fw-bold">Mayo</div>
-                        <div>$2,150</div>
-                    </div>
+                    <asp:Repeater ID="rptGananciasMensuales" runat="server">
+                        <ItemTemplate>
+                            <div class="col text-center">
+                                <div class="fw-bold"><%# ((DateTime)Eval("Mes")).ToString("MMMM yyyy", System.Globalization.CultureInfo.CreateSpecificCulture("es-ES")) %></div>
+                                <div>$<%# Eval("Ganancia", "{0:N2}") %></div>
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
                 </div>
             </div>
         </div>

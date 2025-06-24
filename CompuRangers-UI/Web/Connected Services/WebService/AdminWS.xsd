@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://services.compurangers.com" targetNamespace="http://services.compurangers.com" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="getGananciaMes" type="tns:getGananciaMes" />
+  <xs:element name="getGananciaMesResponse" type="tns:getGananciaMesResponse" />
+  <xs:element name="getGananciasMensuales" type="tns:getGananciasMensuales" />
+  <xs:element name="getGananciasMensualesResponse" type="tns:getGananciasMensualesResponse" />
+  <xs:element name="getPedidosHoy" type="tns:getPedidosHoy" />
+  <xs:element name="getPedidosHoyResponse" type="tns:getPedidosHoyResponse" />
+  <xs:element name="getPedidosSemanal" type="tns:getPedidosSemanal" />
+  <xs:element name="getPedidosSemanalResponse" type="tns:getPedidosSemanalResponse" />
+  <xs:element name="getTotalHistorico" type="tns:getTotalHistorico" />
+  <xs:element name="getTotalHistoricoResponse" type="tns:getTotalHistoricoResponse" />
+  <xs:complexType name="getPedidosSemanal">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="getPedidosSemanalResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:pedidoPorDiaDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="pedidoPorDiaDTO">
+    <xs:sequence>
+      <xs:element name="cantidad" type="xs:int" />
+      <xs:element minOccurs="0" name="dia" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getGananciasMensuales">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="getGananciasMensualesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:gananciasPorMesDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="gananciasPorMesDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ganancia" type="xs:decimal" />
+      <xs:element minOccurs="0" name="mes" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getPedidosHoy">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="getPedidosHoyResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getTotalHistorico">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="getTotalHistoricoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getGananciaMes">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="getGananciaMesResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

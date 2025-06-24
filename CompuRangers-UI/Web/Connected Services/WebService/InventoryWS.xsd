@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://services.compurangers.com" targetNamespace="http://services.compurangers.com" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="getCantidadTotalDisponible" type="tns:getCantidadTotalDisponible" />
+  <xs:element name="getCantidadTotalDisponibleResponse" type="tns:getCantidadTotalDisponibleResponse" />
   <xs:element name="getCatalog" type="tns:getCatalog" />
   <xs:element name="getCatalogResponse" type="tns:getCatalogResponse" />
+  <xs:element name="getInvDisponible" type="tns:getInvDisponible" />
+  <xs:element name="getInvDisponibleResponse" type="tns:getInvDisponibleResponse" />
   <xs:element name="reservarInventario" type="tns:reservarInventario" />
   <xs:element name="reservarInventarioResponse" type="tns:reservarInventarioResponse" />
   <xs:complexType name="getCatalog">
@@ -44,6 +48,16 @@
       <xs:element minOccurs="0" name="nombre" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name="getCantidadTotalDisponible">
+    <xs:sequence>
+      <xs:element name="productoId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getCantidadTotalDisponibleResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="reservarInventario">
     <xs:sequence>
       <xs:element minOccurs="0" name="ordenVenta" type="tns:ordenDeVenta" />
@@ -66,11 +80,29 @@
       <xs:element name="devuelto" type="xs:int" />
       <xs:element name="id" type="xs:int" />
       <xs:element name="idOrdenVenta" type="xs:int" />
-      <xs:element minOccurs="0" name="producto" type="tns:producto" />
+      <xs:element minOccurs="0" name="producto" type="tns:inventario" />
       <xs:element name="subtotal" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="inventario">
+    <xs:sequence>
+      <xs:element name="cantidadDisponible" type="xs:int" />
+      <xs:element name="id" type="xs:int" />
+      <xs:element name="loteId" type="xs:int" />
+      <xs:element minOccurs="0" name="producto" type="tns:producto" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="reservarInventarioResponse">
     <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="getInvDisponible">
+    <xs:sequence>
+      <xs:element name="productoId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getInvDisponibleResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:inventario" />
+    </xs:sequence>
   </xs:complexType>
 </xs:schema>

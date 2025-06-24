@@ -23,6 +23,7 @@
   </MetadataSources>
   <Metadata>
     <MetadataFile FileName="TokenRecuperacionWS.wsdl" MetadataType="Wsdl" ID="6b1ed7b2-57b9-4cc4-9cd7-4056de476fc8" SourceId="1" SourceUrl="http://localhost:8080/WebService/TokenRecuperacionWS?WSDL" />
+    <MetadataFile FileName="AdminWS.xsd" MetadataType="Schema" ID="d96face7-494d-4654-ae76-352e2441596e" SourceId="1" SourceUrl="http://localhost:8080/WebService/AdminWS?xsd=1" />
     <MetadataFile FileName="ProductoWS.xsd" MetadataType="Schema" ID="3c86c55a-bfe0-4d9c-a186-767cad442d57" SourceId="1" SourceUrl="http://localhost:8080/WebService/ProductoWS?xsd=1" />
     <MetadataFile FileName="AuthWS.wsdl" MetadataType="Wsdl" ID="efe77dda-dfb5-47d1-b4b3-900a2c3bea7f" SourceId="1" SourceUrl="http://localhost:8080/WebService/AuthWS?WSDL" />
     <MetadataFile FileName="InventoryWS.xsd" MetadataType="Schema" ID="fa63d8c7-5111-4757-9fed-d25b67c46ff0" SourceId="1" SourceUrl="http://localhost:8080/WebService/InventoryWS?xsd=1" />
@@ -35,6 +36,7 @@
     <MetadataFile FileName="AuthWS.xsd" MetadataType="Schema" ID="5e016c01-efca-4ef3-b1c8-6298670ae210" SourceId="1" SourceUrl="http://localhost:8080/WebService/AuthWS?xsd=1" />
     <MetadataFile FileName="ClienteWS.wsdl" MetadataType="Wsdl" ID="4451cdf9-8471-4883-a4b6-eb88a8a19b0d" SourceId="1" SourceUrl="http://localhost:8080/WebService/ClienteWS?WSDL" />
     <MetadataFile FileName="CarritoWS.wsdl" MetadataType="Wsdl" ID="3ad1537b-28e8-4f47-a287-339df50023da" SourceId="1" SourceUrl="http://localhost:8080/WebService/CarritoWS?WSDL" />
+    <MetadataFile FileName="AdminWS.wsdl" MetadataType="Wsdl" ID="a562ee1f-b9ed-445d-8b2e-932a5f646391" SourceId="1" SourceUrl="http://localhost:8080/WebService/AdminWS?WSDL" />
     <MetadataFile FileName="servicio.disco" MetadataType="Disco" ID="1c4693c8-e36c-44da-b9c6-92475981de11" SourceId="1" SourceUrl="http://localhost:8080/WebService/servicio.disco" />
     <MetadataFile FileName="ProductoWS.wsdl" MetadataType="Wsdl" ID="9d9277c8-c724-4e94-b2d8-dc2a12699abd" SourceId="1" SourceUrl="http://localhost:8080/WebService/ProductoWS?WSDL" />
     <MetadataFile FileName="UsuarioWS.wsdl" MetadataType="Wsdl" ID="2d38fff0-c7cc-4cfb-8df0-a495835c7462" SourceId="1" SourceUrl="http://localhost:8080/WebService/UsuarioWS?WSDL" />

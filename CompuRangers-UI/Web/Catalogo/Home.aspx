@@ -47,6 +47,11 @@
                     </ItemTemplate>
                 </asp:Repeater>
             </div>
+        <div class="d-flex justify-content-center mt-4">
+            <asp:LinkButton ID="btnAnterior" runat="server" OnClick="btnAnterior_Click" CssClass="btn btn-outline-primary me-2">Anterior</asp:LinkButton>
+            <asp:Label ID="lblPagina" runat="server" CssClass="align-self-center"></asp:Label>
+            <asp:LinkButton ID="btnSiguiente" runat="server" OnClick="btnSiguiente_Click" CssClass="btn btn-outline-primary ms-2">Siguiente</asp:LinkButton>
+        </div>
     </main>
 
 </asp:Content>

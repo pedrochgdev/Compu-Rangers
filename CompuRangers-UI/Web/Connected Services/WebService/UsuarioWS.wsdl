@@ -11,6 +11,12 @@
   <message name="changePasswordResponse">
     <part name="parameters" element="tns:changePasswordResponse" />
   </message>
+  <message name="updateUsuario">
+    <part name="parameters" element="tns:updateUsuario" />
+  </message>
+  <message name="updateUsuarioResponse">
+    <part name="parameters" element="tns:updateUsuarioResponse" />
+  </message>
   <message name="deleteUsuario">
     <part name="parameters" element="tns:deleteUsuario" />
   </message>
@@ -22,12 +28,6 @@
   </message>
   <message name="forgotPasswordResponse">
     <part name="parameters" element="tns:forgotPasswordResponse" />
-  </message>
-  <message name="updateUsuario">
-    <part name="parameters" element="tns:updateUsuario" />
-  </message>
-  <message name="updateUsuarioResponse">
-    <part name="parameters" element="tns:updateUsuarioResponse" />
   </message>
   <message name="searchUsuario">
     <part name="parameters" element="tns:searchUsuario" />
@@ -46,6 +46,10 @@
       <input wsam:Action="http://services.compurangers.com/UsuarioWS/changePasswordRequest" message="tns:changePassword" />
       <output wsam:Action="http://services.compurangers.com/UsuarioWS/changePasswordResponse" message="tns:changePasswordResponse" />
     </operation>
+    <operation name="updateUsuario">
+      <input wsam:Action="http://services.compurangers.com/UsuarioWS/updateUsuarioRequest" message="tns:updateUsuario" />
+      <output wsam:Action="http://services.compurangers.com/UsuarioWS/updateUsuarioResponse" message="tns:updateUsuarioResponse" />
+    </operation>
     <operation name="deleteUsuario">
       <input wsam:Action="http://services.compurangers.com/UsuarioWS/deleteUsuarioRequest" message="tns:deleteUsuario" />
       <output wsam:Action="http://services.compurangers.com/UsuarioWS/deleteUsuarioResponse" message="tns:deleteUsuarioResponse" />
@@ -53,10 +57,6 @@
     <operation name="forgotPassword">
       <input wsam:Action="http://services.compurangers.com/UsuarioWS/forgotPasswordRequest" message="tns:forgotPassword" />
       <output wsam:Action="http://services.compurangers.com/UsuarioWS/forgotPasswordResponse" message="tns:forgotPasswordResponse" />
-    </operation>
-    <operation name="updateUsuario">
-      <input wsam:Action="http://services.compurangers.com/UsuarioWS/updateUsuarioRequest" message="tns:updateUsuario" />
-      <output wsam:Action="http://services.compurangers.com/UsuarioWS/updateUsuarioResponse" message="tns:updateUsuarioResponse" />
     </operation>
     <operation name="searchUsuario">
       <input wsam:Action="http://services.compurangers.com/UsuarioWS/searchUsuarioRequest" message="tns:searchUsuario" />
@@ -78,6 +78,15 @@
         <soap:body use="literal" />
       </output>
     </operation>
+    <operation name="updateUsuario">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
     <operation name="deleteUsuario">
       <soap:operation soapAction="" />
       <input>
@@ -88,15 +97,6 @@
       </output>
     </operation>
     <operation name="forgotPassword">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="updateUsuario">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

@@ -55,31 +55,57 @@ namespace Web
                 estado = "EN_PROCESO"
             };
 
-            // Primero creas la orden en la BD y obtienes el ID
             int ordenId = ordenWS.addOrden(nuevaOrden);
             nuevaOrden.id = ordenId;
 
-            // Luego llenas los detalles (esto no se guarda todavía, solo para reservar)
             List<detalleVenta> detallesList = new List<detalleVenta>();
+
             foreach (itemCarrito item in carrito.items)
             {
-                detalleVenta detalle = new detalleVenta
+                int cantidadPendiente = item.cantidad;
+
+                var inventarios = invWS.getInvDisponible(item.producto.id);
+
+                int stockTotalDisponible = inventarios.Sum(i => i.cantidadDisponible);
+
+                // ❌ Validar stock actualizado
+                if (stockTotalDisponible < cantidadPendiente)
                 {
-                    producto = item.producto,
-                    cantidad = item.cantidad,
-                    subtotal = item.subtotal,
-                    devuelto = 0,
-                    idOrdenVenta = ordenId
-                };
-                detallesList.Add(detalle);
+                    throw new Exception($"Stock insuficiente para el producto {item.producto.nombre}. Solo hay {stockTotalDisponible} unidades disponibles.");
+                }
+
+                foreach (var inv in inventarios)
+                {
+                    if (cantidadPendiente <= 0)
+                        break;
+
+                    int cantidadAConsumir = Math.Min(cantidadPendiente, inv.cantidadDisponible);
+
+                    detalleVenta detalle = new detalleVenta
+                    {
+                        producto = inv,
+                        cantidad = cantidadAConsumir,
+                        subtotal = cantidadAConsumir * item.producto.precioVenta,
+                        devuelto = 0,
+                        idOrdenVenta = ordenId
+                    };
+
+                    detallesList.Add(detalle);
+
+                    cantidadPendiente -= cantidadAConsumir;
+                }
+
+                if (cantidadPendiente > 0)
+                {
+                    throw new Exception($"No hay suficiente stock para el producto {item.producto.nombre}");
+                }
             }
 
             nuevaOrden.detalles = detallesList.ToArray();
 
-            // Reservas el inventario con la orden ya creada y detalles listos
-            invWS.reservarInventario(nuevaOrden);
+            // Reservar el stock con lote e inventario exacto
+            invWS.reservarInventario(nuevaOrden); // Esto debería ahora recibir detalles con inventarioId
 
-            // Generas el link de pago
             string linkPago = clientWS.payment(nuevaOrden);
             Session["linkPago"] = linkPago;
 

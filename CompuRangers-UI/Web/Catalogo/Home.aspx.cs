@@ -25,6 +25,25 @@ namespace Web
         private BindingList<productoDTO> catalogo;
         private carrito shoppingcart;
 
+        private int paginaActual
+        {
+            get { return ViewState["paginaActual"] != null ? (int)ViewState["paginaActual"] : 0; }
+            set { ViewState["paginaActual"] = value; }
+        }
+        private List<productoDTO> Catalogo
+        {
+            get
+            {
+                return ViewState["Catalogo"] as List<productoDTO>;
+            }
+            set
+            {
+                ViewState["Catalogo"] = value;
+            }
+        }
+
+        private const int ProductosPorPagina = 15;
+
         public Home()
         {
             this.authWS = new AuthWSClient();
@@ -51,10 +70,10 @@ namespace Web
             if (!IsPostBack)
             {
                 List<productoDTO> productos = invWS.getCatalog().ToList();
-                catalogo = new BindingList<productoDTO>(productos);
+                Catalogo = productos;
 
-                rptProductos.DataSource = catalogo;
-                rptProductos.DataBind();
+                paginaActual = 0;
+                CargarProductosConPaginacion(Catalogo);
 
                 categoria[] categoriasRaiz = categoriaWS.getAllCategorias();
                 List<categoria> hojas = ObtenerCategoriasHoja(categoriasRaiz.ToList());
@@ -100,15 +119,11 @@ namespace Web
             List<productoDTO> productos = invWS.getCatalog().ToList();
 
             if (!string.IsNullOrEmpty(categoriaNombre))
-            {
-                productos = productos
-                    .Where(p => p.producto.categoria.nombre == categoriaNombre)
-                    .ToList();
-            }
+                productos = productos.Where(p => p.producto.categoria.nombre == categoriaNombre).ToList();
 
             catalogo = new BindingList<productoDTO>(productos);
-            rptProductos.DataSource = catalogo;
-            rptProductos.DataBind();
+            paginaActual = 0;
+            CargarProductosConPaginacion(catalogo.ToList());
         }
 
         protected void btnAddCart(object sender, EventArgs e)
@@ -134,7 +149,13 @@ namespace Web
                 HtmlGenericControl lblPrecioVenta = (HtmlGenericControl)item.FindControl("lblPrecioVenta");
 
                 int cantidadDisponible = Convert.ToInt32(hiddenCantidad.Value);
-                if (cantidadDisponible <= 0)
+
+                itemCarrito existente = shoppingcart.items
+                    .FirstOrDefault(i => i.producto.id == Convert.ToInt32(hiddenId.Value));
+
+                int cantidadActualEnCarrito = existente != null ? existente.cantidad : 0;
+
+                if (cantidadDisponible - cantidadActualEnCarrito <= 0)
                 {
                     script = "window.onload = function() { showAlert('No hay stock','warning');};";
                 }
@@ -183,7 +204,34 @@ namespace Web
 
             ClientScript.RegisterStartupScript(GetType(), "", script, true);
         }
+        protected void btnAnterior_Click(object sender, EventArgs e)
+        {
+            paginaActual--;
+            CargarProductosConPaginacion(Catalogo);
+        }
 
+        protected void btnSiguiente_Click(object sender, EventArgs e)
+        {
+            paginaActual++;
+            CargarProductosConPaginacion(Catalogo);
+        }
+
+        private void CargarProductosConPaginacion(List<productoDTO> productos)
+        {
+            PagedDataSource pagedData = new PagedDataSource();
+            pagedData.DataSource = productos;
+            pagedData.AllowPaging = true;
+            pagedData.PageSize = ProductosPorPagina;
+            pagedData.CurrentPageIndex = paginaActual;
+
+            btnAnterior.Enabled = !pagedData.IsFirstPage;
+            btnSiguiente.Enabled = !pagedData.IsLastPage;
+
+            lblPagina.Text = $"Página {paginaActual + 1} de {pagedData.PageCount}";
+
+            rptProductos.DataSource = pagedData;
+            rptProductos.DataBind();
+        }
 
         protected void rptProductos_ItemCommand(object source, RepeaterCommandEventArgs e)
         {

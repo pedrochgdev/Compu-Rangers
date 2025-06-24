@@ -59,6 +59,16 @@ namespace Web
             {
                 int nuevaCantidad = item.cantidad + delta;
 
+                // Aquí validamos contra la cantidad disponible en inventario
+                int cantidadDisponible = invWS.getCantidadTotalDisponible(item.producto.id); // Suponiendo que tengas este método
+
+                if (nuevaCantidad > cantidadDisponible)
+                {
+                    string scriptStock = "window.onload = function() { showAlert('Stock insuficiente para este producto', 'warning'); };";
+                    clientScriptManager.RegisterStartupScript(GetType(), "", scriptStock, true);
+                    return;
+                }
+
                 if (nuevaCantidad <= 0)
                 {
                     icWS.deleteItem(itemId);
@@ -76,6 +86,7 @@ namespace Web
             string script = "window.onload = function() { showModal('carritoModal'); };";
             clientScriptManager.RegisterStartupScript(GetType(), "", script, true);
         }
+
 
         public SiteMaster()
         {
