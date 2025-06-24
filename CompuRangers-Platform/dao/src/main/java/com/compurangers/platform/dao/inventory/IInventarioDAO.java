@@ -7,4 +7,5 @@ import java.util.List;
 public interface IInventarioDAO extends ICrud<Inventario>{
     List<Inventario> getInvDisponible(int productoId);
     List<Inventario> getInvReponer(int productoId);
+    int getCantidadTotalDisponible(int productoId);
 }

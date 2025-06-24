@@ -2,7 +2,7 @@ package com.compurangers.platform.dao.mysql.sales;
 
 import com.compurangers.platform.core.domain.sales.DetalleVenta;
 import com.compurangers.platform.dao.mysql.BaseDetalleDAOImpl;
-import com.compurangers.platform.dao.mysql.catalog.ProductoDAOImpl;
+import com.compurangers.platform.dao.mysql.inventory.InventarioDAOImpl;
 import com.compurangers.platform.dao.sales.IDetalleVentaDAO;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -67,7 +67,7 @@ public class DetalleVentaDAOImpl extends BaseDetalleDAOImpl<DetalleVenta> implem
         dv.setSubtotal(rs.getDouble("subtotal"));
         dv.setDevuelto(rs.getInt("cantidad_devuelta"));
         dv.setIdOrdenVenta(rs.getInt("orden_de_venta_id"));
-        dv.setProducto(new ProductoDAOImpl().search(rs.getInt("producto_id")));
+        dv.setProducto(new InventarioDAOImpl().search(rs.getInt("inventario_id")));
         return dv;
     }
     

@@ -1,11 +1,14 @@
 package com.compurangers.platform.dao.mysql.sales;
 
 import com.compurangers.platform.core.domain.catalog.Producto;
+import com.compurangers.platform.core.domain.inventory.Inventario;
 import com.compurangers.platform.core.domain.sales.DetalleVenta;
 import com.compurangers.platform.dao.ICrudDAOTest;
 import com.compurangers.platform.dao.sales.IDetalleVentaDAO;
 import com.compurangers.platform.dao.catalog.IProductoDAO;
+import com.compurangers.platform.dao.inventory.IInventarioDAO;
 import com.compurangers.platform.dao.mysql.catalog.ProductoDAOImpl;
+import com.compurangers.platform.dao.mysql.inventory.InventarioDAOImpl;
 
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -37,8 +40,8 @@ public class DetalleVentaDAOTest implements ICrudDAOTest {
         detalle.setDevuelto(0);
         detalle.setIdOrdenVenta(ordenVentaId);
 
-        IProductoDAO productoDAO = new ProductoDAOImpl();
-        Producto producto = productoDAO.search(productoId);
+        IInventarioDAO productoDAO = new InventarioDAOImpl();
+        Inventario producto = productoDAO.search(productoId);
         assertNotNull(producto); // Validamos que el producto exista
         detalle.setProducto(producto);
 
@@ -58,8 +61,8 @@ public class DetalleVentaDAOTest implements ICrudDAOTest {
         detalle.setDevuelto(1);
         detalle.setIdOrdenVenta(ordenVentaId);
 
-        IProductoDAO productoDAO = new ProductoDAOImpl();
-        Producto producto = productoDAO.search(productoId);
+        IInventarioDAO productoDAO = new InventarioDAOImpl();
+        Inventario producto = productoDAO.search(productoId);
         detalle.setProducto(producto);
 
         boolean updated = dao.update(detalle);
@@ -84,8 +87,8 @@ public class DetalleVentaDAOTest implements ICrudDAOTest {
         detalle.setDevuelto(0);
         detalle.setIdOrdenVenta(ordenVentaId);
 
-        IProductoDAO productoDAO = new ProductoDAOImpl();
-        Producto producto = productoDAO.search(productoId);
+        IInventarioDAO productoDAO = new InventarioDAOImpl();
+        Inventario producto = productoDAO.search(productoId);
         detalle.setProducto(producto);
 
         boolean updated = dao.update(detalle);

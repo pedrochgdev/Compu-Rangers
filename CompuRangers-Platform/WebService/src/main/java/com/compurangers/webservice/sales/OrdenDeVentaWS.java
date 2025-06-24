@@ -34,22 +34,6 @@ public class OrdenDeVentaWS {
     @WebMethod(operationName = "deleteOrden")
     public boolean deleteOrden(@WebParam(name = "orden") int orderId) {
         return ov.deleteOrdenDeVenta(orderId);
-    }
-    
-    @WebMethod(operationName = "getTotalHistorico")
-    public double getTotalHistorico() {
-        return ov.getTotalHistorico();
-    }
-    
-    @WebMethod(operationName = "getPedidosHoy")
-    public int getPedidosHoy() {
-        return ov.getPedidosHoy();
-    }
-    
-    @WebMethod(operationName = "getPedidosSemanal")
-    public List<PedidoPorDiaDTO> getPedidosSemanal() {
-        return ped.getPedidosSemana();
-    }
-    
+    }   
     
 }

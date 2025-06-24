@@ -3,11 +3,13 @@ package com.compurangers.platform.dao.mysql.user;
 import com.compurangers.platform.core.domain.user.Admin;
 import com.compurangers.platform.core.domain.user.Usuario;
 import com.compurangers.platform.dao.user.IAdminDAO;
+import com.compurangers.platform.util.DatabaseUtil;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 
 public class AdminDAOImpl extends UsuarioDAOImpl implements IAdminDAO {
 
@@ -72,5 +74,24 @@ public class AdminDAOImpl extends UsuarioDAOImpl implements IAdminDAO {
     public String getPasswordHash(int userId) {
         return super.getPasswordHash(userId);
     }
+    
+    @Override
+   public double getGananciaMes() {
+       try (
+           Connection conn = DatabaseUtil.getInstance().getConnection();
+           CallableStatement stmt = conn.prepareCall("{ CALL GET_GANANCIA_MES_ACTUAL(?) }");
+       ) {
+           stmt.registerOutParameter(1, Types.DOUBLE);
+           stmt.execute();
+           return stmt.getDouble(1);
+       } catch (SQLException e) {
+           System.err.println("Error SQL en getGananciaMes: " + e.getMessage());
+           throw new RuntimeException("No se pudo obtener la ganancia del mes.", e);
+       } catch (Exception e) {
+           System.err.println("Error inesperado: " + e.getMessage());
+           throw new RuntimeException("Error inesperado al obtener la ganancia del mes.", e);
+       }
+}
+
     
 }

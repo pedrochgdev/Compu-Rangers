@@ -157,7 +157,7 @@ public class IzipayCallbackResource {
         List<DetalleVenta> detalles = detalleVentaBO.getAllDetalleVentaFromOrder(orderId);
 
         for (DetalleVenta detalle : detalles) {
-            Producto producto = detalle.getProducto(); // Asumiendo que DetalleVenta ya tiene el producto cargado
+            Producto producto = detalle.getProducto().getProducto();
             int cantidadVendida = detalle.getCantidad();
 
             // Actualizar cantidad vendida acumulada

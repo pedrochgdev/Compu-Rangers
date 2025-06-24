@@ -59,16 +59,7 @@ public class OrdenDeVenta {
     public void setDetalles(List<DetalleVenta> detalles) {
         this.detalles = detalles;
     }
-    
-    public void cargarListaDetalle(List<ItemCarrito> carrito) {
-        for (ItemCarrito item : carrito) {
-            DetalleVenta detalle = new DetalleVenta(item.getProducto(), item.getCantidad());
-            this.detalles.add(detalle);
-            this.total += detalle.getSubtotal();
-        }
-
-    }
-    
+        
     public int getClienteId() {
         return clienteId;
     }

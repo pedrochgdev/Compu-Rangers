@@ -1,29 +1,29 @@
 package com.compurangers.platform.core.domain.sales;
 
-import com.compurangers.platform.core.domain.catalog.Producto;
+import com.compurangers.platform.core.domain.inventory.Inventario;
 
 public class DetalleVenta {
     private int id;
     private int cantidad;
     private double subtotal;
     private int devuelto;
-    private Producto producto;
+    private Inventario producto;
     private int idOrdenVenta; 
     
     public DetalleVenta(){}
 
-    public DetalleVenta(int idOrdenVenta, Producto producto, int cantidad){
+    public DetalleVenta(int idOrdenVenta, Inventario producto, int cantidad){
         this.idOrdenVenta=idOrdenVenta;
         this.producto=producto;
         this.cantidad=cantidad;
-        this.subtotal=producto.getPrecioVenta()*cantidad;
+        this.subtotal=producto.getProducto().getPrecioVenta()*cantidad;
         this.devuelto=0;
     }
     
-    public DetalleVenta(Producto producto, int cantidad) {
+    public DetalleVenta(Inventario producto, int cantidad) {
         this.producto = producto;
         this.cantidad = cantidad;
-        this.subtotal = producto.getPrecioVenta() * cantidad;
+        this.subtotal = producto.getProducto().getPrecioVenta() * cantidad;
         this.devuelto = 0;
     }
     
@@ -59,11 +59,11 @@ public class DetalleVenta {
         this.devuelto = devuelto;
     }
 
-    public Producto getProducto() {
+    public Inventario getProducto() {
         return producto;
     }
 
-    public void setProducto(Producto prod) {
+    public void setProducto(Inventario prod) {
         this.producto = prod;
     }
     

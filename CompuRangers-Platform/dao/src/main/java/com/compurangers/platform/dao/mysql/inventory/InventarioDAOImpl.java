@@ -131,4 +131,30 @@ public class InventarioDAOImpl extends BaseDAOImpl<Inventario> implements IInven
             throw new RuntimeException("Error inesperado al listar los registros.", e);
         }
     }
+    
+    @Override
+    public int getCantidadTotalDisponible(int productoId) {
+        try (
+            Connection conn = DatabaseUtil.getInstance().getConnection();
+            CallableStatement cmd = conn.prepareCall("{call get_cantidad_disponible_por_producto(?)}");
+        ) {
+            cmd.setInt(1, productoId);
+            ResultSet rs = cmd.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("cantidad_disponible");
+            }
+
+            return 0;
+        }
+        catch (SQLException e) {
+            System.err.println("Error SQL al obtener cantidad disponible: " + e.getMessage());
+            throw new RuntimeException("No se pudo obtener la cantidad disponible.", e);
+        }
+        catch (Exception e) {
+            System.err.println("Error inesperado: " + e.getMessage());
+            throw new RuntimeException("Error inesperado al obtener la cantidad disponible.", e);
+        }
+    }
+
 }

@@ -2,6 +2,7 @@ package com.compurangers.webservice.inventory;
 
 import com.compurangers.platform.core.domain.catalog.dto.ProductoDTO;
 import com.compurangers.platform.core.domain.catalog.Producto;
+import com.compurangers.platform.core.domain.inventory.Inventario;
 import com.compurangers.platform.core.domain.sales.OrdenDeVenta;
 import com.compurangers.platform.dao.mysql.inventory.InventarioDAOImpl;
 import com.compurangers.platform.service.inventory.InventarioBO;
@@ -40,6 +41,16 @@ public class InventoryWS {
     @WebMethod(operationName = "reservarInventario")
     public void reservarInventario(@WebParam(name = "ordenVenta") OrdenDeVenta ov){
         ibo.reservarInventario(ov);
+    }
+    
+    @WebMethod(operationName = "getCantidadTotalDisponible")
+    public int getCantidadTotalDisponible(@WebParam(name = "productoId") int productoId){
+        return ibo.getCantidadTotalDisponible(productoId);
+    }
+    
+    @WebMethod(operationName = "getInvDisponible")
+    public List<Inventario> getInvDisponible(@WebParam(name = "productoId") int productoId){
+        return ibo.getInvDisponible(productoId);
     }
     
 }

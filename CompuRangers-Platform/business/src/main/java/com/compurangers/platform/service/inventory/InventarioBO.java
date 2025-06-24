@@ -56,7 +56,7 @@ public class InventarioBO {
     public void reservarInventario(OrdenDeVenta ov){
         for (DetalleVenta detalle : ov.getDetalles()) {
             int cantidadAReducir = detalle.getCantidad();
-            int productoId = detalle.getProducto().getId();
+            int productoId = detalle.getProducto().getProducto().getId();
             
             List<Inventario> lotes = this.getInvDisponible(productoId); // ordenados por id ascendente
 
@@ -86,4 +86,8 @@ public class InventarioBO {
     public List<Inventario> getInventarioPorProductoDesc(int id){
         return inventarioDAO.getInvReponer(id);
     }    
+    
+    public int getCantidadTotalDisponible(int productoId){
+        return inventarioDAO.getCantidadTotalDisponible(productoId);
+    }
 }

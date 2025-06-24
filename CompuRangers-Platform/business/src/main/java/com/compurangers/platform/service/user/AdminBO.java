@@ -4,6 +4,7 @@ import com.compurangers.platform.dao.user.IAdminDAO;
 import com.compurangers.platform.service.user.auth.TokenRecuperacionBO;
 import com.compurangers.platform.service.user.auth.utils.PasswordUtils;
 import com.compurangers.platform.core.domain.user.Admin;
+import com.compurangers.platform.dao.mysql.user.AdminDAOImpl;
 import java.util.Date;
 
 public class AdminBO extends UsuarioBO<IAdminDAO> {
@@ -18,5 +19,10 @@ public class AdminBO extends UsuarioBO<IAdminDAO> {
         int userId = usuarioDAO.add(usuario);
         System.out.println("Nuevo usuario agregado con ID: " + userId);
         return userId;
+    }
+    
+    public double getGananciaMes(){
+        IAdminDAO ic = new AdminDAOImpl();
+        return ic.getGananciaMes();
     }
 }
