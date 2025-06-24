@@ -144,12 +144,6 @@ VALUES (0, 0, 2);
 INSERT INTO ORDEN_DE_VENTA (estado, fecha, total, cliente_usuario_id, direccion)
 VALUES ('PAGADO', CURDATE(), 2799.98, 2, '456 Client Ave');
 
--- Insert into DETALLE_VENTA (order details)
-INSERT INTO DETALLE_VENTA (cantidad, subtotal, orden_de_venta_id, producto_id)
-VALUES 
-    (1, 1999.99, 1, 1),  -- MacBook Pro
-    (1, 799.99, 1, 2);   -- Galaxy S21
-
 -- Insert into DOCUMENTO_DE_VENTAS (sales document with tax)
 INSERT INTO DOCUMENTO_DE_VENTAS (numero, subtotal, impuestos, total, orden_de_venta_id)
 VALUES (1001, 2799.98, 504.00, 3303.98, 1);
@@ -281,6 +275,12 @@ INSERT INTO INVENTARIO (cantidad_disponible, lote_id, producto_id) VALUES
 -- Insert into IMPUESTO (tax type)
 INSERT INTO IMPUESTO (nombre, abreviacion, tipo)
 VALUES ('Impuesto General a las ventas', 'IGV', 'VENTA');
+
+-- Insert into DETALLE_VENTA (order details)
+INSERT INTO DETALLE_VENTA (cantidad, subtotal, orden_de_venta_id, inventario_id)
+VALUES 
+    (1, 1999.99, 1, 1),  -- MacBook Pro
+    (1, 799.99, 1, 2);   -- Galaxy S21
 
 -- Insert into PERIODO (tax period)
 INSERT INTO PERIODO (fecha_inicio, fecha_fin)

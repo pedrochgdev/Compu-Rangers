@@ -1,12 +1,12 @@
 SET GLOBAL event_scheduler = ON;
-
+DROP EVENT eliminar_tokens_expirados;
 CREATE EVENT IF NOT EXISTS eliminar_tokens_expirados
 ON SCHEDULE EVERY 1 MINUTE
 DO
   DELETE FROM TOKEN_RECUPERACION
   WHERE fecha_expiracion <= NOW();
 
-DROP EVENT eliminar_tokens_expirados;
+
 /* DROPS */
 
 DROP PROCEDURE IF EXISTS add_categoria;
@@ -170,6 +170,9 @@ DROP PROCEDURE IF EXISTS obtener_inventario_reabastecer;
 DROP PROCEDURE IF EXISTS obtener_inventario_disponible;
 DROP PROCEDURE IF EXISTS obtener_cantidad_de_lote;
 DROP PROCEDURE IF EXISTS delete_all_items_from_carrito;
+DROP PROCEDURE IF EXISTS get_cantidad_disponible_por_producto;
+DROP PROCEDURE IF EXISTS get_ganancia_mes_actual;
+DROP PROCEDURE IF EXISTS get_ganancias_mensuales;
 
 /* CATALOG */
 /* PROCEDURES CATEGORIA */
@@ -1075,11 +1078,11 @@ CREATE PROCEDURE add_detalle_venta(
     IN subtotal_in DECIMAL(10,2),
     IN cantidad_devuelta_in INT,
     IN orden_de_venta_id_in INT,
-    IN producto_id_in INT
+    IN inventario_id_in INT
 )
 BEGIN
-    INSERT INTO DETALLE_VENTA (cantidad, subtotal, cantidad_devuelta, orden_de_venta_id, producto_id)
-    VALUES (cantidad_in, subtotal_in, cantidad_devuelta_in, orden_de_venta_id_in, producto_id_in);
+    INSERT INTO DETALLE_VENTA (cantidad, subtotal, cantidad_devuelta, orden_de_venta_id, inventario_id)
+    VALUES (cantidad_in, subtotal_in, cantidad_devuelta_in, orden_de_venta_id_in, inventario_id_in);
 
     SET generated_id = LAST_INSERT_ID();
 END;
@@ -1093,7 +1096,7 @@ CREATE PROCEDURE update_detalle_venta(
     IN subtotal_in DECIMAL(10,2),
     IN cantidad_devuelta_in INT,
     IN orden_de_venta_id_in INT,
-    IN producto_id_in INT
+    IN inventario_id_in INT
 )
 BEGIN
     UPDATE DETALLE_VENTA
@@ -1101,7 +1104,7 @@ BEGIN
         subtotal = subtotal_in,
         cantidad_devuelta = cantidad_devuelta_in,
         orden_de_venta_id = orden_de_venta_id_in,
-        producto_id = producto_id_in
+        inventario_id = inventario_id_in
     WHERE id = id_in;
 END;
 //
@@ -2420,6 +2423,57 @@ END;
 //
 DELIMITER ;
 
+DELIMITER //
 
+CREATE PROCEDURE get_cantidad_disponible_por_producto (
+    IN p_producto_id INT
+)
+BEGIN
+    SELECT 
+        IFNULL(SUM(cantidad_disponible), 0) AS cantidad_disponible
+    FROM 
+        INVENTARIO
+    WHERE 
+        producto_id = p_producto_id;
+END;
+//
+
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE get_ganancia_mes_actual(OUT ganancia DECIMAL(10,2))
+BEGIN
+    SELECT IFNULL(SUM(dv.subtotal - dl.precio_compra * dv.cantidad), 0)
+    INTO ganancia
+    FROM ORDEN_DE_VENTA ov
+    JOIN DETALLE_VENTA dv ON dv.orden_de_venta_id = ov.id
+    JOIN INVENTARIO i ON dv.inventario_id = i.id
+    JOIN DETALLE_LOTE dl ON i.lote_id = dl.lote_id AND i.producto_id = dl.producto_id
+    WHERE ov.estado = 'PAGADO'
+      AND MONTH(ov.fecha) = MONTH(CURDATE())
+      AND YEAR(ov.fecha) = YEAR(CURDATE());
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE get_ganancias_mensuales()
+BEGIN
+    SELECT 
+        DATE_FORMAT(ov.fecha, '%Y-%m-01') AS mes,
+        ROUND(SUM(dv.subtotal - dl.precio_compra * dv.cantidad), 2) AS ganancia
+    FROM ORDEN_DE_VENTA ov
+    JOIN DETALLE_VENTA dv ON dv.orden_de_venta_id = ov.id
+    JOIN INVENTARIO i ON dv.inventario_id = i.id
+    JOIN DETALLE_LOTE dl ON i.lote_id = dl.lote_id AND i.producto_id = dl.producto_id
+    WHERE ov.estado = 'PAGADO'
+      AND ov.fecha >= DATE_SUB(CURDATE(), INTERVAL 11 MONTH)
+    -- Agrupa por la misma expresión del SELECT
+    GROUP BY DATE_FORMAT(ov.fecha, '%Y-%m-01') -- ¡Cambio clave aquí!
+    ORDER BY mes DESC;
+END;
+//
+DELIMITER ;
 
 
