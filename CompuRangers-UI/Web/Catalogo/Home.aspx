@@ -26,7 +26,10 @@
                     <ItemTemplate>
                         <div class="col">
                             <div class="card h-100">
-                                <img src="https://www.shutterstock.com/image-photo/set-home-kitchen-appliances-room-260nw-2473408983.jpg" class="card-img-top" alt="producto">
+                                <img src='<%# Eval("producto.id", "/MostrarImagen.ashx?id={0}") %>'
+                                     class="card-img-top"
+                                     alt="producto"
+                                     object-fit: cover;" />
                                 <div class="card-body">
                                     <asp:HiddenField ID="hiddenId" runat="server" Value='<%# Eval("producto.id") %>' />
                                     <asp:HiddenField ID="hiddenCantidad" runat="server" Value='<%# Eval("cantidadDisponible") %>' />

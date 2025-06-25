@@ -61,7 +61,7 @@ namespace Web
         // 4. Mostrar info principal del producto
         private void MostrarProducto(productoDTO producto)
         {
-            imgProducto.ImageUrl = "https://www.shutterstock.com/image-photo/set-home-kitchen-appliances-room-260nw-2473408983.jpg";
+            imgProducto.ImageUrl = $"~/MostrarImagen.ashx?id={producto.producto.id}";
             litNombre.Text = producto.producto.nombre;
             litDescripcion.Text = producto.producto.descripcion;
             litPrecio.Text = producto.producto.precioVenta.ToString("C2");

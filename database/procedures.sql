@@ -1,11 +1,11 @@
-SET GLOBAL event_scheduler = ON;
+/*SET GLOBAL event_scheduler = ON;
 DROP EVENT eliminar_tokens_expirados;
 CREATE EVENT IF NOT EXISTS eliminar_tokens_expirados
 ON SCHEDULE EVERY 1 MINUTE
 DO
   DELETE FROM TOKEN_RECUPERACION
   WHERE fecha_expiracion <= NOW();
-
+*/
 
 /* DROPS */
 
@@ -173,8 +173,11 @@ DROP PROCEDURE IF EXISTS delete_all_items_from_carrito;
 DROP PROCEDURE IF EXISTS get_cantidad_disponible_por_producto;
 DROP PROCEDURE IF EXISTS get_ganancia_mes_actual;
 DROP PROCEDURE IF EXISTS get_ganancias_mensuales;
+<<<<<<< HEAD
 DROP PROCEDURE IF EXISTS search_productos_avanzado;
 DROP PROCEDURE IF EXISTS get_ordenes_por_usuario;
+=======
+>>>>>>> 33a0d66d1142b42daf5e404d1833aad6c1c6dbd2
 
 /* CATALOG */
 /* PROCEDURES CATEGORIA */
@@ -315,7 +318,6 @@ END;
 DELIMITER ;
 
 /* PROCEDURES PRODUCTO */
-
 DELIMITER //
 CREATE PROCEDURE add_producto(
     OUT generated_id INT,
@@ -324,11 +326,12 @@ CREATE PROCEDURE add_producto(
     IN descripcion_in TEXT,
     IN precio_venta_in DECIMAL(10, 2),
     IN categoria_id_in INT,
-    IN marca_id_in INT
+    IN marca_id_in INT,
+    IN banner_promocional_in LONGBLOB
 )
 BEGIN
-    INSERT INTO PRODUCTO (sku, nombre, descripcion, precio_venta, categoria_id, marca_id)
-    VALUES (sku_in, nombre_in, descripcion_in, precio_venta_in, categoria_id_in, marca_id_in);
+    INSERT INTO PRODUCTO (sku, nombre, descripcion, precio_venta, categoria_id, marca_id, banner_promocional)
+    VALUES (sku_in, nombre_in, descripcion_in, precio_venta_in, categoria_id_in, marca_id_in, banner_promocional_in);
 
     SET generated_id = LAST_INSERT_ID();
 END;
@@ -2403,7 +2406,8 @@ BEGIN
 		precio_venta,
 		cantidad_ventas,
 		categoria_id AS cid,
-		marca_id AS mid
+		marca_id AS mid,
+        banner_promocional
 	FROM producto
 	ORDER BY cantidad_ventas DESC
 	LIMIT 5;
@@ -2475,10 +2479,8 @@ BEGIN
     GROUP BY DATE_FORMAT(ov.fecha, '%Y-%m-01') -- ¡Cambio clave aquí!
     ORDER BY mes DESC;
 END;
-
 //
 DELIMITER ;
-
 
 DELIMITER //
 CREATE PROCEDURE search_productos_avanzado(
@@ -2510,4 +2512,3 @@ BEGIN
     ORDER BY fecha DESC;
 END;
 //
-DELIMITER ;

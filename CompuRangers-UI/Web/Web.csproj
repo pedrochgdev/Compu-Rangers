@@ -102,7 +102,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
-    <Content Include="Admin\Productos.aspx" />
     <Content Include="Auth\PasswordRecovery.aspx" />
     <Content Include="Auth\ResetPassword.aspx" />
     <Content Include="Cliente\DetalleCompra.aspx" />
@@ -231,6 +230,9 @@
     <Content Include="Connected Services\WebService\Web.WebService.addOrdenResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.addProductoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Connected Services\WebService\Web.WebService.carrito.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -315,6 +317,9 @@
     <Content Include="Connected Services\WebService\Web.WebService.itemCarrito.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.listarProductosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Connected Services\WebService\Web.WebService.loginResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -342,6 +347,9 @@
     <Content Include="Connected Services\WebService\Web.WebService.searchClienteResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.searchProductoIDResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Connected Services\WebService\Web.WebService.searchTokenResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -355,6 +363,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\WebService\Web.WebService.updateItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.updateProductoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\WebService\Web.WebService.updateUsuarioResponse.datasource">
@@ -399,13 +410,6 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\Productos.aspx.cs">
-      <DependentUpon>Productos.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\Productos.aspx.designer.cs">
-      <DependentUpon>Productos.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Auth\PasswordRecovery.aspx.cs">
       <DependentUpon>PasswordRecovery.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

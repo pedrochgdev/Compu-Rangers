@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://services.compurangers.com" targetNamespace="http://services.compurangers.com" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="addProducto" type="tns:addProducto" />
+  <xs:element name="addProductoResponse" type="tns:addProductoResponse" />
   <xs:element name="getProductosFiltrados" type="tns:getProductosFiltrados" />
   <xs:element name="getProductosFiltradosResponse" type="tns:getProductosFiltradosResponse" />
   <xs:element name="getRanking" type="tns:getRanking" />
   <xs:element name="getRankingResponse" type="tns:getRankingResponse" />
+  <xs:element name="listarProductos" type="tns:listarProductos" />
+  <xs:element name="listarProductosResponse" type="tns:listarProductosResponse" />
+  <xs:element name="searchProductoID" type="tns:searchProductoID" />
+  <xs:element name="searchProductoIDResponse" type="tns:searchProductoIDResponse" />
+  <xs:element name="updateProducto" type="tns:updateProducto" />
+  <xs:element name="updateProductoResponse" type="tns:updateProductoResponse" />
   <xs:complexType name="getRanking">
     <xs:sequence />
   </xs:complexType>
@@ -18,6 +26,7 @@
       <xs:element minOccurs="0" name="categoria" type="tns:categoria" />
       <xs:element minOccurs="0" name="descripcion" type="xs:string" />
       <xs:element name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="imagenReferencial" type="xs:base64Binary" />
       <xs:element minOccurs="0" name="marca" type="tns:marca" />
       <xs:element minOccurs="0" name="nombre" type="xs:string" />
       <xs:element name="precioVenta" type="xs:double" />
@@ -38,6 +47,34 @@
       <xs:element minOccurs="0" name="nombre" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name="listarProductos">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarProductosResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:producto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="addProducto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="producto" type="tns:producto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="addProductoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchProductoID">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchProductoIDResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:producto" />
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="getProductosFiltrados">
     <xs:sequence>
       <xs:element minOccurs="0" name="nombre" type="xs:string" />
@@ -48,6 +85,16 @@
   <xs:complexType name="getProductosFiltradosResponse">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:producto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateProducto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="producto" type="tns:producto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateProductoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
 </xs:schema>

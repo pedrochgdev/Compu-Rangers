@@ -21,6 +21,7 @@ public class ProductoWS {
     public List<Producto> getRanking() {
         return prod.getRanking();
     }
+    
     @WebMethod(operationName = "getProductosFiltrados")
     public List<Producto> getSearchAvanzadoProductos(
         @WebParam(name = "nombre") String nombre,
@@ -30,4 +31,29 @@ public class ProductoWS {
         return prod.getSearchAvanzadoProductos(nombre, categoryId, marcaId);
     }
 
+    
+    @WebMethod(operationName = "listarProductos")
+    public List<Producto> listarProductos(){
+        List<Producto> productos = null;
+        try{
+            productos=prod.getAllProductos();
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return productos;
+    }
+    
+    @WebMethod(operationName = "addProducto")
+    public int addProducto(@WebParam(name = "producto") Producto producto) {
+        return prod.addProducto(producto);
+    }
+    
+    @WebMethod(operationName = "updateProducto")
+    public boolean updateProducto(@WebParam(name = "producto") Producto producto) {
+        return prod.updateProducto(producto);
+    }
+    @WebMethod(operationName = "searchProductoID")
+    public Producto searchProductoID(@WebParam(name = "id") int id) {
+        return prod.searchProducto(id);
+    }
 }

@@ -71,6 +71,7 @@ CREATE TABLE PRODUCTO (
     cantidad_ventas INT DEFAULT 0,
     categoria_id INT NOT NULL,
     marca_id INT NOT NULL,
+    banner_promocional LONGBLOB,
     PRIMARY KEY (id),
     CONSTRAINT producto_categoria_FK FOREIGN KEY (categoria_id) REFERENCES CATEGORIA (id),
     CONSTRAINT producto_MARCA_FK FOREIGN KEY (marca_id) REFERENCES MARCA (id)

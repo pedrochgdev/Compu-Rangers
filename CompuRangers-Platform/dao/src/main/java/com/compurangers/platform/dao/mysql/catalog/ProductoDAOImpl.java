@@ -16,7 +16,7 @@ public class ProductoDAOImpl extends BaseDAOImpl<Producto> implements IProductoD
 
     @Override
     protected CallableStatement addCommand(Connection conn, Producto modelo) throws SQLException {
-        String sql = "{CALL add_producto(?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{CALL add_producto(?, ?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.registerOutParameter(1, Types.INTEGER);
         cmd.setString(2, modelo.getSku());
@@ -25,6 +25,11 @@ public class ProductoDAOImpl extends BaseDAOImpl<Producto> implements IProductoD
         cmd.setDouble(5, modelo.getPrecioVenta());
         cmd.setInt(6, modelo.getCategoria().getId());
         cmd.setInt(7, modelo.getMarca().getId());
+        if (modelo.getImagenReferencial() != null) {
+            cmd.setBytes(8, modelo.getImagenReferencial());
+        } else {
+            cmd.setNull(8, Types.BLOB);
+        }
         return cmd;
     }
 
@@ -63,7 +68,7 @@ public class ProductoDAOImpl extends BaseDAOImpl<Producto> implements IProductoD
     protected CallableStatement getAllCommand(Connection conn) throws SQLException {
         return conn.prepareCall("{CALL get_all_productos()}");
     }
-    
+
     protected CallableStatement getRankingCommand(Connection conn) throws SQLException {
         return conn.prepareCall("{CALL get_ranking_productos()}");
     }
@@ -79,30 +84,31 @@ public class ProductoDAOImpl extends BaseDAOImpl<Producto> implements IProductoD
         p.setCantidadVendida(rs.getInt("cantidad_ventas"));
         p.setCategoria(new CategoriaDAOImpl().search(rs.getInt("cid")));
         p.setMarca(new MarcaDAOImpl().search(rs.getInt("mid")));
-
+        if(rs.getBytes("banner_promocional")!=null){
+            p.setImagenReferencial(rs.getBytes("banner_promocional"));
+        }else{
+            p.setImagenReferencial(null);
+        }
+        
         return p;
     }
 
     @Override
     public List<Producto> getRanking() {
         try (
-            Connection conn = DatabaseUtil.getInstance().getConnection();
-            CallableStatement cmd = this.getRankingCommand(conn);
-        ) {
+                Connection conn = DatabaseUtil.getInstance().getConnection(); CallableStatement cmd = this.getRankingCommand(conn);) {
             ResultSet rs = cmd.executeQuery();
-            
+
             List<Producto> modelos = new ArrayList<>();
             while (rs.next()) {
                 modelos.add(this.mapModel(rs));
             }
-            
+
             return modelos;
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             System.err.println("Error SQL durante el ranking: " + e.getMessage());
             throw new RuntimeException("No se pudo listar el ranking.", e);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.err.println("Error inpesperado: " + e.getMessage());
             throw new RuntimeException("Error inesperado al listar el ranking.", e);
         }
