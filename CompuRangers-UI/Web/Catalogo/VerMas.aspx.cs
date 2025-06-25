@@ -64,7 +64,7 @@ namespace Web
             imgProducto.ImageUrl = $"~/MostrarImagen.ashx?id={producto.producto.id}";
             litNombre.Text = producto.producto.nombre;
             litDescripcion.Text = producto.producto.descripcion;
-            litPrecio.Text = producto.producto.precioVenta.ToString("N2");
+            litPrecio.Text = producto.producto.precioVenta.ToString("C2");
             hfIdProducto.Value = producto.producto.id.ToString();
             litCategorias.Text = GenerarHtmlCategorias(producto);
         }

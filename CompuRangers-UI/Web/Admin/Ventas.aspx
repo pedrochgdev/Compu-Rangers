@@ -10,7 +10,7 @@
                 <div class="card shadow-sm border-0">
                     <div class="card-body text-center">
                         <h6 class="card-title text-muted">Total Ventas</h6>
-                        <h2 class="fw-bold text-success">$<asp:Label ID="lblTotalVentas" runat="server" Text="0.00" /></h2>
+                        <h2 class="fw-bold text-success"><asp:Label ID="lblTotalVentas" runat="server" Text="0.00" /></h2>
                     </div>
                 </div>
             </div>
@@ -18,7 +18,7 @@
                 <div class="card shadow-sm border-0">
                     <div class="card-body text-center">
                         <h6 class="card-title text-muted">Ganancias Mes</h6>
-                        <h2 class="fw-bold text-primary">$<asp:Label ID="lblGananciaMes" runat="server" Text="0.00" /></h2>
+                        <h2 class="fw-bold text-primary"><asp:Label ID="lblGananciaMes" runat="server" Text="0.00" /></h2>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                         <ItemTemplate>
                             <div class="col text-center">
                                 <div class="fw-bold"><%# ((DateTime)Eval("Mes")).ToString("MMMM yyyy", System.Globalization.CultureInfo.CreateSpecificCulture("es-ES")) %></div>
-                                <div>$<%# Eval("Ganancia", "{0:N2}") %></div>
+                                <div><%# Eval("Ganancia", "{0:C2}") %></div>
                             </div>
                         </ItemTemplate>
                     </asp:Repeater>
