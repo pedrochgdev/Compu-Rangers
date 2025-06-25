@@ -202,7 +202,7 @@ namespace Web
                 script = "window.onload = function() { showModal('form-modal-login');};";
             else
             {
-                
+
                 script = "window.onload = function() { showModal('carritoModal');};";
             }
             clientScriptManager.RegisterStartupScript(GetType(), "", script, true);
@@ -213,10 +213,10 @@ namespace Web
             string usuario = txtEmail.Text;
             Console.WriteLine(usuario + "" + password);
             int id = authWS.login(usuario, password);
-            
+
             if (id > 0)
             {
-                Session["user"] = id;                
+                Session["user"] = id;
                 FormsAuthenticationTicket tkt;
                 string cookiestr;
                 HttpCookie ck;
@@ -236,7 +236,7 @@ namespace Web
                 else
                     strRedirect = "../Catalogo/Home.aspx";
 
-                Response.Redirect(strRedirect+"?msg=login-success", true);
+                Response.Redirect(strRedirect + "?msg=login-success", true);
             }
             else
             {
@@ -251,7 +251,7 @@ namespace Web
             LinkButton btn = (LinkButton)sender;
             RepeaterItem item = (RepeaterItem)btn.NamingContainer;
             HiddenField hiddenId = (HiddenField)item.FindControl("hfItemCarritoId");
-            int icId= Convert.ToInt32(hiddenId.Value);
+            int icId = Convert.ToInt32(hiddenId.Value);
             icWS.deleteItem(icId);
 
             CargarCarrito();
@@ -289,7 +289,7 @@ namespace Web
             shoppingcart.cantidadProductos = cantidadTotalProductos;
             shoppingcart.total = totalGeneral;
             carritoWSClient.updateCarrito(shoppingcart);
-            
+
         }
         private void actualizarIcono(int cantidadTotalProductos)
         {
@@ -303,5 +303,6 @@ namespace Web
                 spanCantidadCarrito.Style["display"] = "none";
             }
         }
+
     }
 }

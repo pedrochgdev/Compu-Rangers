@@ -5,17 +5,11 @@
       <xsd:import schemaLocation="http://localhost:8080/WebService/ClienteWS?xsd=1" namespace="http://services.compurangers.com" />
     </xsd:schema>
   </types>
-  <message name="searchCliente">
-    <part name="parameters" element="tns:searchCliente" />
+  <message name="addCliente">
+    <part name="parameters" element="tns:addCliente" />
   </message>
-  <message name="searchClienteResponse">
-    <part name="parameters" element="tns:searchClienteResponse" />
-  </message>
-  <message name="getClientesNuevos">
-    <part name="parameters" element="tns:getClientesNuevos" />
-  </message>
-  <message name="getClientesNuevosResponse">
-    <part name="parameters" element="tns:getClientesNuevosResponse" />
+  <message name="addClienteResponse">
+    <part name="parameters" element="tns:addClienteResponse" />
   </message>
   <message name="payment">
     <part name="parameters" element="tns:payment" />
@@ -23,42 +17,39 @@
   <message name="paymentResponse">
     <part name="parameters" element="tns:paymentResponse" />
   </message>
-  <message name="addCliente">
-    <part name="parameters" element="tns:addCliente" />
+  <message name="getClientesNuevos">
+    <part name="parameters" element="tns:getClientesNuevos" />
   </message>
-  <message name="addClienteResponse">
-    <part name="parameters" element="tns:addClienteResponse" />
+  <message name="getClientesNuevosResponse">
+    <part name="parameters" element="tns:getClientesNuevosResponse" />
+  </message>
+  <message name="searchCliente">
+    <part name="parameters" element="tns:searchCliente" />
+  </message>
+  <message name="searchClienteResponse">
+    <part name="parameters" element="tns:searchClienteResponse" />
   </message>
   <portType name="ClienteWS">
-    <operation name="searchCliente">
-      <input wsam:Action="http://services.compurangers.com/ClienteWS/searchClienteRequest" message="tns:searchCliente" />
-      <output wsam:Action="http://services.compurangers.com/ClienteWS/searchClienteResponse" message="tns:searchClienteResponse" />
-    </operation>
-    <operation name="getClientesNuevos">
-      <input wsam:Action="http://services.compurangers.com/ClienteWS/getClientesNuevosRequest" message="tns:getClientesNuevos" />
-      <output wsam:Action="http://services.compurangers.com/ClienteWS/getClientesNuevosResponse" message="tns:getClientesNuevosResponse" />
+    <operation name="addCliente">
+      <input wsam:Action="http://services.compurangers.com/ClienteWS/addClienteRequest" message="tns:addCliente" />
+      <output wsam:Action="http://services.compurangers.com/ClienteWS/addClienteResponse" message="tns:addClienteResponse" />
     </operation>
     <operation name="payment">
       <input wsam:Action="http://services.compurangers.com/ClienteWS/paymentRequest" message="tns:payment" />
       <output wsam:Action="http://services.compurangers.com/ClienteWS/paymentResponse" message="tns:paymentResponse" />
     </operation>
-    <operation name="addCliente">
-      <input wsam:Action="http://services.compurangers.com/ClienteWS/addClienteRequest" message="tns:addCliente" />
-      <output wsam:Action="http://services.compurangers.com/ClienteWS/addClienteResponse" message="tns:addClienteResponse" />
+    <operation name="getClientesNuevos">
+      <input wsam:Action="http://services.compurangers.com/ClienteWS/getClientesNuevosRequest" message="tns:getClientesNuevos" />
+      <output wsam:Action="http://services.compurangers.com/ClienteWS/getClientesNuevosResponse" message="tns:getClientesNuevosResponse" />
+    </operation>
+    <operation name="searchCliente">
+      <input wsam:Action="http://services.compurangers.com/ClienteWS/searchClienteRequest" message="tns:searchCliente" />
+      <output wsam:Action="http://services.compurangers.com/ClienteWS/searchClienteResponse" message="tns:searchClienteResponse" />
     </operation>
   </portType>
   <binding name="ClienteWSPortBinding" type="tns:ClienteWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="searchCliente">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="getClientesNuevos">
+    <operation name="addCliente">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -76,7 +67,16 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="addCliente">
+    <operation name="getClientesNuevos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="searchCliente">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

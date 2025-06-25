@@ -83,7 +83,7 @@
                                     <a class="nav-link text-white" href="#">Ordenes</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="#">Ventas</a>
+                                    <a class="nav-link text-white" runat="server" href="~/Admin/Ventas.aspx">Ventas</a>
                                 </li>
                             </ul>
                         </asp:PlaceHolder>
@@ -144,17 +144,15 @@
                                     <div class="row g-2 align-items-center">
                                         <!-- Imagen -->
                                         <div class="col-3 col-md-1">
-                                            <img src="https://www.shutterstock.com/image-photo/set-home-kitchen-appliances-room-260nw-2473408983.jpg"
-                                                 alt='<%# Eval("producto.nombre") %>'
-                                                 class="img-fluid rounded"
-                                                 style="object-fit: cover;">
+                                                <img src='<%# Eval("producto.id", "/MostrarImagen.ashx?id={0}") %>'
+                                                     class="card-img-top"
+                                                     object-fit: cover;" />
                                         </div>
 
                                         <!-- Nombre y precio unitario -->
                                         <div class="col-9 col-md-4">
                                             <h6 class="mb-1"><%# Eval("producto.nombre") %></h6>
-                                            <small class="text-muted">Precio: $<%# Eval("producto.precioVenta", "{0:N2}") %></small>
-                                        </div>
+                                            <small class="text-muted">Precio: $<%# Eval("producto.precioVenta", "{0:N2}") %></small></div>
 
                                         <!-- Controles de cantidad -->
                                         <div class="col-6 col-md-3 d-flex align-items-center justify-content-center gap-2">
@@ -172,10 +170,7 @@
                                         <!-- Total y eliminar -->
                                         <div class="col-6 col-md-4 text-end">
                                             <div>
-                                                <strong class="d-block mb-1">Total: $<%# Eval("subtotal", "{0:N2}") %></strong>
-                    
-                                                <%-- HiddenField con el ID --%>
-                                                <asp:HiddenField ID="hfItemCarritoId" runat="server" Value='<%# Eval("id") %>' />
+                                                <strong class="d-block mb-1">Total: $<%# Eval("subtotal", "{0:N2}") %></strong><%-- HiddenField con el ID --%><asp:HiddenField ID="hfItemCarritoId" runat="server" Value='<%# Eval("id") %>' />
 
                                                 <%-- Botón que llama al evento OnClick en código servidor --%>
                                                 <asp:LinkButton ID="btnEliminar" runat="server" CommandName="Eliminar" OnClick="btnEliminar_Click">Eliminar</asp:LinkButton>
@@ -196,57 +191,55 @@
             </div>
         </div>
         <asp:HiddenField ID="hfLoginStatus" runat="server" />
-        <div class="modal" id="form-modal-login">
-            <div class="modal-dialog modal-s">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                         <div class="d-flex justify-content-center align-items-center">
-			                   <div class="card-body p-5">
-				                   <div class="text-center mb-4">
-					                   <span class="fw-bold" style="color: black; font-size: calc(1.5rem + 0.3vw);">COMPU</span>
-					                   <span class="fw-bold" style="color: #EB484C; font-size: calc(1.5rem + 0.3vw);">RANGERS</span>
-				                   </div>
-
-				                   <h5 class="text-center mb-4">Inicia sesión en tu cuenta</h5>
-
-						                <div class="mb-3">
-							                <label for="email" class="form-label">Username o Correo electrónico</label>
-
-							                <asp:TextBox ID="txtEmail" runat="server" Enabled="true" CssClass="form-control" placeholder="Introduce tu correo"/>
-                                            <asp:Label ID="lblLoginFeedback" runat="server" CssClass="text-danger small d-block mt-2" />
-						                </div>
-
-						                <div class="mb-3">
-							                <label for="password" class="form-label">Contraseña</label>
-							                <asp:TextBox ID="txtPassword" runat="server" type="password" Enabled="true" CssClass="form-control" placeholder="Introduce tu contraseña" />
-
-						                </div>
-
-						                <div class="d-flex justify-content-between mb-3">
-							                <div class="form-check">
-								                <input class="form-check-input" type="checkbox" id="remember" name="remember">
-								                <label class="form-check-label" for="remember">
-									                Recordarme
-								                </label>
-							                </div>
-							                <a class="text-decoration-none small" href="/Auth/PasswordRecovery.aspx" style="color: #EB484C;">¿Olvidaste tu contraseña?</a>
-						                </div>
-                                        
-						                <asp:LinkButton ID="LinkButton2" runat="server" CssClass="btn btn-danger w-100 py-2" Text="Iniciar sesión" OnClick="btnIniciarLogin" />
-
-
-				                   <div class="mt-3 text-center">
-					                   <p class="small">¿No tienes cuenta? <a href="/Auth/SignUp.aspx" class="text-decoration-none" style="color: #EB484C;">Regístrate aquí</a></p>
-				                   </div>
-			                   </div>
-		                </div>
-                    </div>
-                    <div class="modal-footer"></div>
-                </div>
+<div class="modal" id="form-modal-login">
+    <div class="modal-dialog modal-s">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div class="modal-body">
+                <asp:Panel ID="pnlLogin" runat="server" DefaultButton="LinkButton2">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div class="card-body p-5">
+                            <div class="text-center mb-4">
+                                <span class="fw-bold" style="color: black; font-size: calc(1.5rem + 0.3vw);">COMPU</span>
+                                <span class="fw-bold" style="color: #EB484C; font-size: calc(1.5rem + 0.3vw);">RANGERS</span>
+                            </div>
+
+                            <h5 class="text-center mb-4">Inicia sesión en tu cuenta</h5>
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Username o Correo electrónico</label>
+                                <asp:TextBox ID="txtEmail" runat="server" Enabled="true" CssClass="form-control" placeholder="Introduce tu correo"/>
+                                <asp:Label ID="lblLoginFeedback" runat="server" CssClass="text-danger small d-block mt-2" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Contraseña</label>
+                                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" Enabled="true" CssClass="form-control" placeholder="Introduce tu contraseña" />
+                            </div>
+
+                            <div class="d-flex justify-content-between mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="remember" name="remember">
+                                    <label class="form-check-label" for="remember">Recordarme</label>
+                                </div>
+                                <a class="text-decoration-none small" href="/Auth/PasswordRecovery.aspx" style="color: #EB484C;">¿Olvidaste tu contraseña?</a>
+                            </div>
+
+                            <asp:LinkButton ID="LinkButton2" runat="server" CssClass="btn btn-danger w-100 py-2" Text="Iniciar sesión" OnClick="btnIniciarLogin" />
+
+                            <div class="mt-3 text-center">
+                                <p class="small">¿No tienes cuenta? <a href="/Auth/SignUp.aspx" class="text-decoration-none" style="color: #EB484C;">Regístrate aquí</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </asp:Panel>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
         </div>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">

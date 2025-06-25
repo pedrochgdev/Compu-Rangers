@@ -28,6 +28,7 @@
       <xs:element minOccurs="0" name="categoria" type="tns:categoria" />
       <xs:element minOccurs="0" name="descripcion" type="xs:string" />
       <xs:element name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="imagenReferencial" type="xs:base64Binary" />
       <xs:element minOccurs="0" name="marca" type="tns:marca" />
       <xs:element minOccurs="0" name="nombre" type="xs:string" />
       <xs:element name="precioVenta" type="xs:double" />

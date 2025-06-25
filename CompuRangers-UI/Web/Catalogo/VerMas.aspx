@@ -44,7 +44,9 @@
                     <ItemTemplate>
                         <a href='<%# "VerMas.aspx?id=" + Eval("producto.id") %>' class="text-decoration-none text-dark">
                             <div class="card flex-shrink-0" style="width: 200px;">
-                                <img src="https://www.shutterstock.com/image-photo/set-home-kitchen-appliances-room-260nw-2473408983.jpg" class="card-img-top" alt="Producto" />
+                                <img src='<%# Eval("producto.id", "/MostrarImagen.ashx?id={0}") %>'
+                                     class="card-img-top"
+                                     object-fit: cover;" />
                                 <div class="card-body">
                                     <h6 class="card-title"><%# Eval("producto.nombre") %></h6>
                                     <p class="text-success mb-0">$<%# Eval("producto.precioVenta", "{0:N2}") %></p>
