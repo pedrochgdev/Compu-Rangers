@@ -21,4 +21,17 @@ public class ProductoWS {
     public List<Producto> getRanking() {
         return prod.getRanking();
     }
+    @WebMethod(operationName = "getProductosFiltrados")
+    public List<Producto> getSearchAvanzadoProductos(
+        @WebParam(name = "nombre") String nombre,
+        @WebParam(name = "categoryId") int categoryId,
+        @WebParam(name = "marcaId") int marcaId
+    ) {
+        Integer catId = categoryId > 0 ? categoryId : null;
+        Integer marId = marcaId > 0 ? marcaId : null;
+        String filtroNombre = (nombre != null && !nombre.trim().isEmpty()) ? nombre : null;
+
+        return prod.getSearchAvanzadoProductos(filtroNombre, catId, marId);
+    }
+
 }

@@ -11,15 +11,34 @@
   <message name="getRankingResponse">
     <part name="parameters" element="tns:getRankingResponse" />
   </message>
+  <message name="getProductosFiltrados">
+    <part name="parameters" element="tns:getProductosFiltrados" />
+  </message>
+  <message name="getProductosFiltradosResponse">
+    <part name="parameters" element="tns:getProductosFiltradosResponse" />
+  </message>
   <portType name="ProductoWS">
     <operation name="getRanking">
       <input wsam:Action="http://services.compurangers.com/ProductoWS/getRankingRequest" message="tns:getRanking" />
       <output wsam:Action="http://services.compurangers.com/ProductoWS/getRankingResponse" message="tns:getRankingResponse" />
     </operation>
+    <operation name="getProductosFiltrados">
+      <input wsam:Action="http://services.compurangers.com/ProductoWS/getProductosFiltradosRequest" message="tns:getProductosFiltrados" />
+      <output wsam:Action="http://services.compurangers.com/ProductoWS/getProductosFiltradosResponse" message="tns:getProductosFiltradosResponse" />
+    </operation>
   </portType>
   <binding name="ProductoWSPortBinding" type="tns:ProductoWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <operation name="getRanking">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="getProductosFiltrados">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
