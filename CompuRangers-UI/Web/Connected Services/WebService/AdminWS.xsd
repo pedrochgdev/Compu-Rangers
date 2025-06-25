@@ -38,20 +38,20 @@
       <xs:element minOccurs="0" name="mes" type="xs:dateTime" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="getPedidosHoy">
-    <xs:sequence />
-  </xs:complexType>
-  <xs:complexType name="getPedidosHoyResponse">
-    <xs:sequence>
-      <xs:element name="return" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="getTotalHistorico">
     <xs:sequence />
   </xs:complexType>
   <xs:complexType name="getTotalHistoricoResponse">
     <xs:sequence>
       <xs:element name="return" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getPedidosHoy">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="getPedidosHoyResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="getGananciaMes">

@@ -54,7 +54,10 @@
                 <div class="mt-4">
                     <asp:Button ID="btnRegistrarse" runat="server" CssClass="btn btn-danger w-100 py-2" Text="Registrarse" OnClick="btnRegistrarse_Click" />
                 </div>
-
+                <!-- Label para mostrar errores -->
+                <div class="mt-2 text-center">
+                    <asp:Label ID="lblError" runat="server" ForeColor="Red" CssClass="fw-bold"></asp:Label>
+                </div>
                 <div class="text-center mt-3">
                     <small>¿Ya tienes cuenta? 
                         <asp:LinkButton runat="server" OnClientClick="showModal('form-modal-login'); return false;" class="text-decoration-none" style="color: #EB484C;">Inicia sesión</asp:LinkButton>

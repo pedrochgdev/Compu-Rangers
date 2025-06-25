@@ -7,7 +7,8 @@
         
             <div class="row g-3 mb-4">
                 <div class="col-md-4">
-                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" placeholder="Buscar por nombre" />
+                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" placeholder="Buscar por nombre" onkeyup="buscarEnTiempoReal(this.value)" />
+
                 </div>
                 <div class="col-md-3">
                     <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" />
@@ -20,7 +21,7 @@
                 </div>
             </div>
 
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <div id="contenedorProductos" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                 <asp:Repeater ID="rptProductos" runat="server" OnItemCommand="rptProductos_ItemCommand">
                     <ItemTemplate>
                         <div class="col">

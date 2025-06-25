@@ -32,17 +32,6 @@
       <xs:element name="return" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="changePassword">
-    <xs:sequence>
-      <xs:element name="usuarioId" type="xs:int" />
-      <xs:element minOccurs="0" name="password" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="changePasswordResponse">
-    <xs:sequence>
-      <xs:element name="return" type="xs:boolean" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="updateUsuario">
     <xs:sequence>
       <xs:element minOccurs="0" name="usuario" type="tns:usuario" />
@@ -68,6 +57,17 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="updateUsuarioResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="changePassword">
+    <xs:sequence>
+      <xs:element name="usuarioId" type="xs:int" />
+      <xs:element minOccurs="0" name="password" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="changePasswordResponse">
     <xs:sequence>
       <xs:element name="return" type="xs:boolean" />
     </xs:sequence>

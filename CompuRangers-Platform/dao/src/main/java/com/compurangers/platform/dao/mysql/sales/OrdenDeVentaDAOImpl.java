@@ -1,7 +1,7 @@
 package com.compurangers.platform.dao.mysql.sales;
 
 import com.compurangers.platform.core.domain.sales.OrdenDeVenta;
-import com.compurangers.platform.dao.mysql.BaseDAOImpl;
+import com.compurangers.platform.dao.mysql.BaseDetalleDAOImpl;
 import com.compurangers.platform.dao.sales.IOrdenDeVentaDAO;
 import com.compurangers.platform.util.DatabaseUtil;
 import java.sql.CallableStatement;
@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-public class OrdenDeVentaDAOImpl extends BaseDAOImpl<OrdenDeVenta> implements IOrdenDeVentaDAO {
+public class OrdenDeVentaDAOImpl extends BaseDetalleDAOImpl<OrdenDeVenta> implements IOrdenDeVentaDAO {
 
     @Override
     protected CallableStatement addCommand(Connection conn, OrdenDeVenta modelo) throws SQLException {
@@ -109,6 +109,19 @@ public class OrdenDeVentaDAOImpl extends BaseDAOImpl<OrdenDeVenta> implements IO
             System.err.println("Error inpesperado: " + e.getMessage());
             throw new RuntimeException("Error inesperado al obtener la cantidad de pedidos de hoy.", e);
         }
+    }
+
+    @Override
+    protected CallableStatement getAllFromFkCommand(Connection conn, int foreignKey) throws SQLException {
+        String sql = "{call get_ordenes_por_usuario(?)}";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.setInt(1, foreignKey);
+        return cs;
+    }
+
+    @Override
+    protected CallableStatement getByFkCommand(Connection conn, int foreignKey) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

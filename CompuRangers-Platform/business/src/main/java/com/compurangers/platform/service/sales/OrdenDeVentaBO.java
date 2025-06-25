@@ -31,6 +31,10 @@ public class OrdenDeVentaBO {
         return ordenDeVentaDAO.getAll();
     }
     
+    public List<OrdenDeVenta> getOrdenesFromUsuario(int userid) {
+        return ordenDeVentaDAO.getAllByForeignKey(userid);
+    }
+    
     public double getTotalHistorico(){
         return ordenDeVentaDAO.getTotalHistorico();
     }

@@ -4,6 +4,8 @@
   <xs:element name="addOrdenResponse" type="tns:addOrdenResponse" />
   <xs:element name="deleteOrden" type="tns:deleteOrden" />
   <xs:element name="deleteOrdenResponse" type="tns:deleteOrdenResponse" />
+  <xs:element name="getAllOrdenesFromUser" type="tns:getAllOrdenesFromUser" />
+  <xs:element name="getAllOrdenesFromUserResponse" type="tns:getAllOrdenesFromUserResponse" />
   <xs:complexType name="deleteOrden">
     <xs:sequence>
       <xs:element name="orden" type="xs:int" />
@@ -78,6 +80,16 @@
   <xs:complexType name="addOrdenResponse">
     <xs:sequence>
       <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getAllOrdenesFromUser">
+    <xs:sequence>
+      <xs:element name="userid" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getAllOrdenesFromUserResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:ordenDeVenta" />
     </xs:sequence>
   </xs:complexType>
 </xs:schema>

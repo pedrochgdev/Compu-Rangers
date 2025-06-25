@@ -324,6 +324,7 @@
     <Content Include="Connected Services\WebService\Web.WebService.getGananciasMensualesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+<<<<<<< HEAD
     <Content Include="Connected Services\WebService\Web.WebService.getProductosFiltradosResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -342,6 +343,19 @@
     <Content Include="Connected Services\WebService\Web.WebService.updateProductoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+=======
+    <Content Include="Connected Services\WebService\Web.WebService.getAllOrdenesFromUserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.ordenDeVenta.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-3.7.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.7.0.js" />
+    <Content Include="Scripts\jquery-3.7.0.min.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.min.js" />
+>>>>>>> d5b13b4165025463e677d7d373ad21239b4dce81
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
