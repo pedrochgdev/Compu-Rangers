@@ -8,23 +8,6 @@
   <message name="searchUsuario">
     <part name="parameters" element="tns:searchUsuario" />
   </message>
-<<<<<<< HEAD
-  <message name="changePasswordResponse">
-    <part name="parameters" element="tns:changePasswordResponse" />
-  </message>
-  <message name="getRole">
-    <part name="parameters" element="tns:getRole" />
-  </message>
-  <message name="getRoleResponse">
-    <part name="parameters" element="tns:getRoleResponse" />
-  </message>
-  <message name="updateUsuario">
-    <part name="parameters" element="tns:updateUsuario" />
-  </message>
-  <message name="updateUsuarioResponse">
-    <part name="parameters" element="tns:updateUsuarioResponse" />
-  </message>
-=======
   <message name="searchUsuarioResponse">
     <part name="parameters" element="tns:searchUsuarioResponse" />
   </message>
@@ -34,38 +17,47 @@
   <message name="deleteUsuarioResponse">
     <part name="parameters" element="tns:deleteUsuarioResponse" />
   </message>
-  <message name="updateUsuario">
-    <part name="parameters" element="tns:updateUsuario" />
-  </message>
-  <message name="updateUsuarioResponse">
-    <part name="parameters" element="tns:updateUsuarioResponse" />
-  </message>
->>>>>>> d5b13b4165025463e677d7d373ad21239b4dce81
   <message name="forgotPassword">
     <part name="parameters" element="tns:forgotPassword" />
   </message>
   <message name="forgotPasswordResponse">
     <part name="parameters" element="tns:forgotPasswordResponse" />
   </message>
-<<<<<<< HEAD
-  <message name="deleteUsuario">
-    <part name="parameters" element="tns:deleteUsuario" />
+  <message name="updateUsuario">
+    <part name="parameters" element="tns:updateUsuario" />
   </message>
-  <message name="deleteUsuarioResponse">
-    <part name="parameters" element="tns:deleteUsuarioResponse" />
+  <message name="updateUsuarioResponse">
+    <part name="parameters" element="tns:updateUsuarioResponse" />
   </message>
-  <message name="searchUsuario">
-    <part name="parameters" element="tns:searchUsuario" />
-=======
   <message name="changePassword">
     <part name="parameters" element="tns:changePassword" />
->>>>>>> d5b13b4165025463e677d7d373ad21239b4dce81
   </message>
   <message name="changePasswordResponse">
     <part name="parameters" element="tns:changePasswordResponse" />
   </message>
+  <message name="getRole">
+    <part name="parameters" element="tns:getRole" />
+  </message>
+  <message name="getRoleResponse">
+    <part name="parameters" element="tns:getRoleResponse" />
+  </message>
   <portType name="UsuarioWS">
-<<<<<<< HEAD
+    <operation name="searchUsuario">
+      <input wsam:Action="http://services.compurangers.com/UsuarioWS/searchUsuarioRequest" message="tns:searchUsuario" />
+      <output wsam:Action="http://services.compurangers.com/UsuarioWS/searchUsuarioResponse" message="tns:searchUsuarioResponse" />
+    </operation>
+    <operation name="deleteUsuario">
+      <input wsam:Action="http://services.compurangers.com/UsuarioWS/deleteUsuarioRequest" message="tns:deleteUsuario" />
+      <output wsam:Action="http://services.compurangers.com/UsuarioWS/deleteUsuarioResponse" message="tns:deleteUsuarioResponse" />
+    </operation>
+    <operation name="forgotPassword">
+      <input wsam:Action="http://services.compurangers.com/UsuarioWS/forgotPasswordRequest" message="tns:forgotPassword" />
+      <output wsam:Action="http://services.compurangers.com/UsuarioWS/forgotPasswordResponse" message="tns:forgotPasswordResponse" />
+    </operation>
+    <operation name="updateUsuario">
+      <input wsam:Action="http://services.compurangers.com/UsuarioWS/updateUsuarioRequest" message="tns:updateUsuario" />
+      <output wsam:Action="http://services.compurangers.com/UsuarioWS/updateUsuarioResponse" message="tns:updateUsuarioResponse" />
+    </operation>
     <operation name="changePassword">
       <input wsam:Action="http://services.compurangers.com/UsuarioWS/changePasswordRequest" message="tns:changePassword" />
       <output wsam:Action="http://services.compurangers.com/UsuarioWS/changePasswordResponse" message="tns:changePasswordResponse" />
@@ -74,46 +66,45 @@
       <input wsam:Action="http://services.compurangers.com/UsuarioWS/getRoleRequest" message="tns:getRole" />
       <output wsam:Action="http://services.compurangers.com/UsuarioWS/getRoleResponse" message="tns:getRoleResponse" />
     </operation>
-    <operation name="updateUsuario">
-      <input wsam:Action="http://services.compurangers.com/UsuarioWS/updateUsuarioRequest" message="tns:updateUsuario" />
-      <output wsam:Action="http://services.compurangers.com/UsuarioWS/updateUsuarioResponse" message="tns:updateUsuarioResponse" />
-    </operation>
-=======
-    <operation name="searchUsuario">
-      <input wsam:Action="http://services.compurangers.com/UsuarioWS/searchUsuarioRequest" message="tns:searchUsuario" />
-      <output wsam:Action="http://services.compurangers.com/UsuarioWS/searchUsuarioResponse" message="tns:searchUsuarioResponse" />
-    </operation>
-    <operation name="deleteUsuario">
-      <input wsam:Action="http://services.compurangers.com/UsuarioWS/deleteUsuarioRequest" message="tns:deleteUsuario" />
-      <output wsam:Action="http://services.compurangers.com/UsuarioWS/deleteUsuarioResponse" message="tns:deleteUsuarioResponse" />
-    </operation>
-    <operation name="updateUsuario">
-      <input wsam:Action="http://services.compurangers.com/UsuarioWS/updateUsuarioRequest" message="tns:updateUsuario" />
-      <output wsam:Action="http://services.compurangers.com/UsuarioWS/updateUsuarioResponse" message="tns:updateUsuarioResponse" />
-    </operation>
->>>>>>> d5b13b4165025463e677d7d373ad21239b4dce81
-    <operation name="forgotPassword">
-      <input wsam:Action="http://services.compurangers.com/UsuarioWS/forgotPasswordRequest" message="tns:forgotPassword" />
-      <output wsam:Action="http://services.compurangers.com/UsuarioWS/forgotPasswordResponse" message="tns:forgotPasswordResponse" />
-    </operation>
-<<<<<<< HEAD
-    <operation name="deleteUsuario">
-      <input wsam:Action="http://services.compurangers.com/UsuarioWS/deleteUsuarioRequest" message="tns:deleteUsuario" />
-      <output wsam:Action="http://services.compurangers.com/UsuarioWS/deleteUsuarioResponse" message="tns:deleteUsuarioResponse" />
-    </operation>
-    <operation name="searchUsuario">
-      <input wsam:Action="http://services.compurangers.com/UsuarioWS/searchUsuarioRequest" message="tns:searchUsuario" />
-      <output wsam:Action="http://services.compurangers.com/UsuarioWS/searchUsuarioResponse" message="tns:searchUsuarioResponse" />
-=======
-    <operation name="changePassword">
-      <input wsam:Action="http://services.compurangers.com/UsuarioWS/changePasswordRequest" message="tns:changePassword" />
-      <output wsam:Action="http://services.compurangers.com/UsuarioWS/changePasswordResponse" message="tns:changePasswordResponse" />
->>>>>>> d5b13b4165025463e677d7d373ad21239b4dce81
-    </operation>
   </portType>
   <binding name="UsuarioWSPortBinding" type="tns:UsuarioWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-<<<<<<< HEAD
+    <operation name="searchUsuario">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="deleteUsuario">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="forgotPassword">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="updateUsuario">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
     <operation name="changePassword">
       <soap:operation soapAction="" />
       <input>
@@ -124,58 +115,6 @@
       </output>
     </operation>
     <operation name="getRole">
-=======
-    <operation name="searchUsuario">
->>>>>>> d5b13b4165025463e677d7d373ad21239b4dce81
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="updateUsuario">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="updateUsuario">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="forgotPassword">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-<<<<<<< HEAD
-    <operation name="deleteUsuario">
-=======
-    <operation name="changePassword">
->>>>>>> d5b13b4165025463e677d7d373ad21239b4dce81
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="searchUsuario">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

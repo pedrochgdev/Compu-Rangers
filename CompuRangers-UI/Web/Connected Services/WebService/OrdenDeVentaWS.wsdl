@@ -5,46 +5,49 @@
       <xsd:import schemaLocation="http://localhost:8080/WebService/OrdenDeVentaWS?xsd=1" namespace="http://services.compurangers.com" />
     </xsd:schema>
   </types>
-  <message name="addOrden">
-    <part name="parameters" element="tns:addOrden" />
-  </message>
-  <message name="addOrdenResponse">
-    <part name="parameters" element="tns:addOrdenResponse" />
-  </message>
-<<<<<<< HEAD
-=======
-  <message name="getAllOrdenesFromUser">
-    <part name="parameters" element="tns:getAllOrdenesFromUser" />
-  </message>
-  <message name="getAllOrdenesFromUserResponse">
-    <part name="parameters" element="tns:getAllOrdenesFromUserResponse" />
-  </message>
->>>>>>> d5b13b4165025463e677d7d373ad21239b4dce81
   <message name="deleteOrden">
     <part name="parameters" element="tns:deleteOrden" />
   </message>
   <message name="deleteOrdenResponse">
     <part name="parameters" element="tns:deleteOrdenResponse" />
   </message>
+  <message name="addOrden">
+    <part name="parameters" element="tns:addOrden" />
+  </message>
+  <message name="addOrdenResponse">
+    <part name="parameters" element="tns:addOrdenResponse" />
+  </message>
+  <message name="getAllOrdenesFromUser">
+    <part name="parameters" element="tns:getAllOrdenesFromUser" />
+  </message>
+  <message name="getAllOrdenesFromUserResponse">
+    <part name="parameters" element="tns:getAllOrdenesFromUserResponse" />
+  </message>
   <portType name="OrdenDeVentaWS">
-    <operation name="addOrden">
-      <input wsam:Action="http://services.compurangers.com/OrdenDeVentaWS/addOrdenRequest" message="tns:addOrden" />
-      <output wsam:Action="http://services.compurangers.com/OrdenDeVentaWS/addOrdenResponse" message="tns:addOrdenResponse" />
-    </operation>
-<<<<<<< HEAD
-=======
-    <operation name="getAllOrdenesFromUser">
-      <input wsam:Action="http://services.compurangers.com/OrdenDeVentaWS/getAllOrdenesFromUserRequest" message="tns:getAllOrdenesFromUser" />
-      <output wsam:Action="http://services.compurangers.com/OrdenDeVentaWS/getAllOrdenesFromUserResponse" message="tns:getAllOrdenesFromUserResponse" />
-    </operation>
->>>>>>> d5b13b4165025463e677d7d373ad21239b4dce81
     <operation name="deleteOrden">
       <input wsam:Action="http://services.compurangers.com/OrdenDeVentaWS/deleteOrdenRequest" message="tns:deleteOrden" />
       <output wsam:Action="http://services.compurangers.com/OrdenDeVentaWS/deleteOrdenResponse" message="tns:deleteOrdenResponse" />
     </operation>
+    <operation name="addOrden">
+      <input wsam:Action="http://services.compurangers.com/OrdenDeVentaWS/addOrdenRequest" message="tns:addOrden" />
+      <output wsam:Action="http://services.compurangers.com/OrdenDeVentaWS/addOrdenResponse" message="tns:addOrdenResponse" />
+    </operation>
+    <operation name="getAllOrdenesFromUser">
+      <input wsam:Action="http://services.compurangers.com/OrdenDeVentaWS/getAllOrdenesFromUserRequest" message="tns:getAllOrdenesFromUser" />
+      <output wsam:Action="http://services.compurangers.com/OrdenDeVentaWS/getAllOrdenesFromUserResponse" message="tns:getAllOrdenesFromUserResponse" />
+    </operation>
   </portType>
   <binding name="OrdenDeVentaWSPortBinding" type="tns:OrdenDeVentaWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="deleteOrden">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
     <operation name="addOrden">
       <soap:operation soapAction="" />
       <input>
@@ -54,19 +57,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-<<<<<<< HEAD
-=======
     <operation name="getAllOrdenesFromUser">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
->>>>>>> d5b13b4165025463e677d7d373ad21239b4dce81
-    <operation name="deleteOrden">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
