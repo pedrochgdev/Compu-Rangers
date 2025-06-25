@@ -163,7 +163,7 @@ namespace Web
                 {
                     producto p = new producto();
                     p.id = Convert.ToInt32(hiddenId.Value);
-                    string precioTexto = lblPrecioVenta.InnerText.Replace("$", "").Trim();
+                    string precioTexto = lblPrecioVenta.InnerText.Replace("S/", "").Trim();
                     p.precioVenta = Convert.ToDouble(precioTexto);
                     p.nombre = lblNombre.InnerText;
 

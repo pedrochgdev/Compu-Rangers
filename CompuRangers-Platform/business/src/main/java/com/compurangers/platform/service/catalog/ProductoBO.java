@@ -34,5 +34,11 @@ public class ProductoBO {
     public List<Producto> getRanking(){
         return productDAO.getRanking();
     }
+    public List<Producto> getSearchAvanzadoProductos(String nombre,Integer categoryId,Integer marcaId){
+        Integer catId = categoryId > 0 ? categoryId : null;
+        Integer marId = marcaId > 0 ? marcaId : null;
+        String filtroNombre = (nombre != null && !nombre.trim().isEmpty()) ? nombre : null;
+        return productDAO.searchAvanzado(filtroNombre, catId, marId);
+    }
     
 }

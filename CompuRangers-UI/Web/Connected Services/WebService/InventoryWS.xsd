@@ -8,6 +8,16 @@
   <xs:element name="getInvDisponibleResponse" type="tns:getInvDisponibleResponse" />
   <xs:element name="reservarInventario" type="tns:reservarInventario" />
   <xs:element name="reservarInventarioResponse" type="tns:reservarInventarioResponse" />
+  <xs:complexType name="getCantidadTotalDisponible">
+    <xs:sequence>
+      <xs:element name="productoId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getCantidadTotalDisponibleResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="getCatalog">
     <xs:sequence />
   </xs:complexType>
@@ -46,16 +56,6 @@
     <xs:sequence>
       <xs:element name="id" type="xs:int" />
       <xs:element minOccurs="0" name="nombre" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="getCantidadTotalDisponible">
-    <xs:sequence>
-      <xs:element name="productoId" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="getCantidadTotalDisponibleResponse">
-    <xs:sequence>
-      <xs:element name="return" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="reservarInventario">

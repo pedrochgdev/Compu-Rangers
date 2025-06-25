@@ -173,6 +173,8 @@ DROP PROCEDURE IF EXISTS delete_all_items_from_carrito;
 DROP PROCEDURE IF EXISTS get_cantidad_disponible_por_producto;
 DROP PROCEDURE IF EXISTS get_ganancia_mes_actual;
 DROP PROCEDURE IF EXISTS get_ganancias_mensuales;
+DROP PROCEDURE IF EXISTS search_productos_avanzado;
+DROP PROCEDURE IF EXISTS get_ordenes_por_usuario;
 
 /* CATALOG */
 /* PROCEDURES CATEGORIA */
@@ -2473,7 +2475,39 @@ BEGIN
     GROUP BY DATE_FORMAT(ov.fecha, '%Y-%m-01') -- ¡Cambio clave aquí!
     ORDER BY mes DESC;
 END;
+
 //
 DELIMITER ;
 
 
+DELIMITER //
+CREATE PROCEDURE search_productos_avanzado(
+    IN nombre_filtro VARCHAR(100),
+    IN marca_id INT,
+    IN categoria_id INT
+)
+BEGIN
+    SELECT 
+        p.*, 
+        p.categoria_id AS cid, 
+        p.marca_id AS mid
+    FROM PRODUCTO p
+    WHERE 
+        (nombre_filtro IS NULL OR p.nombre LIKE CONCAT('%', nombre_filtro, '%'))
+        AND (marca_id IS NULL OR p.marca_id = marca_id)
+        AND (categoria_id IS NULL OR p.categoria_id = categoria_id);
+END //
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE get_ordenes_por_usuario(IN p_usuario_id INT)
+BEGIN
+    SELECT 
+        *
+    FROM ORDEN_DE_VENTA
+    WHERE cliente_usuario_id = p_usuario_id
+    ORDER BY fecha DESC;
+END;
+//
+DELIMITER ;

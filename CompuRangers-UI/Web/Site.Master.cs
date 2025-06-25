@@ -180,11 +180,6 @@ namespace Web
                     adminNotLogged.Visible = false;
                 }
             }
-            else
-            {
-                clientScriptManager.RegisterStartupScript(GetType(), "",
-                    "window.onload = function() { showAlert('Inicia sesión para comprar', 'danger'); };", true);
-            }
         }
 
         protected void btnLogOut(object sender, EventArgs e)

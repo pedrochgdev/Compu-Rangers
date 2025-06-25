@@ -21,4 +21,13 @@ public class ProductoWS {
     public List<Producto> getRanking() {
         return prod.getRanking();
     }
+    @WebMethod(operationName = "getProductosFiltrados")
+    public List<Producto> getSearchAvanzadoProductos(
+        @WebParam(name = "nombre") String nombre,
+        @WebParam(name = "categoryId") int categoryId,
+        @WebParam(name = "marcaId") int marcaId
+    ) {
+        return prod.getSearchAvanzadoProductos(nombre, categoryId, marcaId);
+    }
+
 }

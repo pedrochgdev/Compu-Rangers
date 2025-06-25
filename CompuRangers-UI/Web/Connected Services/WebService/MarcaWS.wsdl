@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://services.compurangers.com" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="MarcaWS" targetNamespace="http://services.compurangers.com" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/WebService/MarcaWS?xsd=1" namespace="http://services.compurangers.com" />
+    </xsd:schema>
+  </types>
+  <message name="getAllMarcas">
+    <part name="parameters" element="tns:getAllMarcas" />
+  </message>
+  <message name="getAllMarcasResponse">
+    <part name="parameters" element="tns:getAllMarcasResponse" />
+  </message>
+  <portType name="MarcaWS">
+    <operation name="getAllMarcas">
+      <input wsam:Action="http://services.compurangers.com/MarcaWS/getAllMarcasRequest" message="tns:getAllMarcas" />
+      <output wsam:Action="http://services.compurangers.com/MarcaWS/getAllMarcasResponse" message="tns:getAllMarcasResponse" />
+    </operation>
+  </portType>
+  <binding name="MarcaWSPortBinding" type="tns:MarcaWS">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="getAllMarcas">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="MarcaWS">
+    <port name="MarcaWSPort" binding="tns:MarcaWSPortBinding">
+      <soap:address location="http://localhost:8080/WebService/MarcaWS" />
+    </port>
+  </service>
+</definitions>

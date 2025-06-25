@@ -15,7 +15,7 @@
                 <div class="mb-2">
                     <asp:Literal ID="litCategorias" runat="server" />
                 </div>
-                <h4 class="text-success">$<asp:Literal ID="litPrecio" runat="server" /></h4>
+                <h4 class="text-success"><asp:Literal ID="litPrecio" runat="server" /></h4>
 
                 <div class="d-flex align-items-center mb-3">
                     <button class="btn btn-outline-secondary" type="button" onclick="decreaseQuantity()">-</button>
@@ -47,7 +47,7 @@
                                 <img src="https://www.shutterstock.com/image-photo/set-home-kitchen-appliances-room-260nw-2473408983.jpg" class="card-img-top" alt="Producto" />
                                 <div class="card-body">
                                     <h6 class="card-title"><%# Eval("producto.nombre") %></h6>
-                                    <p class="text-success mb-0">$<%# Eval("producto.precioVenta", "{0:N2}") %></p>
+                                    <p class="text-success mb-0"><%# Eval("producto.precioVenta", "{0:C2}") %></p>
                                 </div>
                             </div>
                         </a>

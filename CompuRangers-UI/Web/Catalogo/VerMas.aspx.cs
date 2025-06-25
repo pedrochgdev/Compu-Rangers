@@ -64,7 +64,7 @@ namespace Web
             imgProducto.ImageUrl = "https://www.shutterstock.com/image-photo/set-home-kitchen-appliances-room-260nw-2473408983.jpg";
             litNombre.Text = producto.producto.nombre;
             litDescripcion.Text = producto.producto.descripcion;
-            litPrecio.Text = producto.producto.precioVenta.ToString("N2");
+            litPrecio.Text = producto.producto.precioVenta.ToString("C2");
             hfIdProducto.Value = producto.producto.id.ToString();
             litCategorias.Text = GenerarHtmlCategorias(producto);
         }

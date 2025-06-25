@@ -55,8 +55,8 @@ namespace Web
         {
             try
             {
-                lblTotalVentas.Text = adminWS.getTotalHistorico().ToString("N2");
-                lblGananciaMes.Text = adminWS.getGananciaMes().ToString("N2"); // ← nuevo
+                lblTotalVentas.Text = adminWS.getTotalHistorico().ToString("C2");
+                lblGananciaMes.Text = adminWS.getGananciaMes().ToString("C2"); // ← nuevo
                 lblPedidosHoy.Text = adminWS.getPedidosHoy().ToString();
                 lblClientesNuevos.Text = clientWS.getClientesNuevos().ToString();
             }

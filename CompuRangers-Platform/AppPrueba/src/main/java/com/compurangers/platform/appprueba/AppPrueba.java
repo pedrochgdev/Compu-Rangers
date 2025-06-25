@@ -3,6 +3,7 @@ package com.compurangers.platform.appprueba;
 import com.compurangers.platform.core.domain.sales.OrdenDeVenta;
 import com.compurangers.platform.core.domain.user.Cliente;
 import com.compurangers.platform.core.domain.user.Usuario;
+import com.compurangers.platform.dao.mysql.catalog.ProductoDAOImpl;
 import com.compurangers.platform.dao.mysql.sales.CarritoDAOImpl;
 import com.compurangers.platform.dao.mysql.sales.OrdenDeVentaDAOImpl;
 import com.compurangers.platform.dao.mysql.user.ClienteDAOImpl;
@@ -11,6 +12,7 @@ import com.compurangers.platform.dao.mysql.user.auth.TokenRecuperacionDAOImpl;
 import com.compurangers.platform.dao.sales.ICarritoDAO;
 import com.compurangers.platform.dao.user.IClienteDAO;
 import com.compurangers.platform.dao.user.auth.ITokenRecuperacionDAO;
+import com.compurangers.platform.service.catalog.ProductoBO;
 import com.compurangers.platform.service.payment.PaymentService;
 import com.compurangers.platform.service.sales.OrdenDeVentaBO;
 import com.compurangers.platform.service.user.ClienteBO;
@@ -31,9 +33,16 @@ public class AppPrueba {
         ITokenRecuperacionDAO tokenDAO = new TokenRecuperacionDAOImpl(); // Tu implementación real
         TokenRecuperacionBO tokenService = new TokenRecuperacionBO(tokenDAO);
         PaymentService paymentService = new PaymentService(); // Tu implementación real
-
+        
+        OrdenDeVentaBO ob=new OrdenDeVentaBO(new OrdenDeVentaDAOImpl());
+        
+        List<OrdenDeVenta> lob=ob.getOrdenesFromUsuario(3);
+        
+        
         // Instanciar UsuarioService
         ClienteBO usuarioService = new ClienteBO(usuarioDAO, tokenService, carritoDAO, paymentService);
+        ProductoBO pbo= new ProductoBO(new ProductoDAOImpl());
+        pbo.getSearchAvanzadoProductos("", 0, 0);
 //
 //        // Crear nuevo usuario
 //        Cliente nuevoUsuario = new Cliente();

@@ -100,6 +100,12 @@ namespace Web
                     throw new Exception($"No hay suficiente stock para el producto {item.producto.nombre}");
                 }
             }
+
+            nuevaOrden.detalles = detallesList.ToArray();
+            invWS.reservarInventario(nuevaOrden);
+            string linkPago = clientWS.payment(nuevaOrden);
+            Session["linkPago"] = linkPago;
+            Response.Redirect("PaymentResponse/WaitingPayment.aspx");
         }
     }
 }
