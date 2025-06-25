@@ -2477,4 +2477,23 @@ END;
 //
 DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE search_productos_avanzado(
+    IN nombre_filtro VARCHAR(100),
+    IN marca_id INT,
+    IN categoria_id INT
+)
+BEGIN
+    SELECT 
+        p.*, 
+        p.categoria_id AS cid, 
+        p.marca_id AS mid
+    FROM PRODUCTO p
+    WHERE 
+        (nombre_filtro IS NULL OR p.nombre LIKE CONCAT('%', nombre_filtro, '%'))
+        AND (marca_id IS NULL OR p.marca_id = marca_id)
+        AND (categoria_id IS NULL OR p.categoria_id = categoria_id);
+END //
+DELIMITER ;
+
 
