@@ -83,11 +83,7 @@
                                     <a class="nav-link text-white" href="#">Ordenes</a>
                                 </li>
                                 <li class="nav-item">
-<<<<<<< HEAD
-                                    <a class="nav-link text-white" runat="server" href="~/Admin/Ventas.aspx">Ventas</a>
-=======
                                     <a class="nav-link text-white" runat="server" href="~/Admin/Ventas">Ventas</a>
->>>>>>> fd3267b726997149ad0dd7ceb18fe12d855bb2ae
                                 </li>
                             </ul>
                         </asp:PlaceHolder>
