@@ -36,7 +36,7 @@
                                     </div>
                                 </div>
                                 <div class="card-footer d-flex justify-content-between align-items-center">
-                                    <strong id="lblPrecioVenta" runat="server" class="text-primary">$<%# Eval("producto.precioVenta", "{0:N2}") %></strong>
+                                    <strong id="lblPrecioVenta" runat="server" class="text-primary"><%# Eval("producto.precioVenta", "{0:C2}") %></strong>
                                     <div class="d-flex flex-row justify-content-end align-item-center gap-2">
                                         <a class="btn btn-sm btn-warning" href='VerMas.aspx?id=<%# Eval("producto.id") %>'>Ver más</a>
                                         <asp:LinkButton ID="btnAddCart" runat="server" CssClass="btn btn-sm btn-success" OnClick="btnAddCart" Text="Añadir al carrito"/>
