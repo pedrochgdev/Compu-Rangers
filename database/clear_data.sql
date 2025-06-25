@@ -5,7 +5,7 @@
 
 -- Option 1: DELETE FROM (respects foreign keys, preserves auto-increment)
 -- Execute in this order to avoid foreign key constraint violations
-
+SET SQL_SAFE_UPDATES = 0;
 -- Child tables
 DELETE FROM DETALLE_CARRITO;
 DELETE FROM DETALLE_DEVOLUCION;

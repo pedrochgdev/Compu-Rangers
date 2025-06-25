@@ -129,6 +129,10 @@
     <None Include="Connected Services\WebService\ItemCarritoWS.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\WebService\MarcaWS.wsdl" />
+    <None Include="Connected Services\WebService\MarcaWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\WebService\OrdenDeVentaWS.wsdl" />
     <None Include="Connected Services\WebService\OrdenDeVentaWS.xsd">
       <SubType>Designer</SubType>
@@ -144,6 +148,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Admin\Productos.aspx" />
     <Content Include="Auth\PasswordRecovery.aspx" />
     <Content Include="Auth\ResetPassword.aspx" />
     <Content Include="Cliente\DetalleCompra.aspx" />
@@ -343,6 +348,15 @@
     <Content Include="Connected Services\WebService\Web.WebService.getGananciasMensualesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.getProductosFiltradosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.getAllMarcasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.marca.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -379,6 +393,13 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\Productos.aspx.cs">
+      <DependentUpon>Productos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Productos.aspx.designer.cs">
+      <DependentUpon>Productos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Auth\PasswordRecovery.aspx.cs">
       <DependentUpon>PasswordRecovery.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

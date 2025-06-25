@@ -27,11 +27,7 @@ public class ProductoWS {
         @WebParam(name = "categoryId") int categoryId,
         @WebParam(name = "marcaId") int marcaId
     ) {
-        Integer catId = categoryId > 0 ? categoryId : null;
-        Integer marId = marcaId > 0 ? marcaId : null;
-        String filtroNombre = (nombre != null && !nombre.trim().isEmpty()) ? nombre : null;
-
-        return prod.getSearchAvanzadoProductos(filtroNombre, catId, marId);
+        return prod.getSearchAvanzadoProductos(nombre, categoryId, marcaId);
     }
 
 }
