@@ -212,6 +212,16 @@ namespace Web
             string password = txtPassword.Text;
             string usuario = txtEmail.Text;
             Console.WriteLine(usuario + "" + password);
+
+            string patronInyeccion = @"['"";#--]";
+            if (System.Text.RegularExpressions.Regex.IsMatch(usuario, patronInyeccion) ||
+                System.Text.RegularExpressions.Regex.IsMatch(password, patronInyeccion))
+            {
+                hfLoginStatus.Value = "failed";
+                lblLoginFeedback.Text = "Usuario o contraseña incorrectos.";
+                return;
+            }
+
             int id = authWS.login(usuario, password);
             
             if (id > 0)

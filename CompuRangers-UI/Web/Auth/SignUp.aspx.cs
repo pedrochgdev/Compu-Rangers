@@ -31,10 +31,21 @@ namespace Web
             string password = txtPassword.Text;
             string confirmarPassword = txtConfirmarPassword.Text;
 
+            string patronInyeccion = @"['"";#--]";
+            if (System.Text.RegularExpressions.Regex.IsMatch(username, patronInyeccion) ||
+                System.Text.RegularExpressions.Regex.IsMatch(nombre, patronInyeccion) ||
+                System.Text.RegularExpressions.Regex.IsMatch(telefono, patronInyeccion) ||
+                System.Text.RegularExpressions.Regex.IsMatch(correo, patronInyeccion) ||
+                System.Text.RegularExpressions.Regex.IsMatch(direccion, patronInyeccion) ||
+                System.Text.RegularExpressions.Regex.IsMatch(password, patronInyeccion))
+            {
+                lblError.Text = "Entrada inválida. No se permiten caracteres especiales.";
+                return;
+            }
+
             if (password != confirmarPassword)
             {
-                // Puedes mostrar un mensaje de error en pantalla usando un Label
-                // lblError.Text = "Las contraseñas no coinciden.";
+                lblError.Text = "Las contraseñas no coinciden.";
                 return;
             }
 

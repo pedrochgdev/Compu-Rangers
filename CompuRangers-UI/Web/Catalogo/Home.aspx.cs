@@ -42,7 +42,7 @@ namespace Web
             }
         }
 
-        private const int ProductosPorPagina = 15;
+        private const int ProductosPorPagina = 9;
 
         public Home()
         {

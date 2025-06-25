@@ -7,7 +7,6 @@ package com.compurangers.webservice.sales;
 import com.compurangers.platform.dao.mysql.sales.OrdenDeVentaDAOImpl;
 import com.compurangers.platform.service.sales.OrdenDeVentaBO;
 import com.compurangers.platform.core.domain.sales.OrdenDeVenta;
-import com.compurangers.platform.core.domain.sales.dto.PedidoPorDiaDTO;
 import com.compurangers.platform.dao.mysql.sales.dto.PedidoPorDiaDAOImpl;
 import com.compurangers.platform.service.sales.dto.PedidoPorDiaBO;
 import jakarta.jws.WebService;
@@ -34,6 +33,11 @@ public class OrdenDeVentaWS {
     @WebMethod(operationName = "deleteOrden")
     public boolean deleteOrden(@WebParam(name = "orden") int orderId) {
         return ov.deleteOrdenDeVenta(orderId);
+    }   
+    
+    @WebMethod(operationName = "getAllOrdenesFromUser")
+    public List<OrdenDeVenta> getAllOrdenesFromUser(@WebParam(name = "userid") int userid) {
+        return ov.getOrdenesFromUsuario(userid);
     }   
     
 }
