@@ -173,11 +173,8 @@ DROP PROCEDURE IF EXISTS delete_all_items_from_carrito;
 DROP PROCEDURE IF EXISTS get_cantidad_disponible_por_producto;
 DROP PROCEDURE IF EXISTS get_ganancia_mes_actual;
 DROP PROCEDURE IF EXISTS get_ganancias_mensuales;
-<<<<<<< HEAD
 DROP PROCEDURE IF EXISTS search_productos_avanzado;
 DROP PROCEDURE IF EXISTS get_ordenes_por_usuario;
-=======
->>>>>>> 33a0d66d1142b42daf5e404d1833aad6c1c6dbd2
 
 /* CATALOG */
 /* PROCEDURES CATEGORIA */
