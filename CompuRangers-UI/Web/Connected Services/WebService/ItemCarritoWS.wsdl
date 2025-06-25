@@ -5,17 +5,17 @@
       <xsd:import schemaLocation="http://localhost:8080/WebService/ItemCarritoWS?xsd=1" namespace="http://services.compurangers.com" />
     </xsd:schema>
   </types>
-  <message name="updateItem">
-    <part name="parameters" element="tns:updateItem" />
-  </message>
-  <message name="updateItemResponse">
-    <part name="parameters" element="tns:updateItemResponse" />
-  </message>
   <message name="deleteItem">
     <part name="parameters" element="tns:deleteItem" />
   </message>
   <message name="deleteItemResponse">
     <part name="parameters" element="tns:deleteItemResponse" />
+  </message>
+  <message name="updateItem">
+    <part name="parameters" element="tns:updateItem" />
+  </message>
+  <message name="updateItemResponse">
+    <part name="parameters" element="tns:updateItemResponse" />
   </message>
   <message name="getAllFromCarrito">
     <part name="parameters" element="tns:getAllFromCarrito" />
@@ -24,13 +24,13 @@
     <part name="parameters" element="tns:getAllFromCarritoResponse" />
   </message>
   <portType name="ItemCarritoWS">
-    <operation name="updateItem">
-      <input wsam:Action="http://services.compurangers.com/ItemCarritoWS/updateItemRequest" message="tns:updateItem" />
-      <output wsam:Action="http://services.compurangers.com/ItemCarritoWS/updateItemResponse" message="tns:updateItemResponse" />
-    </operation>
     <operation name="deleteItem">
       <input wsam:Action="http://services.compurangers.com/ItemCarritoWS/deleteItemRequest" message="tns:deleteItem" />
       <output wsam:Action="http://services.compurangers.com/ItemCarritoWS/deleteItemResponse" message="tns:deleteItemResponse" />
+    </operation>
+    <operation name="updateItem">
+      <input wsam:Action="http://services.compurangers.com/ItemCarritoWS/updateItemRequest" message="tns:updateItem" />
+      <output wsam:Action="http://services.compurangers.com/ItemCarritoWS/updateItemResponse" message="tns:updateItemResponse" />
     </operation>
     <operation name="getAllFromCarrito">
       <input wsam:Action="http://services.compurangers.com/ItemCarritoWS/getAllFromCarritoRequest" message="tns:getAllFromCarrito" />
@@ -39,7 +39,7 @@
   </portType>
   <binding name="ItemCarritoWSPortBinding" type="tns:ItemCarritoWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="updateItem">
+    <operation name="deleteItem">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -48,7 +48,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="deleteItem">
+    <operation name="updateItem">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

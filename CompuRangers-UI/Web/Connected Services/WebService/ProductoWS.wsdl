@@ -5,6 +5,12 @@
       <xsd:import schemaLocation="http://localhost:8080/WebService/ProductoWS?xsd=1" namespace="http://services.compurangers.com" />
     </xsd:schema>
   </types>
+  <message name="getProductosFiltrados">
+    <part name="parameters" element="tns:getProductosFiltrados" />
+  </message>
+  <message name="getProductosFiltradosResponse">
+    <part name="parameters" element="tns:getProductosFiltradosResponse" />
+  </message>
   <message name="getRanking">
     <part name="parameters" element="tns:getRanking" />
   </message>
@@ -16,12 +22,6 @@
   </message>
   <message name="listarProductosResponse">
     <part name="parameters" element="tns:listarProductosResponse" />
-  </message>
-  <message name="addProducto">
-    <part name="parameters" element="tns:addProducto" />
-  </message>
-  <message name="addProductoResponse">
-    <part name="parameters" element="tns:addProductoResponse" />
   </message>
   <message name="updateProducto">
     <part name="parameters" element="tns:updateProducto" />
@@ -35,13 +35,17 @@
   <message name="searchProductoIDResponse">
     <part name="parameters" element="tns:searchProductoIDResponse" />
   </message>
-  <message name="getProductosFiltrados">
-    <part name="parameters" element="tns:getProductosFiltrados" />
+  <message name="addProducto">
+    <part name="parameters" element="tns:addProducto" />
   </message>
-  <message name="getProductosFiltradosResponse">
-    <part name="parameters" element="tns:getProductosFiltradosResponse" />
+  <message name="addProductoResponse">
+    <part name="parameters" element="tns:addProductoResponse" />
   </message>
   <portType name="ProductoWS">
+    <operation name="getProductosFiltrados">
+      <input wsam:Action="http://services.compurangers.com/ProductoWS/getProductosFiltradosRequest" message="tns:getProductosFiltrados" />
+      <output wsam:Action="http://services.compurangers.com/ProductoWS/getProductosFiltradosResponse" message="tns:getProductosFiltradosResponse" />
+    </operation>
     <operation name="getRanking">
       <input wsam:Action="http://services.compurangers.com/ProductoWS/getRankingRequest" message="tns:getRanking" />
       <output wsam:Action="http://services.compurangers.com/ProductoWS/getRankingResponse" message="tns:getRankingResponse" />
@@ -49,10 +53,6 @@
     <operation name="listarProductos">
       <input wsam:Action="http://services.compurangers.com/ProductoWS/listarProductosRequest" message="tns:listarProductos" />
       <output wsam:Action="http://services.compurangers.com/ProductoWS/listarProductosResponse" message="tns:listarProductosResponse" />
-    </operation>
-    <operation name="addProducto">
-      <input wsam:Action="http://services.compurangers.com/ProductoWS/addProductoRequest" message="tns:addProducto" />
-      <output wsam:Action="http://services.compurangers.com/ProductoWS/addProductoResponse" message="tns:addProductoResponse" />
     </operation>
     <operation name="updateProducto">
       <input wsam:Action="http://services.compurangers.com/ProductoWS/updateProductoRequest" message="tns:updateProducto" />
@@ -62,13 +62,22 @@
       <input wsam:Action="http://services.compurangers.com/ProductoWS/searchProductoIDRequest" message="tns:searchProductoID" />
       <output wsam:Action="http://services.compurangers.com/ProductoWS/searchProductoIDResponse" message="tns:searchProductoIDResponse" />
     </operation>
-    <operation name="getProductosFiltrados">
-      <input wsam:Action="http://services.compurangers.com/ProductoWS/getProductosFiltradosRequest" message="tns:getProductosFiltrados" />
-      <output wsam:Action="http://services.compurangers.com/ProductoWS/getProductosFiltradosResponse" message="tns:getProductosFiltradosResponse" />
+    <operation name="addProducto">
+      <input wsam:Action="http://services.compurangers.com/ProductoWS/addProductoRequest" message="tns:addProducto" />
+      <output wsam:Action="http://services.compurangers.com/ProductoWS/addProductoResponse" message="tns:addProductoResponse" />
     </operation>
   </portType>
   <binding name="ProductoWSPortBinding" type="tns:ProductoWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="getProductosFiltrados">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
     <operation name="getRanking">
       <soap:operation soapAction="" />
       <input>
@@ -79,15 +88,6 @@
       </output>
     </operation>
     <operation name="listarProductos">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="addProducto">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -114,7 +114,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="getProductosFiltrados">
+    <operation name="addProducto">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

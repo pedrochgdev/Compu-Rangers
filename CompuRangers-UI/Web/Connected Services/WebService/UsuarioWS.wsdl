@@ -29,17 +29,17 @@
   <message name="forgotPasswordResponse">
     <part name="parameters" element="tns:forgotPasswordResponse" />
   </message>
-  <message name="searchUsuario">
-    <part name="parameters" element="tns:searchUsuario" />
-  </message>
-  <message name="searchUsuarioResponse">
-    <part name="parameters" element="tns:searchUsuarioResponse" />
-  </message>
   <message name="deleteUsuario">
     <part name="parameters" element="tns:deleteUsuario" />
   </message>
   <message name="deleteUsuarioResponse">
     <part name="parameters" element="tns:deleteUsuarioResponse" />
+  </message>
+  <message name="searchUsuario">
+    <part name="parameters" element="tns:searchUsuario" />
+  </message>
+  <message name="searchUsuarioResponse">
+    <part name="parameters" element="tns:searchUsuarioResponse" />
   </message>
   <portType name="UsuarioWS">
     <operation name="changePassword">
@@ -58,13 +58,13 @@
       <input wsam:Action="http://services.compurangers.com/UsuarioWS/forgotPasswordRequest" message="tns:forgotPassword" />
       <output wsam:Action="http://services.compurangers.com/UsuarioWS/forgotPasswordResponse" message="tns:forgotPasswordResponse" />
     </operation>
-    <operation name="searchUsuario">
-      <input wsam:Action="http://services.compurangers.com/UsuarioWS/searchUsuarioRequest" message="tns:searchUsuario" />
-      <output wsam:Action="http://services.compurangers.com/UsuarioWS/searchUsuarioResponse" message="tns:searchUsuarioResponse" />
-    </operation>
     <operation name="deleteUsuario">
       <input wsam:Action="http://services.compurangers.com/UsuarioWS/deleteUsuarioRequest" message="tns:deleteUsuario" />
       <output wsam:Action="http://services.compurangers.com/UsuarioWS/deleteUsuarioResponse" message="tns:deleteUsuarioResponse" />
+    </operation>
+    <operation name="searchUsuario">
+      <input wsam:Action="http://services.compurangers.com/UsuarioWS/searchUsuarioRequest" message="tns:searchUsuario" />
+      <output wsam:Action="http://services.compurangers.com/UsuarioWS/searchUsuarioResponse" message="tns:searchUsuarioResponse" />
     </operation>
   </portType>
   <binding name="UsuarioWSPortBinding" type="tns:UsuarioWS">
@@ -105,7 +105,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="searchUsuario">
+    <operation name="deleteUsuario">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -114,7 +114,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="deleteUsuario">
+    <operation name="searchUsuario">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

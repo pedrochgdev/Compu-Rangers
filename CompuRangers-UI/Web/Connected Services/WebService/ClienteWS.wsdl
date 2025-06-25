@@ -17,17 +17,17 @@
   <message name="paymentResponse">
     <part name="parameters" element="tns:paymentResponse" />
   </message>
-  <message name="getClientesNuevos">
-    <part name="parameters" element="tns:getClientesNuevos" />
-  </message>
-  <message name="getClientesNuevosResponse">
-    <part name="parameters" element="tns:getClientesNuevosResponse" />
-  </message>
   <message name="searchCliente">
     <part name="parameters" element="tns:searchCliente" />
   </message>
   <message name="searchClienteResponse">
     <part name="parameters" element="tns:searchClienteResponse" />
+  </message>
+  <message name="getClientesNuevos">
+    <part name="parameters" element="tns:getClientesNuevos" />
+  </message>
+  <message name="getClientesNuevosResponse">
+    <part name="parameters" element="tns:getClientesNuevosResponse" />
   </message>
   <portType name="ClienteWS">
     <operation name="addCliente">
@@ -38,13 +38,13 @@
       <input wsam:Action="http://services.compurangers.com/ClienteWS/paymentRequest" message="tns:payment" />
       <output wsam:Action="http://services.compurangers.com/ClienteWS/paymentResponse" message="tns:paymentResponse" />
     </operation>
-    <operation name="getClientesNuevos">
-      <input wsam:Action="http://services.compurangers.com/ClienteWS/getClientesNuevosRequest" message="tns:getClientesNuevos" />
-      <output wsam:Action="http://services.compurangers.com/ClienteWS/getClientesNuevosResponse" message="tns:getClientesNuevosResponse" />
-    </operation>
     <operation name="searchCliente">
       <input wsam:Action="http://services.compurangers.com/ClienteWS/searchClienteRequest" message="tns:searchCliente" />
       <output wsam:Action="http://services.compurangers.com/ClienteWS/searchClienteResponse" message="tns:searchClienteResponse" />
+    </operation>
+    <operation name="getClientesNuevos">
+      <input wsam:Action="http://services.compurangers.com/ClienteWS/getClientesNuevosRequest" message="tns:getClientesNuevos" />
+      <output wsam:Action="http://services.compurangers.com/ClienteWS/getClientesNuevosResponse" message="tns:getClientesNuevosResponse" />
     </operation>
   </portType>
   <binding name="ClienteWSPortBinding" type="tns:ClienteWS">
@@ -67,7 +67,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="getClientesNuevos">
+    <operation name="searchCliente">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -76,7 +76,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="searchCliente">
+    <operation name="getClientesNuevos">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

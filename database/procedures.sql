@@ -1,11 +1,11 @@
-SET GLOBAL event_scheduler = ON;
+/*SET GLOBAL event_scheduler = ON;
 DROP EVENT eliminar_tokens_expirados;
 CREATE EVENT IF NOT EXISTS eliminar_tokens_expirados
 ON SCHEDULE EVERY 1 MINUTE
 DO
   DELETE FROM TOKEN_RECUPERACION
   WHERE fecha_expiracion <= NOW();
-
+*/
 
 /* DROPS */
 
@@ -173,7 +173,6 @@ DROP PROCEDURE IF EXISTS delete_all_items_from_carrito;
 DROP PROCEDURE IF EXISTS get_cantidad_disponible_por_producto;
 DROP PROCEDURE IF EXISTS get_ganancia_mes_actual;
 DROP PROCEDURE IF EXISTS get_ganancias_mensuales;
-DROP PROCEDURE IF EXISTS search_productos_avanzado;
 
 /* CATALOG */
 /* PROCEDURES CATEGORIA */
@@ -314,7 +313,6 @@ END;
 DELIMITER ;
 
 /* PROCEDURES PRODUCTO */
-
 DELIMITER //
 CREATE PROCEDURE add_producto(
     OUT generated_id INT,
@@ -323,11 +321,12 @@ CREATE PROCEDURE add_producto(
     IN descripcion_in TEXT,
     IN precio_venta_in DECIMAL(10, 2),
     IN categoria_id_in INT,
-    IN marca_id_in INT
+    IN marca_id_in INT,
+    IN banner_promocional_in LONGBLOB
 )
 BEGIN
-    INSERT INTO PRODUCTO (sku, nombre, descripcion, precio_venta, categoria_id, marca_id)
-    VALUES (sku_in, nombre_in, descripcion_in, precio_venta_in, categoria_id_in, marca_id_in);
+    INSERT INTO PRODUCTO (sku, nombre, descripcion, precio_venta, categoria_id, marca_id, banner_promocional)
+    VALUES (sku_in, nombre_in, descripcion_in, precio_venta_in, categoria_id_in, marca_id_in, banner_promocional_in);
 
     SET generated_id = LAST_INSERT_ID();
 END;
@@ -2402,7 +2401,8 @@ BEGIN
 		precio_venta,
 		cantidad_ventas,
 		categoria_id AS cid,
-		marca_id AS mid
+		marca_id AS mid,
+        banner_promocional
 	FROM producto
 	ORDER BY cantidad_ventas DESC
 	LIMIT 5;
@@ -2474,27 +2474,7 @@ BEGIN
     GROUP BY DATE_FORMAT(ov.fecha, '%Y-%m-01') -- ¡Cambio clave aquí!
     ORDER BY mes DESC;
 END;
-
 //
 DELIMITER ;
 
-
-DELIMITER //
-CREATE PROCEDURE search_productos_avanzado(
-    IN nombre_filtro VARCHAR(100),
-    IN marca_id INT,
-    IN categoria_id INT
-)
-BEGIN
-    SELECT 
-        p.*, 
-        p.categoria_id AS cid, 
-        p.marca_id AS mid
-    FROM PRODUCTO p
-    WHERE 
-        (nombre_filtro IS NULL OR p.nombre LIKE CONCAT('%', nombre_filtro, '%'))
-        AND (marca_id IS NULL OR p.marca_id = marca_id)
-        AND (categoria_id IS NULL OR p.categoria_id = categoria_id);
-END //
-DELIMITER ;
 
