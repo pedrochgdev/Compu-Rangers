@@ -489,6 +489,7 @@
     <Compile Include="Catalogo\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Encriptacion\CryptoUtil.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -499,7 +500,7 @@
     <Compile Include="Auth\SignUp.aspx.designer.cs">
       <DependentUpon>SignUp.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MostrarImagen.ashx.cs">
+    <Compile Include="Imagenes\MostrarImagen.ashx.cs">
       <DependentUpon>MostrarImagen.ashx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -559,7 +560,7 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="MostrarImagen.ashx" />
+    <Content Include="Imagenes\MostrarImagen.ashx" />
     <Content Include="Connected Services\WebService\Web.WebService.searchProductoIDResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>

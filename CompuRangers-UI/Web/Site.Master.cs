@@ -8,6 +8,7 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Web.WebService;
+using Web.Encriptacion;
 
 namespace Web
 {
@@ -102,39 +103,47 @@ namespace Web
             // Login automático desde cookie
             if (Session["user"] == null && Request.Cookies["RecordarUsuario"] != null)
             {
-                string email = Request.Cookies["RecordarUsuario"]["email"];
-                string password = Request.Cookies["RecordarUsuario"]["pass"];
-
-                int id = authWS.login(email, password);
-
-                if (id > 0)
+                try
                 {
-                    Session["user"] = id;
+                    string email = CryptoUtil.Decrypt(Request.Cookies["RecordarUsuario"]["email"]);
+                    string password = CryptoUtil.Decrypt(Request.Cookies["RecordarUsuario"]["pass"]);
 
-                    FormsAuthenticationTicket tkt = new FormsAuthenticationTicket(
-                        1, email, DateTime.Now,
-                        DateTime.Now.AddMinutes(30), true, "datos adicionales");
+                    int id = authWS.login(email, password);
 
-                    string cookiestr = FormsAuthentication.Encrypt(tkt);
-                    HttpCookie ck = new HttpCookie(FormsAuthentication.FormsCookieName, cookiestr)
+                    if (id > 0)
                     {
-                        Expires = tkt.Expiration,
-                        Path = FormsAuthentication.FormsCookiePath
-                    };
-                    Response.Cookies.Add(ck);
+                        Session["user"] = id;
 
-                    // Puedes redirigir solo si estás en la home u otra lógica
-                    // Response.Redirect("~/Catalogo/Home.aspx?msg=login-success");
+                        FormsAuthenticationTicket tkt = new FormsAuthenticationTicket(
+                            1, email, DateTime.Now,
+                            DateTime.Now.AddMinutes(30), true, "datos adicionales");
+
+                        string cookiestr = FormsAuthentication.Encrypt(tkt);
+                        HttpCookie ck = new HttpCookie(FormsAuthentication.FormsCookieName, cookiestr)
+                        {
+                            Expires = tkt.Expiration,
+                            Path = FormsAuthentication.FormsCookiePath
+                        };
+                        Response.Cookies.Add(ck);
+                        string strRedirect = userWS.getRole(id) ? "../Admin/Ventas.aspx" : "../Catalogo/Home.aspx";
+                        Response.Redirect(strRedirect + "?msg=login-success", true);
+                    }
+                    else
+                    {
+                        // Login fallido: eliminar cookie corrupta
+                        Response.Cookies["RecordarUsuario"].Expires = DateTime.Now.AddDays(-1);
+                    }
                 }
-                else
+                catch
                 {
-                    // Login fallido, eliminar cookie corrupta
+                    // Error al desencriptar o valores corruptos
                     Response.Cookies["RecordarUsuario"].Expires = DateTime.Now.AddDays(-1);
                 }
             }
 
             this.clientScriptManager = Page.ClientScript;
         }
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -276,8 +285,8 @@ namespace Web
                 if (recordar)
                 {
                     HttpCookie userCookie = new HttpCookie("RecordarUsuario");
-                    userCookie["email"] = usuario;
-                    userCookie["pass"] = password; // ⚠️ No recomendable para producción real
+                    userCookie["email"] = CryptoUtil.Encrypt(usuario);
+                    userCookie["pass"] = CryptoUtil.Encrypt(password);
                     userCookie.Expires = DateTime.Now.AddDays(15);
                     Response.Cookies.Add(userCookie);
                 }

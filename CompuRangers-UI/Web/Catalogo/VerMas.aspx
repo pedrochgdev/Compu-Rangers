@@ -43,13 +43,22 @@
                 <asp:Repeater ID="rptSugeridos" runat="server">
                     <ItemTemplate>
                         <a href='<%# "VerMas.aspx?id=" + Eval("producto.id") %>' class="text-decoration-none text-dark">
-                            <div class="card flex-shrink-0" style="width: 200px;">
-                                <img src='<%# Eval("producto.id", "/MostrarImagen.ashx?id={0}") %>'
-                                     class="card-img-top"
-                                     object-fit: cover;" />
-                                <div class="card-body">
-                                    <h6 class="card-title"><%# Eval("producto.nombre") %></h6>
-                                    <p class="text-success mb-0"><%# Eval("producto.precioVenta", "{0:C2}") %></p>
+                            <div class="card flex-shrink-0 border-0 shadow-sm" style="width: 180px;">
+                                <!-- Imagen fija con aspecto cuadrado -->
+                                <div style="height: 150px; overflow: hidden;">
+                                    <img src='<%# ResolveUrl(string.Format("~/Imagenes/MostrarImagen.ashx?id={0}", Eval("producto.id"))) %>'
+                                            class="img-fluid w-100 h-100"
+                                            style="object-fit: contain;"
+                                            alt="Producto" />
+                                </div>
+                                <!-- Cuerpo de la tarjeta -->
+                                <div class="card-body p-2 text-center">
+                                    <h6 class="card-title text-truncate mb-1" title='<%# Eval("producto.nombre") %>'>
+                                        <%# Eval("producto.nombre") %>
+                                    </h6>
+                                    <p class="text-success fw-semibold mb-0">
+                                        <%# Eval("producto.precioVenta", "{0:C2}") %>
+                                    </p>
                                 </div>
                             </div>
                         </a>
@@ -57,6 +66,7 @@
                 </asp:Repeater>
             </div>
         </div>
+
     </main>
     <script>
     function increaseQuantity() {
