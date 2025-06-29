@@ -65,6 +65,7 @@
     <xs:sequence>
       <xs:element name="usuarioId" type="xs:int" />
       <xs:element minOccurs="0" name="password" type="xs:string" />
+      <xs:element name="tokenId" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="changePasswordResponse">

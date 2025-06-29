@@ -13,6 +13,7 @@ namespace Web
         private readonly ClienteWSClient clientWS;
         private readonly OrdenDeVentaWSClient ordenWS;
         private readonly InventoryWSClient invWS;
+        private ClientScriptManager clientScriptManager;
         public DetalleCompra()
         {
             this.clientWS = new ClienteWSClient();
@@ -21,6 +22,8 @@ namespace Web
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            clientScriptManager = Page.ClientScript;
+
             if (!IsPostBack)
             {
                 var master = (SiteMaster)this.Master;
@@ -71,7 +74,10 @@ namespace Web
                 // ❌ Validar stock actualizado
                 if (stockTotalDisponible < cantidadPendiente)
                 {
-                    throw new Exception($"Stock insuficiente para el producto {item.producto.nombre}. Solo hay {stockTotalDisponible} unidades disponibles.");
+                    string mensaje = $"Stock insuficiente para el producto {item.producto.nombre}. Solo hay {stockTotalDisponible} unidades disponibles.";
+                    clientScriptManager.RegisterStartupScript(this.GetType(), "",
+                        $"window.onload = function() {{ showAlert('{mensaje}', 'warning'); }};", true);
+                    return;
                 }
 
                 foreach (var inv in inventarios)
@@ -97,7 +103,10 @@ namespace Web
 
                 if (cantidadPendiente > 0)
                 {
-                    throw new Exception($"No hay suficiente stock para el producto {item.producto.nombre}");
+                    string mensaje = $"No hay suficiente stock para el producto {item.producto.nombre}";
+                    clientScriptManager.RegisterStartupScript(this.GetType(), "",
+                        $"window.onload = function() {{ showAlert('{mensaje}', 'warning'); }};", true);
+                    return;
                 }
             }
 

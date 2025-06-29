@@ -11,5 +11,14 @@
       </div>
     </div>
 
+    <script type="text/javascript">
+        setTimeout(function () {
+            if (window.opener && !window.opener.closed) {
+                // Enviar mensaje al opener indicando que el pago fue cancelado
+                window.opener.postMessage({ pago: 'cancelado' }, '*');
+            }
+            window.close(); // Cierra esta ventana
+        }, 2000);
+    </script>
 
 </asp:Content>

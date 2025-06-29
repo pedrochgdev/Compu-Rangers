@@ -11,18 +11,5 @@
       </div>
     </div>
 
-
-    <script>
-        // Notifica a la ventana que abrió esta que el pago ha sido completado
-        if (window.opener) {
-            window.opener.postMessage('pago-completado', '*');
-        }
-
-        // Espera 5 segundos y cierra la ventana
-        setTimeout(() => {
-            window.close();
-        }, 5000);
-    </script>
-
 </asp:Content>
 

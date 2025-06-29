@@ -117,6 +117,10 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\WebService\ItemCarritoWS.wsdl" />
+    <None Include="Connected Services\WebService\LogWS.wsdl" />
+    <None Include="Connected Services\WebService\LogWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\WebService\MarcaWS.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -376,6 +380,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="MostrarImagen.ashx" />
+    <Content Include="Connected Services\WebService\Web.WebService.markTokenAsUsedResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.addLogResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />

@@ -23,4 +23,9 @@ public class TokenRecuperacionWS {
     public TokenRecuperacion searchToken(@WebParam(name = "token") String token) {
         return tokenBO.searchToken(token);
     }
+    
+    @WebMethod(operationName = "markTokenAsUsed")
+    public void markTokenAsUsed(@WebParam(name = "id") int id) {
+        tokenBO.markTokenAsUsed(id);
+    }
 }

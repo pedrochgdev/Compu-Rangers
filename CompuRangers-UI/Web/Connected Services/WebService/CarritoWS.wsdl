@@ -11,30 +11,30 @@
   <message name="updateCarritoResponse">
     <part name="parameters" element="tns:updateCarritoResponse" />
   </message>
-  <message name="getCarritoFromUser">
-    <part name="parameters" element="tns:getCarritoFromUser" />
-  </message>
-  <message name="getCarritoFromUserResponse">
-    <part name="parameters" element="tns:getCarritoFromUserResponse" />
-  </message>
   <message name="addItem">
     <part name="parameters" element="tns:addItem" />
   </message>
   <message name="addItemResponse">
     <part name="parameters" element="tns:addItemResponse" />
   </message>
+  <message name="getCarritoFromUser">
+    <part name="parameters" element="tns:getCarritoFromUser" />
+  </message>
+  <message name="getCarritoFromUserResponse">
+    <part name="parameters" element="tns:getCarritoFromUserResponse" />
+  </message>
   <portType name="CarritoWS">
     <operation name="updateCarrito">
       <input wsam:Action="http://services.compurangers.com/CarritoWS/updateCarritoRequest" message="tns:updateCarrito" />
       <output wsam:Action="http://services.compurangers.com/CarritoWS/updateCarritoResponse" message="tns:updateCarritoResponse" />
     </operation>
-    <operation name="getCarritoFromUser">
-      <input wsam:Action="http://services.compurangers.com/CarritoWS/getCarritoFromUserRequest" message="tns:getCarritoFromUser" />
-      <output wsam:Action="http://services.compurangers.com/CarritoWS/getCarritoFromUserResponse" message="tns:getCarritoFromUserResponse" />
-    </operation>
     <operation name="addItem">
       <input wsam:Action="http://services.compurangers.com/CarritoWS/addItemRequest" message="tns:addItem" />
       <output wsam:Action="http://services.compurangers.com/CarritoWS/addItemResponse" message="tns:addItemResponse" />
+    </operation>
+    <operation name="getCarritoFromUser">
+      <input wsam:Action="http://services.compurangers.com/CarritoWS/getCarritoFromUserRequest" message="tns:getCarritoFromUser" />
+      <output wsam:Action="http://services.compurangers.com/CarritoWS/getCarritoFromUserResponse" message="tns:getCarritoFromUserResponse" />
     </operation>
   </portType>
   <binding name="CarritoWSPortBinding" type="tns:CarritoWS">
@@ -48,7 +48,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="getCarritoFromUser">
+    <operation name="addItem">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -57,7 +57,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="addItem">
+    <operation name="getCarritoFromUser">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

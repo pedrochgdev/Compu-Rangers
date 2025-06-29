@@ -19,8 +19,16 @@ namespace Web
         private readonly InventoryWSClient invWS;
         private readonly CarritoWSClient carritoWSClient;
         private readonly ItemCarritoWSClient icWS;
+        private readonly LogWSClient logWS;
         private carrito shoppingcart;
         private ClientScriptManager clientScriptManager;
+        public bool EsAdmin
+        {
+            get
+            {
+                return Session["isAdmin"] != null && (bool)Session["isAdmin"];
+            }
+        }
 
         public carrito ShoppingCart
         {
@@ -96,6 +104,7 @@ namespace Web
             this.invWS = new InventoryWSClient();
             this.icWS = new ItemCarritoWSClient();
             this.carritoWSClient = new CarritoWSClient();
+            this.logWS = new LogWSClient();
         }
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -165,11 +174,13 @@ namespace Web
             bool loggedIn = Session["user"] != null;
             phUserLogged.Visible = loggedIn;
             phUserNotLogged.Visible = !loggedIn;
-
+            phTituloTexto.Visible = false;
+            phLinkTitulo.Visible = true;
             if (loggedIn)
             {
 
                 bool isadmin = userWS.getRole(Convert.ToInt32(Session["user"]));
+                Session["isAdmin"] = isadmin;
                 if (!isadmin)
                 {
                     CargarCarrito();
@@ -178,6 +189,8 @@ namespace Web
                 {
                     adminLogged.Visible = true;
                     adminNotLogged.Visible = false;
+                    phTituloTexto.Visible = true;
+                    phLinkTitulo.Visible = false;
                 }
             }
         }
@@ -236,6 +249,12 @@ namespace Web
                 bool user = userWS.getRole(id);
                 if (user)
                 {
+                    log line = new log
+                    {
+                        usuarioId = id,
+                        accion = "Inicio de sesión exitoso",
+                    };
+                    logWS.addLog(line);
                     strRedirect = "../Admin/Ventas.aspx";
                 }
                 else

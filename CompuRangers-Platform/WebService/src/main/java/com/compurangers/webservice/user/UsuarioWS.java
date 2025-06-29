@@ -22,8 +22,8 @@ public class UsuarioWS {
     }
     
     @WebMethod(operationName = "changePassword")
-    public boolean changePassword(@WebParam(name = "usuarioId") int usuario, @WebParam(name = "password") String password) {
-        return user.changePassword(usuario, password);
+    public boolean changePassword(@WebParam(name = "usuarioId") int usuario, @WebParam(name = "password") String password, @WebParam(name = "tokenId") int tokenId) {
+        return user.changePassword(usuario, password, tokenId);
     }
     
     @WebMethod(operationName = "forgotPassword")

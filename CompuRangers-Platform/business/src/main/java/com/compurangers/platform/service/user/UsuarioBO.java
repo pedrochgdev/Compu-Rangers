@@ -21,9 +21,12 @@ public class UsuarioBO<T extends IUsuarioDAO> {
         return usuarioDAO.update(usuario);
     }
 
-    public boolean changePassword(int userID, String newPlainPassword) {
+    public boolean changePassword(int userID, String newPlainPassword, int tokenId) {
         String hashed = PasswordUtils.hashPassword(newPlainPassword);
-        return usuarioDAO.updatePassword(userID, hashed);
+        boolean rpt = usuarioDAO.updatePassword(userID, hashed);
+        if(rpt)
+            tokenService.markTokenAsUsed(tokenId);
+        return rpt;
     }
 
     public boolean forgotPassword(String correo) {

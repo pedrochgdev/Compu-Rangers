@@ -15,6 +15,24 @@ namespace Web
     {
 
         /// <summary>
+        /// Control phLinkTitulo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phLinkTitulo;
+
+        /// <summary>
+        /// Control phTituloTexto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phTituloTexto;
+
+        /// <summary>
         /// Control adminLogged.
         /// </summary>
         /// <remarks>

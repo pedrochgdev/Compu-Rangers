@@ -60,25 +60,44 @@
         </div>
 
         <!-- Productos más vendidos -->
-        <asp:Repeater ID="rptMasVendidos" runat="server">
-            <ItemTemplate>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <%# Eval("nombre") %>
-                    <span class="badge bg-success rounded-pill"><%# Eval("cantidadVendida") %></span>
-                </li>
-            </ItemTemplate>
-        </asp:Repeater>
+        <div class="card mb-4 shadow-sm border-0">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">Más Vendidos</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <asp:Repeater ID="rptMasVendidos" runat="server">
+                        <ItemTemplate>
+                            <li class="list-group-item border-0 d-flex justify-content-between align-items-center">
+                                <%# Eval("nombre") %>
+                                <span class="badge bg-success rounded-pill"><%# Eval("cantidadVendida") %></span>
+                            </li>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </ul>
+            </div>
+        </div>
+
 
 
         <!-- Pedidos por día -->
-        <asp:Repeater ID="rptPedidosPorDia" runat="server">
-            <ItemTemplate>
-                <div class="col text-center">
-                    <div class="fw-bold"><%# String.Format("{0:dd MMM}", Eval("dia")) %></div>
-                    <div><%# Eval("cantidad") %></div>
-                </div>
-            </ItemTemplate>
-        </asp:Repeater>
+         <div class="card mb-4 shadow-sm border-0">
+             <div class="card-header bg-white">
+                 <h5 class="mb-0">Pedidos en la Semana</h5>
+             </div>
+             <div class="card-body">
+                 <div class="row text-center">
+                     <asp:Repeater ID="rptPedidosPorDia" runat="server">
+                         <ItemTemplate>
+                             <div class="col">
+                                 <div class="fw-bold"><%# String.Format("{0:dd MMM}", Eval("dia")) %></div>
+                                 <div><%# Eval("cantidad") %></div>
+                             </div>
+                         </ItemTemplate>
+                     </asp:Repeater>
+                 </div>
+             </div>
+         </div>
 
     </main>
 </asp:Content>

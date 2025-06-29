@@ -10,7 +10,7 @@
     <artifactId>Reportes</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>Reportes-1.0-SNAPSHOT</name>
+    <name>Reportes</name>
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

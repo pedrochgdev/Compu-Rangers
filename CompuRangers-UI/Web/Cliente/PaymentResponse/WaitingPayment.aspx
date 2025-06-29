@@ -11,6 +11,8 @@
             window.addEventListener('message', function (event) {
                 if (event.data === 'pago-completado') {
                     window.location.href = '../../Catalogo/Home.aspx'; // Redirige a donde tú desees
+                } else if (event.data && event.data.pago === 'cancelado') {
+                    window.location.href = '../../Cliente/DetalleCompra.aspx'; // Redirige tras cancelación
                 }
             });
         </script>

@@ -60,10 +60,19 @@
         </nav>--%>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand d-flex align-items-center" runat="server" href="~/Catalogo/Home">
-                    <span class="fw-bold" style="color: white; font-size: calc(1.5rem + 0.3vw);">COMPU</span>
-                    <span class="fw-bold" style="color: #EB484C; font-size: calc(1.5rem + 0.3vw);">RANGERS</span>
-                </a>
+                <asp:PlaceHolder ID="phLinkTitulo" runat="server" Visible="false">
+                    <a class="navbar-brand d-flex align-items-center" runat="server" href="~/Catalogo/Home">
+                        <span class="fw-bold" style="color: white; font-size: calc(1.5rem + 0.3vw);">COMPU</span>
+                        <span class="fw-bold" style="color: #EB484C; font-size: calc(1.5rem + 0.3vw);">RANGERS</span>
+                    </a>
+                </asp:PlaceHolder>
+
+                <asp:PlaceHolder ID="phTituloTexto" runat="server" Visible="false">
+                    <span class="navbar-brand d-flex align-items-center" style="cursor: default;">
+                        <span class="fw-bold" style="color: white; font-size: calc(1.5rem + 0.3vw);">COMPU</span>
+                        <span class="fw-bold" style="color: #EB484C; font-size: calc(1.5rem + 0.3vw);">RANGERS</span>
+                    </span>
+                </asp:PlaceHolder>
 
                 <!-- Botón para colapsar -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarRight"
@@ -110,6 +119,10 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarUserDropdown">
                                     <li><a class="dropdown-item" href="/Usuario/MiPerfil.aspx">Mi Perfil</a></li>
+                                    <% if (!EsAdmin) { %>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="/Cliente/PurchaseHistory.aspx">Mis Compras</a></li>
+                                    <% } %>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><asp:LinkButton runat="server" CssClass="dropdown-item text-danger" OnClick="btnLogOut" Text="Log Out" /></li>
                                 </ul>

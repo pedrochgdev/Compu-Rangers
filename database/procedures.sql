@@ -1,11 +1,11 @@
-/*SET GLOBAL event_scheduler = ON;
-DROP EVENT eliminar_tokens_expirados;
+-- SET GLOBAL event_scheduler = ON;
+DROP EVENT IF EXISTS eliminar_tokens_expirados;
 CREATE EVENT IF NOT EXISTS eliminar_tokens_expirados
 ON SCHEDULE EVERY 1 MINUTE
 DO
   DELETE FROM TOKEN_RECUPERACION
   WHERE fecha_expiracion <= NOW();
-*/
+
 
 /* DROPS */
 
@@ -1530,7 +1530,7 @@ CREATE PROCEDURE update_user_password (
     IN p_new_password_hash VARCHAR(255)
 )
 BEGIN
-    UPDATE usuario
+    UPDATE USUARIO
     SET password = p_new_password_hash
     WHERE id = p_user_id;
 END;
@@ -1594,7 +1594,7 @@ CREATE PROCEDURE get_user_id_by_email(
 )
 BEGIN
     SELECT id INTO p_id
-    FROM usuario
+    FROM USUARIO
     WHERE correo COLLATE utf8mb4_unicode_ci = p_correo;
 
     IF p_id IS NULL THEN
@@ -1612,7 +1612,7 @@ CREATE PROCEDURE get_user_id_by_username(
 )
 BEGIN
     SELECT id INTO p_id
-    FROM usuario
+    FROM USUARIO
     WHERE username COLLATE utf8mb4_unicode_ci = p_username
     LIMIT 1;
 
@@ -1631,7 +1631,7 @@ CREATE PROCEDURE get_user_password_by_id(
 )
 BEGIN
     SELECT password INTO p_password
-    FROM usuario
+    FROM USUARIO
     WHERE id = p_id
     LIMIT 1;
 

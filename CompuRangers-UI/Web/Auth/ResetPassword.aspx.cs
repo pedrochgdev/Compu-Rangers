@@ -25,6 +25,11 @@ namespace Web.Auth
             this.tokenWS = new TokenRecuperacionWSClient();
             this.userWS = new UsuarioWSClient();
         }
+        private int TokenId
+        {
+            get => ViewState["TokenId"] != null ? (int)ViewState["TokenId"] : -1;
+            set => ViewState["TokenId"] = value;
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -38,7 +43,7 @@ namespace Web.Auth
 
                 // Aquí haces una validación desde tu backend:
                 tokenRecuperacion tokenValido = tokenWS.searchToken(token);
-                if (tokenValido.usado)
+                if (tokenValido == null || tokenValido.usado)
                 {
                     ShowError("El token ha expirado o no es válido.");
                     btnResetPassword.Enabled = false;
@@ -46,7 +51,7 @@ namespace Web.Auth
                 else
                 {
                     UserId = tokenValido.userId;
-
+                    TokenId = tokenValido.id;
                 }
             }
         }
@@ -73,7 +78,17 @@ namespace Web.Auth
                 ShowError("La contraseña debe tener al menos 6 caracteres.");
                 return;
             }
-                bool success = userWS.changePassword(UserId, newPassword);
+
+            string patronInyeccion = @"['"";#--]";
+
+            if(System.Text.RegularExpressions.Regex.IsMatch(newPassword, patronInyeccion) ||
+                System.Text.RegularExpressions.Regex.IsMatch(confirmPassword, patronInyeccion))
+            {
+                ShowError("Entrada inválida. No se permiten caracteres especiales.");
+                return;
+            }
+
+            bool success = userWS.changePassword(UserId, newPassword, TokenId);
                 if (success)
                 {
                     Response.Redirect("~/Catalogo/Home.aspx?msg=reset_success");

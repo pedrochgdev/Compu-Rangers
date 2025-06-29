@@ -1,0 +1,509 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- https://go.microsoft.com/fwlink/?LinkID=208121. -->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\PUCP\2025-1\PROGRAMACION 3\TAREA ACADEMICA\Installer</_PublishTargetUrl>
+    <History>True|2025-06-27T20:04:04.8515485Z||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="About.aspx">
+      <publishTime>05/14/2025 00:51:20</publishTime>
+    </File>
+    <File Include="Admin/Productos.aspx">
+      <publishTime>06/25/2025 04:33:56</publishTime>
+    </File>
+    <File Include="Admin/Ventas.aspx">
+      <publishTime>06/25/2025 06:09:54</publishTime>
+    </File>
+    <File Include="Auth/PasswordRecovery.aspx">
+      <publishTime>06/22/2025 18:02:58</publishTime>
+    </File>
+    <File Include="Auth/ResetPassword.aspx">
+      <publishTime>06/22/2025 18:02:58</publishTime>
+    </File>
+    <File Include="Auth/SignUp.aspx">
+      <publishTime>06/24/2025 23:23:26</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>09/10/2013 16:29:20</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.pdb">
+      <publishTime>09/10/2013 16:29:20</publishTime>
+    </File>
+    <File Include="bin/es/Microsoft.AspNet.FriendlyUrls.resources.dll">
+      <publishTime>07/30/2013 12:01:46</publishTime>
+    </File>
+    <File Include="bin/es/System.Web.Optimization.resources.dll">
+      <publishTime>02/11/2014 10:28:40</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.FriendlyUrls.dll">
+      <publishTime>07/30/2013 16:57:30</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.Web.Optimization.WebForms.dll">
+      <publishTime>02/11/2014 15:26:04</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>09/05/2018 16:10:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ScriptManager.MSAjax.dll">
+      <publishTime>09/06/2013 11:20:12</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ScriptManager.WebForms.dll">
+      <publishTime>09/06/2013 11:20:22</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>04/11/2022 19:09:46</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>03/08/2023 07:09:56</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>02/11/2014 15:26:04</publishTime>
+    </File>
+    <File Include="bin/Web.dll">
+      <publishTime>06/27/2025 15:03:58</publishTime>
+    </File>
+    <File Include="bin/Web.pdb">
+      <publishTime>06/27/2025 15:03:58</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>01/23/2014 13:57:34</publishTime>
+    </File>
+    <File Include="Bundle.config">
+      <publishTime>05/14/2025 00:51:20</publishTime>
+    </File>
+    <File Include="Catalogo/Home.aspx">
+      <publishTime>06/27/2025 14:40:32</publishTime>
+    </File>
+    <File Include="Catalogo/VerMas.aspx">
+      <publishTime>06/25/2025 07:31:00</publishTime>
+    </File>
+    <File Include="Cliente/DetalleCompra.aspx">
+      <publishTime>06/16/2025 21:53:32</publishTime>
+    </File>
+    <File Include="Cliente/PaymentResponse/Cancel.aspx">
+      <publishTime>06/22/2025 16:58:22</publishTime>
+    </File>
+    <File Include="Cliente/PaymentResponse/Error.aspx">
+      <publishTime>06/22/2025 16:58:22</publishTime>
+    </File>
+    <File Include="Cliente/PaymentResponse/Refused.aspx">
+      <publishTime>06/22/2025 16:58:22</publishTime>
+    </File>
+    <File Include="Cliente/PaymentResponse/Success.aspx">
+      <publishTime>06/22/2025 16:58:22</publishTime>
+    </File>
+    <File Include="Cliente/PaymentResponse/WaitingPayment.aspx">
+      <publishTime>06/21/2025 18:51:08</publishTime>
+    </File>
+    <File Include="Cliente/PurchaseHistory.aspx">
+      <publishTime>06/25/2025 00:22:04</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.addClienteResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.addItemResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.addOrdenResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.addProductoResponse.datasource">
+      <publishTime>06/27/2025 14:40:32</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.carrito.datasource">
+      <publishTime>06/25/2025 08:44:33</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.categoria.datasource">
+      <publishTime>06/25/2025 08:44:33</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.changePasswordResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.cliente.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.deleteItemResponse.datasource">
+      <publishTime>06/25/2025 08:44:35</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.deleteOrdenResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.deleteUsuarioResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.forgotPasswordResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.gananciasPorMesDTO.datasource">
+      <publishTime>06/25/2025 08:44:33</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.getAllCategoriasResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.getAllFromCarritoResponse.datasource">
+      <publishTime>06/25/2025 08:44:35</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.getAllMarcasResponse.datasource">
+      <publishTime>06/27/2025 14:40:32</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.getAllOrdenesFromUserResponse.datasource">
+      <publishTime>06/27/2025 14:40:32</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.getCantidadTotalDisponibleResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.getCarritoFromUserResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.getCatalogResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.getClientesNuevosResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.getGananciaMesResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.getGananciasMensualesResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.getInvDisponibleResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.getPedidosHoyResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.getPedidosSemanalResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.getProductosFiltradosResponse.datasource">
+      <publishTime>06/27/2025 14:40:32</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.getRankingResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.getRoleResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.getTotalHistoricoResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.inventario.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.itemCarrito.datasource">
+      <publishTime>06/25/2025 08:44:33</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.listarProductosResponse.datasource">
+      <publishTime>06/27/2025 14:40:32</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.loginResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.marca.datasource">
+      <publishTime>06/27/2025 14:40:32</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.ordenDeVenta.datasource">
+      <publishTime>06/27/2025 14:40:32</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.paymentResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.pedidoPorDiaDTO.datasource">
+      <publishTime>06/25/2025 08:44:33</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.producto.datasource">
+      <publishTime>06/25/2025 08:44:33</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.productoDTO.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.reservarInventarioResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.searchClienteResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.searchProductoIDResponse.datasource">
+      <publishTime>06/27/2025 14:40:32</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.searchTokenResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.searchUsuarioResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.tokenRecuperacion.datasource">
+      <publishTime>06/25/2025 08:44:33</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.updateCarritoResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.updateItemResponse.datasource">
+      <publishTime>06/25/2025 08:44:35</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.updateProductoResponse.datasource">
+      <publishTime>06/27/2025 14:40:32</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.updateUsuarioResponse.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Connected Services/WebService/Web.WebService.usuario.datasource">
+      <publishTime>06/25/2025 08:44:34</publishTime>
+    </File>
+    <File Include="Contact.aspx">
+      <publishTime>05/14/2025 00:51:20</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.css">
+      <publishTime>06/25/2025 07:31:00</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.css.map">
+      <publishTime>06/25/2025 07:31:00</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.min.css">
+      <publishTime>06/25/2025 07:31:00</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.min.css.map">
+      <publishTime>06/25/2025 07:31:00</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.rtl.css">
+      <publishTime>06/25/2025 07:31:00</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.rtl.css.map">
+      <publishTime>06/25/2025 07:31:00</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.rtl.min.css">
+      <publishTime>06/25/2025 07:31:00</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.rtl.min.css.map">
+      <publishTime>06/25/2025 07:31:00</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.css">
+      <publishTime>06/25/2025 07:31:00</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.css.map">
+      <publishTime>06/25/2025 07:31:00</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.min.css">
+      <publishTime>06/25/2025 07:31:00</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.min.css.map">
+      <publishTime>06/25/2025 07:31:00</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.rtl.css">
+      <publishTime>06/25/2025 07:31:00</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.rtl.css.map">
+      <publishTime>06/25/2025 07:31:00</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.rtl.min.css">
+      <publishTime>06/25/2025 07:31:00</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.rtl.min.css.map">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.css">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.css.map">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.min.css">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.min.css.map">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.rtl.css">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.rtl.css.map">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.rtl.min.css">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.rtl.min.css.map">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css.map">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css.map">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Content/bootstrap.rtl.css">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Content/bootstrap.rtl.css.map">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Content/bootstrap.rtl.min.css">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Content/bootstrap.rtl.min.css.map">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Content/Site.css">
+      <publishTime>05/14/2025 00:51:20</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>05/14/2025 00:51:20</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>05/14/2025 00:51:20</publishTime>
+    </File>
+    <File Include="MostrarImagen.ashx">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.bundle.js">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.bundle.js.map">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.bundle.min.js">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.bundle.min.js.map">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.esm.js">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.esm.js.map">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.esm.min.js">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.esm.min.js.map">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js.map">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js.map">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Scripts/CompuRangers/Alert.js">
+      <publishTime>06/18/2025 02:57:46</publishTime>
+    </File>
+    <File Include="Scripts/CompuRangers/Modal.js">
+      <publishTime>06/18/2025 03:37:10</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.0.js">
+      <publishTime>06/27/2025 14:15:21</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.0.min.js">
+      <publishTime>06/27/2025 14:15:21</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.0.min.map">
+      <publishTime>06/27/2025 14:15:21</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.0.slim.js">
+      <publishTime>06/27/2025 14:15:21</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.0.slim.min.js">
+      <publishTime>06/27/2025 14:15:21</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.0.slim.min.map">
+      <publishTime>06/27/2025 14:15:21</publishTime>
+    </File>
+    <File Include="Scripts/modernizr-2.8.3.js">
+      <publishTime>05/14/2025 00:51:22</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/DetailsView.js">
+      <publishTime>05/14/2025 00:51:24</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/Focus.js">
+      <publishTime>05/14/2025 00:51:24</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/GridView.js">
+      <publishTime>05/14/2025 00:51:24</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/Menu.js">
+      <publishTime>05/14/2025 00:51:24</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/MenuStandards.js">
+      <publishTime>05/14/2025 00:51:24</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/MSAjax/MicrosoftAjax.js">
+      <publishTime>05/14/2025 00:51:24</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxApplicationServices.js">
+      <publishTime>05/14/2025 00:51:24</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxComponentModel.js">
+      <publishTime>05/14/2025 00:51:24</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxCore.js">
+      <publishTime>05/14/2025 00:51:24</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxGlobalization.js">
+      <publishTime>05/14/2025 00:51:24</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxHistory.js">
+      <publishTime>05/14/2025 00:51:24</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxNetwork.js">
+      <publishTime>05/14/2025 00:51:24</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxSerialization.js">
+      <publishTime>05/14/2025 00:51:24</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxTimer.js">
+      <publishTime>05/14/2025 00:51:24</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxWebForms.js">
+      <publishTime>05/14/2025 00:51:24</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxWebServices.js">
+      <publishTime>05/14/2025 00:51:24</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/SmartNav.js">
+      <publishTime>05/14/2025 00:51:24</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/TreeView.js">
+      <publishTime>05/14/2025 00:51:24</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/WebForms.js">
+      <publishTime>05/14/2025 00:51:24</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/WebParts.js">
+      <publishTime>05/14/2025 00:51:24</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/WebUIValidation.js">
+      <publishTime>05/14/2025 00:51:24</publishTime>
+    </File>
+    <File Include="Site.Master">
+      <publishTime>06/25/2025 07:31:01</publishTime>
+    </File>
+    <File Include="Site.Mobile.Master">
+      <publishTime>05/14/2025 00:51:24</publishTime>
+    </File>
+    <File Include="Usuario/MiPerfil.aspx">
+      <publishTime>06/18/2025 01:35:02</publishTime>
+    </File>
+    <File Include="ViewSwitcher.ascx">
+      <publishTime>05/14/2025 00:51:24</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>06/27/2025 15:03:59</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
