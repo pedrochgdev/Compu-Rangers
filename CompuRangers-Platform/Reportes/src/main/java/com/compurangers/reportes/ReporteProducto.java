@@ -33,11 +33,12 @@ import com.compurangers.platform.util.EmailUtil;
  * @author eric
  */
 @WebServlet(name = "ReporteProducto", 
-        urlPatterns = {"/reportes/producto"})
+        urlPatterns = {"/producto"})
 public class ReporteProducto extends HttpServlet {
     private final String NOMBRE_REPORTE = 
             "reportes/hola.jasper";
-    
+    private final String NOMBRE_LOGO = 
+            "imagenes/compurangers.png";
     @Override
     protected void doGet(
             HttpServletRequest request, 
@@ -53,17 +54,22 @@ public class ReporteProducto extends HttpServlet {
                                     this.NOMBRE_REPORTE);
             
             if (reporte == null) {
-                throw new FileNotFoundException("No se encontró el archivo 'areas.jasper'");
+                throw new FileNotFoundException("No se encontró el archivo 'hola.jasper'");
             }
             
-//            Map<String, Object> parametros = 
-//                    new HashMap<>();
+           Map<String, Object> parametros = new HashMap<>();
 //            parametros.put("autor", "Juan Perez");
+            InputStream logoStream = getClass().getClassLoader().
+                    getResourceAsStream(this.NOMBRE_LOGO);
+            if (logoStream != null) {
+                Image logo = ImageIO.read(logoStream);
+                parametros.put("Logo", logo);
+            }
             
             try (Connection conexion = DatabaseUtil.getInstance().getConnection()) {
                 JasperPrint jp = 
                         JasperFillManager.fillReport(reporte, 
-                                null, 
+                                parametros, 
                                 conexion);
                 JasperExportManager.exportReportToPdfStream(
                         jp, response.getOutputStream());
