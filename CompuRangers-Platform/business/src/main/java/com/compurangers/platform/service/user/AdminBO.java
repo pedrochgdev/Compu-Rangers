@@ -25,4 +25,11 @@ public class AdminBO extends UsuarioBO<IAdminDAO> {
         IAdminDAO ic = new AdminDAOImpl();
         return ic.getGananciaMes();
     }
+    public Admin searchAdmin(int id){
+        IAdminDAO ic = new AdminDAOImpl();
+        return (Admin)ic.search(id);
+    }
+    public boolean updateAdmin(Admin usuario){
+        return usuarioDAO.update(usuario);
+    }
 }

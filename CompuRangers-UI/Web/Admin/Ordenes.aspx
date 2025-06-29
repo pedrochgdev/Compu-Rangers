@@ -4,8 +4,7 @@
 <asp:Content ID="PurchaseHistoryContent" ContentPlaceHolderID="MainContent" runat="server">
     <main class="py-4">
         <div class="container">
-            <h3 class="mb-4 text-center fw-bold">Historial de Compras</h3>
-
+            <h3 class="mb-4 text-center fw-bold">Órdenes</h3>
             <div class="table-responsive">
                 <table class="table table-bordered table-hover align-middle">
                     <thead class="table-dark">

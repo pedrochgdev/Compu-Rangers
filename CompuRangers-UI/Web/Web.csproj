@@ -101,6 +101,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="404.aspx" />
     <Content Include="About.aspx" />
     <Content Include="Admin\Ordenes.aspx" />
     <Content Include="Admin\Productos.aspx" />
@@ -393,6 +394,15 @@
     <Content Include="Connected Services\WebService\Web.WebService.getAllOrdenesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.admin.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.searchAdminResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.updateAdminResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -429,6 +439,13 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="404.aspx.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="404.aspx.designer.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Ordenes.aspx.cs">
       <DependentUpon>Ordenes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

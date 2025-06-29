@@ -14,42 +14,12 @@ namespace Web.Usuario
     public partial class MiPerfil : System.Web.UI.Page
     {
         private ClienteWSClient clienteWS;
+        private AdminWSClient adminWS;
         private ClientScriptManager clientScriptManager;
         public MiPerfil()
         {
             this.clienteWS = new ClienteWSClient();
-        }
-        protected void Page_Init(object sender, EventArgs e)
-        {
-            
-            this.clientScriptManager = Page.ClientScript;
-            if (!IsPostBack)
-            {
-                int? user = Session["user"] as int?;
-                if (user.HasValue)
-                {
-                    int userId = Convert.ToInt32(Session["user"]);
-                    var cliente = clienteWS.searchCliente(userId);
-                    Session["direccion_preferida"] = cliente.direccionPreferida;
-
-                    if (cliente != null)
-                    {
-                        nombre.Value = cliente.nombreCompleto;
-                        username.Value = cliente.username;
-                        correo.Value = cliente.correoElectronico;
-                        telefono.Value = cliente.telefono;
-                        direccion.Value = cliente.direccion;
-
-                        // Guardar valores originales en ViewState
-                        ViewState["nombre"] = cliente.nombreCompleto;
-                        ViewState["username"] = cliente.username;
-                        ViewState["correo"] = cliente.correoElectronico;
-                        ViewState["telefono"] = cliente.telefono;
-                        ViewState["direccion"] = cliente.direccion;
-                    }
-                }
-            }
-
+            this.adminWS = new AdminWSClient(); 
         }
         protected void Guardar_Click(object sender, EventArgs e)
         {
@@ -113,20 +83,40 @@ namespace Web.Usuario
                 return;
             }
 
-            var cliente = new cliente
-            {
-                id = user.Value,
-                nombreCompleto = nombre.Value,
-                username = username.Value,
-                correoElectronico = correo.Value,
-                telefono = telefono.Value,
-                direccion = direccion.Value,
-                direccionPreferida=Session["direccion_preferida"].ToString() // Asegúrate de que esta sesión esté configurada correctamente
-            };
+            
             bool actualizado;
             try
             {
-                 actualizado = clienteWS.updateCliente(cliente);
+                if ((bool)Session["isAdmin"])
+                {
+                    var admin_obj = new admin
+                    {
+                        id = user.Value,
+                        nombreCompleto = nombre.Value,
+                        username = username.Value,
+                        correoElectronico = correo.Value,
+                        telefono = telefono.Value,
+                        direccion = direccion.Value,
+                        fechaIngreso = Convert.ToDateTime(Session["fecha_ingreso"])
+                    };
+
+                    actualizado = adminWS.updateAdmin(admin_obj);
+
+                }
+                else{
+                    var cliente_obj = new cliente
+                    {
+                        id = user.Value,
+                        nombreCompleto = nombre.Value,
+                        username = username.Value,
+                        correoElectronico = correo.Value,
+                        telefono = telefono.Value,
+                        direccion = direccion.Value,
+                        direccionPreferida = Session["direccion_preferida"].ToString() // Asegúrate de que esta sesión esté configurada correctamente
+                    };
+                    actualizado = clienteWS.updateCliente(cliente_obj);
+                }
+                    
                 if (actualizado)
                 {
                     nombre.Attributes.Add("readonly", "true");
@@ -174,6 +164,7 @@ namespace Web.Usuario
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.clientScriptManager = Page.ClientScript;
             if (!IsPostBack)
             {
                 int? user = Session["user"] as int?;
@@ -181,15 +172,31 @@ namespace Web.Usuario
                 {
 
                     int userId = Convert.ToInt32(Session["user"]);
-                    var cliente = clienteWS.searchCliente(userId);
-                    Session["direccion_preferida"] = cliente.direccionPreferida;
-                    if (cliente != null)
-                    {
-                        nombre.Value = cliente.nombreCompleto;
-                        username.Value = cliente.username;
-                        correo.Value = cliente.correoElectronico;
-                        telefono.Value = cliente.telefono;
-                        direccion.Value = cliente.direccion;
+                    if (userId > 0) {
+                        if ((bool)Session["isAdmin"])
+                        {
+                            var admin = adminWS.searchAdmin(userId);
+                            if (admin != null)
+                            {
+                                Session["fecha_ingreso"] = admin.fechaIngreso;
+                                nombre.Value = admin.nombreCompleto;
+                                username.Value = admin.username;
+                                correo.Value = admin.correoElectronico;
+                                telefono.Value = admin.telefono;
+                                direccion.Value = admin.direccion;
+                            }
+                        }else {
+                            var cliente = clienteWS.searchCliente(userId);
+                            if (cliente != null)
+                            {
+                                Session["direccion_preferida"] = cliente.direccionPreferida;
+                                nombre.Value = cliente.nombreCompleto;
+                                username.Value = cliente.username;
+                                correo.Value = cliente.correoElectronico;
+                                telefono.Value = cliente.telefono;
+                                direccion.Value = cliente.direccion;
+                            }
+                        }
                     }
                 }
                 else
