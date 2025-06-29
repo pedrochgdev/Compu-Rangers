@@ -39,6 +39,9 @@
                 <asp:BoundField DataField="sku" HeaderText="SKU" />
                 <asp:BoundField DataField="descripcion" HeaderText="Descripción" />
                 <asp:BoundField DataField="precioVenta" HeaderText="Precio" DataFormatString="{0:C}" />
+                
+                <asp:BoundField DataField="categoria.nombre" HeaderText="Categoría" />
+                <asp:BoundField DataField="marca.nombre" HeaderText="Marca"  />
                 <asp:TemplateField HeaderText="Acciones">
                     <ItemTemplate>
                         <a href='<%# "EditarProducto.aspx?id=" + Eval("id") %>' class="btn btn-sm btn-outline-primary me-2" title="Editar">

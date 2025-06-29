@@ -68,7 +68,7 @@ public class ProductoDAOImpl extends BaseDAOImpl<Producto> implements IProductoD
     protected CallableStatement getAllCommand(Connection conn) throws SQLException {
         return conn.prepareCall("{CALL get_all_productos()}");
     }
-
+    
     protected CallableStatement getRankingCommand(Connection conn) throws SQLException {
         return conn.prepareCall("{CALL get_ranking_productos()}");
     }
@@ -89,26 +89,30 @@ public class ProductoDAOImpl extends BaseDAOImpl<Producto> implements IProductoD
         }else{
             p.setImagenReferencial(null);
         }
-        
+       
         return p;
     }
 
     @Override
     public List<Producto> getRanking() {
         try (
-                Connection conn = DatabaseUtil.getInstance().getConnection(); CallableStatement cmd = this.getRankingCommand(conn);) {
+            Connection conn = DatabaseUtil.getInstance().getConnection();
+            CallableStatement cmd = this.getRankingCommand(conn);
+        ) {
             ResultSet rs = cmd.executeQuery();
-
+            
             List<Producto> modelos = new ArrayList<>();
             while (rs.next()) {
                 modelos.add(this.mapModel(rs));
             }
-
+            
             return modelos;
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             System.err.println("Error SQL durante el ranking: " + e.getMessage());
             throw new RuntimeException("No se pudo listar el ranking.", e);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             System.err.println("Error inpesperado: " + e.getMessage());
             throw new RuntimeException("Error inesperado al listar el ranking.", e);
         }

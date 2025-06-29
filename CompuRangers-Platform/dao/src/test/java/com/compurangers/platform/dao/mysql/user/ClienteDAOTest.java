@@ -33,7 +33,7 @@ public class ClienteDAOTest implements ICrudDAOTest {
         cliente.setDireccionPreferida("Calle Siempre Viva 742");
 
         this.testId = dao.add(cliente);
-        
+
         assertTrue(testId > 0);
     }
 
@@ -119,7 +119,7 @@ public class ClienteDAOTest implements ICrudDAOTest {
         boolean deleted = dao.delete(testId);
         assertTrue(deleted);
     }
-    
+
     @Test
     @Order(9)
     public void shouldFindUserIdByUsername() {
@@ -130,7 +130,7 @@ public class ClienteDAOTest implements ICrudDAOTest {
         assertTrue(userId > 0);
         assertEquals(2, userId);
     }
-    
+
     @Test
     @Order(10)
     public void shouldFindUserIdByEmail() {
@@ -152,5 +152,5 @@ public class ClienteDAOTest implements ICrudDAOTest {
         assertNotNull(hash);
         assertFalse(hash.isEmpty());
     }
-    
+
 }

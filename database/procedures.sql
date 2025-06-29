@@ -1516,8 +1516,7 @@ BEGIN
         telefono = telefono_in,
         correo = correo_in,
         direccion = direccion_in,
-        isAdmin = isadmin_in,
-        password = password_in
+        isAdmin = isadmin_in
     WHERE id = id_in;
 END;
 //
