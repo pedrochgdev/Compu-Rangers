@@ -8,7 +8,7 @@ using Web.WebService;
 
 namespace Web.Auth
 {
-    public partial class ResetPassword : System.Web.UI.Page
+    public partial class ResetPassword : Web.Middleware.NoAuth
     {
         private string token;
         private TokenRecuperacionWSClient tokenWS;

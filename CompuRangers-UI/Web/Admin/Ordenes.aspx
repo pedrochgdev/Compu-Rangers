@@ -4,8 +4,11 @@
 <asp:Content ID="PurchaseHistoryContent" ContentPlaceHolderID="MainContent" runat="server">
     <main class="py-4">
         <div class="container">
-            <h3 class="mb-4 text-center fw-bold">Órdenes</h3>
-            <div class="table-responsive">
+            <div class="bg-white d-flex justify-content-between align-items-center">
+                  <h5 class="mb-0">Órdenes</h5>
+                  <asp:Button ID="Button2" runat="server" Text="Generar reporte" CssClass="btn btn-outline-danger btn-sm" OnClick="btnGenerarReporteOrdenes_Click" />
+            </div> 
+            <div class="table-responsive mt-5">
                 <table class="table table-bordered table-hover align-middle">
                     <thead class="table-dark">
                         <tr>

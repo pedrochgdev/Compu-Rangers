@@ -8,7 +8,7 @@ using Web.WebService;
 
 namespace Web.Auth
 {
-    public partial class PasswordRecovery : System.Web.UI.Page
+    public partial class PasswordRecovery : Web.Middleware.NoAuth
     {
         private readonly UsuarioWSClient authWS;
 

@@ -259,7 +259,8 @@ namespace Web
                 }
                 else
                     strRedirect = "../Catalogo/Home.aspx";
-
+                bool isadmin = userWS.getRole(Convert.ToInt32(Session["user"]));
+                Session["isAdmin"] = isadmin;
                 Response.Redirect(strRedirect + "?msg=login-success", true);
             }
             else

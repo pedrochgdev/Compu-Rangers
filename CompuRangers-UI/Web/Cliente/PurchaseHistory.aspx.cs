@@ -1,14 +1,16 @@
 ﻿using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using Web.WebService;
 
 
 namespace Web
 {
-    public partial class PurchaseHistory : Page
+    public partial class PurchaseHistory : Web.Middleware.ClientePage
     {
         private readonly OrdenDeVentaWSClient ordenWS;
 
@@ -16,7 +18,15 @@ namespace Web
         {
             this.ordenWS = new OrdenDeVentaWSClient();
         }
-
+        protected void rptHistorialCompras_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "GenerarReporte")
+            {
+                int idOrden = Convert.ToInt32(e.CommandArgument);
+                string baseUrl = ConfigurationManager.AppSettings["BaseUrl"]; // Asegúrate de tener esto en tu web.config
+                Response.Redirect($"{baseUrl}/Reportes/ordenes?id={idOrden}");
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

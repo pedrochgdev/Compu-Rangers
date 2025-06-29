@@ -13,7 +13,7 @@ using Web.WebService;
 
 namespace Web
 {
-    public partial class Home : Page
+    public partial class Home : Web.Middleware.NoAdminPage
     {
         private readonly AuthWSClient authWS;
         private readonly UsuarioWSClient userWS;

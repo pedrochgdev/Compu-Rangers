@@ -5,7 +5,7 @@ using Web.WebService;
 
 namespace Web
 {
-    public partial class VerMas : System.Web.UI.Page
+    public partial class VerMas : Web.Middleware.NoAuth
     {
         private readonly InventoryWSClient invWS;
         private readonly CarritoWSClient carritoWS;

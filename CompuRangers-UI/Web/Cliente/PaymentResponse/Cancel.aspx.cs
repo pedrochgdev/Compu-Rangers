@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Web.Cliente.PaymentResponse
 {
-    public partial class Cancel : System.Web.UI.Page
+    public partial class Cancel : Web.Middleware.ClientePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

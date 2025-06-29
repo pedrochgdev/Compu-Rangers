@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using Web.WebService;
 namespace Web.Admin
 {
-    public partial class Productos : Page
+    public partial class Productos : Web.Middleware.AdminPage
     {
         private ProductoWSClient productoWS;
         private readonly CategoriaWSClient categoriaWS;

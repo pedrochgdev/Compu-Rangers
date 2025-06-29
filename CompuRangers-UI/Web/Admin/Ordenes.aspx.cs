@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -8,7 +9,7 @@ using Web.WebService;
 
 namespace Web.Admin
 {
-    public partial class Ordenes : System.Web.UI.Page
+    public partial class Ordenes : Web.Middleware.AdminPage
     {
         private readonly OrdenDeVentaWSClient ordenWS;
 
@@ -33,7 +34,12 @@ namespace Web.Admin
                 rptHistorialCompras.DataBind();
             }
         }
-
+        protected void btnGenerarReporteOrdenes_Click(object sender, EventArgs e)
+        {
+            string baseUrl = ConfigurationManager.AppSettings["BaseUrl"];
+            Response.Redirect($"{baseUrl}/Reportes/ventasrealizadas");
+        }
+      
         private detalleVenta[] AgruparDetalles(detalleVenta[] detalles)
         {
             var agrupados = new Dictionary<string, detalleVenta>();
