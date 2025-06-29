@@ -5,7 +5,6 @@
     <main class="py-4">
         <div class="container">
             <h3 class="mb-4 text-center fw-bold">Historial de Compras</h3>
-
             <div class="table-responsive">
                 <table class="table table-bordered table-hover align-middle">
                     <thead class="table-dark">
@@ -51,7 +50,7 @@
                                                 <tr>
                                                     <td><%# Eval("producto.producto.nombre") %></td>
                                                     <td class="text-center"><%# Eval("cantidad") %></td>
-                                                    <td class="text-end">$<%# Eval("subtotal", "{0:F2}") %></td>
+                                                    <td class="text-end"><%# Eval("subtotal", "{0:C2}") %></td>
                                                 </tr>
                                             </ItemTemplate>
                                             <FooterTemplate>
