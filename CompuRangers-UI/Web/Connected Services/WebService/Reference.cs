@@ -471,66 +471,6 @@ namespace Web.WebService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.compurangers.com")]
-    public partial class pedidoPorDiaDTO : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private int cantidadField;
-        
-        private System.DateTime diaField;
-        
-        private bool diaFieldSpecified;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public int cantidad {
-            get {
-                return this.cantidadField;
-            }
-            set {
-                this.cantidadField = value;
-                this.RaisePropertyChanged("cantidad");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public System.DateTime dia {
-            get {
-                return this.diaField;
-            }
-            set {
-                this.diaField = value;
-                this.RaisePropertyChanged("dia");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool diaSpecified {
-            get {
-                return this.diaFieldSpecified;
-            }
-            set {
-                this.diaFieldSpecified = value;
-                this.RaisePropertyChanged("diaSpecified");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.compurangers.com")]
     public partial class gananciasPorMesDTO : object, System.ComponentModel.INotifyPropertyChanged {
         
         private decimal gananciaField;
@@ -586,6 +526,66 @@ namespace Web.WebService {
             set {
                 this.mesFieldSpecified = value;
                 this.RaisePropertyChanged("mesSpecified");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.compurangers.com")]
+    public partial class pedidoPorDiaDTO : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int cantidadField;
+        
+        private System.DateTime diaField;
+        
+        private bool diaFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public int cantidad {
+            get {
+                return this.cantidadField;
+            }
+            set {
+                this.cantidadField = value;
+                this.RaisePropertyChanged("cantidad");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public System.DateTime dia {
+            get {
+                return this.diaField;
+            }
+            set {
+                this.diaField = value;
+                this.RaisePropertyChanged("dia");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool diaSpecified {
+            get {
+                return this.diaFieldSpecified;
+            }
+            set {
+                this.diaFieldSpecified = value;
+                this.RaisePropertyChanged("diaSpecified");
             }
         }
         
@@ -1450,22 +1450,13 @@ namespace Web.WebService {
         System.Threading.Tasks.Task<Web.WebService.getRoleResponse> getRoleAsync(Web.WebService.getRoleRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/UsuarioWS/searchUsuarioRequest", ReplyAction="http://services.compurangers.com/UsuarioWS/searchUsuarioResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/UsuarioWS/updateUsuarioRequest", ReplyAction="http://services.compurangers.com/UsuarioWS/updateUsuarioResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        Web.WebService.searchUsuarioResponse searchUsuario(Web.WebService.searchUsuarioRequest request);
+        Web.WebService.updateUsuarioResponse updateUsuario(Web.WebService.updateUsuarioRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/UsuarioWS/searchUsuarioRequest", ReplyAction="http://services.compurangers.com/UsuarioWS/searchUsuarioResponse")]
-        System.Threading.Tasks.Task<Web.WebService.searchUsuarioResponse> searchUsuarioAsync(Web.WebService.searchUsuarioRequest request);
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/UsuarioWS/deleteUsuarioRequest", ReplyAction="http://services.compurangers.com/UsuarioWS/deleteUsuarioResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        Web.WebService.deleteUsuarioResponse deleteUsuario(Web.WebService.deleteUsuarioRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/UsuarioWS/deleteUsuarioRequest", ReplyAction="http://services.compurangers.com/UsuarioWS/deleteUsuarioResponse")]
-        System.Threading.Tasks.Task<Web.WebService.deleteUsuarioResponse> deleteUsuarioAsync(Web.WebService.deleteUsuarioRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/UsuarioWS/updateUsuarioRequest", ReplyAction="http://services.compurangers.com/UsuarioWS/updateUsuarioResponse")]
+        System.Threading.Tasks.Task<Web.WebService.updateUsuarioResponse> updateUsuarioAsync(Web.WebService.updateUsuarioRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/UsuarioWS/forgotPasswordRequest", ReplyAction="http://services.compurangers.com/UsuarioWS/forgotPasswordResponse")]
@@ -1477,13 +1468,22 @@ namespace Web.WebService {
         System.Threading.Tasks.Task<Web.WebService.forgotPasswordResponse> forgotPasswordAsync(Web.WebService.forgotPasswordRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/UsuarioWS/updateUsuarioRequest", ReplyAction="http://services.compurangers.com/UsuarioWS/updateUsuarioResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/UsuarioWS/deleteUsuarioRequest", ReplyAction="http://services.compurangers.com/UsuarioWS/deleteUsuarioResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        Web.WebService.updateUsuarioResponse updateUsuario(Web.WebService.updateUsuarioRequest request);
+        Web.WebService.deleteUsuarioResponse deleteUsuario(Web.WebService.deleteUsuarioRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/UsuarioWS/updateUsuarioRequest", ReplyAction="http://services.compurangers.com/UsuarioWS/updateUsuarioResponse")]
-        System.Threading.Tasks.Task<Web.WebService.updateUsuarioResponse> updateUsuarioAsync(Web.WebService.updateUsuarioRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/UsuarioWS/deleteUsuarioRequest", ReplyAction="http://services.compurangers.com/UsuarioWS/deleteUsuarioResponse")]
+        System.Threading.Tasks.Task<Web.WebService.deleteUsuarioResponse> deleteUsuarioAsync(Web.WebService.deleteUsuarioRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/UsuarioWS/searchUsuarioRequest", ReplyAction="http://services.compurangers.com/UsuarioWS/searchUsuarioResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        Web.WebService.searchUsuarioResponse searchUsuario(Web.WebService.searchUsuarioRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/UsuarioWS/searchUsuarioRequest", ReplyAction="http://services.compurangers.com/UsuarioWS/searchUsuarioResponse")]
+        System.Threading.Tasks.Task<Web.WebService.searchUsuarioResponse> searchUsuarioAsync(Web.WebService.searchUsuarioRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/UsuarioWS/changePasswordRequest", ReplyAction="http://services.compurangers.com/UsuarioWS/changePasswordResponse")]
@@ -1534,71 +1534,35 @@ namespace Web.WebService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="searchUsuario", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class searchUsuarioRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="updateUsuario", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class updateUsuarioRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int usuarioId;
+        public Web.WebService.usuario usuario;
         
-        public searchUsuarioRequest() {
+        public updateUsuarioRequest() {
         }
         
-        public searchUsuarioRequest(int usuarioId) {
-            this.usuarioId = usuarioId;
+        public updateUsuarioRequest(Web.WebService.usuario usuario) {
+            this.usuario = usuario;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="searchUsuarioResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class searchUsuarioResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Web.WebService.usuario @return;
-        
-        public searchUsuarioResponse() {
-        }
-        
-        public searchUsuarioResponse(Web.WebService.usuario @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="deleteUsuario", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class deleteUsuarioRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int usuarioId;
-        
-        public deleteUsuarioRequest() {
-        }
-        
-        public deleteUsuarioRequest(int usuarioId) {
-            this.usuarioId = usuarioId;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="deleteUsuarioResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class deleteUsuarioResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="updateUsuarioResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class updateUsuarioResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public bool @return;
         
-        public deleteUsuarioResponse() {
+        public updateUsuarioResponse() {
         }
         
-        public deleteUsuarioResponse(bool @return) {
+        public updateUsuarioResponse(bool @return) {
             this.@return = @return;
         }
     }
@@ -1642,35 +1606,71 @@ namespace Web.WebService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="updateUsuario", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class updateUsuarioRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="deleteUsuario", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class deleteUsuarioRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Web.WebService.usuario usuario;
+        public int usuarioId;
         
-        public updateUsuarioRequest() {
+        public deleteUsuarioRequest() {
         }
         
-        public updateUsuarioRequest(Web.WebService.usuario usuario) {
-            this.usuario = usuario;
+        public deleteUsuarioRequest(int usuarioId) {
+            this.usuarioId = usuarioId;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="updateUsuarioResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class updateUsuarioResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="deleteUsuarioResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class deleteUsuarioResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public bool @return;
         
-        public updateUsuarioResponse() {
+        public deleteUsuarioResponse() {
         }
         
-        public updateUsuarioResponse(bool @return) {
+        public deleteUsuarioResponse(bool @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="searchUsuario", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class searchUsuarioRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int usuarioId;
+        
+        public searchUsuarioRequest() {
+        }
+        
+        public searchUsuarioRequest(int usuarioId) {
+            this.usuarioId = usuarioId;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="searchUsuarioResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class searchUsuarioResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Web.WebService.usuario @return;
+        
+        public searchUsuarioResponse() {
+        }
+        
+        public searchUsuarioResponse(Web.WebService.usuario @return) {
             this.@return = @return;
         }
     }
@@ -1772,49 +1772,26 @@ namespace Web.WebService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Web.WebService.searchUsuarioResponse Web.WebService.UsuarioWS.searchUsuario(Web.WebService.searchUsuarioRequest request) {
-            return base.Channel.searchUsuario(request);
+        Web.WebService.updateUsuarioResponse Web.WebService.UsuarioWS.updateUsuario(Web.WebService.updateUsuarioRequest request) {
+            return base.Channel.updateUsuario(request);
         }
         
-        public Web.WebService.usuario searchUsuario(int usuarioId) {
-            Web.WebService.searchUsuarioRequest inValue = new Web.WebService.searchUsuarioRequest();
-            inValue.usuarioId = usuarioId;
-            Web.WebService.searchUsuarioResponse retVal = ((Web.WebService.UsuarioWS)(this)).searchUsuario(inValue);
+        public bool updateUsuario(Web.WebService.usuario usuario) {
+            Web.WebService.updateUsuarioRequest inValue = new Web.WebService.updateUsuarioRequest();
+            inValue.usuario = usuario;
+            Web.WebService.updateUsuarioResponse retVal = ((Web.WebService.UsuarioWS)(this)).updateUsuario(inValue);
             return retVal.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Web.WebService.searchUsuarioResponse> Web.WebService.UsuarioWS.searchUsuarioAsync(Web.WebService.searchUsuarioRequest request) {
-            return base.Channel.searchUsuarioAsync(request);
+        System.Threading.Tasks.Task<Web.WebService.updateUsuarioResponse> Web.WebService.UsuarioWS.updateUsuarioAsync(Web.WebService.updateUsuarioRequest request) {
+            return base.Channel.updateUsuarioAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Web.WebService.searchUsuarioResponse> searchUsuarioAsync(int usuarioId) {
-            Web.WebService.searchUsuarioRequest inValue = new Web.WebService.searchUsuarioRequest();
-            inValue.usuarioId = usuarioId;
-            return ((Web.WebService.UsuarioWS)(this)).searchUsuarioAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Web.WebService.deleteUsuarioResponse Web.WebService.UsuarioWS.deleteUsuario(Web.WebService.deleteUsuarioRequest request) {
-            return base.Channel.deleteUsuario(request);
-        }
-        
-        public bool deleteUsuario(int usuarioId) {
-            Web.WebService.deleteUsuarioRequest inValue = new Web.WebService.deleteUsuarioRequest();
-            inValue.usuarioId = usuarioId;
-            Web.WebService.deleteUsuarioResponse retVal = ((Web.WebService.UsuarioWS)(this)).deleteUsuario(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Web.WebService.deleteUsuarioResponse> Web.WebService.UsuarioWS.deleteUsuarioAsync(Web.WebService.deleteUsuarioRequest request) {
-            return base.Channel.deleteUsuarioAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Web.WebService.deleteUsuarioResponse> deleteUsuarioAsync(int usuarioId) {
-            Web.WebService.deleteUsuarioRequest inValue = new Web.WebService.deleteUsuarioRequest();
-            inValue.usuarioId = usuarioId;
-            return ((Web.WebService.UsuarioWS)(this)).deleteUsuarioAsync(inValue);
+        public System.Threading.Tasks.Task<Web.WebService.updateUsuarioResponse> updateUsuarioAsync(Web.WebService.usuario usuario) {
+            Web.WebService.updateUsuarioRequest inValue = new Web.WebService.updateUsuarioRequest();
+            inValue.usuario = usuario;
+            return ((Web.WebService.UsuarioWS)(this)).updateUsuarioAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1841,26 +1818,49 @@ namespace Web.WebService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Web.WebService.updateUsuarioResponse Web.WebService.UsuarioWS.updateUsuario(Web.WebService.updateUsuarioRequest request) {
-            return base.Channel.updateUsuario(request);
+        Web.WebService.deleteUsuarioResponse Web.WebService.UsuarioWS.deleteUsuario(Web.WebService.deleteUsuarioRequest request) {
+            return base.Channel.deleteUsuario(request);
         }
         
-        public bool updateUsuario(Web.WebService.usuario usuario) {
-            Web.WebService.updateUsuarioRequest inValue = new Web.WebService.updateUsuarioRequest();
-            inValue.usuario = usuario;
-            Web.WebService.updateUsuarioResponse retVal = ((Web.WebService.UsuarioWS)(this)).updateUsuario(inValue);
+        public bool deleteUsuario(int usuarioId) {
+            Web.WebService.deleteUsuarioRequest inValue = new Web.WebService.deleteUsuarioRequest();
+            inValue.usuarioId = usuarioId;
+            Web.WebService.deleteUsuarioResponse retVal = ((Web.WebService.UsuarioWS)(this)).deleteUsuario(inValue);
             return retVal.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Web.WebService.updateUsuarioResponse> Web.WebService.UsuarioWS.updateUsuarioAsync(Web.WebService.updateUsuarioRequest request) {
-            return base.Channel.updateUsuarioAsync(request);
+        System.Threading.Tasks.Task<Web.WebService.deleteUsuarioResponse> Web.WebService.UsuarioWS.deleteUsuarioAsync(Web.WebService.deleteUsuarioRequest request) {
+            return base.Channel.deleteUsuarioAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Web.WebService.updateUsuarioResponse> updateUsuarioAsync(Web.WebService.usuario usuario) {
-            Web.WebService.updateUsuarioRequest inValue = new Web.WebService.updateUsuarioRequest();
-            inValue.usuario = usuario;
-            return ((Web.WebService.UsuarioWS)(this)).updateUsuarioAsync(inValue);
+        public System.Threading.Tasks.Task<Web.WebService.deleteUsuarioResponse> deleteUsuarioAsync(int usuarioId) {
+            Web.WebService.deleteUsuarioRequest inValue = new Web.WebService.deleteUsuarioRequest();
+            inValue.usuarioId = usuarioId;
+            return ((Web.WebService.UsuarioWS)(this)).deleteUsuarioAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Web.WebService.searchUsuarioResponse Web.WebService.UsuarioWS.searchUsuario(Web.WebService.searchUsuarioRequest request) {
+            return base.Channel.searchUsuario(request);
+        }
+        
+        public Web.WebService.usuario searchUsuario(int usuarioId) {
+            Web.WebService.searchUsuarioRequest inValue = new Web.WebService.searchUsuarioRequest();
+            inValue.usuarioId = usuarioId;
+            Web.WebService.searchUsuarioResponse retVal = ((Web.WebService.UsuarioWS)(this)).searchUsuario(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Web.WebService.searchUsuarioResponse> Web.WebService.UsuarioWS.searchUsuarioAsync(Web.WebService.searchUsuarioRequest request) {
+            return base.Channel.searchUsuarioAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Web.WebService.searchUsuarioResponse> searchUsuarioAsync(int usuarioId) {
+            Web.WebService.searchUsuarioRequest inValue = new Web.WebService.searchUsuarioRequest();
+            inValue.usuarioId = usuarioId;
+            return ((Web.WebService.UsuarioWS)(this)).searchUsuarioAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1896,31 +1896,13 @@ namespace Web.WebService {
     public interface ClienteWS {
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ClienteWS/searchClienteRequest", ReplyAction="http://services.compurangers.com/ClienteWS/searchClienteResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ClienteWS/addClienteRequest", ReplyAction="http://services.compurangers.com/ClienteWS/addClienteResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        Web.WebService.searchClienteResponse searchCliente(Web.WebService.searchClienteRequest request);
+        Web.WebService.addClienteResponse addCliente(Web.WebService.addClienteRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ClienteWS/searchClienteRequest", ReplyAction="http://services.compurangers.com/ClienteWS/searchClienteResponse")]
-        System.Threading.Tasks.Task<Web.WebService.searchClienteResponse> searchClienteAsync(Web.WebService.searchClienteRequest request);
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ClienteWS/getClientesNuevosRequest", ReplyAction="http://services.compurangers.com/ClienteWS/getClientesNuevosResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        Web.WebService.getClientesNuevosResponse getClientesNuevos(Web.WebService.getClientesNuevosRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ClienteWS/getClientesNuevosRequest", ReplyAction="http://services.compurangers.com/ClienteWS/getClientesNuevosResponse")]
-        System.Threading.Tasks.Task<Web.WebService.getClientesNuevosResponse> getClientesNuevosAsync(Web.WebService.getClientesNuevosRequest request);
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ClienteWS/updateClienteRequest", ReplyAction="http://services.compurangers.com/ClienteWS/updateClienteResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        Web.WebService.updateClienteResponse updateCliente(Web.WebService.updateClienteRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ClienteWS/updateClienteRequest", ReplyAction="http://services.compurangers.com/ClienteWS/updateClienteResponse")]
-        System.Threading.Tasks.Task<Web.WebService.updateClienteResponse> updateClienteAsync(Web.WebService.updateClienteRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ClienteWS/addClienteRequest", ReplyAction="http://services.compurangers.com/ClienteWS/addClienteResponse")]
+        System.Threading.Tasks.Task<Web.WebService.addClienteResponse> addClienteAsync(Web.WebService.addClienteRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ClienteWS/paymentRequest", ReplyAction="http://services.compurangers.com/ClienteWS/paymentResponse")]
@@ -1932,93 +1914,47 @@ namespace Web.WebService {
         System.Threading.Tasks.Task<Web.WebService.paymentResponse> paymentAsync(Web.WebService.paymentRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ClienteWS/addClienteRequest", ReplyAction="http://services.compurangers.com/ClienteWS/addClienteResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ClienteWS/getClientesNuevosRequest", ReplyAction="http://services.compurangers.com/ClienteWS/getClientesNuevosResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        Web.WebService.addClienteResponse addCliente(Web.WebService.addClienteRequest request);
+        Web.WebService.getClientesNuevosResponse getClientesNuevos(Web.WebService.getClientesNuevosRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ClienteWS/addClienteRequest", ReplyAction="http://services.compurangers.com/ClienteWS/addClienteResponse")]
-        System.Threading.Tasks.Task<Web.WebService.addClienteResponse> addClienteAsync(Web.WebService.addClienteRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ClienteWS/getClientesNuevosRequest", ReplyAction="http://services.compurangers.com/ClienteWS/getClientesNuevosResponse")]
+        System.Threading.Tasks.Task<Web.WebService.getClientesNuevosResponse> getClientesNuevosAsync(Web.WebService.getClientesNuevosRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ClienteWS/searchClienteRequest", ReplyAction="http://services.compurangers.com/ClienteWS/searchClienteResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        Web.WebService.searchClienteResponse searchCliente(Web.WebService.searchClienteRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ClienteWS/searchClienteRequest", ReplyAction="http://services.compurangers.com/ClienteWS/searchClienteResponse")]
+        System.Threading.Tasks.Task<Web.WebService.searchClienteResponse> searchClienteAsync(Web.WebService.searchClienteRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ClienteWS/updateClienteRequest", ReplyAction="http://services.compurangers.com/ClienteWS/updateClienteResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        Web.WebService.updateClienteResponse updateCliente(Web.WebService.updateClienteRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ClienteWS/updateClienteRequest", ReplyAction="http://services.compurangers.com/ClienteWS/updateClienteResponse")]
+        System.Threading.Tasks.Task<Web.WebService.updateClienteResponse> updateClienteAsync(Web.WebService.updateClienteRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="searchCliente", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class searchClienteRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int id;
-        
-        public searchClienteRequest() {
-        }
-        
-        public searchClienteRequest(int id) {
-            this.id = id;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="searchClienteResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class searchClienteResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Web.WebService.cliente @return;
-        
-        public searchClienteResponse() {
-        }
-        
-        public searchClienteResponse(Web.WebService.cliente @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getClientesNuevos", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class getClientesNuevosRequest {
-        
-        public getClientesNuevosRequest() {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getClientesNuevosResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class getClientesNuevosResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int @return;
-        
-        public getClientesNuevosResponse() {
-        }
-        
-        public getClientesNuevosResponse(int @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="updateCliente", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class updateClienteRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="addCliente", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class addClienteRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public Web.WebService.cliente cliente;
         
-        public updateClienteRequest() {
+        public addClienteRequest() {
         }
         
-        public updateClienteRequest(Web.WebService.cliente cliente) {
+        public addClienteRequest(Web.WebService.cliente cliente) {
             this.cliente = cliente;
         }
     }
@@ -2026,17 +1962,17 @@ namespace Web.WebService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="updateClienteResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class updateClienteResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="addClienteResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class addClienteResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public bool @return;
+        public int @return;
         
-        public updateClienteResponse() {
+        public addClienteResponse() {
         }
         
-        public updateClienteResponse(bool @return) {
+        public addClienteResponse(int @return) {
             this.@return = @return;
         }
     }
@@ -2080,17 +2016,81 @@ namespace Web.WebService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="addCliente", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class addClienteRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getClientesNuevos", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class getClientesNuevosRequest {
+        
+        public getClientesNuevosRequest() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getClientesNuevosResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class getClientesNuevosResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int @return;
+        
+        public getClientesNuevosResponse() {
+        }
+        
+        public getClientesNuevosResponse(int @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="searchCliente", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class searchClienteRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int id;
+        
+        public searchClienteRequest() {
+        }
+        
+        public searchClienteRequest(int id) {
+            this.id = id;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="searchClienteResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class searchClienteResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Web.WebService.cliente @return;
+        
+        public searchClienteResponse() {
+        }
+        
+        public searchClienteResponse(Web.WebService.cliente @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="updateCliente", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class updateClienteRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public Web.WebService.cliente cliente;
         
-        public addClienteRequest() {
+        public updateClienteRequest() {
         }
         
-        public addClienteRequest(Web.WebService.cliente cliente) {
+        public updateClienteRequest(Web.WebService.cliente cliente) {
             this.cliente = cliente;
         }
     }
@@ -2098,17 +2098,17 @@ namespace Web.WebService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="addClienteResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class addClienteResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="updateClienteResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class updateClienteResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int @return;
+        public bool @return;
         
-        public addClienteResponse() {
+        public updateClienteResponse() {
         }
         
-        public addClienteResponse(int @return) {
+        public updateClienteResponse(bool @return) {
             this.@return = @return;
         }
     }
@@ -2141,70 +2141,26 @@ namespace Web.WebService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Web.WebService.searchClienteResponse Web.WebService.ClienteWS.searchCliente(Web.WebService.searchClienteRequest request) {
-            return base.Channel.searchCliente(request);
+        Web.WebService.addClienteResponse Web.WebService.ClienteWS.addCliente(Web.WebService.addClienteRequest request) {
+            return base.Channel.addCliente(request);
         }
         
-        public Web.WebService.cliente searchCliente(int id) {
-            Web.WebService.searchClienteRequest inValue = new Web.WebService.searchClienteRequest();
-            inValue.id = id;
-            Web.WebService.searchClienteResponse retVal = ((Web.WebService.ClienteWS)(this)).searchCliente(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Web.WebService.searchClienteResponse> Web.WebService.ClienteWS.searchClienteAsync(Web.WebService.searchClienteRequest request) {
-            return base.Channel.searchClienteAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Web.WebService.searchClienteResponse> searchClienteAsync(int id) {
-            Web.WebService.searchClienteRequest inValue = new Web.WebService.searchClienteRequest();
-            inValue.id = id;
-            return ((Web.WebService.ClienteWS)(this)).searchClienteAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Web.WebService.getClientesNuevosResponse Web.WebService.ClienteWS.getClientesNuevos(Web.WebService.getClientesNuevosRequest request) {
-            return base.Channel.getClientesNuevos(request);
-        }
-        
-        public int getClientesNuevos() {
-            Web.WebService.getClientesNuevosRequest inValue = new Web.WebService.getClientesNuevosRequest();
-            Web.WebService.getClientesNuevosResponse retVal = ((Web.WebService.ClienteWS)(this)).getClientesNuevos(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Web.WebService.getClientesNuevosResponse> Web.WebService.ClienteWS.getClientesNuevosAsync(Web.WebService.getClientesNuevosRequest request) {
-            return base.Channel.getClientesNuevosAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Web.WebService.getClientesNuevosResponse> getClientesNuevosAsync() {
-            Web.WebService.getClientesNuevosRequest inValue = new Web.WebService.getClientesNuevosRequest();
-            return ((Web.WebService.ClienteWS)(this)).getClientesNuevosAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Web.WebService.updateClienteResponse Web.WebService.ClienteWS.updateCliente(Web.WebService.updateClienteRequest request) {
-            return base.Channel.updateCliente(request);
-        }
-        
-        public bool updateCliente(Web.WebService.cliente cliente) {
-            Web.WebService.updateClienteRequest inValue = new Web.WebService.updateClienteRequest();
+        public int addCliente(Web.WebService.cliente cliente) {
+            Web.WebService.addClienteRequest inValue = new Web.WebService.addClienteRequest();
             inValue.cliente = cliente;
-            Web.WebService.updateClienteResponse retVal = ((Web.WebService.ClienteWS)(this)).updateCliente(inValue);
+            Web.WebService.addClienteResponse retVal = ((Web.WebService.ClienteWS)(this)).addCliente(inValue);
             return retVal.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Web.WebService.updateClienteResponse> Web.WebService.ClienteWS.updateClienteAsync(Web.WebService.updateClienteRequest request) {
-            return base.Channel.updateClienteAsync(request);
+        System.Threading.Tasks.Task<Web.WebService.addClienteResponse> Web.WebService.ClienteWS.addClienteAsync(Web.WebService.addClienteRequest request) {
+            return base.Channel.addClienteAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Web.WebService.updateClienteResponse> updateClienteAsync(Web.WebService.cliente cliente) {
-            Web.WebService.updateClienteRequest inValue = new Web.WebService.updateClienteRequest();
+        public System.Threading.Tasks.Task<Web.WebService.addClienteResponse> addClienteAsync(Web.WebService.cliente cliente) {
+            Web.WebService.addClienteRequest inValue = new Web.WebService.addClienteRequest();
             inValue.cliente = cliente;
-            return ((Web.WebService.ClienteWS)(this)).updateClienteAsync(inValue);
+            return ((Web.WebService.ClienteWS)(this)).addClienteAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -2231,41 +2187,76 @@ namespace Web.WebService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Web.WebService.addClienteResponse Web.WebService.ClienteWS.addCliente(Web.WebService.addClienteRequest request) {
-            return base.Channel.addCliente(request);
+        Web.WebService.getClientesNuevosResponse Web.WebService.ClienteWS.getClientesNuevos(Web.WebService.getClientesNuevosRequest request) {
+            return base.Channel.getClientesNuevos(request);
         }
         
-        public int addCliente(Web.WebService.cliente cliente) {
-            Web.WebService.addClienteRequest inValue = new Web.WebService.addClienteRequest();
-            inValue.cliente = cliente;
-            Web.WebService.addClienteResponse retVal = ((Web.WebService.ClienteWS)(this)).addCliente(inValue);
+        public int getClientesNuevos() {
+            Web.WebService.getClientesNuevosRequest inValue = new Web.WebService.getClientesNuevosRequest();
+            Web.WebService.getClientesNuevosResponse retVal = ((Web.WebService.ClienteWS)(this)).getClientesNuevos(inValue);
             return retVal.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Web.WebService.addClienteResponse> Web.WebService.ClienteWS.addClienteAsync(Web.WebService.addClienteRequest request) {
-            return base.Channel.addClienteAsync(request);
+        System.Threading.Tasks.Task<Web.WebService.getClientesNuevosResponse> Web.WebService.ClienteWS.getClientesNuevosAsync(Web.WebService.getClientesNuevosRequest request) {
+            return base.Channel.getClientesNuevosAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Web.WebService.addClienteResponse> addClienteAsync(Web.WebService.cliente cliente) {
-            Web.WebService.addClienteRequest inValue = new Web.WebService.addClienteRequest();
+        public System.Threading.Tasks.Task<Web.WebService.getClientesNuevosResponse> getClientesNuevosAsync() {
+            Web.WebService.getClientesNuevosRequest inValue = new Web.WebService.getClientesNuevosRequest();
+            return ((Web.WebService.ClienteWS)(this)).getClientesNuevosAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Web.WebService.searchClienteResponse Web.WebService.ClienteWS.searchCliente(Web.WebService.searchClienteRequest request) {
+            return base.Channel.searchCliente(request);
+        }
+        
+        public Web.WebService.cliente searchCliente(int id) {
+            Web.WebService.searchClienteRequest inValue = new Web.WebService.searchClienteRequest();
+            inValue.id = id;
+            Web.WebService.searchClienteResponse retVal = ((Web.WebService.ClienteWS)(this)).searchCliente(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Web.WebService.searchClienteResponse> Web.WebService.ClienteWS.searchClienteAsync(Web.WebService.searchClienteRequest request) {
+            return base.Channel.searchClienteAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Web.WebService.searchClienteResponse> searchClienteAsync(int id) {
+            Web.WebService.searchClienteRequest inValue = new Web.WebService.searchClienteRequest();
+            inValue.id = id;
+            return ((Web.WebService.ClienteWS)(this)).searchClienteAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Web.WebService.updateClienteResponse Web.WebService.ClienteWS.updateCliente(Web.WebService.updateClienteRequest request) {
+            return base.Channel.updateCliente(request);
+        }
+        
+        public bool updateCliente(Web.WebService.cliente cliente) {
+            Web.WebService.updateClienteRequest inValue = new Web.WebService.updateClienteRequest();
             inValue.cliente = cliente;
-            return ((Web.WebService.ClienteWS)(this)).addClienteAsync(inValue);
+            Web.WebService.updateClienteResponse retVal = ((Web.WebService.ClienteWS)(this)).updateCliente(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Web.WebService.updateClienteResponse> Web.WebService.ClienteWS.updateClienteAsync(Web.WebService.updateClienteRequest request) {
+            return base.Channel.updateClienteAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Web.WebService.updateClienteResponse> updateClienteAsync(Web.WebService.cliente cliente) {
+            Web.WebService.updateClienteRequest inValue = new Web.WebService.updateClienteRequest();
+            inValue.cliente = cliente;
+            return ((Web.WebService.ClienteWS)(this)).updateClienteAsync(inValue);
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.compurangers.com", ConfigurationName="WebService.OrdenDeVentaWS")]
     public interface OrdenDeVentaWS {
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/OrdenDeVentaWS/getAllOrdenesFromUserRequest", ReplyAction="http://services.compurangers.com/OrdenDeVentaWS/getAllOrdenesFromUserResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        Web.WebService.getAllOrdenesFromUserResponse getAllOrdenesFromUser(Web.WebService.getAllOrdenesFromUserRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/OrdenDeVentaWS/getAllOrdenesFromUserRequest", ReplyAction="http://services.compurangers.com/OrdenDeVentaWS/getAllOrdenesFromUserResponse")]
-        System.Threading.Tasks.Task<Web.WebService.getAllOrdenesFromUserResponse> getAllOrdenesFromUserAsync(Web.WebService.getAllOrdenesFromUserRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/OrdenDeVentaWS/getAllOrdenesRequest", ReplyAction="http://services.compurangers.com/OrdenDeVentaWS/getAllOrdenesResponse")]
@@ -2293,42 +2284,15 @@ namespace Web.WebService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/OrdenDeVentaWS/addOrdenRequest", ReplyAction="http://services.compurangers.com/OrdenDeVentaWS/addOrdenResponse")]
         System.Threading.Tasks.Task<Web.WebService.addOrdenResponse> addOrdenAsync(Web.WebService.addOrdenRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getAllOrdenesFromUser", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class getAllOrdenesFromUserRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int userid;
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/OrdenDeVentaWS/getAllOrdenesFromUserRequest", ReplyAction="http://services.compurangers.com/OrdenDeVentaWS/getAllOrdenesFromUserResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        Web.WebService.getAllOrdenesFromUserResponse getAllOrdenesFromUser(Web.WebService.getAllOrdenesFromUserRequest request);
         
-        public getAllOrdenesFromUserRequest() {
-        }
-        
-        public getAllOrdenesFromUserRequest(int userid) {
-            this.userid = userid;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getAllOrdenesFromUserResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class getAllOrdenesFromUserResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Web.WebService.ordenDeVenta[] @return;
-        
-        public getAllOrdenesFromUserResponse() {
-        }
-        
-        public getAllOrdenesFromUserResponse(Web.WebService.ordenDeVenta[] @return) {
-            this.@return = @return;
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/OrdenDeVentaWS/getAllOrdenesFromUserRequest", ReplyAction="http://services.compurangers.com/OrdenDeVentaWS/getAllOrdenesFromUserResponse")]
+        System.Threading.Tasks.Task<Web.WebService.getAllOrdenesFromUserResponse> getAllOrdenesFromUserAsync(Web.WebService.getAllOrdenesFromUserRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -2431,6 +2395,42 @@ namespace Web.WebService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getAllOrdenesFromUser", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class getAllOrdenesFromUserRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int userid;
+        
+        public getAllOrdenesFromUserRequest() {
+        }
+        
+        public getAllOrdenesFromUserRequest(int userid) {
+            this.userid = userid;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getAllOrdenesFromUserResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class getAllOrdenesFromUserResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Web.WebService.ordenDeVenta[] @return;
+        
+        public getAllOrdenesFromUserResponse() {
+        }
+        
+        public getAllOrdenesFromUserResponse(Web.WebService.ordenDeVenta[] @return) {
+            this.@return = @return;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface OrdenDeVentaWSChannel : Web.WebService.OrdenDeVentaWS, System.ServiceModel.IClientChannel {
     }
@@ -2456,29 +2456,6 @@ namespace Web.WebService {
         
         public OrdenDeVentaWSClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Web.WebService.getAllOrdenesFromUserResponse Web.WebService.OrdenDeVentaWS.getAllOrdenesFromUser(Web.WebService.getAllOrdenesFromUserRequest request) {
-            return base.Channel.getAllOrdenesFromUser(request);
-        }
-        
-        public Web.WebService.ordenDeVenta[] getAllOrdenesFromUser(int userid) {
-            Web.WebService.getAllOrdenesFromUserRequest inValue = new Web.WebService.getAllOrdenesFromUserRequest();
-            inValue.userid = userid;
-            Web.WebService.getAllOrdenesFromUserResponse retVal = ((Web.WebService.OrdenDeVentaWS)(this)).getAllOrdenesFromUser(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Web.WebService.getAllOrdenesFromUserResponse> Web.WebService.OrdenDeVentaWS.getAllOrdenesFromUserAsync(Web.WebService.getAllOrdenesFromUserRequest request) {
-            return base.Channel.getAllOrdenesFromUserAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Web.WebService.getAllOrdenesFromUserResponse> getAllOrdenesFromUserAsync(int userid) {
-            Web.WebService.getAllOrdenesFromUserRequest inValue = new Web.WebService.getAllOrdenesFromUserRequest();
-            inValue.userid = userid;
-            return ((Web.WebService.OrdenDeVentaWS)(this)).getAllOrdenesFromUserAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -2546,6 +2523,29 @@ namespace Web.WebService {
             Web.WebService.addOrdenRequest inValue = new Web.WebService.addOrdenRequest();
             inValue.orden = orden;
             return ((Web.WebService.OrdenDeVentaWS)(this)).addOrdenAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Web.WebService.getAllOrdenesFromUserResponse Web.WebService.OrdenDeVentaWS.getAllOrdenesFromUser(Web.WebService.getAllOrdenesFromUserRequest request) {
+            return base.Channel.getAllOrdenesFromUser(request);
+        }
+        
+        public Web.WebService.ordenDeVenta[] getAllOrdenesFromUser(int userid) {
+            Web.WebService.getAllOrdenesFromUserRequest inValue = new Web.WebService.getAllOrdenesFromUserRequest();
+            inValue.userid = userid;
+            Web.WebService.getAllOrdenesFromUserResponse retVal = ((Web.WebService.OrdenDeVentaWS)(this)).getAllOrdenesFromUser(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Web.WebService.getAllOrdenesFromUserResponse> Web.WebService.OrdenDeVentaWS.getAllOrdenesFromUserAsync(Web.WebService.getAllOrdenesFromUserRequest request) {
+            return base.Channel.getAllOrdenesFromUserAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Web.WebService.getAllOrdenesFromUserResponse> getAllOrdenesFromUserAsync(int userid) {
+            Web.WebService.getAllOrdenesFromUserRequest inValue = new Web.WebService.getAllOrdenesFromUserRequest();
+            inValue.userid = userid;
+            return ((Web.WebService.OrdenDeVentaWS)(this)).getAllOrdenesFromUserAsync(inValue);
         }
     }
     
@@ -2991,14 +2991,6 @@ namespace Web.WebService {
         [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/InventoryWS/getCantidadTotalDisponibleRequest", ReplyAction="http://services.compurangers.com/InventoryWS/getCantidadTotalDisponibleResponse")]
         System.Threading.Tasks.Task<Web.WebService.getCantidadTotalDisponibleResponse> getCantidadTotalDisponibleAsync(Web.WebService.getCantidadTotalDisponibleRequest request);
         
-        // CODEGEN: El parámetro 'ordenVenta' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/InventoryWS/reservarInventarioRequest", ReplyAction="http://services.compurangers.com/InventoryWS/reservarInventarioResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        Web.WebService.reservarInventarioResponse reservarInventario(Web.WebService.reservarInventarioRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/InventoryWS/reservarInventarioRequest", ReplyAction="http://services.compurangers.com/InventoryWS/reservarInventarioResponse")]
-        System.Threading.Tasks.Task<Web.WebService.reservarInventarioResponse> reservarInventarioAsync(Web.WebService.reservarInventarioRequest request);
-        
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/InventoryWS/getInvDisponibleRequest", ReplyAction="http://services.compurangers.com/InventoryWS/getInvDisponibleResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -3016,6 +3008,14 @@ namespace Web.WebService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/InventoryWS/getCatalogRequest", ReplyAction="http://services.compurangers.com/InventoryWS/getCatalogResponse")]
         System.Threading.Tasks.Task<Web.WebService.getCatalogResponse> getCatalogAsync(Web.WebService.getCatalogRequest request);
+        
+        // CODEGEN: El parámetro 'ordenVenta' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/InventoryWS/reservarInventarioRequest", ReplyAction="http://services.compurangers.com/InventoryWS/reservarInventarioResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        Web.WebService.reservarInventarioResponse reservarInventario(Web.WebService.reservarInventarioRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/InventoryWS/reservarInventarioRequest", ReplyAction="http://services.compurangers.com/InventoryWS/reservarInventarioResponse")]
+        System.Threading.Tasks.Task<Web.WebService.reservarInventarioResponse> reservarInventarioAsync(Web.WebService.reservarInventarioRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -3051,34 +3051,6 @@ namespace Web.WebService {
         
         public getCantidadTotalDisponibleResponse(int @return) {
             this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="reservarInventario", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class reservarInventarioRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Web.WebService.ordenDeVenta ordenVenta;
-        
-        public reservarInventarioRequest() {
-        }
-        
-        public reservarInventarioRequest(Web.WebService.ordenDeVenta ordenVenta) {
-            this.ordenVenta = ordenVenta;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="reservarInventarioResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class reservarInventarioResponse {
-        
-        public reservarInventarioResponse() {
         }
     }
     
@@ -3146,6 +3118,34 @@ namespace Web.WebService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="reservarInventario", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class reservarInventarioRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Web.WebService.ordenDeVenta ordenVenta;
+        
+        public reservarInventarioRequest() {
+        }
+        
+        public reservarInventarioRequest(Web.WebService.ordenDeVenta ordenVenta) {
+            this.ordenVenta = ordenVenta;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="reservarInventarioResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class reservarInventarioResponse {
+        
+        public reservarInventarioResponse() {
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface InventoryWSChannel : Web.WebService.InventoryWS, System.ServiceModel.IClientChannel {
     }
@@ -3197,28 +3197,6 @@ namespace Web.WebService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Web.WebService.reservarInventarioResponse Web.WebService.InventoryWS.reservarInventario(Web.WebService.reservarInventarioRequest request) {
-            return base.Channel.reservarInventario(request);
-        }
-        
-        public void reservarInventario(Web.WebService.ordenDeVenta ordenVenta) {
-            Web.WebService.reservarInventarioRequest inValue = new Web.WebService.reservarInventarioRequest();
-            inValue.ordenVenta = ordenVenta;
-            Web.WebService.reservarInventarioResponse retVal = ((Web.WebService.InventoryWS)(this)).reservarInventario(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Web.WebService.reservarInventarioResponse> Web.WebService.InventoryWS.reservarInventarioAsync(Web.WebService.reservarInventarioRequest request) {
-            return base.Channel.reservarInventarioAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Web.WebService.reservarInventarioResponse> reservarInventarioAsync(Web.WebService.ordenDeVenta ordenVenta) {
-            Web.WebService.reservarInventarioRequest inValue = new Web.WebService.reservarInventarioRequest();
-            inValue.ordenVenta = ordenVenta;
-            return ((Web.WebService.InventoryWS)(this)).reservarInventarioAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         Web.WebService.getInvDisponibleResponse Web.WebService.InventoryWS.getInvDisponible(Web.WebService.getInvDisponibleRequest request) {
             return base.Channel.getInvDisponible(request);
         }
@@ -3261,19 +3239,33 @@ namespace Web.WebService {
             Web.WebService.getCatalogRequest inValue = new Web.WebService.getCatalogRequest();
             return ((Web.WebService.InventoryWS)(this)).getCatalogAsync(inValue);
         }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Web.WebService.reservarInventarioResponse Web.WebService.InventoryWS.reservarInventario(Web.WebService.reservarInventarioRequest request) {
+            return base.Channel.reservarInventario(request);
+        }
+        
+        public void reservarInventario(Web.WebService.ordenDeVenta ordenVenta) {
+            Web.WebService.reservarInventarioRequest inValue = new Web.WebService.reservarInventarioRequest();
+            inValue.ordenVenta = ordenVenta;
+            Web.WebService.reservarInventarioResponse retVal = ((Web.WebService.InventoryWS)(this)).reservarInventario(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Web.WebService.reservarInventarioResponse> Web.WebService.InventoryWS.reservarInventarioAsync(Web.WebService.reservarInventarioRequest request) {
+            return base.Channel.reservarInventarioAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Web.WebService.reservarInventarioResponse> reservarInventarioAsync(Web.WebService.ordenDeVenta ordenVenta) {
+            Web.WebService.reservarInventarioRequest inValue = new Web.WebService.reservarInventarioRequest();
+            inValue.ordenVenta = ordenVenta;
+            return ((Web.WebService.InventoryWS)(this)).reservarInventarioAsync(inValue);
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.compurangers.com", ConfigurationName="WebService.TokenRecuperacionWS")]
     public interface TokenRecuperacionWS {
-        
-        // CODEGEN: El parámetro 'id' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/TokenRecuperacionWS/markTokenAsUsedRequest", ReplyAction="http://services.compurangers.com/TokenRecuperacionWS/markTokenAsUsedResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        Web.WebService.markTokenAsUsedResponse markTokenAsUsed(Web.WebService.markTokenAsUsedRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/TokenRecuperacionWS/markTokenAsUsedRequest", ReplyAction="http://services.compurangers.com/TokenRecuperacionWS/markTokenAsUsedResponse")]
-        System.Threading.Tasks.Task<Web.WebService.markTokenAsUsedResponse> markTokenAsUsedAsync(Web.WebService.markTokenAsUsedRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/TokenRecuperacionWS/searchTokenRequest", ReplyAction="http://services.compurangers.com/TokenRecuperacionWS/searchTokenResponse")]
@@ -3283,34 +3275,14 @@ namespace Web.WebService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/TokenRecuperacionWS/searchTokenRequest", ReplyAction="http://services.compurangers.com/TokenRecuperacionWS/searchTokenResponse")]
         System.Threading.Tasks.Task<Web.WebService.searchTokenResponse> searchTokenAsync(Web.WebService.searchTokenRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="markTokenAsUsed", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class markTokenAsUsedRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int id;
+        // CODEGEN: El parámetro 'id' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/TokenRecuperacionWS/markTokenAsUsedRequest", ReplyAction="http://services.compurangers.com/TokenRecuperacionWS/markTokenAsUsedResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        Web.WebService.markTokenAsUsedResponse markTokenAsUsed(Web.WebService.markTokenAsUsedRequest request);
         
-        public markTokenAsUsedRequest() {
-        }
-        
-        public markTokenAsUsedRequest(int id) {
-            this.id = id;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="markTokenAsUsedResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class markTokenAsUsedResponse {
-        
-        public markTokenAsUsedResponse() {
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/TokenRecuperacionWS/markTokenAsUsedRequest", ReplyAction="http://services.compurangers.com/TokenRecuperacionWS/markTokenAsUsedResponse")]
+        System.Threading.Tasks.Task<Web.WebService.markTokenAsUsedResponse> markTokenAsUsedAsync(Web.WebService.markTokenAsUsedRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -3349,6 +3321,34 @@ namespace Web.WebService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="markTokenAsUsed", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class markTokenAsUsedRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int id;
+        
+        public markTokenAsUsedRequest() {
+        }
+        
+        public markTokenAsUsedRequest(int id) {
+            this.id = id;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="markTokenAsUsedResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class markTokenAsUsedResponse {
+        
+        public markTokenAsUsedResponse() {
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface TokenRecuperacionWSChannel : Web.WebService.TokenRecuperacionWS, System.ServiceModel.IClientChannel {
     }
@@ -3377,28 +3377,6 @@ namespace Web.WebService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Web.WebService.markTokenAsUsedResponse Web.WebService.TokenRecuperacionWS.markTokenAsUsed(Web.WebService.markTokenAsUsedRequest request) {
-            return base.Channel.markTokenAsUsed(request);
-        }
-        
-        public void markTokenAsUsed(int id) {
-            Web.WebService.markTokenAsUsedRequest inValue = new Web.WebService.markTokenAsUsedRequest();
-            inValue.id = id;
-            Web.WebService.markTokenAsUsedResponse retVal = ((Web.WebService.TokenRecuperacionWS)(this)).markTokenAsUsed(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Web.WebService.markTokenAsUsedResponse> Web.WebService.TokenRecuperacionWS.markTokenAsUsedAsync(Web.WebService.markTokenAsUsedRequest request) {
-            return base.Channel.markTokenAsUsedAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Web.WebService.markTokenAsUsedResponse> markTokenAsUsedAsync(int id) {
-            Web.WebService.markTokenAsUsedRequest inValue = new Web.WebService.markTokenAsUsedRequest();
-            inValue.id = id;
-            return ((Web.WebService.TokenRecuperacionWS)(this)).markTokenAsUsedAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         Web.WebService.searchTokenResponse Web.WebService.TokenRecuperacionWS.searchToken(Web.WebService.searchTokenRequest request) {
             return base.Channel.searchToken(request);
         }
@@ -3420,20 +3398,33 @@ namespace Web.WebService {
             inValue.token = token;
             return ((Web.WebService.TokenRecuperacionWS)(this)).searchTokenAsync(inValue);
         }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Web.WebService.markTokenAsUsedResponse Web.WebService.TokenRecuperacionWS.markTokenAsUsed(Web.WebService.markTokenAsUsedRequest request) {
+            return base.Channel.markTokenAsUsed(request);
+        }
+        
+        public void markTokenAsUsed(int id) {
+            Web.WebService.markTokenAsUsedRequest inValue = new Web.WebService.markTokenAsUsedRequest();
+            inValue.id = id;
+            Web.WebService.markTokenAsUsedResponse retVal = ((Web.WebService.TokenRecuperacionWS)(this)).markTokenAsUsed(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Web.WebService.markTokenAsUsedResponse> Web.WebService.TokenRecuperacionWS.markTokenAsUsedAsync(Web.WebService.markTokenAsUsedRequest request) {
+            return base.Channel.markTokenAsUsedAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Web.WebService.markTokenAsUsedResponse> markTokenAsUsedAsync(int id) {
+            Web.WebService.markTokenAsUsedRequest inValue = new Web.WebService.markTokenAsUsedRequest();
+            inValue.id = id;
+            return ((Web.WebService.TokenRecuperacionWS)(this)).markTokenAsUsedAsync(inValue);
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.compurangers.com", ConfigurationName="WebService.AdminWS")]
     public interface AdminWS {
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/AdminWS/getGananciasMensualesRequest", ReplyAction="http://services.compurangers.com/AdminWS/getGananciasMensualesResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        Web.WebService.getGananciasMensualesResponse getGananciasMensuales(Web.WebService.getGananciasMensualesRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/AdminWS/getGananciasMensualesRequest", ReplyAction="http://services.compurangers.com/AdminWS/getGananciasMensualesResponse")]
-        System.Threading.Tasks.Task<Web.WebService.getGananciasMensualesResponse> getGananciasMensualesAsync(Web.WebService.getGananciasMensualesRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/AdminWS/getTotalHistoricoRequest", ReplyAction="http://services.compurangers.com/AdminWS/getTotalHistoricoResponse")]
@@ -3443,6 +3434,15 @@ namespace Web.WebService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/AdminWS/getTotalHistoricoRequest", ReplyAction="http://services.compurangers.com/AdminWS/getTotalHistoricoResponse")]
         System.Threading.Tasks.Task<Web.WebService.getTotalHistoricoResponse> getTotalHistoricoAsync(Web.WebService.getTotalHistoricoRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/AdminWS/getPedidosHoyRequest", ReplyAction="http://services.compurangers.com/AdminWS/getPedidosHoyResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        Web.WebService.getPedidosHoyResponse getPedidosHoy(Web.WebService.getPedidosHoyRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/AdminWS/getPedidosHoyRequest", ReplyAction="http://services.compurangers.com/AdminWS/getPedidosHoyResponse")]
+        System.Threading.Tasks.Task<Web.WebService.getPedidosHoyResponse> getPedidosHoyAsync(Web.WebService.getPedidosHoyRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/AdminWS/getPedidosSemanalRequest", ReplyAction="http://services.compurangers.com/AdminWS/getPedidosSemanalResponse")]
@@ -3463,41 +3463,13 @@ namespace Web.WebService {
         System.Threading.Tasks.Task<Web.WebService.getGananciaMesResponse> getGananciaMesAsync(Web.WebService.getGananciaMesRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/AdminWS/getPedidosHoyRequest", ReplyAction="http://services.compurangers.com/AdminWS/getPedidosHoyResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/AdminWS/getGananciasMensualesRequest", ReplyAction="http://services.compurangers.com/AdminWS/getGananciasMensualesResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        Web.WebService.getPedidosHoyResponse getPedidosHoy(Web.WebService.getPedidosHoyRequest request);
+        Web.WebService.getGananciasMensualesResponse getGananciasMensuales(Web.WebService.getGananciasMensualesRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/AdminWS/getPedidosHoyRequest", ReplyAction="http://services.compurangers.com/AdminWS/getPedidosHoyResponse")]
-        System.Threading.Tasks.Task<Web.WebService.getPedidosHoyResponse> getPedidosHoyAsync(Web.WebService.getPedidosHoyRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getGananciasMensuales", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class getGananciasMensualesRequest {
-        
-        public getGananciasMensualesRequest() {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getGananciasMensualesResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class getGananciasMensualesResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Web.WebService.gananciasPorMesDTO[] @return;
-        
-        public getGananciasMensualesResponse() {
-        }
-        
-        public getGananciasMensualesResponse(Web.WebService.gananciasPorMesDTO[] @return) {
-            this.@return = @return;
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/AdminWS/getGananciasMensualesRequest", ReplyAction="http://services.compurangers.com/AdminWS/getGananciasMensualesResponse")]
+        System.Threading.Tasks.Task<Web.WebService.getGananciasMensualesResponse> getGananciasMensualesAsync(Web.WebService.getGananciasMensualesRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -3524,6 +3496,34 @@ namespace Web.WebService {
         }
         
         public getTotalHistoricoResponse(double @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getPedidosHoy", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class getPedidosHoyRequest {
+        
+        public getPedidosHoyRequest() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getPedidosHoyResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class getPedidosHoyResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int @return;
+        
+        public getPedidosHoyResponse() {
+        }
+        
+        public getPedidosHoyResponse(int @return) {
             this.@return = @return;
         }
     }
@@ -3587,27 +3587,27 @@ namespace Web.WebService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getPedidosHoy", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class getPedidosHoyRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getGananciasMensuales", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class getGananciasMensualesRequest {
         
-        public getPedidosHoyRequest() {
+        public getGananciasMensualesRequest() {
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getPedidosHoyResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class getPedidosHoyResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getGananciasMensualesResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class getGananciasMensualesResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int @return;
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Web.WebService.gananciasPorMesDTO[] @return;
         
-        public getPedidosHoyResponse() {
+        public getGananciasMensualesResponse() {
         }
         
-        public getPedidosHoyResponse(int @return) {
+        public getGananciasMensualesResponse(Web.WebService.gananciasPorMesDTO[] @return) {
             this.@return = @return;
         }
     }
@@ -3640,27 +3640,6 @@ namespace Web.WebService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Web.WebService.getGananciasMensualesResponse Web.WebService.AdminWS.getGananciasMensuales(Web.WebService.getGananciasMensualesRequest request) {
-            return base.Channel.getGananciasMensuales(request);
-        }
-        
-        public Web.WebService.gananciasPorMesDTO[] getGananciasMensuales() {
-            Web.WebService.getGananciasMensualesRequest inValue = new Web.WebService.getGananciasMensualesRequest();
-            Web.WebService.getGananciasMensualesResponse retVal = ((Web.WebService.AdminWS)(this)).getGananciasMensuales(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Web.WebService.getGananciasMensualesResponse> Web.WebService.AdminWS.getGananciasMensualesAsync(Web.WebService.getGananciasMensualesRequest request) {
-            return base.Channel.getGananciasMensualesAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Web.WebService.getGananciasMensualesResponse> getGananciasMensualesAsync() {
-            Web.WebService.getGananciasMensualesRequest inValue = new Web.WebService.getGananciasMensualesRequest();
-            return ((Web.WebService.AdminWS)(this)).getGananciasMensualesAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         Web.WebService.getTotalHistoricoResponse Web.WebService.AdminWS.getTotalHistorico(Web.WebService.getTotalHistoricoRequest request) {
             return base.Channel.getTotalHistorico(request);
         }
@@ -3679,6 +3658,27 @@ namespace Web.WebService {
         public System.Threading.Tasks.Task<Web.WebService.getTotalHistoricoResponse> getTotalHistoricoAsync() {
             Web.WebService.getTotalHistoricoRequest inValue = new Web.WebService.getTotalHistoricoRequest();
             return ((Web.WebService.AdminWS)(this)).getTotalHistoricoAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Web.WebService.getPedidosHoyResponse Web.WebService.AdminWS.getPedidosHoy(Web.WebService.getPedidosHoyRequest request) {
+            return base.Channel.getPedidosHoy(request);
+        }
+        
+        public int getPedidosHoy() {
+            Web.WebService.getPedidosHoyRequest inValue = new Web.WebService.getPedidosHoyRequest();
+            Web.WebService.getPedidosHoyResponse retVal = ((Web.WebService.AdminWS)(this)).getPedidosHoy(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Web.WebService.getPedidosHoyResponse> Web.WebService.AdminWS.getPedidosHoyAsync(Web.WebService.getPedidosHoyRequest request) {
+            return base.Channel.getPedidosHoyAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Web.WebService.getPedidosHoyResponse> getPedidosHoyAsync() {
+            Web.WebService.getPedidosHoyRequest inValue = new Web.WebService.getPedidosHoyRequest();
+            return ((Web.WebService.AdminWS)(this)).getPedidosHoyAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -3724,24 +3724,24 @@ namespace Web.WebService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Web.WebService.getPedidosHoyResponse Web.WebService.AdminWS.getPedidosHoy(Web.WebService.getPedidosHoyRequest request) {
-            return base.Channel.getPedidosHoy(request);
+        Web.WebService.getGananciasMensualesResponse Web.WebService.AdminWS.getGananciasMensuales(Web.WebService.getGananciasMensualesRequest request) {
+            return base.Channel.getGananciasMensuales(request);
         }
         
-        public int getPedidosHoy() {
-            Web.WebService.getPedidosHoyRequest inValue = new Web.WebService.getPedidosHoyRequest();
-            Web.WebService.getPedidosHoyResponse retVal = ((Web.WebService.AdminWS)(this)).getPedidosHoy(inValue);
+        public Web.WebService.gananciasPorMesDTO[] getGananciasMensuales() {
+            Web.WebService.getGananciasMensualesRequest inValue = new Web.WebService.getGananciasMensualesRequest();
+            Web.WebService.getGananciasMensualesResponse retVal = ((Web.WebService.AdminWS)(this)).getGananciasMensuales(inValue);
             return retVal.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Web.WebService.getPedidosHoyResponse> Web.WebService.AdminWS.getPedidosHoyAsync(Web.WebService.getPedidosHoyRequest request) {
-            return base.Channel.getPedidosHoyAsync(request);
+        System.Threading.Tasks.Task<Web.WebService.getGananciasMensualesResponse> Web.WebService.AdminWS.getGananciasMensualesAsync(Web.WebService.getGananciasMensualesRequest request) {
+            return base.Channel.getGananciasMensualesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Web.WebService.getPedidosHoyResponse> getPedidosHoyAsync() {
-            Web.WebService.getPedidosHoyRequest inValue = new Web.WebService.getPedidosHoyRequest();
-            return ((Web.WebService.AdminWS)(this)).getPedidosHoyAsync(inValue);
+        public System.Threading.Tasks.Task<Web.WebService.getGananciasMensualesResponse> getGananciasMensualesAsync() {
+            Web.WebService.getGananciasMensualesRequest inValue = new Web.WebService.getGananciasMensualesRequest();
+            return ((Web.WebService.AdminWS)(this)).getGananciasMensualesAsync(inValue);
         }
     }
     
@@ -3759,13 +3759,13 @@ namespace Web.WebService {
         System.Threading.Tasks.Task<Web.WebService.getRankingResponse> getRankingAsync(Web.WebService.getRankingRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ProductoWS/getProductosFiltradosRequest", ReplyAction="http://services.compurangers.com/ProductoWS/getProductosFiltradosResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ProductoWS/listarProductosRequest", ReplyAction="http://services.compurangers.com/ProductoWS/listarProductosResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        Web.WebService.getProductosFiltradosResponse getProductosFiltrados(Web.WebService.getProductosFiltradosRequest request);
+        Web.WebService.listarProductosResponse listarProductos(Web.WebService.listarProductosRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ProductoWS/getProductosFiltradosRequest", ReplyAction="http://services.compurangers.com/ProductoWS/getProductosFiltradosResponse")]
-        System.Threading.Tasks.Task<Web.WebService.getProductosFiltradosResponse> getProductosFiltradosAsync(Web.WebService.getProductosFiltradosRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ProductoWS/listarProductosRequest", ReplyAction="http://services.compurangers.com/ProductoWS/listarProductosResponse")]
+        System.Threading.Tasks.Task<Web.WebService.listarProductosResponse> listarProductosAsync(Web.WebService.listarProductosRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ProductoWS/addProductoRequest", ReplyAction="http://services.compurangers.com/ProductoWS/addProductoResponse")]
@@ -3777,6 +3777,15 @@ namespace Web.WebService {
         System.Threading.Tasks.Task<Web.WebService.addProductoResponse> addProductoAsync(Web.WebService.addProductoRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ProductoWS/searchProductoIDRequest", ReplyAction="http://services.compurangers.com/ProductoWS/searchProductoIDResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        Web.WebService.searchProductoIDResponse searchProductoID(Web.WebService.searchProductoIDRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ProductoWS/searchProductoIDRequest", ReplyAction="http://services.compurangers.com/ProductoWS/searchProductoIDResponse")]
+        System.Threading.Tasks.Task<Web.WebService.searchProductoIDResponse> searchProductoIDAsync(Web.WebService.searchProductoIDRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ProductoWS/updateProductoRequest", ReplyAction="http://services.compurangers.com/ProductoWS/updateProductoResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
@@ -3786,22 +3795,13 @@ namespace Web.WebService {
         System.Threading.Tasks.Task<Web.WebService.updateProductoResponse> updateProductoAsync(Web.WebService.updateProductoRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ProductoWS/listarProductosRequest", ReplyAction="http://services.compurangers.com/ProductoWS/listarProductosResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ProductoWS/getProductosFiltradosRequest", ReplyAction="http://services.compurangers.com/ProductoWS/getProductosFiltradosResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        Web.WebService.listarProductosResponse listarProductos(Web.WebService.listarProductosRequest request);
+        Web.WebService.getProductosFiltradosResponse getProductosFiltrados(Web.WebService.getProductosFiltradosRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ProductoWS/listarProductosRequest", ReplyAction="http://services.compurangers.com/ProductoWS/listarProductosResponse")]
-        System.Threading.Tasks.Task<Web.WebService.listarProductosResponse> listarProductosAsync(Web.WebService.listarProductosRequest request);
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ProductoWS/searchProductoIDRequest", ReplyAction="http://services.compurangers.com/ProductoWS/searchProductoIDResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        Web.WebService.searchProductoIDResponse searchProductoID(Web.WebService.searchProductoIDRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ProductoWS/searchProductoIDRequest", ReplyAction="http://services.compurangers.com/ProductoWS/searchProductoIDResponse")]
-        System.Threading.Tasks.Task<Web.WebService.searchProductoIDResponse> searchProductoIDAsync(Web.WebService.searchProductoIDRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/ProductoWS/getProductosFiltradosRequest", ReplyAction="http://services.compurangers.com/ProductoWS/getProductosFiltradosResponse")]
+        System.Threading.Tasks.Task<Web.WebService.getProductosFiltradosResponse> getProductosFiltradosAsync(Web.WebService.getProductosFiltradosRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -3828,6 +3828,142 @@ namespace Web.WebService {
         }
         
         public getRankingResponse(Web.WebService.producto[] @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="listarProductos", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class listarProductosRequest {
+        
+        public listarProductosRequest() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="listarProductosResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class listarProductosResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Web.WebService.producto[] @return;
+        
+        public listarProductosResponse() {
+        }
+        
+        public listarProductosResponse(Web.WebService.producto[] @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="addProducto", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class addProductoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Web.WebService.producto producto;
+        
+        public addProductoRequest() {
+        }
+        
+        public addProductoRequest(Web.WebService.producto producto) {
+            this.producto = producto;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="addProductoResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class addProductoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int @return;
+        
+        public addProductoResponse() {
+        }
+        
+        public addProductoResponse(int @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="searchProductoID", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class searchProductoIDRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int id;
+        
+        public searchProductoIDRequest() {
+        }
+        
+        public searchProductoIDRequest(int id) {
+            this.id = id;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="searchProductoIDResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class searchProductoIDResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Web.WebService.producto @return;
+        
+        public searchProductoIDResponse() {
+        }
+        
+        public searchProductoIDResponse(Web.WebService.producto @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="updateProducto", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class updateProductoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Web.WebService.producto producto;
+        
+        public updateProductoRequest() {
+        }
+        
+        public updateProductoRequest(Web.WebService.producto producto) {
+            this.producto = producto;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="updateProductoResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class updateProductoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public bool @return;
+        
+        public updateProductoResponse() {
+        }
+        
+        public updateProductoResponse(bool @return) {
             this.@return = @return;
         }
     }
@@ -3874,142 +4010,6 @@ namespace Web.WebService {
         }
         
         public getProductosFiltradosResponse(Web.WebService.producto[] @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="addProducto", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class addProductoRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Web.WebService.producto producto;
-        
-        public addProductoRequest() {
-        }
-        
-        public addProductoRequest(Web.WebService.producto producto) {
-            this.producto = producto;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="addProductoResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class addProductoResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int @return;
-        
-        public addProductoResponse() {
-        }
-        
-        public addProductoResponse(int @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="updateProducto", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class updateProductoRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Web.WebService.producto producto;
-        
-        public updateProductoRequest() {
-        }
-        
-        public updateProductoRequest(Web.WebService.producto producto) {
-            this.producto = producto;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="updateProductoResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class updateProductoResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public bool @return;
-        
-        public updateProductoResponse() {
-        }
-        
-        public updateProductoResponse(bool @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="listarProductos", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class listarProductosRequest {
-        
-        public listarProductosRequest() {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="listarProductosResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class listarProductosResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Web.WebService.producto[] @return;
-        
-        public listarProductosResponse() {
-        }
-        
-        public listarProductosResponse(Web.WebService.producto[] @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="searchProductoID", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class searchProductoIDRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int id;
-        
-        public searchProductoIDRequest() {
-        }
-        
-        public searchProductoIDRequest(int id) {
-            this.id = id;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="searchProductoIDResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class searchProductoIDResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Web.WebService.producto @return;
-        
-        public searchProductoIDResponse() {
-        }
-        
-        public searchProductoIDResponse(Web.WebService.producto @return) {
             this.@return = @return;
         }
     }
@@ -4063,30 +4063,24 @@ namespace Web.WebService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Web.WebService.getProductosFiltradosResponse Web.WebService.ProductoWS.getProductosFiltrados(Web.WebService.getProductosFiltradosRequest request) {
-            return base.Channel.getProductosFiltrados(request);
+        Web.WebService.listarProductosResponse Web.WebService.ProductoWS.listarProductos(Web.WebService.listarProductosRequest request) {
+            return base.Channel.listarProductos(request);
         }
         
-        public Web.WebService.producto[] getProductosFiltrados(string nombre, int categoryId, int marcaId) {
-            Web.WebService.getProductosFiltradosRequest inValue = new Web.WebService.getProductosFiltradosRequest();
-            inValue.nombre = nombre;
-            inValue.categoryId = categoryId;
-            inValue.marcaId = marcaId;
-            Web.WebService.getProductosFiltradosResponse retVal = ((Web.WebService.ProductoWS)(this)).getProductosFiltrados(inValue);
+        public Web.WebService.producto[] listarProductos() {
+            Web.WebService.listarProductosRequest inValue = new Web.WebService.listarProductosRequest();
+            Web.WebService.listarProductosResponse retVal = ((Web.WebService.ProductoWS)(this)).listarProductos(inValue);
             return retVal.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Web.WebService.getProductosFiltradosResponse> Web.WebService.ProductoWS.getProductosFiltradosAsync(Web.WebService.getProductosFiltradosRequest request) {
-            return base.Channel.getProductosFiltradosAsync(request);
+        System.Threading.Tasks.Task<Web.WebService.listarProductosResponse> Web.WebService.ProductoWS.listarProductosAsync(Web.WebService.listarProductosRequest request) {
+            return base.Channel.listarProductosAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Web.WebService.getProductosFiltradosResponse> getProductosFiltradosAsync(string nombre, int categoryId, int marcaId) {
-            Web.WebService.getProductosFiltradosRequest inValue = new Web.WebService.getProductosFiltradosRequest();
-            inValue.nombre = nombre;
-            inValue.categoryId = categoryId;
-            inValue.marcaId = marcaId;
-            return ((Web.WebService.ProductoWS)(this)).getProductosFiltradosAsync(inValue);
+        public System.Threading.Tasks.Task<Web.WebService.listarProductosResponse> listarProductosAsync() {
+            Web.WebService.listarProductosRequest inValue = new Web.WebService.listarProductosRequest();
+            return ((Web.WebService.ProductoWS)(this)).listarProductosAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -4113,6 +4107,29 @@ namespace Web.WebService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Web.WebService.searchProductoIDResponse Web.WebService.ProductoWS.searchProductoID(Web.WebService.searchProductoIDRequest request) {
+            return base.Channel.searchProductoID(request);
+        }
+        
+        public Web.WebService.producto searchProductoID(int id) {
+            Web.WebService.searchProductoIDRequest inValue = new Web.WebService.searchProductoIDRequest();
+            inValue.id = id;
+            Web.WebService.searchProductoIDResponse retVal = ((Web.WebService.ProductoWS)(this)).searchProductoID(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Web.WebService.searchProductoIDResponse> Web.WebService.ProductoWS.searchProductoIDAsync(Web.WebService.searchProductoIDRequest request) {
+            return base.Channel.searchProductoIDAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Web.WebService.searchProductoIDResponse> searchProductoIDAsync(int id) {
+            Web.WebService.searchProductoIDRequest inValue = new Web.WebService.searchProductoIDRequest();
+            inValue.id = id;
+            return ((Web.WebService.ProductoWS)(this)).searchProductoIDAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         Web.WebService.updateProductoResponse Web.WebService.ProductoWS.updateProducto(Web.WebService.updateProductoRequest request) {
             return base.Channel.updateProducto(request);
         }
@@ -4136,47 +4153,30 @@ namespace Web.WebService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Web.WebService.listarProductosResponse Web.WebService.ProductoWS.listarProductos(Web.WebService.listarProductosRequest request) {
-            return base.Channel.listarProductos(request);
+        Web.WebService.getProductosFiltradosResponse Web.WebService.ProductoWS.getProductosFiltrados(Web.WebService.getProductosFiltradosRequest request) {
+            return base.Channel.getProductosFiltrados(request);
         }
         
-        public Web.WebService.producto[] listarProductos() {
-            Web.WebService.listarProductosRequest inValue = new Web.WebService.listarProductosRequest();
-            Web.WebService.listarProductosResponse retVal = ((Web.WebService.ProductoWS)(this)).listarProductos(inValue);
+        public Web.WebService.producto[] getProductosFiltrados(string nombre, int categoryId, int marcaId) {
+            Web.WebService.getProductosFiltradosRequest inValue = new Web.WebService.getProductosFiltradosRequest();
+            inValue.nombre = nombre;
+            inValue.categoryId = categoryId;
+            inValue.marcaId = marcaId;
+            Web.WebService.getProductosFiltradosResponse retVal = ((Web.WebService.ProductoWS)(this)).getProductosFiltrados(inValue);
             return retVal.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Web.WebService.listarProductosResponse> Web.WebService.ProductoWS.listarProductosAsync(Web.WebService.listarProductosRequest request) {
-            return base.Channel.listarProductosAsync(request);
+        System.Threading.Tasks.Task<Web.WebService.getProductosFiltradosResponse> Web.WebService.ProductoWS.getProductosFiltradosAsync(Web.WebService.getProductosFiltradosRequest request) {
+            return base.Channel.getProductosFiltradosAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Web.WebService.listarProductosResponse> listarProductosAsync() {
-            Web.WebService.listarProductosRequest inValue = new Web.WebService.listarProductosRequest();
-            return ((Web.WebService.ProductoWS)(this)).listarProductosAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Web.WebService.searchProductoIDResponse Web.WebService.ProductoWS.searchProductoID(Web.WebService.searchProductoIDRequest request) {
-            return base.Channel.searchProductoID(request);
-        }
-        
-        public Web.WebService.producto searchProductoID(int id) {
-            Web.WebService.searchProductoIDRequest inValue = new Web.WebService.searchProductoIDRequest();
-            inValue.id = id;
-            Web.WebService.searchProductoIDResponse retVal = ((Web.WebService.ProductoWS)(this)).searchProductoID(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Web.WebService.searchProductoIDResponse> Web.WebService.ProductoWS.searchProductoIDAsync(Web.WebService.searchProductoIDRequest request) {
-            return base.Channel.searchProductoIDAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Web.WebService.searchProductoIDResponse> searchProductoIDAsync(int id) {
-            Web.WebService.searchProductoIDRequest inValue = new Web.WebService.searchProductoIDRequest();
-            inValue.id = id;
-            return ((Web.WebService.ProductoWS)(this)).searchProductoIDAsync(inValue);
+        public System.Threading.Tasks.Task<Web.WebService.getProductosFiltradosResponse> getProductosFiltradosAsync(string nombre, int categoryId, int marcaId) {
+            Web.WebService.getProductosFiltradosRequest inValue = new Web.WebService.getProductosFiltradosRequest();
+            inValue.nombre = nombre;
+            inValue.categoryId = categoryId;
+            inValue.marcaId = marcaId;
+            return ((Web.WebService.ProductoWS)(this)).getProductosFiltradosAsync(inValue);
         }
     }
     
@@ -4324,6 +4324,15 @@ namespace Web.WebService {
     public interface CarritoWS {
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/CarritoWS/updateCarritoRequest", ReplyAction="http://services.compurangers.com/CarritoWS/updateCarritoResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        Web.WebService.updateCarritoResponse updateCarrito(Web.WebService.updateCarritoRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/CarritoWS/updateCarritoRequest", ReplyAction="http://services.compurangers.com/CarritoWS/updateCarritoResponse")]
+        System.Threading.Tasks.Task<Web.WebService.updateCarritoResponse> updateCarritoAsync(Web.WebService.updateCarritoRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/CarritoWS/addItemRequest", ReplyAction="http://services.compurangers.com/CarritoWS/addItemResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
@@ -4340,15 +4349,42 @@ namespace Web.WebService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/CarritoWS/getCarritoFromUserRequest", ReplyAction="http://services.compurangers.com/CarritoWS/getCarritoFromUserResponse")]
         System.Threading.Tasks.Task<Web.WebService.getCarritoFromUserResponse> getCarritoFromUserAsync(Web.WebService.getCarritoFromUserRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="updateCarrito", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class updateCarritoRequest {
         
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/CarritoWS/updateCarritoRequest", ReplyAction="http://services.compurangers.com/CarritoWS/updateCarritoResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        Web.WebService.updateCarritoResponse updateCarrito(Web.WebService.updateCarritoRequest request);
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Web.WebService.carrito carrito;
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.compurangers.com/CarritoWS/updateCarritoRequest", ReplyAction="http://services.compurangers.com/CarritoWS/updateCarritoResponse")]
-        System.Threading.Tasks.Task<Web.WebService.updateCarritoResponse> updateCarritoAsync(Web.WebService.updateCarritoRequest request);
+        public updateCarritoRequest() {
+        }
+        
+        public updateCarritoRequest(Web.WebService.carrito carrito) {
+            this.carrito = carrito;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="updateCarritoResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
+    public partial class updateCarritoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public bool @return;
+        
+        public updateCarritoResponse() {
+        }
+        
+        public updateCarritoResponse(bool @return) {
+            this.@return = @return;
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -4423,42 +4459,6 @@ namespace Web.WebService {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="updateCarrito", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class updateCarritoRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Web.WebService.carrito carrito;
-        
-        public updateCarritoRequest() {
-        }
-        
-        public updateCarritoRequest(Web.WebService.carrito carrito) {
-            this.carrito = carrito;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="updateCarritoResponse", WrapperNamespace="http://services.compurangers.com", IsWrapped=true)]
-    public partial class updateCarritoResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.compurangers.com", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public bool @return;
-        
-        public updateCarritoResponse() {
-        }
-        
-        public updateCarritoResponse(bool @return) {
-            this.@return = @return;
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface CarritoWSChannel : Web.WebService.CarritoWS, System.ServiceModel.IClientChannel {
     }
@@ -4484,6 +4484,29 @@ namespace Web.WebService {
         
         public CarritoWSClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Web.WebService.updateCarritoResponse Web.WebService.CarritoWS.updateCarrito(Web.WebService.updateCarritoRequest request) {
+            return base.Channel.updateCarrito(request);
+        }
+        
+        public bool updateCarrito(Web.WebService.carrito carrito) {
+            Web.WebService.updateCarritoRequest inValue = new Web.WebService.updateCarritoRequest();
+            inValue.carrito = carrito;
+            Web.WebService.updateCarritoResponse retVal = ((Web.WebService.CarritoWS)(this)).updateCarrito(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Web.WebService.updateCarritoResponse> Web.WebService.CarritoWS.updateCarritoAsync(Web.WebService.updateCarritoRequest request) {
+            return base.Channel.updateCarritoAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Web.WebService.updateCarritoResponse> updateCarritoAsync(Web.WebService.carrito carrito) {
+            Web.WebService.updateCarritoRequest inValue = new Web.WebService.updateCarritoRequest();
+            inValue.carrito = carrito;
+            return ((Web.WebService.CarritoWS)(this)).updateCarritoAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -4530,29 +4553,6 @@ namespace Web.WebService {
             Web.WebService.getCarritoFromUserRequest inValue = new Web.WebService.getCarritoFromUserRequest();
             inValue.userId = userId;
             return ((Web.WebService.CarritoWS)(this)).getCarritoFromUserAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Web.WebService.updateCarritoResponse Web.WebService.CarritoWS.updateCarrito(Web.WebService.updateCarritoRequest request) {
-            return base.Channel.updateCarrito(request);
-        }
-        
-        public bool updateCarrito(Web.WebService.carrito carrito) {
-            Web.WebService.updateCarritoRequest inValue = new Web.WebService.updateCarritoRequest();
-            inValue.carrito = carrito;
-            Web.WebService.updateCarritoResponse retVal = ((Web.WebService.CarritoWS)(this)).updateCarrito(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Web.WebService.updateCarritoResponse> Web.WebService.CarritoWS.updateCarritoAsync(Web.WebService.updateCarritoRequest request) {
-            return base.Channel.updateCarritoAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Web.WebService.updateCarritoResponse> updateCarritoAsync(Web.WebService.carrito carrito) {
-            Web.WebService.updateCarritoRequest inValue = new Web.WebService.updateCarritoRequest();
-            inValue.carrito = carrito;
-            return ((Web.WebService.CarritoWS)(this)).updateCarritoAsync(inValue);
         }
     }
 }

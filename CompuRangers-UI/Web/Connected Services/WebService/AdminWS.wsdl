@@ -5,17 +5,17 @@
       <xsd:import schemaLocation="http://localhost:8080/WebService/AdminWS?xsd=1" namespace="http://services.compurangers.com" />
     </xsd:schema>
   </types>
-  <message name="getGananciasMensuales">
-    <part name="parameters" element="tns:getGananciasMensuales" />
-  </message>
-  <message name="getGananciasMensualesResponse">
-    <part name="parameters" element="tns:getGananciasMensualesResponse" />
-  </message>
   <message name="getTotalHistorico">
     <part name="parameters" element="tns:getTotalHistorico" />
   </message>
   <message name="getTotalHistoricoResponse">
     <part name="parameters" element="tns:getTotalHistoricoResponse" />
+  </message>
+  <message name="getPedidosHoy">
+    <part name="parameters" element="tns:getPedidosHoy" />
+  </message>
+  <message name="getPedidosHoyResponse">
+    <part name="parameters" element="tns:getPedidosHoyResponse" />
   </message>
   <message name="getPedidosSemanal">
     <part name="parameters" element="tns:getPedidosSemanal" />
@@ -29,20 +29,20 @@
   <message name="getGananciaMesResponse">
     <part name="parameters" element="tns:getGananciaMesResponse" />
   </message>
-  <message name="getPedidosHoy">
-    <part name="parameters" element="tns:getPedidosHoy" />
+  <message name="getGananciasMensuales">
+    <part name="parameters" element="tns:getGananciasMensuales" />
   </message>
-  <message name="getPedidosHoyResponse">
-    <part name="parameters" element="tns:getPedidosHoyResponse" />
+  <message name="getGananciasMensualesResponse">
+    <part name="parameters" element="tns:getGananciasMensualesResponse" />
   </message>
   <portType name="AdminWS">
-    <operation name="getGananciasMensuales">
-      <input wsam:Action="http://services.compurangers.com/AdminWS/getGananciasMensualesRequest" message="tns:getGananciasMensuales" />
-      <output wsam:Action="http://services.compurangers.com/AdminWS/getGananciasMensualesResponse" message="tns:getGananciasMensualesResponse" />
-    </operation>
     <operation name="getTotalHistorico">
       <input wsam:Action="http://services.compurangers.com/AdminWS/getTotalHistoricoRequest" message="tns:getTotalHistorico" />
       <output wsam:Action="http://services.compurangers.com/AdminWS/getTotalHistoricoResponse" message="tns:getTotalHistoricoResponse" />
+    </operation>
+    <operation name="getPedidosHoy">
+      <input wsam:Action="http://services.compurangers.com/AdminWS/getPedidosHoyRequest" message="tns:getPedidosHoy" />
+      <output wsam:Action="http://services.compurangers.com/AdminWS/getPedidosHoyResponse" message="tns:getPedidosHoyResponse" />
     </operation>
     <operation name="getPedidosSemanal">
       <input wsam:Action="http://services.compurangers.com/AdminWS/getPedidosSemanalRequest" message="tns:getPedidosSemanal" />
@@ -52,14 +52,14 @@
       <input wsam:Action="http://services.compurangers.com/AdminWS/getGananciaMesRequest" message="tns:getGananciaMes" />
       <output wsam:Action="http://services.compurangers.com/AdminWS/getGananciaMesResponse" message="tns:getGananciaMesResponse" />
     </operation>
-    <operation name="getPedidosHoy">
-      <input wsam:Action="http://services.compurangers.com/AdminWS/getPedidosHoyRequest" message="tns:getPedidosHoy" />
-      <output wsam:Action="http://services.compurangers.com/AdminWS/getPedidosHoyResponse" message="tns:getPedidosHoyResponse" />
+    <operation name="getGananciasMensuales">
+      <input wsam:Action="http://services.compurangers.com/AdminWS/getGananciasMensualesRequest" message="tns:getGananciasMensuales" />
+      <output wsam:Action="http://services.compurangers.com/AdminWS/getGananciasMensualesResponse" message="tns:getGananciasMensualesResponse" />
     </operation>
   </portType>
   <binding name="AdminWSPortBinding" type="tns:AdminWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="getGananciasMensuales">
+    <operation name="getTotalHistorico">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -68,7 +68,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="getTotalHistorico">
+    <operation name="getPedidosHoy">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -95,7 +95,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="getPedidosHoy">
+    <operation name="getGananciasMensuales">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

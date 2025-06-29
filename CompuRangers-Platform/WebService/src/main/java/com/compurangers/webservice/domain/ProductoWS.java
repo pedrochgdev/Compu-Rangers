@@ -50,6 +50,8 @@ public class ProductoWS {
     
     @WebMethod(operationName = "updateProducto")
     public boolean updateProducto(@WebParam(name = "producto") Producto producto) {
+        System.out.println("ID: "+ producto.getId());
+        System.out.println("IMAGEN: "+ (producto.getImagenReferencial()!=null ? producto.getImagenReferencial().length : 0));
         return prod.updateProducto(producto);
     }
     @WebMethod(operationName = "searchProductoID")

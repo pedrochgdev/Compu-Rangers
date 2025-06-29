@@ -3,6 +3,7 @@ package com.compurangers.platform.appprueba;
 import com.compurangers.platform.core.domain.sales.OrdenDeVenta;
 import com.compurangers.platform.core.domain.user.Cliente;
 import com.compurangers.platform.core.domain.user.Usuario;
+import com.compurangers.platform.core.domain.catalog.Producto;
 import com.compurangers.platform.dao.mysql.catalog.ProductoDAOImpl;
 import com.compurangers.platform.dao.mysql.sales.CarritoDAOImpl;
 import com.compurangers.platform.dao.mysql.sales.OrdenDeVentaDAOImpl;
@@ -110,5 +111,9 @@ public class AppPrueba {
 
         emailService.sendPasswordRecoveryEmail(emailDestino, token);
         System.out.println("Correo enviado. Revisa tu bandeja.");
+//        ProductoBO prod = new ProductoBO(new ProductoDAOImpl());
+//        Producto p1=prod.searchProducto(1);
+//        p1.setImagenReferencial(null);
+//        prod.updateProducto(p1);
     }
 }
