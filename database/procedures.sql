@@ -8,7 +8,6 @@ DO
 */
 
 /* DROPS */
-
 DROP PROCEDURE IF EXISTS add_categoria;
 DROP PROCEDURE IF EXISTS update_categoria;
 DROP PROCEDURE IF EXISTS delete_categoria;
@@ -342,7 +341,8 @@ CREATE PROCEDURE update_producto(
     IN precio_venta_in DECIMAL(10, 2),
     IN cantidad_ventas_in INT,
     IN categoria_id_in INT,
-    IN marca_id_in INT
+    IN marca_id_in INT,
+	IN banner_promocional_in LONGBLOB
 )
 BEGIN
     UPDATE PRODUCTO
@@ -352,7 +352,8 @@ BEGIN
         precio_venta = precio_venta_in,
         cantidad_ventas = cantidad_ventas_in,
         categoria_id = categoria_id_in,
-        marca_id = marca_id_in
+        marca_id = marca_id_in,
+		banner_promocional = banner_promocional_in
     WHERE id = id_in;
 END;
 //

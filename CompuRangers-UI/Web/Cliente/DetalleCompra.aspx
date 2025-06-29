@@ -10,12 +10,10 @@
                     <div class="row g-2 align-items-center">
                         <!-- Imagen -->
                         <div class="col-3 col-md-1">
-                            <img src="https://www.shutterstock.com/image-photo/set-home-kitchen-appliances-room-260nw-2473408983.jpg"
-                                 alt='<%# Eval("producto.nombre") %>'
-                                 class="img-fluid rounded"
-                                 style="object-fit: cover;">
+                            <img src='<%# Eval("producto.id", "/MostrarImagen.ashx?id={0}") %>'
+                                    class="img-fluid rounded"
+                                    style="object-fit: contain;">  
                         </div>
-
                         <!-- Nombre y precio unitario -->
                         <div class="col-9 col-md-5">
                             <h6 class="mb-1"><%# Eval("producto.nombre") %></h6>

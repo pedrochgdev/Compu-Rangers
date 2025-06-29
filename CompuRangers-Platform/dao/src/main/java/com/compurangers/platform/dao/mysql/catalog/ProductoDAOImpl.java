@@ -35,7 +35,7 @@ public class ProductoDAOImpl extends BaseDAOImpl<Producto> implements IProductoD
 
     @Override
     protected CallableStatement updateCommand(Connection conn, Producto modelo) throws SQLException {
-        String sql = "{CALL update_producto(?, ?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{CALL update_producto(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setInt(1, modelo.getId());
         cmd.setString(2, modelo.getSku());
@@ -45,6 +45,7 @@ public class ProductoDAOImpl extends BaseDAOImpl<Producto> implements IProductoD
         cmd.setInt(6, modelo.getCantidadVendida());
         cmd.setInt(7, modelo.getCategoria().getId());
         cmd.setInt(8, modelo.getMarca().getId());
+        cmd.setBytes(9, modelo.getImagenReferencial());
         return cmd;
     }
 

@@ -99,23 +99,60 @@ namespace Web
         }
         protected void Page_Init(object sender, EventArgs e)
         {
-            if (Session["user"] == null)
+            // Login automático desde cookie
+            if (Session["user"] == null && Request.Cookies["RecordarUsuario"] != null)
             {
-                //ms¿ostrar btnes login
+                string email = Request.Cookies["RecordarUsuario"]["email"];
+                string password = Request.Cookies["RecordarUsuario"]["pass"];
+
+                int id = authWS.login(email, password);
+
+                if (id > 0)
+                {
+                    Session["user"] = id;
+
+                    FormsAuthenticationTicket tkt = new FormsAuthenticationTicket(
+                        1, email, DateTime.Now,
+                        DateTime.Now.AddMinutes(30), true, "datos adicionales");
+
+                    string cookiestr = FormsAuthentication.Encrypt(tkt);
+                    HttpCookie ck = new HttpCookie(FormsAuthentication.FormsCookieName, cookiestr)
+                    {
+                        Expires = tkt.Expiration,
+                        Path = FormsAuthentication.FormsCookiePath
+                    };
+                    Response.Cookies.Add(ck);
+
+                    // Puedes redirigir solo si estás en la home u otra lógica
+                    // Response.Redirect("~/Catalogo/Home.aspx?msg=login-success");
+                }
+                else
+                {
+                    // Login fallido, eliminar cookie corrupta
+                    Response.Cookies["RecordarUsuario"].Expires = DateTime.Now.AddDays(-1);
+                }
             }
-            else
-            {
-            }
+
             this.clientScriptManager = Page.ClientScript;
         }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 MostrarMensajeDesdeQuery();
                 ControlarEstadoSesion();
+
+                // === NUEVO: Cargar cookies si existen ===
+                HttpCookie userCookie = Request.Cookies["RecordarUsuario"];
+                if (userCookie != null)
+                {
+                    txtEmail.Text = userCookie["email"];
+                    txtPassword.Attributes["value"] = userCookie["pass"];
+                }
             }
         }
+
 
         private void MostrarMensajeDesdeQuery()
         {
@@ -184,10 +221,21 @@ namespace Web
 
         protected void btnLogOut(object sender, EventArgs e)
         {
+            // Limpiar sesión
             Session.Clear();
             FormsAuthentication.SignOut();
+
+            // Eliminar cookie de "recordarme"
+            if (Request.Cookies["RecordarUsuario"] != null)
+            {
+                HttpCookie cookie = new HttpCookie("RecordarUsuario");
+                cookie.Expires = DateTime.Now.AddDays(-1); // Fecha pasada = eliminación
+                Response.Cookies.Add(cookie);
+            }
+
             Response.Redirect("~/Catalogo/Home.aspx?msg=logout-true");
         }
+
 
         protected void bttnCarrito_Show(object sender, EventArgs e)
         {
@@ -206,7 +254,6 @@ namespace Web
         {
             string password = txtPassword.Text;
             string usuario = txtEmail.Text;
-            Console.WriteLine(usuario + "" + password);
 
             string patronInyeccion = @"['"";#--]";
             if (System.Text.RegularExpressions.Regex.IsMatch(usuario, patronInyeccion) ||
@@ -222,25 +269,33 @@ namespace Web
             if (id > 0)
             {
                 Session["user"] = id;
-                FormsAuthenticationTicket tkt;
-                string cookiestr;
-                HttpCookie ck;
-                tkt = new FormsAuthenticationTicket(1, usuario, DateTime.Now,
-                DateTime.Now.AddMinutes(30), true, "datos adicionales del usuario");
-                cookiestr = FormsAuthentication.Encrypt(tkt);
-                ck = new HttpCookie(FormsAuthentication.FormsCookieName, cookiestr);
-                ck.Expires = tkt.Expiration;
-                ck.Path = FormsAuthentication.FormsCookiePath;
-                Response.Cookies.Add(ck);
-                string strRedirect;
-                bool user = userWS.getRole(id);
-                if (user)
-                {
-                    strRedirect = "../Admin/Ventas.aspx";
-                }
-                else
-                    strRedirect = "../Catalogo/Home.aspx";
 
+                // === NUEVO: Recordarme ===
+                bool recordar = Request.Form["remember"] == "on";
+
+                if (recordar)
+                {
+                    HttpCookie userCookie = new HttpCookie("RecordarUsuario");
+                    userCookie["email"] = usuario;
+                    userCookie["pass"] = password; // ⚠️ No recomendable para producción real
+                    userCookie.Expires = DateTime.Now.AddDays(15);
+                    Response.Cookies.Add(userCookie);
+                }
+
+                // Login con autenticación estándar
+                FormsAuthenticationTicket tkt = new FormsAuthenticationTicket(
+                    1, usuario, DateTime.Now,
+                    DateTime.Now.AddMinutes(30), recordar, "datos adicionales");
+
+                string cookiestr = FormsAuthentication.Encrypt(tkt);
+                HttpCookie ck = new HttpCookie(FormsAuthentication.FormsCookieName, cookiestr)
+                {
+                    Expires = tkt.Expiration,
+                    Path = FormsAuthentication.FormsCookiePath
+                };
+                Response.Cookies.Add(ck);
+
+                string strRedirect = userWS.getRole(id) ? "../Admin/Ventas.aspx" : "../Catalogo/Home.aspx";
                 Response.Redirect(strRedirect + "?msg=login-success", true);
             }
             else
@@ -250,6 +305,7 @@ namespace Web
                 lblLoginFeedback.Text = "Usuario o contraseña incorrectos.";
             }
         }
+
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {

@@ -1,6 +1,6 @@
 ﻿using System;
+using System.IO;
 using System.Web;
-using System.Net;
 using Web.WebService;
 
 namespace Web
@@ -26,14 +26,22 @@ namespace Web
                 }
             }
 
-            // Si no hay imagen: descargar la imagen por defecto y devolverla como bytes
-            using (var client = new WebClient())
+            // Cargar imagen predeterminada desde el disco
+            string rutaImagen = context.Server.MapPath("~/Imagenes/predeterminado.jpg");
+            if (File.Exists(rutaImagen))
             {
-                context.Response.Redirect("/Imagenes/predeterminado.jpg", endResponse: false);
+                byte[] imagenPorDefecto = File.ReadAllBytes(rutaImagen);
+                context.Response.BinaryWrite(imagenPorDefecto);
+                context.Response.End();
+            }
+            else
+            {
+                // Fallback: 404 si ni la imagen por defecto existe
+                context.Response.StatusCode = 404;
+                context.Response.End();
             }
         }
 
         public bool IsReusable => false;
     }
 }
-

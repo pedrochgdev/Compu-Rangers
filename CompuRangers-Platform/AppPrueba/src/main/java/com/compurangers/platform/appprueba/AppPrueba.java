@@ -3,6 +3,7 @@ package com.compurangers.platform.appprueba;
 import com.compurangers.platform.core.domain.sales.OrdenDeVenta;
 import com.compurangers.platform.core.domain.user.Cliente;
 import com.compurangers.platform.core.domain.user.Usuario;
+import com.compurangers.platform.core.domain.catalog.Producto;
 import com.compurangers.platform.dao.mysql.catalog.ProductoDAOImpl;
 import com.compurangers.platform.dao.mysql.sales.CarritoDAOImpl;
 import com.compurangers.platform.dao.mysql.sales.OrdenDeVentaDAOImpl;
@@ -95,15 +96,19 @@ public class AppPrueba {
 //        boolean deleteStatus = usuarioService.deleteUsuario(userId);
 //        System.out.println("¿Se eliminó el usuario? " + deleteStatus);
 
-          UsuarioBO user = new UsuarioBO(new UsuarioDAOImpl(), tokenService);
-          
-          user.forgotPassword("gabrielchg6@gmail.com");
-
-        EmailService emailService = new EmailService();
-        String emailDestino = "gabrielchg2004@gmail.com"; // Cambia esto por uno real que controles
-        String token = "PRUEBA-TOKEN-12345";
-
-        emailService.sendPasswordRecoveryEmail(emailDestino, token);
-        System.out.println("Correo enviado. Revisa tu bandeja.");
+//          UsuarioBO user = new UsuarioBO(new UsuarioDAOImpl(), tokenService);
+//          
+//          user.forgotPassword("gabrielchg6@gmail.com");
+//
+//        EmailService emailService = new EmailService();
+//        String emailDestino = "gabrielchg2004@gmail.com"; // Cambia esto por uno real que controles
+//        String token = "PRUEBA-TOKEN-12345";
+//
+//        emailService.sendPasswordRecoveryEmail(emailDestino, token);
+//        System.out.println("Correo enviado. Revisa tu bandeja.");
+        ProductoBO prod = new ProductoBO(new ProductoDAOImpl());
+        Producto p1=prod.searchProducto(1);
+        p1.setImagenReferencial(null);
+        prod.updateProducto(p1);
     }
 }

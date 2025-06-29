@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Web.WebService;
@@ -12,14 +14,17 @@ namespace Web.Admin
         private ProductoWSClient productoWS;
         private readonly CategoriaWSClient categoriaWS;
         private readonly MarcaWSClient marcaWS;
+        private ClientScriptManager clientScriptManager;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                CargarFiltros();
-                CargarProductos(); // carga inicial
+                CargarProductos();
             }
+            this.clientScriptManager = Page.ClientScript;
         }
+
+
         public Productos()
         {
             this.productoWS = new ProductoWSClient();
@@ -161,6 +166,65 @@ namespace Web.Admin
         {
             gvProductos.PageIndex = e.NewPageIndex;
             CargarProductos();
+        }
+
+        protected void gvProductos_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Editar")
+            {
+                int idProducto = Convert.ToInt32(e.CommandArgument);
+                var producto = productoWS.searchProductoID(idProducto);
+
+                if (producto != null)
+                {
+                    hfProductoId.Value = producto.id.ToString();
+                    lblNombreProducto.Text = producto.nombre;
+
+                    imgActual.ImageUrl = $"/MostrarImagen.ashx?id={producto.id}";
+
+                    // ✅ Para mostrar el modal tras postback completo
+                    Session["MostrarEditarModal"] = true;
+                }
+            }
+        }
+
+
+
+        protected void btnGuardarBanner_Click(object sender, EventArgs e)
+        {
+            // Obtener ID del producto desde el HiddenField
+            int idProducto = int.Parse(hfProductoId.Value);
+
+            // Leer la imagen del FileUpload si fue seleccionada
+            byte[] imagenBytes = null;
+            if (fuBanner.HasFile)
+            {
+                imagenBytes = fuBanner.FileBytes;
+            }
+
+            if (imagenBytes == null || imagenBytes.Length == 0)
+            {
+                // Mostrar error o simplemente salir
+                clientScriptManager.RegisterStartupScript(this.GetType(), "",
+                    $"window.onload = function() {{ showAlert('Debes seleccionar una imagen.', 'danger'); }};", true);
+                return;
+            }
+
+            // Obtener el producto original desde el WebService
+            producto prod = productoWS.searchProductoID(idProducto);
+
+            if (prod != null)
+            {
+                // Asignar la nueva imagen
+                prod.imagenReferencial = imagenBytes;
+                // Llamar al update
+                bool update=productoWS.updateProducto(prod);
+                if (update == true)
+                {
+                    clientScriptManager.RegisterStartupScript(this.GetType(), "",
+                    $"window.onload = function() {{ showAlert('Banner modificado con exito.', 'success'); }};", true);
+                }
+            }
         }
     }
 }
