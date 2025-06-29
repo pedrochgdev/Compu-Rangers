@@ -102,6 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="Admin\Ordenes.aspx" />
     <Content Include="Admin\Productos.aspx" />
     <Content Include="Auth\PasswordRecovery.aspx" />
     <Content Include="Auth\ResetPassword.aspx" />
@@ -235,9 +236,6 @@
     <Content Include="Connected Services\WebService\Web.WebService.addOrdenResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\WebService\Web.WebService.addProductoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Connected Services\WebService\Web.WebService.carrito.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -272,9 +270,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\WebService\Web.WebService.getAllMarcasResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\WebService\Web.WebService.getAllOrdenesFromUserResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\WebService\Web.WebService.getCantidadTotalDisponibleResponse.datasource">
@@ -322,16 +317,10 @@
     <Content Include="Connected Services\WebService\Web.WebService.itemCarrito.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\WebService\Web.WebService.listarProductosResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Connected Services\WebService\Web.WebService.loginResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\WebService\Web.WebService.marca.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\WebService\Web.WebService.ordenDeVenta.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\WebService\Web.WebService.paymentResponse.datasource">
@@ -352,9 +341,6 @@
     <Content Include="Connected Services\WebService\Web.WebService.searchClienteResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\WebService\Web.WebService.searchProductoIDResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Connected Services\WebService\Web.WebService.searchTokenResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -370,9 +356,6 @@
     <Content Include="Connected Services\WebService\Web.WebService.updateItemResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\WebService\Web.WebService.updateProductoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Connected Services\WebService\Web.WebService.updateUsuarioResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -380,10 +363,34 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="MostrarImagen.ashx" />
+    <Content Include="Connected Services\WebService\Web.WebService.addLogResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.addProductoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.getAllOrdenesFromUserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.listarProductosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Connected Services\WebService\Web.WebService.markTokenAsUsedResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\WebService\Web.WebService.addLogResponse.datasource">
+    <Content Include="Connected Services\WebService\Web.WebService.ordenDeVenta.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.searchProductoIDResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.updateProductoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.updateClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\Web.WebService.getAllOrdenesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
@@ -421,6 +428,13 @@
     <Content Include="Bundle.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\Ordenes.aspx.cs">
+      <DependentUpon>Ordenes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Ordenes.aspx.designer.cs">
+      <DependentUpon>Ordenes.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Productos.aspx.cs">
       <DependentUpon>Productos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

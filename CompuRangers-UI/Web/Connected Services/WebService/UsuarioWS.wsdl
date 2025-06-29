@@ -5,17 +5,11 @@
       <xsd:import schemaLocation="http://localhost:8080/WebService/UsuarioWS?xsd=1" namespace="http://services.compurangers.com" />
     </xsd:schema>
   </types>
-  <message name="deleteUsuario">
-    <part name="parameters" element="tns:deleteUsuario" />
+  <message name="getRole">
+    <part name="parameters" element="tns:getRole" />
   </message>
-  <message name="deleteUsuarioResponse">
-    <part name="parameters" element="tns:deleteUsuarioResponse" />
-  </message>
-  <message name="updateUsuario">
-    <part name="parameters" element="tns:updateUsuario" />
-  </message>
-  <message name="updateUsuarioResponse">
-    <part name="parameters" element="tns:updateUsuarioResponse" />
+  <message name="getRoleResponse">
+    <part name="parameters" element="tns:getRoleResponse" />
   </message>
   <message name="searchUsuario">
     <part name="parameters" element="tns:searchUsuario" />
@@ -23,17 +17,23 @@
   <message name="searchUsuarioResponse">
     <part name="parameters" element="tns:searchUsuarioResponse" />
   </message>
+  <message name="deleteUsuario">
+    <part name="parameters" element="tns:deleteUsuario" />
+  </message>
+  <message name="deleteUsuarioResponse">
+    <part name="parameters" element="tns:deleteUsuarioResponse" />
+  </message>
   <message name="forgotPassword">
     <part name="parameters" element="tns:forgotPassword" />
   </message>
   <message name="forgotPasswordResponse">
     <part name="parameters" element="tns:forgotPasswordResponse" />
   </message>
-  <message name="getRole">
-    <part name="parameters" element="tns:getRole" />
+  <message name="updateUsuario">
+    <part name="parameters" element="tns:updateUsuario" />
   </message>
-  <message name="getRoleResponse">
-    <part name="parameters" element="tns:getRoleResponse" />
+  <message name="updateUsuarioResponse">
+    <part name="parameters" element="tns:updateUsuarioResponse" />
   </message>
   <message name="changePassword">
     <part name="parameters" element="tns:changePassword" />
@@ -42,25 +42,25 @@
     <part name="parameters" element="tns:changePasswordResponse" />
   </message>
   <portType name="UsuarioWS">
-    <operation name="deleteUsuario">
-      <input wsam:Action="http://services.compurangers.com/UsuarioWS/deleteUsuarioRequest" message="tns:deleteUsuario" />
-      <output wsam:Action="http://services.compurangers.com/UsuarioWS/deleteUsuarioResponse" message="tns:deleteUsuarioResponse" />
-    </operation>
-    <operation name="updateUsuario">
-      <input wsam:Action="http://services.compurangers.com/UsuarioWS/updateUsuarioRequest" message="tns:updateUsuario" />
-      <output wsam:Action="http://services.compurangers.com/UsuarioWS/updateUsuarioResponse" message="tns:updateUsuarioResponse" />
+    <operation name="getRole">
+      <input wsam:Action="http://services.compurangers.com/UsuarioWS/getRoleRequest" message="tns:getRole" />
+      <output wsam:Action="http://services.compurangers.com/UsuarioWS/getRoleResponse" message="tns:getRoleResponse" />
     </operation>
     <operation name="searchUsuario">
       <input wsam:Action="http://services.compurangers.com/UsuarioWS/searchUsuarioRequest" message="tns:searchUsuario" />
       <output wsam:Action="http://services.compurangers.com/UsuarioWS/searchUsuarioResponse" message="tns:searchUsuarioResponse" />
     </operation>
+    <operation name="deleteUsuario">
+      <input wsam:Action="http://services.compurangers.com/UsuarioWS/deleteUsuarioRequest" message="tns:deleteUsuario" />
+      <output wsam:Action="http://services.compurangers.com/UsuarioWS/deleteUsuarioResponse" message="tns:deleteUsuarioResponse" />
+    </operation>
     <operation name="forgotPassword">
       <input wsam:Action="http://services.compurangers.com/UsuarioWS/forgotPasswordRequest" message="tns:forgotPassword" />
       <output wsam:Action="http://services.compurangers.com/UsuarioWS/forgotPasswordResponse" message="tns:forgotPasswordResponse" />
     </operation>
-    <operation name="getRole">
-      <input wsam:Action="http://services.compurangers.com/UsuarioWS/getRoleRequest" message="tns:getRole" />
-      <output wsam:Action="http://services.compurangers.com/UsuarioWS/getRoleResponse" message="tns:getRoleResponse" />
+    <operation name="updateUsuario">
+      <input wsam:Action="http://services.compurangers.com/UsuarioWS/updateUsuarioRequest" message="tns:updateUsuario" />
+      <output wsam:Action="http://services.compurangers.com/UsuarioWS/updateUsuarioResponse" message="tns:updateUsuarioResponse" />
     </operation>
     <operation name="changePassword">
       <input wsam:Action="http://services.compurangers.com/UsuarioWS/changePasswordRequest" message="tns:changePassword" />
@@ -69,16 +69,7 @@
   </portType>
   <binding name="UsuarioWSPortBinding" type="tns:UsuarioWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="deleteUsuario">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="updateUsuario">
+    <operation name="getRole">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -96,6 +87,15 @@
         <soap:body use="literal" />
       </output>
     </operation>
+    <operation name="deleteUsuario">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
     <operation name="forgotPassword">
       <soap:operation soapAction="" />
       <input>
@@ -105,7 +105,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="getRole">
+    <operation name="updateUsuario">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

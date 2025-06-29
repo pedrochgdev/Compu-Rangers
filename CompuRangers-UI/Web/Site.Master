@@ -89,7 +89,7 @@
                                     <a class="nav-link text-white" runat="server" href="~/Admin/Productos">Productos</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="#">Ordenes</a>
+                                    <a class="nav-link text-white" runat="server" href="~/Admin/Ordenes">Ordenes</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-white" runat="server" href="~/Admin/Ventas.aspx">Ventas</a>

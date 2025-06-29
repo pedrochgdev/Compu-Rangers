@@ -5,17 +5,17 @@
       <xsd:import schemaLocation="http://localhost:8080/WebService/InventoryWS?xsd=1" namespace="http://services.compurangers.com" />
     </xsd:schema>
   </types>
-  <message name="reservarInventario">
-    <part name="parameters" element="tns:reservarInventario" />
-  </message>
-  <message name="reservarInventarioResponse">
-    <part name="parameters" element="tns:reservarInventarioResponse" />
-  </message>
   <message name="getCantidadTotalDisponible">
     <part name="parameters" element="tns:getCantidadTotalDisponible" />
   </message>
   <message name="getCantidadTotalDisponibleResponse">
     <part name="parameters" element="tns:getCantidadTotalDisponibleResponse" />
+  </message>
+  <message name="reservarInventario">
+    <part name="parameters" element="tns:reservarInventario" />
+  </message>
+  <message name="reservarInventarioResponse">
+    <part name="parameters" element="tns:reservarInventarioResponse" />
   </message>
   <message name="getInvDisponible">
     <part name="parameters" element="tns:getInvDisponible" />
@@ -30,13 +30,13 @@
     <part name="parameters" element="tns:getCatalogResponse" />
   </message>
   <portType name="InventoryWS">
-    <operation name="reservarInventario">
-      <input wsam:Action="http://services.compurangers.com/InventoryWS/reservarInventarioRequest" message="tns:reservarInventario" />
-      <output wsam:Action="http://services.compurangers.com/InventoryWS/reservarInventarioResponse" message="tns:reservarInventarioResponse" />
-    </operation>
     <operation name="getCantidadTotalDisponible">
       <input wsam:Action="http://services.compurangers.com/InventoryWS/getCantidadTotalDisponibleRequest" message="tns:getCantidadTotalDisponible" />
       <output wsam:Action="http://services.compurangers.com/InventoryWS/getCantidadTotalDisponibleResponse" message="tns:getCantidadTotalDisponibleResponse" />
+    </operation>
+    <operation name="reservarInventario">
+      <input wsam:Action="http://services.compurangers.com/InventoryWS/reservarInventarioRequest" message="tns:reservarInventario" />
+      <output wsam:Action="http://services.compurangers.com/InventoryWS/reservarInventarioResponse" message="tns:reservarInventarioResponse" />
     </operation>
     <operation name="getInvDisponible">
       <input wsam:Action="http://services.compurangers.com/InventoryWS/getInvDisponibleRequest" message="tns:getInvDisponible" />
@@ -49,7 +49,7 @@
   </portType>
   <binding name="InventoryWSPortBinding" type="tns:InventoryWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="reservarInventario">
+    <operation name="getCantidadTotalDisponible">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -58,7 +58,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="getCantidadTotalDisponible">
+    <operation name="reservarInventario">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

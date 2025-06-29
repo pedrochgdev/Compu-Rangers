@@ -51,7 +51,7 @@ public abstract class BaseDAOImpl<T> implements ICrud<T>{
         }
         catch (SQLException e) {
             System.err.println("Error SQL durante la modificacion: " + e.getMessage());
-            throw new RuntimeException("No se pudo modificar el registro.", e);
+            throw new RuntimeException("No se pudo modificar el registro."+e.getMessage(), e);
         }
         catch (Exception e) {
             System.err.println("Error inpesperado: " + e.getMessage());

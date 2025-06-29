@@ -24,7 +24,7 @@ public class ClienteBO extends UsuarioBO<IClienteDAO> {
         this.carritoDAO = carritoDAO;
         this.paymentService = paymentService;
     }
-
+    
     public int addCliente(Cliente usuario) {
         usuario.setContrasena(PasswordUtils.hashPassword(usuario.getContrasena()));
         usuario.setDireccionPreferida(usuario.getDireccion());
@@ -38,7 +38,9 @@ public class ClienteBO extends UsuarioBO<IClienteDAO> {
         }
         return userId;
     }
-    
+    public boolean updateCliente(Cliente usuario){
+        return usuarioDAO.update(usuario);
+    }
     public Cliente searchCliente(int id){
         IClienteDAO ic = new ClienteDAOImpl();
         return (Cliente)ic.search(id);

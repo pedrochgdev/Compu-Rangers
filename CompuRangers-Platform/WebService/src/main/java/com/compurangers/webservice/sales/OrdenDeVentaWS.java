@@ -39,5 +39,9 @@ public class OrdenDeVentaWS {
     public List<OrdenDeVenta> getAllOrdenesFromUser(@WebParam(name = "userid") int userid) {
         return ov.getOrdenesFromUsuario(userid);
     }   
+    @WebMethod(operationName = "getAllOrdenes")
+    public List<OrdenDeVenta> getAllOrdenes() {
+        return ov.getAllOrdenDeVenta();
+    }   
     
 }

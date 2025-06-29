@@ -36,7 +36,7 @@ public class AppPrueba {
         
         OrdenDeVentaBO ob=new OrdenDeVentaBO(new OrdenDeVentaDAOImpl());
         
-        List<OrdenDeVenta> lob=ob.getOrdenesFromUsuario(3);
+//        List<OrdenDeVenta> lob=ob.getOrdenesFromUsuario(3);
         
         
         // Instanciar UsuarioService

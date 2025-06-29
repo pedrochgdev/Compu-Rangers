@@ -35,7 +35,6 @@ namespace Web
             string patronInyeccion = @"['"";#--]";
             if (System.Text.RegularExpressions.Regex.IsMatch(username, patronInyeccion) ||
                 System.Text.RegularExpressions.Regex.IsMatch(nombre, patronInyeccion) ||
-                //System.Text.RegularExpressions.Regex.IsMatch(telefono, patronInyeccion) ||
                 System.Text.RegularExpressions.Regex.IsMatch(correo, patronInyeccion) ||
                 System.Text.RegularExpressions.Regex.IsMatch(direccion, patronInyeccion) ||
                 System.Text.RegularExpressions.Regex.IsMatch(password, patronInyeccion))
