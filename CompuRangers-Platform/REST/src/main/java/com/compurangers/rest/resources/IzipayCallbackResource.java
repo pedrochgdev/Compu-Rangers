@@ -230,7 +230,8 @@ public class IzipayCallbackResource {
         OrdenDeVentaBO dao = new OrdenDeVentaBO(new OrdenDeVentaDAOImpl());
         OrdenDeVenta ov = dao.searchOrdenDeVenta(orderId);
         reponerInventario(ov);
-        dao.deleteOrdenDeVenta(orderId);
+        ov.setEstado("CANCELADO");
+        dao.updateOrdenDeVenta(ov);
         System.out.printf("🗑️ Orden %d será eliminada debido a estado %s%n", orderId, estado);
     }
 }

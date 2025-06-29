@@ -32,7 +32,7 @@ namespace Web
                 rptConfirmacionCompra.DataSource = carrito.items;
                 rptConfirmacionCompra.DataBind();
 
-                lblTotalPedido.Text = carrito.total.ToString("N2");
+                lblTotalPedido.Text = carrito.total.ToString("C2");
 
                 int userId = Convert.ToInt32(Session["user"]);
                 cliente usuario = clientWS.searchCliente(userId);
@@ -48,6 +48,15 @@ namespace Web
         {
             var master = (SiteMaster)this.Master;
             var carrito = master.ShoppingCart;
+
+            int userId = Convert.ToInt32(Session["user"]);
+
+            cliente cli = new cliente
+            {
+                direccionPreferida = txtDireccion.Text
+            };
+
+            //clientWS.updateCliente(userId, cli);
 
             ordenDeVenta nuevaOrden = new ordenDeVenta
             {

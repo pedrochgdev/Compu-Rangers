@@ -994,7 +994,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE add_orden_de_venta(
     OUT generated_id INT,
-    IN estado_in ENUM('EN_PROCESO', 'PAGADO', 'ENVIADO', 'ENTREGADO'),
+    IN estado_in ENUM('EN_PROCESO', 'CANCELADO','PAGADO', 'ENVIADO', 'ENTREGADO'),
     IN fecha_in DATE,
     IN total_in DECIMAL(10,2),
     IN cliente_usuario_id_in INT,

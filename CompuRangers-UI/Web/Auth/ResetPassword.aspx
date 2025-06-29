@@ -15,6 +15,7 @@
                 <div class="mb-3">
                     <label for="newPassword" class="form-label">Nueva contraseña</label>
                     <asp:TextBox ID="txtNewPassword" runat="server"
+                                 Style="width: 100% !important; max-width: 100% !important;"
                                  CssClass="form-control"
                                  TextMode="Password"
                                  placeholder="Nueva contraseña" />
@@ -23,6 +24,7 @@
                 <div class="mb-4">
                     <label for="confirmPassword" class="form-label">Confirmar contraseña</label>
                     <asp:TextBox ID="txtConfirmPassword" runat="server"
+                                 Style="width: 100% !important; max-width: 100% !important;"
                                  CssClass="form-control"
                                  TextMode="Password"
                                  placeholder="Confirma tu contraseña" />

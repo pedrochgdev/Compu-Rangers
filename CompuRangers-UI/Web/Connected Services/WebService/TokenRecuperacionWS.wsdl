@@ -5,31 +5,31 @@
       <xsd:import schemaLocation="http://localhost:8080/WebService/TokenRecuperacionWS?xsd=1" namespace="http://services.compurangers.com" />
     </xsd:schema>
   </types>
-  <message name="markTokenAsUsed">
-    <part name="parameters" element="tns:markTokenAsUsed" />
-  </message>
-  <message name="markTokenAsUsedResponse">
-    <part name="parameters" element="tns:markTokenAsUsedResponse" />
-  </message>
   <message name="searchToken">
     <part name="parameters" element="tns:searchToken" />
   </message>
   <message name="searchTokenResponse">
     <part name="parameters" element="tns:searchTokenResponse" />
   </message>
+  <message name="markTokenAsUsed">
+    <part name="parameters" element="tns:markTokenAsUsed" />
+  </message>
+  <message name="markTokenAsUsedResponse">
+    <part name="parameters" element="tns:markTokenAsUsedResponse" />
+  </message>
   <portType name="TokenRecuperacionWS">
-    <operation name="markTokenAsUsed">
-      <input wsam:Action="http://services.compurangers.com/TokenRecuperacionWS/markTokenAsUsedRequest" message="tns:markTokenAsUsed" />
-      <output wsam:Action="http://services.compurangers.com/TokenRecuperacionWS/markTokenAsUsedResponse" message="tns:markTokenAsUsedResponse" />
-    </operation>
     <operation name="searchToken">
       <input wsam:Action="http://services.compurangers.com/TokenRecuperacionWS/searchTokenRequest" message="tns:searchToken" />
       <output wsam:Action="http://services.compurangers.com/TokenRecuperacionWS/searchTokenResponse" message="tns:searchTokenResponse" />
     </operation>
+    <operation name="markTokenAsUsed">
+      <input wsam:Action="http://services.compurangers.com/TokenRecuperacionWS/markTokenAsUsedRequest" message="tns:markTokenAsUsed" />
+      <output wsam:Action="http://services.compurangers.com/TokenRecuperacionWS/markTokenAsUsedResponse" message="tns:markTokenAsUsedResponse" />
+    </operation>
   </portType>
   <binding name="TokenRecuperacionWSPortBinding" type="tns:TokenRecuperacionWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="markTokenAsUsed">
+    <operation name="searchToken">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -38,7 +38,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="searchToken">
+    <operation name="markTokenAsUsed">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

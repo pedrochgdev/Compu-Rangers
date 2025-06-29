@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Password Recovery Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PasswordRecovery.aspx.cs" Inherits="Web.Auth.PasswordRecovery" %>
 
 <asp:Content ID="PasswordRecovery" ContentPlaceHolderID="MainContent" runat="server">
-   <div class="d-flex justify-content-center align-items-center vh-100 style="max-width: 720px; width: 100%;">
+   <div class="d-flex justify-content-center align-items-center vh-100" style="max-width: 720px; width: 100%;">
         <div class="card shadow-lg" style="width: 100%; max-width: 500px;">
             <div class="card-body p-5">
                 <div class="text-center mb-4">
@@ -19,6 +19,7 @@
                         </div>
                         <div class="w-100">
                             <asp:TextBox ID="txtEmail" runat="server"
+                                         Style="width: 100% !important; max-width: 100% !important;"
                                          CssClass="form-control w-100"
                                          TextMode="Email"
                                          name="email"

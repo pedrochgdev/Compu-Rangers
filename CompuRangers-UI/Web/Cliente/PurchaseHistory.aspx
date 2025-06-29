@@ -39,7 +39,7 @@
                                             <tr>
                                                 <td class="ps-0"><%# Eval("producto.producto.nombre") %></td>
                                                 <td class="text-center"><%# Eval("cantidad") %></td>
-                                                <td class="text-end pe-0">$<%# Eval("subtotal", "{0:F2}") %></td>
+                                                <td class="text-end pe-0"><%# Eval("subtotal", "{0:C2}") %></td>
                                             </tr>
                                         </ItemTemplate>
                                         <FooterTemplate>
@@ -49,7 +49,7 @@
                                     </asp:Repeater>
                                     <div class="d-flex justify-content-end">
                                         <div>
-                                            <div class="fw-bold fs-5 text-success">Total: $<%# Eval("total", "{0:F2}") %></div>
+                                            <div class="fw-bold fs-5 text-success">Total: <%# Eval("total", "{0:C2}") %></div>
                                         </div>
                                     </div>
                                 </div>

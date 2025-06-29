@@ -33,7 +33,7 @@ public abstract class BaseDAOImpl<T> implements ICrud<T>{
         }
         catch (SQLException e) {
             System.err.println("Error SQL durante la insercion: " + e.getMessage());
-            throw new RuntimeException("No se pudo insertar el registro.", e);
+            throw new RuntimeException("No se pudo insertar el registro." + e.getMessage(), e);
         }
         catch (Exception e) {
             System.err.println("Error inpesperado: " + e.getMessage());

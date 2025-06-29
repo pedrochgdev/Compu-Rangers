@@ -1,23 +1,21 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="Web.Home" %>
 
 <asp:Content ID="HomeContent" ContentPlaceHolderID="MainContent" runat="server">
-    <script src="../Scripts/CompuRangers/Modal.js"></script>
-
     <main>
         
             <div class="row g-3 mb-4">
-                <div class="col-md-4">
-                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" placeholder="Buscar por nombre" onkeyup="buscarEnTiempoReal(this.value)" />
-
+                <div class="col-md-6">
+                    <asp:TextBox ID="txtNombre" runat="server" Style="width: 100% !important; max-width: 100% !important;" CssClass="form-control w-100" placeholder="Buscar por nombre" AutoPostBack="true" OnTextChanged="txtNombre_TextChanged" />
                 </div>
                 <div class="col-md-3">
                     <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" />
                 </div>
                 <div class="col-md-3">
-                    <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" placeholder="Precio máximo" TextMode="Number" />
-                </div>
-                <div class="col-md-2">
-                    <asp:Button ID="btnFiltrar" runat="server" CssClass="btn btn-primary w-100" Text="Filtrar" OnClick="btnFiltrar_Click" />
+                    <asp:DropDownList ID="ddlOrdenPrecio" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="ddlOrdenPrecio_SelectedIndexChanged">
+                        <asp:ListItem Text="Ordenar por precio" Value="" />
+                        <asp:ListItem Text="Menor a mayor" Value="asc" />
+                        <asp:ListItem Text="Mayor a menor" Value="desc" />
+                    </asp:DropDownList>
                 </div>
             </div>
 

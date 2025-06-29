@@ -111,19 +111,43 @@ namespace Web
 
             return hojas;
         }
-
-
-        protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        private void FiltrarCatalogoCompleto()
         {
+            string nombre = txtNombre.Text.Trim().ToLower();
             string categoriaNombre = ddlCategoria.SelectedValue;
+            string ordenPrecio = ddlOrdenPrecio.SelectedValue;
+
             List<productoDTO> productos = invWS.getCatalog().ToList();
+
+            if (!string.IsNullOrEmpty(nombre))
+                productos = productos.Where(p => p.producto.nombre.ToLower().Contains(nombre)).ToList();
 
             if (!string.IsNullOrEmpty(categoriaNombre))
                 productos = productos.Where(p => p.producto.categoria.nombre == categoriaNombre).ToList();
 
-            catalogo = new BindingList<productoDTO>(productos);
+            if (ordenPrecio == "asc")
+                productos = productos.OrderBy(p => p.producto.precioVenta).ToList();
+            else if (ordenPrecio == "desc")
+                productos = productos.OrderByDescending(p => p.producto.precioVenta).ToList();
+
+            Catalogo = productos;
             paginaActual = 0;
-            CargarProductosConPaginacion(catalogo.ToList());
+            CargarProductosConPaginacion(productos);
+        }
+
+        protected void txtNombre_TextChanged(object sender, EventArgs e)
+        {
+            FiltrarCatalogoCompleto();
+        }
+
+        protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FiltrarCatalogoCompleto();
+        }
+
+        protected void ddlOrdenPrecio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FiltrarCatalogoCompleto();
         }
 
         protected void btnAddCart(object sender, EventArgs e)
@@ -190,17 +214,6 @@ namespace Web
                     script = "window.onload = function() { showModal('carritoModal');};";
                 }
             }
-
-            ClientScript.RegisterStartupScript(GetType(), "", script, true);
-        }
-        protected void btnFiltrar_Click(object sender, EventArgs e)
-        {
-            string script;
-            //Llamar a una función Javascript
-            if (Session["user"] == null)
-                script = "window.onload = function() { showModal('form-modal-login');};";
-            else
-                script = "window.onload = function() { showModal('carritoModal');};";
 
             ClientScript.RegisterStartupScript(GetType(), "", script, true);
         }

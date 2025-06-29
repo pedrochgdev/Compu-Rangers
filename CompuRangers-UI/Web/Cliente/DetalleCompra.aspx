@@ -19,7 +19,7 @@
                         <!-- Nombre y precio unitario -->
                         <div class="col-9 col-md-5">
                             <h6 class="mb-1"><%# Eval("producto.nombre") %></h6>
-                            <small class="text-muted">Precio unitario: $<%# Eval("producto.precioVenta", "{0:N2}") %></small>
+                            <small class="text-muted">Precio unitario: <%# Eval("producto.precioVenta", "{0:C2}") %></small>
                         </div>
 
                         <!-- Cantidad -->
@@ -29,7 +29,7 @@
 
                         <!-- Total -->
                         <div class="col-6 col-md-3 text-end">
-                            <strong class="d-block">Total: $<%# Eval("subtotal", "{0:N2}") %></strong>
+                            <strong class="d-block">Total: <%# Eval("subtotal", "{0:C2}") %></strong>
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
         <hr class="my-4">
 
         <div class="text-end">
-            <h5 class="mb-3">Total del Pedido: <strong>$<asp:Label ID="lblTotalPedido" runat="server" Text="0.00" /></strong></h5>
+            <h5 class="mb-3">Total del Pedido: <strong>S/ <asp:Label ID="lblTotalPedido" runat="server" Text="0.00" /></strong></h5>
 
             <asp:LinkButton ID="btnMostrarModal" runat="server" OnClientClick="showModal('modalDireccion'); return false;" CssClass="btn btn-primary btn-lg">Pagar</asp:LinkButton>
         </div>
