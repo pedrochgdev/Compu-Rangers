@@ -5,6 +5,7 @@
 package com.compurangers.reportes;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,29 +23,25 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import com.compurangers.platform.util.Config;
 import com.compurangers.platform.util.DatabaseUtil;
-import com.compurangers.platform.util.EmailUtil;
-
-
-
 /**
  *
- * @author eric
+ * @author Gianca
  */
-@WebServlet(name = "ReporteVentasRealizadas", 
-        urlPatterns = {"/ventasrealizadas"})
-public class ReporteVentasRealizadas extends HttpServlet {
+@WebServlet(name = "ReporteOrdenDeVenta", urlPatterns = {"/ordenes"})
+public class ReporteOrdenDeVenta extends HttpServlet {
     private final String NOMBRE_REPORTE = 
-            "reportes/reporte2.jasper";
+            "reportes/ordenventa.jasper";
     private final String NOMBRE_LOGO = 
             "imagenes/compurangers.png";
+    private final String SUB_REPORTE = 
+            "reportes/subreporte.jasper";
+    
     @Override
     protected void doGet(
             HttpServletRequest request, 
-            HttpServletResponse response)
+            HttpServletResponse response) 
             throws ServletException, IOException {
-        
         response.setContentType("application/pdf");
         
         try {
@@ -52,19 +49,26 @@ public class ReporteVentasRealizadas extends HttpServlet {
                     getClass().getClassLoader()
                             .getResourceAsStream(
                                     this.NOMBRE_REPORTE);
-            
+
             if (reporte == null) {
-                throw new FileNotFoundException("No se encontró el archivo 'reporte2.jasper'");
+                throw new FileNotFoundException("No se encontró el archivo 'ordenventa.jasper'");
             }
-            
-           Map<String, Object> parametros = new HashMap<>();
-//            parametros.put("autor", "Juan Perez");
-            InputStream logoStream = getClass().getClassLoader().
-                    getResourceAsStream(this.NOMBRE_LOGO);
+
+            Map<String, Object> parametros = new HashMap<>();
+            int id = Integer.parseInt(request.getParameter("id"));
+            parametros.put("idOrden", id);
+
+            InputStream logoStream = 
+                    getClass().getClassLoader()
+                            .getResourceAsStream(
+                                    this.NOMBRE_LOGO);
             if (logoStream != null) {
                 Image logo = ImageIO.read(logoStream);
                 parametros.put("Logo", logo);
             }
+            parametros.put("subreport", this.SUB_REPORTE);
+            
+            // JasperPrint jp = JasperFillManager.fillReport(jr, parametros, new JREmptyDataSource());
             try (Connection conexion = DatabaseUtil.getInstance().getConnection()) {
                 JasperPrint jp = 
                         JasperFillManager.fillReport(reporte, 
@@ -84,13 +88,9 @@ public class ReporteVentasRealizadas extends HttpServlet {
         }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
-        return "Genera reporte de Areas V2";
+        return "Esta servlet genera el reporte de areas.";
     }
 }
+

@@ -7,12 +7,18 @@
         <img src="~/images/loading.gif" alt="Cargando..." style="margin-top:20px;" />
 
         <script type="text/javascript">
-            // Escucha cuando la ventana de pago confirme el pago
             window.addEventListener('message', function (event) {
-                if (event.data === 'pago-completado') {
-                    window.location.href = '../../Catalogo/Home.aspx'; // Redirige a donde tú desees
+                if (event.data && event.data.tipo === 'pago-completado') {
+                    const id = event.data.idOrden;
+                    const urlBoleta = `${window.BaseUrl}/Reportes/ordenes?id=${id}`;
+
+                    // Abre el reporte en una nueva pestaña
+                    window.open(urlBoleta, '_blank');
+
+                    // Redirige esta página (WaitingPayment) al Home
+                    window.location.href = '../../Catalogo/Home.aspx';
                 } else if (event.data && event.data.pago === 'cancelado') {
-                    window.location.href = '../../Cliente/DetalleCompra.aspx'; // Redirige tras cancelación
+                    window.location.href = '../../Cliente/DetalleCompra.aspx';
                 }
             });
         </script>

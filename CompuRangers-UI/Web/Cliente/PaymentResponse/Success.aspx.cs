@@ -14,16 +14,24 @@ namespace Web.Cliente.PaymentResponse
             if (!IsPostBack)
             {
                 string vadsOrderId = Request.QueryString["vads_order_id"];
-                int idOrden = int.Parse(vadsOrderId.Split('-')[1]);
-                string baseUrl = System.Configuration.ConfigurationManager.AppSettings["BaseUrl"];
-                string reporteUrl = $"{baseUrl}/Reportes/reportes/detalleVenta?idOrden={idOrden}";
+                if (!string.IsNullOrEmpty(vadsOrderId) && vadsOrderId.Contains("-"))
+                {
+                    int idOrden = int.Parse(vadsOrderId.Split('-')[1]);
 
-                ClientScript.RegisterStartupScript(this.GetType(), "redirectAfterDelay", $@"
-                    setTimeout(() => {{
-                        window.opener.postMessage('pago-completado', '*');
-                        window.location.href = '{reporteUrl}';
-                    }}, 2000);
-                ", true);
+                    ClientScript.RegisterStartupScript(this.GetType(), "postPagoCompletado", $@"
+                window.onload = function () {{
+                    window.opener.postMessage({{
+                        tipo: 'pago-completado',
+                        idOrden: {idOrden}
+                    }}, '*');
+                    window.close();
+                }};
+            ", true);
+                }
+                else
+                {
+                    Response.Redirect("~/Error.aspx");
+                }
             }
         }
     }
