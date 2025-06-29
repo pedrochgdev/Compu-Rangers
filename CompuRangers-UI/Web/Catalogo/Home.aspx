@@ -24,15 +24,17 @@
                     <ItemTemplate>
                         <div class="col">
                             <div class="card h-100">
-                                <img src='<%# Eval("producto.id", "/MostrarImagen.ashx?id={0}") %>'
-                                     class="card-img-top"
+                                <img src='<%# ResolveUrl(string.Format("~/Imagenes/MostrarImagen.ashx?id={0}", Eval("producto.id"))) %>'
+                                     class="card-img-top img-fluid"
                                      alt="producto"
-                                     object-fit: cover;" />
+                                     style="max-height: 250px; width: 100%; object-fit: contain;" />
                                 <div class="card-body">
                                     <asp:HiddenField ID="hiddenId" runat="server" Value='<%# Eval("producto.id") %>' />
                                     <asp:HiddenField ID="hiddenCantidad" runat="server" Value='<%# Eval("cantidadDisponible") %>' />
                                     <h5 id="lblNombre" runat="server" class="card-title"><%# Eval("producto.nombre") %></h5>
-                                    <p class="card-text"><%# Eval("producto.descripcion") %></p>
+                                    <p class="card-text" style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
+                                        <%# Eval("producto.descripcion") %>
+                                    </p>
                                     <div class="d-flex gap-2">
                                         <span class="badge bg-secondary"><%# Eval("producto.categoria.nombre") %></span>
                                     </div>

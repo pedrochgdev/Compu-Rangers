@@ -540,6 +540,7 @@
     <Compile Include="Catalogo\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Encriptacion\CryptoUtil.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -550,7 +551,7 @@
     <Compile Include="Auth\SignUp.aspx.designer.cs">
       <DependentUpon>SignUp.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MostrarImagen.ashx.cs">
+    <Compile Include="Imagenes\MostrarImagen.ashx.cs">
       <DependentUpon>MostrarImagen.ashx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

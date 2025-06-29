@@ -66,8 +66,8 @@ namespace Web
         {
             switch (estado.ToUpper())
             {
-                case "ENTREGADO": return "success";
-                case "EN CAMINO": return "warning text-dark";
+                case "PAGADO": return "success";
+                case "EN_PROCESO": return "warning text-dark";
                 case "CANCELADO": return "danger";
                 default: return "secondary";
             }

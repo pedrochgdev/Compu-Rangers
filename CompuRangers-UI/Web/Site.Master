@@ -141,7 +141,7 @@
                                     <div class="row g-2 align-items-center">
                                         <!-- Imagen -->
                                         <div class="col-3 col-md-1">
-                                                <img src='<%# Eval("producto.id", "/MostrarImagen.ashx?id={0}") %>'
+                                                <img src='<%# ResolveUrl(string.Format("~/Imagenes/MostrarImagen.ashx?id={0}", Eval("producto.id"))) %>'
                                                      class="card-img-top"
                                                      object-fit: cover;" />
                                         </div>

@@ -9,10 +9,12 @@
                 <div class="card shadow-sm p-3 mb-2">
                     <div class="row g-2 align-items-center">
                         <!-- Imagen -->
-                        <div class="col-3 col-md-1">
-                            <img src='<%# Eval("producto.id", "/MostrarImagen.ashx?id={0}") %>'
-                                    class="img-fluid rounded"
-                                    style="object-fit: contain;">  
+                        <div class="col-3 col-md-1 d-flex align-items-center justify-content-center">
+                            <div style="width: 64px; height: 64px; overflow: hidden;">
+                                <img src='<%# ResolveUrl(string.Format("~/Imagenes/MostrarImagen.ashx?id={0}", Eval("producto.id"))) %>'
+                                     class="img-fluid"
+                                     style="width: 100%; height: 100%; object-fit: contain;" />
+                            </div>
                         </div>
                         <!-- Nombre y precio unitario -->
                         <div class="col-9 col-md-5">
