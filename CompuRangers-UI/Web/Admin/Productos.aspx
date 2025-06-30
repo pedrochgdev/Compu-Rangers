@@ -49,7 +49,7 @@
                        class="btn btn-sm btn-outline-primary me-2 btn-editar" 
                        data-id='<%# Eval("id") %>' 
                        data-nombre='<%# Eval("nombre") %>' 
-                       data-img='/MostrarImagen.ashx?id=<%# Eval("id") %>'>
+                       data-img='<%# ResolveUrl(string.Format("~/MostrarImagen.ashx?id={0}", Eval("id"))) %>'>
                        <i class="bi bi-pencil-fill"></i>
                     </a>
                 </ItemTemplate>
