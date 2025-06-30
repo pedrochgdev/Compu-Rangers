@@ -9,7 +9,7 @@ using Web.WebService;
 
 namespace Web
 {
-    public partial class SignUp : Page
+    public partial class SignUp : Web.Middleware.NoAuth
     {
         private readonly ClienteWSClient clientWS;
 

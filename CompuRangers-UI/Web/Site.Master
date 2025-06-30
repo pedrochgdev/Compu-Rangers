@@ -259,12 +259,6 @@
                 <!-- Enlaces -->
                 <div class="col-12 col-md-4 text-center mb-3 mb-md-0">
                     <h6 class="mb-3 text-uppercase text-secondary" style="letter-spacing:1px;">Enlaces</h6>
-                    <ul class="list-inline mb-0">
-                        <li class="list-inline-item mx-2"><a href="#" class="text-light text-decoration-none">Inicio</a></li>
-                        <li class="list-inline-item mx-2"><a href="#" class="text-light text-decoration-none">Productos</a></li>
-                        <li class="list-inline-item mx-2"><a href="#" class="text-light text-decoration-none">Mi cuenta</a></li>
-                        <li class="list-inline-item mx-2"><a href="#" class="text-light text-decoration-none">Contacto</a></li>
-                    </ul>
                 </div>
                 <!-- Contacto -->
                 <div class="col-12 col-md-4 text-center text-md-end">

@@ -8,7 +8,7 @@ using Web.WebService;
 
 namespace Web
 {
-    public partial class DetalleCompra : System.Web.UI.Page
+    public partial class DetalleCompra : Web.Middleware.ClientePage
     {
         private readonly ClienteWSClient clientWS;
         private readonly OrdenDeVentaWSClient ordenWS;

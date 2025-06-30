@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Web.Cliente.PaymentResponse
 {
-    public partial class Refused : System.Web.UI.Page
+    public partial class Refused : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

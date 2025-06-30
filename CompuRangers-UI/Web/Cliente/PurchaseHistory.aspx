@@ -8,7 +8,7 @@
             <div class="row justify-content-center">
                 <div class="col-12 col-md-10 col-lg-8">
 
-                    <asp:Repeater ID="rptHistorialCompras" runat="server">
+                    <asp:Repeater ID="rptHistorialCompras" runat="server" OnItemCommand="rptHistorialCompras_ItemCommand">
                         <ItemTemplate>
                             <div class="card mb-4 shadow-sm border-0 rounded-4">
                                 <div class="card-body">
@@ -18,6 +18,19 @@
                                             <span class="badge bg-<%# GetBadgeColor(Eval("estado").ToString()) %> ms-2">
                                                 <%# Eval("estado") %>
                                             </span>
+                                            <span>
+                                                <asp:PlaceHolder ID="phReporte" runat="server" Visible='<%# Eval("estado").ToString() == "PAGADO" %>'>
+                                                    <asp:LinkButton 
+                                                        ID="btnReporteIndividual" 
+                                                        runat="server" 
+                                                        CommandName="GenerarReporte" 
+                                                        CommandArgument='<%# Eval("id") %>' 
+                                                        CssClass="btn btn-outline-secondary btn-sm ms-2" 
+                                                        Text="Reporte" />
+                                                </asp:PlaceHolder>
+
+                                            </span>
+                                        
                                         </div>
                                         <span class="text-muted small mt-2 mt-md-0">
                                             <i class="bi bi-calendar3"></i> <%# Eval("fecha", "{0:dd MMMM yyyy}") %>
@@ -56,6 +69,7 @@
                             </div>
                         </ItemTemplate>
                     </asp:Repeater>
+
                     <asp:Panel ID="pnlSinCompras" runat="server" Visible="false">
                         <div class="alert alert-info text-center mt-5">
                             <i class="bi bi-cart-x fs-3 d-block mb-2"></i>
@@ -63,6 +77,13 @@
                             Cuando realices una compra, aparecerá aquí.
                         </div>
                     </asp:Panel>
+
+                    <div class="d-flex justify-content-center mt-4">
+                        <asp:LinkButton ID="btnAnterior" runat="server" OnClick="btnAnterior_Click" CssClass="btn btn-outline-primary me-2">Anterior</asp:LinkButton>
+                        <asp:Label ID="lblPagina" runat="server" CssClass="align-self-center"></asp:Label>
+                        <asp:LinkButton ID="btnSiguiente" runat="server" OnClick="btnSiguiente_Click" CssClass="btn btn-outline-primary ms-2">Siguiente</asp:LinkButton>
+                    </div>
+
 
                     <!-- Puedes duplicar más compras aquí -->
 

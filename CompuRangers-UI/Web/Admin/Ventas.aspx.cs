@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -8,7 +9,7 @@ using Web.WebService;
 
 namespace Web
 {
-    public partial class Ventas : Page
+    public partial class Ventas : Web.Middleware.AdminPage
     {
         private ClienteWSClient clientWS;
         private OrdenDeVentaWSClient ordenWS;
@@ -29,6 +30,14 @@ namespace Web
             CargarProductosMasVendidos();
             CargarPedidosPorDia();
             CargarGananciasPorMes();
+        }
+        protected void btnGenerarReporteProductos_Click(object sender, EventArgs e)
+        {
+            string baseUrl = ConfigurationManager.AppSettings["BaseUrl"];
+            string url = $"{baseUrl}/Reportes/producto";
+            string script = $"window.open('{url}', '_blank');";
+
+            ClientScript.RegisterStartupScript(this.GetType(), "AbrirReporteProductos", script, true);
         }
         private void CargarGananciasPorMes()
         {

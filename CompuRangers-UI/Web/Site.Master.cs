@@ -56,7 +56,16 @@ namespace Web
                 return total.ToString("C2");
             }
         }
-
+        public SiteMaster()
+        {
+            this.authWS = new AuthWSClient();
+            this.userWS = new UsuarioWSClient();
+            this.clientWS = new ClienteWSClient();
+            this.invWS = new InventoryWSClient();
+            this.icWS = new ItemCarritoWSClient();
+            this.carritoWSClient = new CarritoWSClient();
+            this.logWS = new LogWSClient();
+        }
         protected void btnActualizarCantidad_Command(object sender, CommandEventArgs e)
         {
             string[] args = e.CommandArgument.ToString().Split(';');
@@ -94,18 +103,6 @@ namespace Web
 
             string script = "window.onload = function() { showModal('carritoModal'); };";
             clientScriptManager.RegisterStartupScript(GetType(), "", script, true);
-        }
-
-
-        public SiteMaster()
-        {
-            this.authWS = new AuthWSClient();
-            this.userWS = new UsuarioWSClient();
-            this.clientWS = new ClienteWSClient();
-            this.invWS = new InventoryWSClient();
-            this.icWS = new ItemCarritoWSClient();
-            this.carritoWSClient = new CarritoWSClient();
-            this.logWS = new LogWSClient();
         }
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -317,7 +314,21 @@ namespace Web
                 };
                 Response.Cookies.Add(ck);
 
-                string strRedirect = userWS.getRole(id) ? "../Admin/Ventas.aspx" : "../Catalogo/Home.aspx";
+                string strRedirect;
+                if (userWS.getRole(id)) {
+                    strRedirect="../Admin/Ventas.aspx";
+                    log line = new log
+                    {
+                        usuarioId = id,
+                        accion = "Inicio de sesión exitoso",
+                    };
+                    logWS.addLog(line);
+                    bool isadmin = userWS.getRole(Convert.ToInt32(Session["user"]));
+                    Session["isAdmin"] = isadmin;
+                } else {
+                    strRedirect="../Catalogo/Home.aspx";
+                }
+                    
                 Response.Redirect(strRedirect + "?msg=login-success", true);
             }
             else
@@ -339,7 +350,7 @@ namespace Web
 
             CargarCarrito();
 
-            string script = "window.onload = function() { updateModal('carritoModal'); };";
+            string script = "window.onload = function() { showModal('carritoModal'); };";
             clientScriptManager.RegisterStartupScript(GetType(), "", script, true);
         }
         public void CargarCarrito()

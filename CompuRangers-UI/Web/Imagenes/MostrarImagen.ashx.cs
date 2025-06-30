@@ -27,7 +27,7 @@ namespace Web
             }
 
             // Cargar imagen predeterminada desde el disco
-            string rutaImagen = context.Server.MapPath("~/Imagenes/predeterminado.jpg");
+            string rutaImagen = context.Server.MapPath("~/Imagenes/predeterminado.png");
             if (File.Exists(rutaImagen))
             {
                 byte[] imagenPorDefecto = File.ReadAllBytes(rutaImagen);

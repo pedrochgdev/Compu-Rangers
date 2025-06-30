@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 using Web.WebService;
 namespace Web.Admin
 {
-    public partial class Productos : Page
+    public partial class Productos : Web.Middleware.AdminPage
     {
         private ProductoWSClient productoWS;
         private readonly CategoriaWSClient categoriaWS;
@@ -201,8 +201,16 @@ namespace Web.Admin
             if (fuBanner.HasFile)
             {
                 imagenBytes = fuBanner.FileBytes;
-            }
+                const int maxFileSize = 3 * 1024 * 1024;
 
+                if (imagenBytes.Length > maxFileSize)
+                {
+                    clientScriptManager.RegisterStartupScript(this.GetType(), "",
+                    $"window.onload = function() {{ showAlert('La imagen seleccionada excede los 3MB.', 'warning'); }};", true);
+                    return;
+                }
+            }
+            
             if (imagenBytes == null || imagenBytes.Length == 0)
             {
                 // Mostrar error o simplemente salir

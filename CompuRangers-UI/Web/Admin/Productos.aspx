@@ -42,6 +42,8 @@
             <asp:BoundField DataField="nombre" HeaderText="Nombre" />
             <asp:BoundField DataField="sku" HeaderText="SKU" />
             <asp:BoundField DataField="descripcion" HeaderText="Descripción" />
+            <asp:BoundField DataField="categoria.nombre" HeaderText="Categoría" />
+            <asp:BoundField DataField="marca.nombre" HeaderText="Marca"  />
             <asp:BoundField DataField="precioVenta" HeaderText="Precio" DataFormatString="{0:C}" />
             <asp:TemplateField HeaderText="Acciones">
                 <ItemTemplate>
@@ -49,7 +51,7 @@
                        class="btn btn-sm btn-outline-primary me-2 btn-editar" 
                        data-id='<%# Eval("id") %>' 
                        data-nombre='<%# Eval("nombre") %>' 
-                       data-img='/MostrarImagen.ashx?id=<%# Eval("id") %>'>
+                       data-img='<%# ResolveUrl(string.Format("~/Imagenes/MostrarImagen.ashx?id={0}", Eval("id"))) %>'>
                        <i class="bi bi-pencil-fill"></i>
                     </a>
                 </ItemTemplate>

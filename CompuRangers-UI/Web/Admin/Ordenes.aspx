@@ -4,8 +4,11 @@
 <asp:Content ID="PurchaseHistoryContent" ContentPlaceHolderID="MainContent" runat="server">
     <main class="py-4">
         <div class="container">
-            <h3 class="mb-4 text-center fw-bold">Historial de Compras</h3>
-            <div class="table-responsive">
+            <div class="bg-white d-flex justify-content-between align-items-center">
+                  <h2 class="mb-0">Ordenes</h2>
+                  <asp:Button ID="Button2" runat="server" Text="Generar reporte" CssClass="btn btn-outline-danger btn-sm" OnClick="btnGenerarReporteOrdenes_Click" />
+            </div> 
+            <div class="table-responsive mt-5">
                 <table class="table table-bordered table-hover align-middle">
                     <thead class="table-dark">
                         <tr>
@@ -65,6 +68,11 @@
                         </asp:Repeater>
                     </tbody>
                 </table>
+                <div class="d-flex justify-content-center mt-4">
+                    <asp:LinkButton ID="btnAnterior" runat="server" CssClass="btn btn-outline-primary me-2" OnClick="btnAnterior_Click">Anterior</asp:LinkButton>
+                    <asp:Label ID="lblPagina" runat="server" CssClass="align-self-center fw-bold"></asp:Label>
+                    <asp:LinkButton ID="btnSiguiente" runat="server" CssClass="btn btn-outline-primary ms-2" OnClick="btnSiguiente_Click">Siguiente</asp:LinkButton>
+                </div>
             </div>
         </div>
     </main>

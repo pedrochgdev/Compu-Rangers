@@ -42,9 +42,9 @@
 
         <!-- Ganancias por mes -->
         <div class="card mb-4 shadow-sm border-0">
-            <div class="card-header bg-white">
-                <h5 class="mb-0">Ganancias por mes</h5>
-            </div>
+              <div class="card-header bg-white d-flex justify-content-start align-items-center">
+                  <h5 class="mb-0">  Ganancias por mes </h5>
+              </div>
             <div class="card-body">
                 <div class="row text-center">
                     <asp:Repeater ID="rptGananciasMensuales" runat="server">
@@ -61,9 +61,10 @@
 
         <!-- Productos más vendidos -->
         <div class="card mb-4 shadow-sm border-0">
-            <div class="card-header bg-white">
-                <h5 class="mb-0">Más Vendidos</h5>
-            </div>
+              <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Más Vendidos</h5>
+                    <asp:Button ID="Button1" runat="server" Text="Generar reporte" CssClass="btn btn-outline-danger btn-sm" OnClick="btnGenerarReporteProductos_Click" />
+              </div>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
                     <asp:Repeater ID="rptMasVendidos" runat="server">

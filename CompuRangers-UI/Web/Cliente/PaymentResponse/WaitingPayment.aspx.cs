@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace Web.Cliente.PaymentResponse
 {
-    public partial class WaitingPayment : Page
+    public partial class WaitingPayment : Web.Middleware.ClientePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
