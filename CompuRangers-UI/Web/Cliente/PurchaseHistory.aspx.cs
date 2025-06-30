@@ -24,15 +24,26 @@ namespace Web
                 int userId = Convert.ToInt32(Session["user"]);
                 var ordenes = ordenWS.getAllOrdenesFromUser(userId);
 
-                foreach (var orden in ordenes)
+                if (ordenes != null && ordenes.Length > 0)
                 {
-                    orden.detalles = AgruparDetalles(orden.detalles);
-                }
+                    foreach (var orden in ordenes)
+                    {
+                        orden.detalles = AgruparDetalles(orden.detalles);
+                    }
 
-                rptHistorialCompras.DataSource = ordenes;
-                rptHistorialCompras.DataBind();
+                    rptHistorialCompras.DataSource = ordenes;
+                    rptHistorialCompras.DataBind();
+                    pnlSinCompras.Visible = false;
+                }
+                else
+                {
+                    rptHistorialCompras.DataSource = null;
+                    rptHistorialCompras.DataBind();
+                    pnlSinCompras.Visible = true;
+                }
             }
         }
+
 
         private detalleVenta[] AgruparDetalles(detalleVenta[] detalles)
         {

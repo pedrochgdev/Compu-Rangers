@@ -56,7 +56,13 @@
                             </div>
                         </ItemTemplate>
                     </asp:Repeater>
-
+                    <asp:Panel ID="pnlSinCompras" runat="server" Visible="false">
+                        <div class="alert alert-info text-center mt-5">
+                            <i class="bi bi-cart-x fs-3 d-block mb-2"></i>
+                            <strong>No tienes compras registradas.</strong><br />
+                            Cuando realices una compra, aparecerá aquí.
+                        </div>
+                    </asp:Panel>
 
                     <!-- Puedes duplicar más compras aquí -->
 

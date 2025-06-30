@@ -4,7 +4,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 public class Config {
     private static final Dotenv dotenv = Dotenv.configure()
-            .directory("D:\\ultimo\\Compu-Rangers\\CompuRangers-Platform")
+            .directory("E:\\PUCP\\2025-1\\PROGRAMACION 3\\TAREA ACADEMICA\\Compu-Rangers\\CompuRangers-Platform")
             .load();
 
     public static String getEnv(String key) {

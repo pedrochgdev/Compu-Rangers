@@ -181,7 +181,7 @@ namespace Web.Admin
                     hfProductoId.Value = producto.id.ToString();
                     lblNombreProducto.Text = producto.nombre;
 
-                    imgActual.ImageUrl = $"/MostrarImagen.ashx?id={producto.id}";
+                    imgActual.ImageUrl = $"/Imagenes/MostrarImagen.ashx?id={producto.id}";
 
                     // ✅ Para mostrar el modal tras postback completo
                     Session["MostrarEditarModal"] = true;
